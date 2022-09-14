@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="PhotoSYN:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>PhotoSYN</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="PhotoSYN.war">
+      <element id="artifact" artifact-name="PhotoSYN:war exploded" />
+    </root>
+  </artifact>
+</component>
