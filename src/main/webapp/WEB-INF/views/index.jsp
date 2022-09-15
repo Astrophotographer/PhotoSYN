@@ -12,5 +12,6 @@
   </head>
   <body>
   $END$
+  <div>hello</div>
   </body>
 </html>
