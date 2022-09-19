@@ -17,7 +17,7 @@
     </mvc:annotation-driven>
 
     <!-- resources 위치 -->
-    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <!-- resolver 추가해주기 및 order 순서 잡아주기 -->
 
