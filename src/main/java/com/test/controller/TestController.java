@@ -10,8 +10,8 @@ public class TestController {
 
 
     @GetMapping("hello")
-    public String hello(){
-        log.info("helloooooo");
+    public String hello() {
+        log.info("helloggooooo");
         return "index";
     }
 }

@@ -15,16 +15,17 @@ public class DownloadView extends AbstractView {
     public DownloadView() {
         setContentType("application/download; charset=utf-8");
     }
+
     @Override
     protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
                                            HttpServletResponse response) throws Exception {
 
-        File file = (File)model.get("downloadFile");
+        File file = (File) model.get("downloadFile");
         response.setContentType(getContentType());
-        response.setContentLength((int)file.length());
+        response.setContentLength((int) file.length());
 
         String fileName = java.net.URLEncoder.encode(file.getName(), "UTF-8");
-        response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\";");
+        response.setHeader("Content-Disposition", "attachment;filename=\"" + fileName + "\";");
         response.setHeader("Content-Transfer-Encoding", "binary");
 
         OutputStream out = response.getOutputStream();
@@ -32,10 +33,16 @@ public class DownloadView extends AbstractView {
         try {
             fis = new FileInputStream(file);
             FileCopyUtils.copy(fis, out);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(fis != null) { try {fis.close();}catch(Exception e2) { e2.printStackTrace(); } }
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+            }
             out.flush();
         }
 
