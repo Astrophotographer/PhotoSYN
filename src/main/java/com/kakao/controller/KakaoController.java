@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/user/*")
 public class KakaoController {
 
-    @GetMapping("kakaoLogin")
+    @GetMapping("k_login")
     public String kakaoLogin(@RequestParam (value = "code", required = false) String code) throws Exception {
         System.out.println("#########" + code);
 
-        return "kakaoLogin"; // 나중에 경로 변경
+        return "testPage"; // 나중에 경로 변경
     }
 
 }
