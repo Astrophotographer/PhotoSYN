@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Log4j
 public class TestController {
 
+
     @GetMapping("hello")
     public String hello() {
         log.info("helloggooooo");
+        //log.info("helloggooooo");
         return "index";
     }
 }
