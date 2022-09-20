@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="/resources/css/signForm.css" rel="stylesheet" type="text/css"/>
+<%--    <link href="/resources/css/signForm.css" rel="stylesheet" type="text/css"/>--%>
 </head>
 <body>
 <div class="login-box">
@@ -24,11 +24,8 @@
     </form>
 </div>
 
-<%--<div>--%>
-<%--    <a class="p-2"--%>
-<%--       href="https://kauth.kakao.com/oauth/authorize?client_id=5637a372d543a79ac7d28ed36d58fe2f&redirect_uri=http://localhost:8080/user/kakaoLogin&response_type=code">--%>
-<%--        <img src="/resources/icon/kakao_login_medium_wide.png" style="height: 60px; width: 350px;">--%>
-<%--    </a>--%>
-<%--</div>--%>
+
+
+
 </body>
 </html>
