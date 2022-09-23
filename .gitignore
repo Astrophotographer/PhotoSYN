@@ -4,6 +4,9 @@ test/controller2/
 #DB 주소, ID, PW
 db-connection.properties
 
+#editor 하위 폴더
+src\main\webapp\resources\testEditor\static\sample\viewer
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,windows,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,windows,java
 
