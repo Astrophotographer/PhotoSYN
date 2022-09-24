@@ -46,7 +46,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16" />
           <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.4" />
-          <element id="library" level="project" name="Maven: commons-io:commons-io:2.6" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.7" />
           <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.9.3" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.2.9.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.2.9.RELEASE" />
