@@ -23,7 +23,6 @@
 
 
     <context:component-scan base-package="com.kakao.controller"/>
-    <context:component-scan base-package="com.kakao.service"/>
     <context:component-scan base-package="com.test.controller"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
