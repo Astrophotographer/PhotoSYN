@@ -12,12 +12,13 @@
     <script
             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript"
-            src="<%=request.getContextPath()%>/resources/testEditor/static/js/service/HuskyEZCreator.js"
+            src="<%=request.getContextPath()%>/resources/testEditor/static/js/HuskyEZCreator.js"
             charset="UTF-8"></script>
 </head>
 <body>
 <div>
     <h1>TestEditor</h1>
+    <h5>editor.jsp 에서 작성</h5>
 </div>
 
 
@@ -82,7 +83,7 @@
         nhn.husky.EZCreator.createInIFrame({
             oAppRef: obj,
             elPlaceHolder: "editorTxt", // textarea의 name태그
-            sSkinURI: "resources/testEditor/static/SmartEditor2Skin.html",
+            sSkinURI: "../resources/testEditor/static/SmartEditor2Skin.html",
             // htParams: {
             //     // 툴바 사용 여부
             //     bUseToolbar: true,
@@ -111,7 +112,20 @@
 
         });
 
+        submitPost = function(){
+            obj.getById["editorTxt"].exec("UPDATE_CONTENTS_FIELD", []);
+            let content = document.getElementById("editorTxt").value;
+
+            if(content==""){
+                alert("내용을 입력해주세요");
+                obj.getById["editorTxt"].exec("FOCUS");
+                return;
+            }else {
+                console.log(content);
+            }
+        }
     });
+
 </script>
 
 </body>

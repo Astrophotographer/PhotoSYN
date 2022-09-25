@@ -1,7 +1,7 @@
 #test ignore
 test/controller2/
 
-#DB 주소, ID, PW
+#DB 주소, ID, PW 저장파일
 db-connection.properties
 
 #editor 하위 폴더

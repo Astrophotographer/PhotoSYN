@@ -6,9 +6,9 @@
 	var rFilter = /^(image\/bmp|image\/gif|image\/jpg|image\/jpeg|image\/png)$/i;  
 	var rFilter2 = /^(bmp|gif|jpg|jpeg|png)$/i; 
 	var nTotalSize = 0;
-	var nMaxImageSize = 10*1024*1024;
-	var nMaxTotalImageSize = 50*1024*1024;
-	var nMaxImageCount = 10;
+	var nMaxImageSize = 10*1024*1024;	//1장 최대 10MB
+	var nMaxTotalImageSize = 50*1024*1024;	//총 50MB까지 업로드 가능
+	var nMaxImageCount = 10;	//사진 갯수
 	var nImageFileCount = 0;
 	var bSupportDragAndDropAPI = false;
 	var oFileUploader;
@@ -466,21 +466,79 @@
       * 확인 버튼 클릭하면 호출되는 msg
       */
      function uploadImage (e){
-    	 if(!bSupportDragAndDropAPI){
-    		 generalUpload();
-    	 }else{
-    		 html5Upload();
-    	 }
+		 // 임시로 수정. 테스트 이후 if/else 사용하기.
+		customGeneralUpload();
+    	 // if(!bSupportDragAndDropAPI){
+			//  //0924 수정
+    		//  // generalUpload();
+			//  // https://beforb.tistory.com/56 참조
+			//  customGeneralUpload();
+    	 // }else{		// 멀티이미지
+			//  //0924 수정
+    		//  html5Upload();
+			//  // customHtml5Upload();
+    	 // }
      }
-     
+	 // 위의 uploadImage(e) 수정
+	function customGeneralUpload(){
+		 let imgFile = jQuery3_4_1("#uploadInputBox")[0].files[0];
+
+		 let fdata = new FormData();
+		 fdata.encType = "multipart/form-data";
+		 fdata.method = "post";
+
+		 fdata.append("filedata", imgFile);
+
+		 jQuery3_4_1.ajax({
+			 url : "photo_upload.html",
+			 data: fdata,
+			 method: "post",
+			 encType: "multipart/form-data; charset=UTF-8",
+			 processData: false,
+			 contentType: false,
+			 cache : false,
+			 success : function(data){
+				 let sfileURL = data.sfileURL;
+				 let sfileName = data.sfileName;
+				 let bNewLine = data.bNewLine;
+
+				 if(data.result == '200'){
+					 let aResult = [];
+					 let obj = {
+						 "bNewLine" : bNewLine,
+						 "sFileURL" : sfileURL || "",
+						 "sFileName" : sfileName || ""
+					 }
+					 aResult.push(obj);
+					 setPhotoToEditor(aResult);
+
+					 goReadyMode();
+					 window.close();
+				 }else {
+					 alert("사진 업로드 실패. else");
+				 }
+			 }, error: function(e){
+				 //0924 현재 에러 실행중.;
+				 alert("사진 업로드 실패. error :"+e)
+			 }
+		 })
+	}
+
+
+
+
+    /////////////////////////////////////////
  	/**
  	 * jindo에 파일 업로드 사용.(iframe에 Form을 Submit하여 리프레시없이 파일을 업로드하는 컴포넌트)
  	 */
  	function callFileUploader (){
  		oFileUploader = new jindo.FileUploader(jindo.$("uploadInputBox"),{
- 			sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
- 	        sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
- 	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)	
+ 			// sUrl  : location.href.replace(/\/[^\/]*$/, '') + '/file_uploader.php',	//샘플 URL입니다.
+ 			// sUrl  : 'testfileupload',	//샘플 URL입니다.
+ 			sUrl  : 'file_uploader.php',
+ 	        // sCallback : location.href.replace(/\/[^\/]*$/, '') + '/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 	        sCallback : '../resources/testEditor/static/sample/photo_uploader/callback.html',	//업로드 이후에 iframe이 redirect될 콜백페이지의 주소
+ 	    	sFiletype : "*.jpg;*.png;*.bmp;*.gif",						//허용할 파일의 형식. ex) "*", "*.*", "*.jpg", 구분자(;)
  	    	sMsgNotAllowedExt : 'JPG, GIF, PNG, BMP 확장자만 가능합니다',	//허용할 파일의 형식이 아닌경우에 띄워주는 경고창의 문구
  	    	bAutoUpload : false,									 	//파일이 선택됨과 동시에 자동으로 업로드를 수행할지 여부 (upload 메소드 수행)
  	    	bAutoReset : true 											// 업로드한 직후에 파일폼을 리셋 시킬지 여부 (reset 메소드 수행)
