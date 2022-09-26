@@ -7,21 +7,26 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 
+/*
 @Repository
 public class KakapRepository {
 
     @Autowired
     private SqlSessionTemplate sql;
 
-    // 정보 저장
-    public void kakaoinsert(HashMap<String, Object> userInfo) {
-        sql.insert("com.kakao.mapper.kakaoInsert", userInfo);
+    // 카카오 로그인
+    public void kakaoInsert(HashMap<String, Object> userInfo) {
+        sql.insert("Kakao.kakaoInsert", userInfo);
     }
 
-    // 정보 확인
-    public KakaoDTO findkakao(HashMap<String, Object> userInfo) {
+    // 카카오 확인
+    public KakaoDTO findKakao(HashMap<String, Object> userInfo) {
+        return sql.selectOne("Kakao.findKakao", userInfo);
+    }
 
-        return sql.selectOne("com.kakao.mapper.findKakao", userInfo);
+    public KakaoDTO kakaoNumber(KakaoDTO userInfo) {
+        return sql.selectOne("Kakao.kakaoNumber", userInfo);
     }
 
 }
+*/

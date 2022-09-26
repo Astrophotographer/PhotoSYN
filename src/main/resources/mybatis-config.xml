@@ -3,8 +3,7 @@
 
 <configuration>
     <typeAliases>
-        <typeAlias type="com.kakao.domain.KakaoDTO" alias="Kakao"/>
-        <package name="com.kakao.mapper"/>
+        <typeAlias alias="kdto" type="com.kakao.domain.KakaoDTO"/>
     </typeAliases>
 
 

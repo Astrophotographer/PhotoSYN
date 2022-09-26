@@ -10,7 +10,8 @@ import java.net.URL;
 import java.util.HashMap;
 
 import com.kakao.domain.KakaoDTO;
-import com.kakao.mapper.KakapRepository;
+import com.kakao.mapper.KakaoRepo;
+//import com.kakao.mapper.KakapRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +27,17 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class KakaoServiceImpl implements KakaoService {
 
+    /*
     @Configuration
     @ComponentScan({"com.kakao.mapper"})
     class ComponentScanConfiguration {
-    }
+    }*/
 
-    private KakapRepository kakapRepository;
+    //private KakapRepository kakapRepository;
+
+    @Autowired
+    private KakaoRepo kakaoRepo;
+
 
     @Override
     public String getAccessToken(String code) {
@@ -88,16 +94,20 @@ public class KakaoServiceImpl implements KakaoService {
     }
 
     @Override
-    public HashMap<String, Object> getUserInfo(String access_token) {
-        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+    public HashMap<String, String> getUserInfo(String access_token) {
+        // 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
+        HashMap<String, String> userInfo = new HashMap<String, String>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
+
+        KakaoDTO dto = new KakaoDTO();
+
 
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            //요청에 필요한 Header에 포함될 내용
+            // 요청에 필요한 Header에 포함될 내용
             conn.setRequestProperty("Authorization", "Bearer " + access_token);
 
             int responseCode = conn.getResponseCode();
@@ -120,9 +130,13 @@ public class KakaoServiceImpl implements KakaoService {
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
             String id = element.getAsJsonObject().get("id").getAsString();
+            dto.setId(element.getAsJsonObject().get("id").getAsLong());
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+            dto.setName(properties.getAsJsonObject().get("nickname").getAsString());
             String thumbnail_image = properties.getAsJsonObject().get("thumbnail_image").getAsString();
+            dto.setImage(properties.getAsJsonObject().get("thumbnail_image").getAsString());
             String email = kakao_account.getAsJsonObject().get("email").getAsString();
+            dto.setEmail(kakao_account.getAsJsonObject().get("email").getAsString());
 
             userInfo.put("id", id);
             userInfo.put("nickname", nickname);
@@ -134,23 +148,39 @@ public class KakaoServiceImpl implements KakaoService {
         }
         /*
         // 먼저 정보가 저장되어 있는지 확인.
-        KakaoDTO result = kakapRepository.findkakao(userInfo);
+        KakaoDTO result = kakapRepository.findKakao(userInfo);
         System.out.println("S:" + result);
 
         if (result == null) {
             // result가 null이면 정보가 저장이 안 되어 있어서 정보를 저장.
-            kakapRepository.kakaoinsert(userInfo);
+            kakapRepository.kakaoInsert(userInfo);
             // 위 코드가 정보를 저장하기 위해 Repository로 보내는 코드임.
-            return kakapRepository.findkakao(userInfo);
+            return kakapRepository.findKakao(userInfo);
             // 위 코드는 정보 저장 후 컨트롤러에 정보를 보내는 코드임.
             //  result를 리턴으로 보내면 null이 리턴되므로 위 코드를 사용.
         } else {
-
             // 정보가 이미 있기 때문에 result를 리턴함.
+            return result;
         }
-        s
-         */
-            return userInfo;
+        */
+        return userInfo;
     }
 
+    /*
+    @Override
+    public KakaoDTO kakaoNumber(KakaoDTO userInfo) {
+        return kakapRepository.kakaoNumber(userInfo);
+    }
+    */
+    @Override
+    public void kakaoInsert(HashMap<String, String> userInfo) {
+        //kakapRepository.kakaoInsert(userInfo);
+        kakaoRepo.kakaoInsert(userInfo);
+    }
+    /*
+    @Override
+    public KakaoDTO findKakao(HashMap<String, Object> userInfo) {
+        return kakapRepository.findKakao(userInfo);
+    }
+    */
 }

@@ -32,12 +32,18 @@ public class KakaoController {
         String access_token = kakaoService.getAccessToken(code);
 
         // 접속자 정보 get
-        HashMap<String, Object> result = kakaoService.getUserInfo(access_token);
+        HashMap<String, String> userInfo = kakaoService.getUserInfo(access_token);
+
         log.info("### access_token ### :: " + access_token);
-        log.info("### 아이디 ########## :: " + result.get("id"));
-        log.info("### 닉네임 ########## :: " + result.get("nickname"));
-        log.info("### 이미지 ########## :: " + result.get("thumbnail_image"));
-        log.info("### 이메일 ########## :: " + result.get("email"));
+        log.info("### 아이디 ########## :: " + userInfo.get("id"));
+        log.info("### 닉네임 ########## :: " + userInfo.get("nickname"));
+        log.info("### 이미지 ########## :: " + userInfo.get("thumbnail_image"));
+        log.info("### 이메일 ########## :: " + userInfo.get("email")); // id
+
+        // 가입여부 db에서 확인하고, 있으면 로그인처리 (세션)
+        // 없으면 회원가입 -> 회원가입 폼에 카카오에서 받은 email, nickname, thumbnail 보내놓기
+        kakaoService.kakaoInsert(userInfo);
+
 
         return "main";
     }
