@@ -1,20 +1,25 @@
 package com.test.controller;
 
+import com.google.gson.JsonObject;
 import com.test.domain.Editor;
 import com.test.domain.EditorDTO;
+import com.test.domain.SummerEditorVO;
 import com.test.service.PostService;
 import lombok.extern.log4j.Log4j;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -34,6 +39,76 @@ public class EditorController {
 
         return "/testpage/editor/editor";
     }
+    @RequestMapping("/summereditor")
+    public String summereditor(){
+        log.info("summereditor Start...");
+
+        return "/testpage/editor/summereditor";
+    }
+    @PostMapping("/summerwrite")
+    public String summerwrite(Model model, SummerEditorVO summerEditorVO) throws Exception {
+        log.info("summerwrite Start...");
+
+        log.info("summerEditorVO : "+summerEditorVO.toString());
+        log.info("summerEditorVO content : "+summerEditorVO.getContent());
+        log.info("summerEditorVO subject : "+summerEditorVO.getSubject());
+        log.info("summerEditorVO writer  : "+summerEditorVO.getWriter());
+
+        int result = postService.insertSummerBoard(summerEditorVO);
+
+        log.info("summerwrite result : "+result);
+
+        return "/testpage/editor/summerwrite";
+    }
+
+    @RequestMapping(value = "/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
+    @ResponseBody
+    public String uploadSummernoteImageFile(@RequestParam("file")MultipartFile multipartFile, HttpServletRequest request){
+        JsonObject json = new JsonObject();
+
+
+        String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+        String fileRoot = contextRoot+"resources/fileupload/";
+
+        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+        String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
+
+        String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+        File targetFile = new File(fileRoot + savedFileName);
+
+        try {
+            // 파일 저장
+            InputStream fileStream = multipartFile.getInputStream();
+            FileUtils.copyInputStreamToFile(fileStream, targetFile);
+
+            // 파일을 열기위하여 common/getImg.do 호출 / 파라미터로 savedFileName 보냄.
+            json.addProperty("url", "common/getImg.do?savedFileName="+savedFileName);
+            json.addProperty("responseCode", "success");
+
+        } catch (IOException e) {
+            FileUtils.deleteQuietly(targetFile);
+            json.addProperty("responseCode", "error");
+            e.printStackTrace();
+        }
+        String jsonvalue = json.toString();
+
+        return jsonvalue;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @RequestMapping("/")
     public ModelAndView insertEditor(HttpServletRequest request, HttpServletResponse response, Editor editor) throws Exception {
