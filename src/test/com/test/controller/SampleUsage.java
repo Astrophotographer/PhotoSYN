@@ -30,6 +30,7 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.*;
 
 import com.drew.metadata.iptc.IptcReader;
+import com.drew.metadata.jpeg.JpegDirectory;
 import org.junit.Test;
 import lombok.extern.log4j.Log4j;
 
@@ -47,11 +48,12 @@ import java.util.Date;
  */
 @Log4j
 public class SampleUsage {
-
+    //TEST 그냥적어봄 TEST!@#!@#123 pushTest
+    //
 
     @Test
     public void test(){
-        File file = new File("src/main/resources/TestImg/TEST.JPG");
+        File file = new File("src/main/resources/TestImg/TEST.jpg");
 
         // There are multiple ways to get a Metadata object for a file
 
@@ -66,6 +68,7 @@ public class SampleUsage {
 
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
+            JpegDirectory Directory3 = metadata.getFirstDirectoryOfType(JpegDirectory.class);
             ExifSubIFDDirectory Directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
             ExifIFD0Directory Directory2 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 
@@ -73,7 +76,9 @@ public class SampleUsage {
             if (Directory != null) {
 
                 Double Aperture = Directory.getDoubleObject(Directory.TAG_FNUMBER);
-                //Double longitude = Directory.getDoubleObject(Directory.TAG_LONGITUDE);
+
+
+
                 Date date = Directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
                 Double ISO = Directory.getDoubleObject(Directory.TAG_ISO_EQUIVALENT);
                 Double ExposureTime = Directory.getDoubleObject(Directory.TAG_EXPOSURE_TIME);
@@ -87,8 +92,12 @@ public class SampleUsage {
                         " Modle: " + Model + "     ExposureTime: " + ExposureTime + "     FocalLength: " + FocalLength +
                         " ShutterSpeed: " + ShutterSpeed + "     Width: " + Width + "     Height: " + Height);
             }
+            Double latitude = Directory3.getDoubleObject(GpsDirectory.TAG_LATITUDE);
+            Double longitude = Directory3.getDoubleObject(GpsDirectory.TAG_LONGITUDE);
+            Double altitude = Directory3.getDoubleObject(GpsDirectory.TAG_ALTITUDE);
 
-           log.info(metadata.getDirectories() + "Using ImageMetadataReader");
+            log.info("latitude: " + latitude + "     longitude: " + longitude + "     altitude: " + altitude);
+            log.info(metadata.getDirectories() + "Using ImageMetadataReader");
 
         } catch (ImageProcessingException e) {
             //print(e);
