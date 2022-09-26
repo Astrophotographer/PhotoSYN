@@ -85,7 +85,9 @@ public class SampleUsage {
                 Double Height = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_HEIGHT);
                 String Model = Directory2.getString(Directory2.TAG_MODEL);
 
-                log.info("Aperture: " + Aperture + "     Date: " + date  + "     ISO: " + ISO + " Modle: " + Model + "     ExposureTime: " + ExposureTime + "     FocalLength: " + FocalLength + "     ShutterSpeed: " + ShutterSpeed + "     Width: " + Width + "     Height: " + Height);
+                log.info("Aperture: " + Aperture + "     Date: " + date  + "     ISO: " + ISO +
+                        " Modle: " + Model + "     ExposureTime: " + ExposureTime + "     FocalLength: " + FocalLength +
+                        " ShutterSpeed: " + ShutterSpeed + "     Width: " + Width + "     Height: " + Height);
             }
 
            log.info(metadata.getDirectories() + "Using ImageMetadataReader");
@@ -140,6 +142,7 @@ public class SampleUsage {
     /**
      * Write all extracted values to stdout.
      */
+
 
 
 
