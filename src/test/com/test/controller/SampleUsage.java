@@ -27,10 +27,8 @@ import com.drew.imaging.jpeg.JpegMetadataReader;
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.imaging.jpeg.JpegSegmentMetadataReader;
 import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.*;
 
-import com.drew.metadata.exif.ExifIFD0Directory;
-import com.drew.metadata.exif.ExifReader;
-import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.drew.metadata.iptc.IptcReader;
 import org.junit.Test;
 import lombok.extern.log4j.Log4j;
@@ -52,7 +50,7 @@ public class SampleUsage {
 
 
     @Test
-    public void testaddNum(){
+    public void test(){
         File file = new File("src/main/resources/TestImg/TEST.JPG");
 
         // There are multiple ways to get a Metadata object for a file
