@@ -26,19 +26,19 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.imaging.jpeg.JpegMetadataReader;
 import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.imaging.jpeg.JpegSegmentMetadataReader;
-import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
-import com.drew.metadata.Tag;
+
+import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifReader;
-import com.drew.metadata.exif.GpsDirectory;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
 import com.drew.metadata.iptc.IptcReader;
-import com.drew.metadata.jpeg.JpegDescriptor;
 import org.junit.Test;
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Showcases the most popular ways of using the metadata-extractor library.
@@ -53,7 +53,7 @@ public class SampleUsage {
 
     @Test
     public void testaddNum(){
-        File file = new File("/Users/chris/Desktop/TEST.CR2");
+        File file = new File("src/main/resources/TestImg/TEST.JPG");
 
         // There are multiple ways to get a Metadata object for a file
 
@@ -64,19 +64,28 @@ public class SampleUsage {
         // readers.  In most cases, this is the most appropriate usage.  This will handle JPEG, TIFF, GIF, BMP and RAW
         // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
         //
+
+
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
+            ExifSubIFDDirectory Directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+            ExifIFD0Directory Directory2 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 
 
+            if (Directory != null) {
 
+                Double Aperture = Directory.getDoubleObject(Directory.TAG_FNUMBER);
+                //Double longitude = Directory.getDoubleObject(Directory.TAG_LONGITUDE);
+                Date date = Directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+                Double ISO = Directory.getDoubleObject(Directory.TAG_ISO_EQUIVALENT);
+                Double ExposureTime = Directory.getDoubleObject(Directory.TAG_EXPOSURE_TIME);
+                Double FocalLength = Directory.getDoubleObject(Directory.TAG_FOCAL_LENGTH);
+                Double ShutterSpeed = Directory.getDoubleObject(Directory.TAG_SHUTTER_SPEED);
+                Double Width = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_WIDTH);
+                Double Height = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_HEIGHT);
+                String Model = Directory2.getString(Directory2.TAG_MODEL);
 
-            GpsDirectory gpsDirectory = metadata.getFirstDirectoryOfType(GpsDirectory.class);
-
-            if (gpsDirectory != null) {
-                Double latitude = gpsDirectory.getDoubleObject(GpsDirectory.TAG_LATITUDE);
-                Double longitude = gpsDirectory.getDoubleObject(GpsDirectory.TAG_LONGITUDE);
-
-                log.info("latitude: " + latitude + ", longitude: " + longitude);
+                log.info("Aperture: " + Aperture + "     Date: " + date  + "     ISO: " + ISO + " Modle: " + Model + "     ExposureTime: " + ExposureTime + "     FocalLength: " + FocalLength + "     ShutterSpeed: " + ShutterSpeed + "     Width: " + Width + "     Height: " + Height);
             }
 
            log.info(metadata.getDirectories() + "Using ImageMetadataReader");
