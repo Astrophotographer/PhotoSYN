@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kakao.mapper">
+    <insert id="kakaoInsert" parameterType="java.util.HashMap">
+        insert into kakao(num, name, email, image)
+        values (#{id}, #{name}, #{email}, #{image})
+    </insert>
+
+    <select id="findKakao" parameterType="java.util.HashMap" resultType="com.kakao.domain.KakaoDTO">
+        select *
+        from kakao
+        where name = #{name}
+          and email = #{email}
+    </select>
+
+</mapper>
