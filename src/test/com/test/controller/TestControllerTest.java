@@ -7,12 +7,12 @@ import org.junit.Test;
 @Log4j
 public class TestControllerTest extends TestCase {
 
-//    @Test
-//    public void testaddNum(){
-//        int a = 3;
-//        int b = 2;
-//        log.info(a+b);
-//    }
+    @Test
+    public void testaddNum(){
+        int a = 3;
+        int b = 2;
+        log.info(a+b);
+    }
 
 
 }

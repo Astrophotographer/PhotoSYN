@@ -22,8 +22,6 @@
     <!-- resolver 추가해주기 및 order 순서 잡아주기 -->
 
 
-    <context:component-scan base-package="com.test.controller"/>
-
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
@@ -31,4 +29,12 @@
 
     <!-- 테스트하기 위해 post 방식 사용시 시큐리티 방식사용? -->
 
+
+    <!-- controller 추가 -->
+    <context:component-scan base-package="com.test.controller"/>
+
+    <context:component-scan base-package="com.blog.controller"/>
+    <context:component-scan base-package="com.gallery.controller"/>
+    <context:component-scan base-package="com.member.controller"/>
+    <context:component-scan base-package="com.admin.controller"/>
 </beans>
