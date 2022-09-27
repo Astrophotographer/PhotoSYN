@@ -36,11 +36,15 @@
     <!-- 파일 업로드 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <!-- 사이즈 제한 없음 -->
-        <property name="maxUploadSize" value="-1"></property>
-        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="maxUploadSize" value="-1"/>
+        <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
     <!-- mapper, component(service등) 추가 -->
+
+    <mybatis-spring:scan base-package="com.test.persistence"/>
+    <context:component-scan base-package="com.test.service"/>
+
     <context:component-scan base-package="com.gallery.service"/>
     <mybatis-spring:scan base-package="com.gallery.mapper"/>
 
@@ -52,6 +56,7 @@
 
     <context:component-scan base-package="com.admin.service"/>
     <mybatis-spring:scan base-package="com.admin.mapper"/>
+
 
 
 
