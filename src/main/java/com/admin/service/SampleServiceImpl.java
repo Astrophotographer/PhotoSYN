@@ -1,6 +1,6 @@
-package com.blog.service;
+package com.admin.service;
 
-import com.blog.mapper.SampleMapper;
+import com.admin.mapper.SampleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
