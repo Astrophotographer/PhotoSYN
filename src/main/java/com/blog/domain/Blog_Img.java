@@ -1,10 +1,8 @@
 package com.blog.domain;
 
 import lombok.Data;
-import lombok.Setter;
 
 @Data
-@Setter
 public class Blog_Img {
     private long BI_NO;
     private long B_NO;

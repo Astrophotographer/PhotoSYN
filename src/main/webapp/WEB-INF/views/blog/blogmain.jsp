@@ -33,7 +33,17 @@
     <link rel="stylesheet" href="../resources/blog/css/style.css">
 </head>
 <body>
-<h1>TEST BLOG MAIN</h1>
+<div>
+    <h1>TEST BLOG MAIN</h1>
+    <table>
+        <c:forEach var="board" items="${list}">
+        <tr>
+            <td>U_ID : ${board.u_ID}</td>
+        </tr>
+        </c:forEach>
+    </table>
+</div>
+
 
 <header class="header-top bg-grey justify-content-center">
     <div class="container">
@@ -183,6 +193,23 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row">
                     <!-- 글 -->
+                    <c:forEach var="board" items="${list}">
+                        <div class="col-lg-3 col-md-6">
+                            <article class="post-grid mb-5">
+                                <a class="post-thumb mb-4 d-block" href="../resources/blog/blog-single.html">
+                                    <img src="../resources/blog/images/news/f1.jpg" alt="" class="img-fluid w-100">
+                                </a>
+                                <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out
+                                        value="${board.MT_NAME}"/></span>
+                                <h3 class="post-title mt-1"><a href="/WEB-INF/views/blog/single?"+${board.b_NO}><c:out value="${board.b_SUBJECT}"/></a></h3>
+
+                                <span class="text-muted letter-spacing text-uppercase font-sm"><c:out value="${board.b_REG}"/></span>
+
+                            </article>
+                        </div>
+                        <!-- 글 한개 -->
+                    </c:forEach>
+                    <!-- 샘플 글 여러개 배치 -->
                     <c:forEach var="i" begin="1" end="8" step="1">
                         <div class="col-lg-3 col-md-6">
                             <article class="post-grid mb-5">

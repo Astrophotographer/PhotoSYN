@@ -14,5 +14,13 @@
         insert into BLOG (B_NO, U_ID, MT_NAME, B_SUBJECT, B_CONTENT, B_TAG1)
         values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT},#{B_TAG1})
     </insert>
+
+    <select id="getBlogList" resultType="com.blog.domain.BlogDTO">
+        select * from blog
+    </select>
+
+    <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">
+        select * from blog where b_no = #{B_NO}
+    </select>
 </mapper>
 

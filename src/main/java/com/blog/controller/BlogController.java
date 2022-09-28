@@ -6,6 +6,7 @@ import com.blog.service.BlogService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,10 +29,22 @@ public class BlogController {
     private BlogService blogService;
 
     @RequestMapping(value ="main")
-    public String goMain(){
+    public String goMain(Model model){
         log.info("goMain Start...");
 
+        model.addAttribute("list", blogService.getBlogList());
+
         return "blog/blogmain";
+    }
+
+    //블로그 글 한개 보기
+    @RequestMapping(value="single", method = RequestMethod.GET)
+    public String goSingle(Model model, @RequestParam("b_no") Long b_no){
+        log.info("goSingle Start...");
+
+        model.addAttribute("blog", blogService.getBlogSingle(b_no));
+
+        return "blog/blogsingle";
     }
 
 
