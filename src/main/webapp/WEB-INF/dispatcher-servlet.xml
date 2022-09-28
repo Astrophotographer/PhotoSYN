@@ -34,7 +34,7 @@
     <context:component-scan base-package="com.test.controller"/>
 
     <context:component-scan base-package="com.blog.controller"/>
-    <context:component-scan base-package="com.gallery.controller"/>
-    <context:component-scan base-package="com.member.controller"/>
-    <context:component-scan base-package="com.admin.controller"/>
+<!--    <context:component-scan base-package="com.gallery.controller"/>-->
+<!--    <context:component-scan base-package="com.member.controller"/>-->
+<!--    <context:component-scan base-package="com.admin.controller"/>-->
 </beans>

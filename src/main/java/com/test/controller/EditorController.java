@@ -1,5 +1,6 @@
 package com.test.controller;
 
+import com.drew.lang.StringUtil;
 import com.google.gson.JsonObject;
 import com.test.domain.Editor;
 import com.test.domain.EditorDTO;
@@ -7,6 +8,7 @@ import com.test.domain.SummerEditorVO;
 import com.test.service.PostService;
 import lombok.extern.log4j.Log4j;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,15 +16,20 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Log4j
@@ -33,226 +40,129 @@ public class EditorController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/testeditor")
-    public String testeditor(){
-        log.info("testEditor Start...");
 
-        return "/testpage/editor/editor";
-    }
-    @RequestMapping("/summereditor")
-    public String summereditor(){
-        log.info("summereditor Start...");
+    // CKEDITOR
 
-        return "/testpage/editor/summereditor";
-    }
-    @PostMapping("/summerwrite")
-    public String summerwrite(Model model, SummerEditorVO summerEditorVO) throws Exception {
-        log.info("summerwrite Start...");
+    @RequestMapping("ckeditor")
+    public String ckeditor() {
 
-        log.info("summerEditorVO : "+summerEditorVO.toString());
-        log.info("summerEditorVO content : "+summerEditorVO.getContent());
-        log.info("summerEditorVO subject : "+summerEditorVO.getSubject());
-        log.info("summerEditorVO writer  : "+summerEditorVO.getWriter());
-
-        int result = postService.insertSummerBoard(summerEditorVO);
-
-        log.info("summerwrite result : "+result);
-
-        return "/testpage/editor/summerwrite";
+        log.info("ckeditor start...");
+        return "testpage/editor/ckeditor";
     }
 
-    @RequestMapping(value = "/uploadSummernoteImageFile", produces = "application/json; charset=utf8")
-    @ResponseBody
-    public String uploadSummernoteImageFile(@RequestParam("file")MultipartFile multipartFile, HttpServletRequest request){
-        JsonObject json = new JsonObject();
+    @RequestMapping("ckeditor2")
+    public String ckeditor2() {
+
+        log.info("ckeditor2 start...");
+        return "testpage/editor/ckeditor2";
+    }
 
 
-        String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-        String fileRoot = contextRoot+"resources/fileupload/";
 
-        String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-        String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
+    @RequestMapping(value="editor/food/imageUpload.do", method = RequestMethod.POST)
+    public void imageUpload4(HttpServletRequest request,
+                            HttpServletResponse response, MultipartHttpServletRequest multiFile
+            , @RequestParam MultipartFile upload) throws Exception{
+        // 랜덤 문자 생성
+        UUID uid = UUID.randomUUID();
 
-        String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-        File targetFile = new File(fileRoot + savedFileName);
+        OutputStream out = null;
+        PrintWriter printWriter = null;
 
-        try {
-            // 파일 저장
-            InputStream fileStream = multipartFile.getInputStream();
-            FileUtils.copyInputStreamToFile(fileStream, targetFile);
+        //인코딩
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        try{
+            //파일 이름 가져오기
+            String fileName = upload.getOriginalFilename();
+            byte[] bytes = upload.getBytes();
 
-            // 파일을 열기위하여 common/getImg.do 호출 / 파라미터로 savedFileName 보냄.
-            json.addProperty("url", "common/getImg.do?savedFileName="+savedFileName);
-            json.addProperty("responseCode", "success");
+            //이미지 경로 생성
+//            String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
+            String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";	// 이미지 경로 설정(폴더 자동 생성)
+//            C:\Users\pmwkd\Desktop\git\PhotoSYN\src\main\webapp\resources\saveImgckImage
+            String ckUploadPath = path + uid + "_" + fileName;
+            File folder = new File(path);
+//            System.out.println("path:"+path);	// 이미지 저장경로 console에 확인
+            log.info("path:"+path);	// 이미지 저장경로 console에 확인
+            //해당 디렉토리 확인
+            if(!folder.exists()){
+                try{
+                    folder.mkdirs(); // 폴더 생성
+                }catch(Exception e){
+                    e.getStackTrace();
+                }
+            }
 
-        } catch (IOException e) {
-            FileUtils.deleteQuietly(targetFile);
-            json.addProperty("responseCode", "error");
+            out = new FileOutputStream(new File(ckUploadPath));
+            out.write(bytes);
+            out.flush(); // outputStram에 저장된 데이터를 전송하고 초기화
+
+            String callback = request.getParameter("CKEditorFuncNum");
+            printWriter = response.getWriter();
+            String fileUrl = "/editor/food/ckImgSubmit.do?uid=" + uid + "&fileName=" + fileName; // 작성화면
+
+            // 업로드시 메시지 출력
+            printWriter.println("{\"filename\" : \""+fileName+"\", \"uploaded\" : 1, \"url\":\""+fileUrl+"\"}");
+            printWriter.flush();
+
+        }catch(IOException e){
             e.printStackTrace();
+        } finally {
+            try {
+                if(out != null) { out.close(); }
+                if(printWriter != null) { printWriter.close(); }
+            } catch(IOException e) { e.printStackTrace(); }
         }
-        String jsonvalue = json.toString();
-
-        return jsonvalue;
+        return;
     }
+    // 서버로 전송된 이미지 뿌려주기
+    @RequestMapping(value="/food/ckImgSubmit.do")
+    public void ckSubmit4(@RequestParam(value="uid") String uid
+            , @RequestParam(value="fileName") String fileName
+            , HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
 
+        //서버에 저장된 이미지 경로
+//        String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
+        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";	// 저장된 이미지 경로
+        System.out.println("path:"+path);
+        String sDirPath = path + uid + "_" + fileName;
 
+        File imgFile = new File(sDirPath);
 
+        //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
+        if(imgFile.isFile()){
+            byte[] buf = new byte[1024];
+            int readByte = 0;
+            int length = 0;
+            byte[] imgBuf = null;
 
+            FileInputStream fileInputStream = null;
+            ByteArrayOutputStream outputStream = null;
+            ServletOutputStream out = null;
 
+            try{
+                fileInputStream = new FileInputStream(imgFile);
+                outputStream = new ByteArrayOutputStream();
+                out = response.getOutputStream();
 
-
-
-
-
-
-
-
-
-
-
-    @RequestMapping("/")
-    public ModelAndView insertEditor(HttpServletRequest request, HttpServletResponse response, Editor editor) throws Exception {
-        log.info("insertEditor Start...");
-        return new ModelAndView("editor/newPost");
-    }
-
-    @RequestMapping("/savePost")
-    public View savePost(HttpServletRequest request, EditorDTO post) throws Exception{
-        log.info("savePost Start...");
-
-        ModelMap model = new ModelMap();
-        model.addAttribute("result", HttpStatus.OK);
-
-        postService.savePost(post);
-
-        return new MappingJackson2JsonView();
-    }
-
-    //일반 파일 업로드 컨트롤러
-    @RequestMapping("/testfileupload")
-    public String testfileupload(HttpServletRequest request, HttpServletResponse response, Editor editor){
-        log.info("testfileupload Start...");
-
-        String return1=request.getParameter("callback");
-        String return2="?callback_func=" + request.getParameter("callback_func");
-        String return3="";
-        String name = "";
-        try {
-            if(editor.getFile() != null && editor.getFile().getOriginalFilename() != null && !editor.getFile().getOriginalFilename().equals("")) {
-                // 기존 상단 코드를 막고 하단코드를 이용
-                name = editor.getFile().getOriginalFilename().substring(editor.getFile().getOriginalFilename().lastIndexOf(File.separator)+1);
-                String filename_ext = name.substring(name.lastIndexOf(".")+1);
-                filename_ext = filename_ext.toLowerCase();
-                String[] allow_file = {"jpg","png","bmp","gif"};
-                int cnt = 0;
-                for(int i=0; i<allow_file.length; i++) {
-                    if(filename_ext.equals(allow_file[i])){
-                        cnt++;
-                    }
+                while((readByte = fileInputStream.read(buf)) != -1){
+                    outputStream.write(buf, 0, readByte);
                 }
-                if(cnt == 0) {
-                    return3 = "&errstr="+name;
-                } else {
-                    //파일 기본경로
-                    String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-                    //파일 기본경로 _ 상세경로
-                    String filePath = dftFilePath + "resources"+ File.separator + "editor" + File.separator +"upload" + File.separator;
-                    File file = new File(filePath);
-                    if(!file.exists()) {
-                        file.mkdirs();
-                    }
-                    String realFileNm = "";
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-                    String today= formatter.format(new java.util.Date());
-                    realFileNm = today+ UUID.randomUUID().toString() + name.substring(name.lastIndexOf("."));
-                    String rlFileNm = filePath + realFileNm;
-                    ///////////////// 서버에 파일쓰기 /////////////////
-                    editor.getFile().transferTo(new File(rlFileNm));
-                    ///////////////// 서버에 파일쓰기 /////////////////
-                    return3 += "&bNewLine=true";
-                    return3 += "&sFileName="+ name;
-                    return3 += "&sFileURL=/resources/editor/upload/"+realFileNm;
-                }
-            }else {
-                return3 += "&errstr=error";
+
+                imgBuf = outputStream.toByteArray();
+                length = imgBuf.length;
+                out.write(imgBuf, 0, length);
+                out.flush();
+
+            }catch(IOException e){
+                e.printStackTrace();
+            }finally {
+                outputStream.close();
+                fileInputStream.close();
+                out.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "redirect:"+return1+return2+return3;
-    }
-
-    @RequestMapping(value="/file_uploader_html5",method = RequestMethod.POST)
-    public void file_uploader_html5(HttpServletResponse response, HttpServletRequest request){
-        try {
-            //파일정보
-            String sFileInfo = "";
-            //파일명을 받는다 - 일반 원본파일명
-            String filename = request.getHeader("file-name");
-            //파일 확장자
-            String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
-            //확장자를소문자로 변경
-            filename_ext = filename_ext.toLowerCase();
-
-            //이미지 검증 배열변수
-            String[] allow_file = {"jpg","png","bmp","gif"};
-
-            //돌리면서 확장자가 이미지인지
-            int cnt = 0;
-            for(int i=0; i<allow_file.length; i++) {
-                if(filename_ext.equals(allow_file[i])){
-                    cnt++;
-                }
-            }
-
-            //이미지가 아님
-            if(cnt == 0) {
-                PrintWriter print = response.getWriter();
-                print.print("NOTALLOW_"+filename);
-                print.flush();
-                print.close();
-            } else {
-                //이미지이므로 신규 파일로 디렉토리 설정 및 업로드
-                //파일 기본경로
-                String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-                //파일 기본경로 _ 상세경로
-                String filePath = dftFilePath + "resources" + File.separator + "editor" + File.separator +"multiupload" + File.separator;
-                File file = new File(filePath);
-                if(!file.exists()) {
-                    file.mkdirs();
-                }
-                String realFileNm = "";
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-                String today= formatter.format(new java.util.Date());
-                realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-                String rlFileNm = filePath + realFileNm;
-                ///////////////// 서버에 파일쓰기 /////////////////
-                InputStream is = request.getInputStream();
-                OutputStream os=new FileOutputStream(rlFileNm);
-                int numRead;
-                byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-                while((numRead = is.read(b,0,b.length)) != -1){
-                    os.write(b,0,numRead);
-                }
-                if(is != null) {
-                    is.close();
-                }
-                os.flush();
-                os.close();
-                ///////////////// 서버에 파일쓰기 /////////////////
-
-                // 정보 출력
-                sFileInfo += "&bNewLine=true";
-                // img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-                sFileInfo += "&sFileName="+ filename;;
-                sFileInfo += "&sFileURL="+"/resources/editor/multiupload/"+realFileNm;
-                PrintWriter print = response.getWriter();
-                print.print(sFileInfo);
-                print.flush();
-                print.close();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
