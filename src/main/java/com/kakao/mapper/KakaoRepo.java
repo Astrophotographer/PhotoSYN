@@ -1,9 +1,9 @@
 package com.kakao.mapper;
 
-import java.util.HashMap;
+import com.kakao.domain.KakaoDTO;
 
 public interface KakaoRepo {
 
-    public void kakaoInsert(HashMap<String, String> userInfo);
+    public void kakaoInsert(KakaoDTO userInfo);
 
 }
