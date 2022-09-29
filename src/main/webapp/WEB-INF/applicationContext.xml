@@ -28,6 +28,9 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <!-- 예성 추가 -->
+        <property name="mapperLocations" value="classpath:com/**/*Mapper.xml"></property>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
     </bean>
 
     <!-- multipart. 다운로드 -->
@@ -42,22 +45,20 @@
 
     <!-- mapper, component(service등) 추가 -->
 
-    <mybatis-spring:scan base-package="com.test.persistence"/>
-    <context:component-scan base-package="com.test.service"/>
+<!--    <mybatis-spring:scan base-package="com.test.persistence"/>-->
+<!--    <context:component-scan base-package="com.test.service"/>-->
 
-    <context:component-scan base-package="com.gallery.service"/>
-    <mybatis-spring:scan base-package="com.gallery.mapper"/>
+<!--    <context:component-scan base-package="com.gallery.service"/>-->
+<!--    <mybatis-spring:scan base-package="com.gallery.mapper"/>-->
 
-    <context:component-scan base-package="com.blog.service"/>
-    <mybatis-spring:scan base-package="com.blog.mapper"/>
+<!--    <context:component-scan base-package="com.blog.service"/>-->
+<!--    <mybatis-spring:scan base-package="com.blog.mapper"/>-->
 
     <context:component-scan base-package="com.member.service"/>
     <mybatis-spring:scan base-package="com.member.mapper"/>
 
-    <context:component-scan base-package="com.admin.service"/>
-    <mybatis-spring:scan base-package="com.admin.mapper"/>
-
-
+<!--    <context:component-scan base-package="com.admin.service"/>-->
+<!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
 
 
 </beans>
