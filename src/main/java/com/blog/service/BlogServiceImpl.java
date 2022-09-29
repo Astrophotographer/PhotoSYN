@@ -25,6 +25,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public int checkBlogSeq() {
+        return blogMapper.checkBlogSeq();
+    }
+
+    @Override
     public List<BlogDTO> getBlogList() {
         return blogMapper.getBlogList();
     }
@@ -32,6 +37,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogDTO getBlogSingle(Long B_NO) {
         return blogMapper.getBlogSingle(B_NO);
+    }
+
+    @Override
+    public List checkMainImg() {
+        return blogMapper.checkMainImg();
     }
 }
 

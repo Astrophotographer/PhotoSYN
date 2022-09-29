@@ -11,7 +11,11 @@ public interface BlogMapper {
 
     public int insertBlog(BlogDTO blogDTO);
 
+    public int checkBlogSeq();
+
     public List<BlogDTO> getBlogList();
 
     public BlogDTO getBlogSingle(Long B_NO);
+
+    public List checkMainImg();
 }

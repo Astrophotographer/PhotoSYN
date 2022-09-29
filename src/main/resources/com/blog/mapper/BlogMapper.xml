@@ -7,7 +7,7 @@
 
 
     <insert id="insertImg">
-        insert into BLOG_IMG (BI_NO, BI_NAME, BI_MAIN) values (blog_img_seq.nextval, #{BI_NAME}, #{BI_MAIN})
+        insert into BLOG_IMG (BI_NO, BI_NAME, BI_MAIN, BI_UUID, BI_ORIGINNAME) values (blog_img_seq.nextval, #{BI_NAME}, #{BI_MAIN}, #{BI_UUID}, #{BI_ORIGINNAME})
     </insert>
 
     <insert id="insertBlog">
@@ -15,12 +15,20 @@
         values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT},#{B_TAG1})
     </insert>
 
+    <select id="checkBlogSeq" resultType="_int">
+        select blog_seq.currval from dual
+    </select>
+
     <select id="getBlogList" resultType="com.blog.domain.BlogDTO">
         select * from blog
     </select>
 
     <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">
         select * from blog where b_no = #{B_NO}
+    </select>
+
+    <select id="checkMainImg" resultType="com.blog.domain.Blog_Img">
+        select * from blog_img
     </select>
 </mapper>
 

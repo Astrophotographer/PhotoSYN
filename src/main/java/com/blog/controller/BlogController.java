@@ -106,16 +106,21 @@ public class BlogController {
             printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
             printWriter.flush();
 
-            //사진 이름 저장
-            blog_img.setBI_NAME(uid+"_"+fileName);
-            //사진 메인 여부 0 : 메인, 1 : 서브
-            blog_img.setBI_MAIN(1);
-
-            //사진 정보 DB에 저장
+            //임시 사진 저장 사용 전
+//            //사진 이름 저장
+//            blog_img.setBI_NAME(uid+"_"+fileName);
+//            //사진 메인 여부 0 : 서브, 1 : 메인
+//            //기본으로 서브용 사진들로 지정.
+//            blog_img.setBI_MAIN(0);
+//            blog_img.setBI_UUID(uid.toString());
+//            blog_img.setBI_ORIGINNAME(fileName);
+//
+//
+//            //사진 정보 DB에 저장
 //            int result = blogService.insertImg(blog_img);
 
-            //DB 저장 성공.
-//            log.info("result:" + result);
+            //DB 저장 성공시 1출력.
+            log.info("result:" + result);
 
 
         } catch (IOException e) {
@@ -137,6 +142,7 @@ public class BlogController {
 
 //    String fileUrl = "../resources/saveImgckImage/" + uid + "_" + fileName; // 작성화면(에디터에 저장되는 텍스트 문구)
     // 서버로 전송된 이미지 글에다가 뿌려주기
+    //이미지 태그 에서도 사진 불러오기 위해 사용.
     @RequestMapping(value = "/write/ckImgSubmit.do")
     public void ckSubmit4(@RequestParam(value = "uid") String uid
             , @RequestParam(value = "fileName") String fileName
@@ -187,15 +193,34 @@ public class BlogController {
         }
     }
 
-    @RequestMapping(value="submit", method = RequestMethod.POST)
-    public void submit(BlogDTO blogDTO, Blog_Img blog_img){
-        log.info("submit start...");
+    @RequestMapping(value="checkmainimg", method = RequestMethod.POST)
+    public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model){
+        log.info("checkmainimg start...");
 
-
+        //블로그 글 DB 저장.
         log.info(blogDTO.toString());
         blogService.insertBlog(blogDTO);
+        int blog_seq = blogService.checkBlogSeq();
+
+        //정상적으로 시퀀스값 가져옴.
+        log.info("checkmainimg_blog_seq:" + blog_seq);
+
+        //이름들로 db 저장된 사진들 가져와서 출력 후 select 해서 이미지 고르게하기
+
+        model.addAttribute("imgs", blogService.checkMainImg());
+
+        //임시 사진 저장한것 불러와서 값 담기
+//        //사진 이름 저장
+//        blog_img.setBI_NAME(uid+"_"+fileName);
+//        //사진 메인 여부 0 : 서브, 1 : 메인
+//        //기본으로 서브용 사진들로 지정.
+//        blog_img.setBI_MAIN(0);
+//        blog_img.setBI_UUID(uid.toString());
+//        blog_img.setBI_ORIGINNAME(fileName);
 
 
+
+        return "blog/checkmainimg";
     }
 }
 
