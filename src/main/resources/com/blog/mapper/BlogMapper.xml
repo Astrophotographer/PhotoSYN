@@ -5,22 +5,50 @@
 
 <mapper namespace="com.blog.mapper.BlogMapper">
 
+    <insert id="insertTempImg">
+        insert into blog_img_temp values (#{U_ID}, #{BI_NAME}, #{BI_UUID}, #{BI_ORIGINNAME})
+    </insert>
+
+    <select id="getTempImg" resultType="com.blog.domain.Blog_Img_Temp">
+        select * from blog_img_temp where U_ID = #{user_id}
+    </select>
 
     <insert id="insertImg">
-        insert into BLOG_IMG (BI_NO, BI_NAME, BI_MAIN) values (blog_img_seq.nextval, #{BI_NAME}, #{BI_MAIN})
+        insert into BLOG_IMG (BI_NO, B_NO, BI_NAME, BI_MAIN, BI_UUID, BI_ORIGINNAME) values (blog_img_seq.nextval, #{B_NO}, #{BI_NAME}, #{BI_MAIN}, #{BI_UUID}, #{BI_ORIGINNAME})
     </insert>
+
+    <update id="updateImg">
+        update BLOG_IMG set BI_MAIN = 1 where BI_UUID = #{uuid}
+    </update>
+    <delete id="deleteTempImg">
+        delete from blog_img_temp where U_ID = #{u_id}
+    </delete>
 
     <insert id="insertBlog">
         insert into BLOG (B_NO, U_ID, MT_NAME, B_SUBJECT, B_CONTENT, B_TAG1)
         values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT},#{B_TAG1})
     </insert>
 
+    <select id="checkBlogSeq" resultType="_int">
+        select blog_seq.currval from dual
+    </select>
+
     <select id="getBlogList" resultType="com.blog.domain.BlogDTO">
-        select * from blog
+        select * from blog order by b_reg desc
     </select>
 
     <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">
         select * from blog where b_no = #{B_NO}
     </select>
+
+    <select id="checkMainImg" resultType="com.blog.domain.Blog_Img">
+        select * from blog_img
+    </select>
+
+    <select id="getMainImg" resultType="com.blog.domain.Blog_Img">
+        select * from blog_img where b_no = #{B_NO} and bi_main = 1
+    </select>
+
+
 </mapper>
 

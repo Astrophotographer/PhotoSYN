@@ -19,7 +19,7 @@
 <%-- 헤더 수정하기.. 임시로 test 를 줌--%>
 <jsp:include page="/WEB-INF/views/includes/test.jsp"/>
 
-<form class="form-horizontal" role="form" id="editorForm" method="post" action="/blog/submit">
+<form class="form-horizontal" role="form" id="editorForm" method="post" action="/blog/checkmainimg">
     <div class="form-group">
         <div class="form-group">
             <div class="col-lg-12">
