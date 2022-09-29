@@ -2,6 +2,7 @@ package com.blog.controller;
 
 import com.blog.domain.BlogDTO;
 import com.blog.domain.Blog_Img;
+import com.blog.domain.Blog_Img_Temp;
 import com.blog.service.BlogService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @Log4j
@@ -27,9 +28,10 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
+    private Object tempimg;
 
-    @RequestMapping(value ="main")
-    public String goMain(Model model){
+    @RequestMapping(value = "main")
+    public String goMain(Model model) {
         log.info("goMain Start...");
 
         model.addAttribute("list", blogService.getBlogList());
@@ -38,8 +40,8 @@ public class BlogController {
     }
 
     //블로그 글 한개 보기
-    @RequestMapping(value="single", method = RequestMethod.GET)
-    public String goSingle(Model model, @RequestParam("b_no") Long b_no){
+    @RequestMapping(value = "single", method = RequestMethod.GET)
+    public String goSingle(Model model, @RequestParam("b_no") Long b_no) {
         log.info("goSingle Start...");
 
         model.addAttribute("blog", blogService.getBlogSingle(b_no));
@@ -60,7 +62,7 @@ public class BlogController {
     @RequestMapping(value = "write", method = RequestMethod.POST)
     public void imageUpload4(HttpServletRequest request,
                              HttpServletResponse response, MultipartHttpServletRequest multiFile
-            , @RequestParam MultipartFile upload, Blog_Img blog_img) throws Exception {
+            , @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
 
@@ -115,12 +117,22 @@ public class BlogController {
 //            blog_img.setBI_UUID(uid.toString());
 //            blog_img.setBI_ORIGINNAME(fileName);
 //
-//
 //            //사진 정보 DB에 저장
 //            int result = blogService.insertImg(blog_img);
 
             //DB 저장 성공시 1출력.
-            log.info("result:" + result);
+//            log.info("result:" + result);
+
+            //임시 사진 저장 사용
+            //유저 아이디 값 받아오기
+            blog_img_temp.setU_ID("test");
+            blog_img_temp.setBI_NAME(uid + "_" + fileName);
+            blog_img_temp.setBI_UUID(uid.toString());
+            blog_img_temp.setBI_ORIGINNAME(fileName);
+
+            int tempResult = blogService.insertTempImg(blog_img_temp);
+            log.info("------------------------------------------------------------------------------");
+            log.info("tempResult:" + tempResult);   //성공시 1 출력
 
 
         } catch (IOException e) {
@@ -140,7 +152,7 @@ public class BlogController {
         return;
     }
 
-//    String fileUrl = "../resources/saveImgckImage/" + uid + "_" + fileName; // 작성화면(에디터에 저장되는 텍스트 문구)
+    //    String fileUrl = "../resources/saveImgckImage/" + uid + "_" + fileName; // 작성화면(에디터에 저장되는 텍스트 문구)
     // 서버로 전송된 이미지 글에다가 뿌려주기
     //이미지 태그 에서도 사진 불러오기 위해 사용.
     @RequestMapping(value = "/write/ckImgSubmit.do")
@@ -193,23 +205,52 @@ public class BlogController {
         }
     }
 
-    @RequestMapping(value="checkmainimg", method = RequestMethod.POST)
-    public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model){
-        log.info("checkmainimg start...");
+    @RequestMapping(value = "checkmainimg", method = RequestMethod.POST)
+    public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model) {
+        try {
+            log.info("checkmainimg start...");
 
-        //블로그 글 DB 저장.
-        log.info(blogDTO.toString());
-        blogService.insertBlog(blogDTO);
-        int blog_seq = blogService.checkBlogSeq();
+            //블로그 글 DB 저장.
+            log.info(blogDTO.toString());
+            blogService.insertBlog(blogDTO);
+            int blog_seq = blogService.checkBlogSeq();
 
-        //정상적으로 시퀀스값 가져옴.
-        log.info("checkmainimg_blog_seq:" + blog_seq);
+            //정상적으로 시퀀스값 가져옴.
+            log.info("checkmainimg_blog_seq:" + blog_seq);  //작성한 시퀀스 값 가져옴
 
-        //이름들로 db 저장된 사진들 가져와서 출력 후 select 해서 이미지 고르게하기
+//        blogService.getTempImg("test");
 
-        model.addAttribute("imgs", blogService.checkMainImg());
+            //이름들로 db 저장된 사진들 가져와서 출력 후 select 해서 이미지 고르게하기
+            //list로 가져올때는 정상
+            //map으로 바뀌어서 에러
+            blogService.getTempImg("test").forEach(img -> log.info("foreach사용 " + img.toString() + "\nimg 타입 :" + img.getClass().getName()));
+            //img 타입 ㅣ com.blog.domain.Blog_Img_Temp
 
-        //임시 사진 저장한것 불러와서 값 담기
+            List<Blog_Img_Temp> list = blogService.getTempImg("test");
+            List<Blog_Img> list2 = new ArrayList<Blog_Img>();
+
+            //현재 있는 temp에 담긴 테이블 값들 뷰에 뿌려주기
+            model.addAttribute("imgs", list);
+
+            //list에 담겨있는 temp테이블 가져와서 메인으로 보내주기
+            for (int i = 0; i < list.size(); i++) {
+                log.info("for문 사용 " + list.get(i).toString());
+                log.info("----- getClass.getname" + list.get(i).getClass().getName());
+                blog_img.setB_NO(blog_seq);
+                blog_img.setBI_NAME(list.get(i).getBI_NAME());
+                //메인 여부
+                blog_img.setBI_MAIN(0);
+
+                blog_img.setBI_UUID(list.get(i).getBI_UUID());
+                blog_img.setBI_ORIGINNAME(list.get(i).getBI_ORIGINNAME());
+
+                log.info("blog_img.toString() : " + blog_img.toString());
+                blogService.insertImg(blog_img);
+                Thread.sleep(100);
+            }
+
+
+            //임시 사진 저장한것 불러와서 값 담기
 //        //사진 이름 저장
 //        blog_img.setBI_NAME(uid+"_"+fileName);
 //        //사진 메인 여부 0 : 서브, 1 : 메인
@@ -217,10 +258,27 @@ public class BlogController {
 //        blog_img.setBI_MAIN(0);
 //        blog_img.setBI_UUID(uid.toString());
 //        blog_img.setBI_ORIGINNAME(fileName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            log.info("finally...");
 
-
-
-        return "blog/checkmainimg";
+            return "blog/checkmainimg";
+        }
     }
+
+    @RequestMapping(value = "checkmainimg", method = RequestMethod.GET)
+    public String finishSubmit(String mainImg, String UUID) {
+        log.info("finishSubmit start...");
+        log.info("mainImg : " + mainImg);
+        log.info("UUID : " + UUID);
+
+        //임시 사진저장 테이블에 들어있는 데이터들 삭제 및 메인 지정
+        blogService.updateImg("test", UUID);
+
+
+        return "redirect:/blog/main";
+    }
+
 }
 
