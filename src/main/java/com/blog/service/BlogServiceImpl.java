@@ -67,5 +67,10 @@ public class BlogServiceImpl implements BlogService {
     public List checkMainImg() {
         return blogMapper.checkMainImg();
     }
+
+    @Override
+    public Blog_Img getMainImg(int b_no) {
+        return blogMapper.getMainImg(b_no);
+    }
 }
 

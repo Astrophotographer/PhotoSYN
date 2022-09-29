@@ -44,5 +44,11 @@
     <select id="checkMainImg" resultType="com.blog.domain.Blog_Img">
         select * from blog_img
     </select>
+
+    <select id="getMainImg" resultType="com.blog.domain.Blog_Img">
+        select * from blog_img where b_no = #{B_NO} and bi_main = 1
+    </select>
+
+
 </mapper>
 

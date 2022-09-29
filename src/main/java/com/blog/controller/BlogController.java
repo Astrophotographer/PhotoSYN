@@ -108,23 +108,6 @@ public class BlogController {
             printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
             printWriter.flush();
 
-            //임시 사진 저장 사용 전
-//            //사진 이름 저장
-//            blog_img.setBI_NAME(uid+"_"+fileName);
-//            //사진 메인 여부 0 : 서브, 1 : 메인
-//            //기본으로 서브용 사진들로 지정.
-//            blog_img.setBI_MAIN(0);
-//            blog_img.setBI_UUID(uid.toString());
-//            blog_img.setBI_ORIGINNAME(fileName);
-//
-//            //사진 정보 DB에 저장
-//            int result = blogService.insertImg(blog_img);
-
-            //DB 저장 성공시 1출력.
-//            log.info("result:" + result);
-
-            //임시 사진 저장 사용
-            //유저 아이디 값 받아오기
             blog_img_temp.setU_ID("test");
             blog_img_temp.setBI_NAME(uid + "_" + fileName);
             blog_img_temp.setBI_UUID(uid.toString());
@@ -133,7 +116,6 @@ public class BlogController {
             int tempResult = blogService.insertTempImg(blog_img_temp);
             log.info("------------------------------------------------------------------------------");
             log.info("tempResult:" + tempResult);   //성공시 1 출력
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -221,10 +203,13 @@ public class BlogController {
 //        blogService.getTempImg("test");
 
             //이름들로 db 저장된 사진들 가져와서 출력 후 select 해서 이미지 고르게하기
-            //list로 가져올때는 정상
-            //map으로 바뀌어서 에러
             blogService.getTempImg("test").forEach(img -> log.info("foreach사용 " + img.toString() + "\nimg 타입 :" + img.getClass().getName()));
             //img 타입 ㅣ com.blog.domain.Blog_Img_Temp
+
+            //람다로는 안되나?
+//            blogService.getTempImg("test").forEach(img ->{
+//                blog_img.setBI_UUID(img.getBI_UUID());
+//            });
 
             List<Blog_Img_Temp> list = blogService.getTempImg("test");
             List<Blog_Img> list2 = new ArrayList<Blog_Img>();
@@ -249,15 +234,6 @@ public class BlogController {
                 Thread.sleep(100);
             }
 
-
-            //임시 사진 저장한것 불러와서 값 담기
-//        //사진 이름 저장
-//        blog_img.setBI_NAME(uid+"_"+fileName);
-//        //사진 메인 여부 0 : 서브, 1 : 메인
-//        //기본으로 서브용 사진들로 지정.
-//        blog_img.setBI_MAIN(0);
-//        blog_img.setBI_UUID(uid.toString());
-//        blog_img.setBI_ORIGINNAME(fileName);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -280,5 +256,57 @@ public class BlogController {
         return "redirect:/blog/main";
     }
 
+    //메인 이미지 링크 뿌려주기
+    @RequestMapping(value = "getmainimg")
+    public void getmainimg(@RequestParam("b_no") int b_no, Blog_Img blog_img
+            , HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        log.info("getmainimg start...");
+
+        //blog_img에 b_no 주고 메인이미지 가져오기
+        blog_img = blogService.getMainImg(b_no);
+
+        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 저장된 이미지 경로
+        log.info("getmainimg 에서 실행 path:" + path);
+        String sDirPath = path + blog_img.getBI_UUID() + "_" + blog_img.getBI_ORIGINNAME();
+        log.info("getmainimg 에서 실행 sDirPath:" + sDirPath);
+        File imgFile = new File(sDirPath);
+
+        //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
+        if (imgFile.isFile()) {
+            byte[] buf = new byte[1024];
+            int readByte = 0;
+            int length = 0;
+            byte[] imgBuf = null;
+
+            FileInputStream fileInputStream = null;
+            ByteArrayOutputStream outputStream = null;
+            ServletOutputStream out = null;
+
+            try {
+                fileInputStream = new FileInputStream(imgFile);
+                outputStream = new ByteArrayOutputStream();
+                out = response.getOutputStream();
+
+                while ((readByte = fileInputStream.read(buf)) != -1) {
+                    outputStream.write(buf, 0, readByte);
+                }
+
+                imgBuf = outputStream.toByteArray();
+                length = imgBuf.length;
+                out.write(imgBuf, 0, length);
+                out.flush();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                outputStream.close();
+                fileInputStream.close();
+                out.close();
+            }
+        }
+    }
 }
+
+
 

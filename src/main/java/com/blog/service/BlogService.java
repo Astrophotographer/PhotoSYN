@@ -29,4 +29,6 @@ public interface BlogService {
     public BlogDTO getBlogSingle(Long B_NO);
 
     public List checkMainImg();
+
+    public Blog_Img getMainImg(int b_no);
 }
