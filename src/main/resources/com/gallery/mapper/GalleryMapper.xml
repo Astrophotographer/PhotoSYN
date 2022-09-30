@@ -15,6 +15,11 @@
 <!--        values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT},#{B_TAG1})-->
 <!--    </insert>-->
 
+    <select id="insertMetadata" resultType="com.gallery.domain.MetadataDTO">
+        select * from gallery
+    </select>
+
+
     <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
         select * from gallery
     </select>

@@ -32,6 +32,7 @@
     <!-- manin stylesheet -->
     <link rel="stylesheet" href="../resources/blog/css/style.css">
 </head>
+</head>
 <body>
 <div>
     <h1>TEST BLOG MAIN</h1>

@@ -1,7 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html xml:lang="en" lang="en" dir="ltr"
       class="device-nonmobile tone-light js js history svg localstorage sessionstorage hashchange canvas opacity rgba fontface chrome chrome105 osx tablet"
       prefix="og: http://ogp.me/ns#">
-<head>
+    <head>
     <meta charset="utf-8">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -52,58 +55,7 @@
             return n === d || void 0 === n ? u : void i(n)
         }
     }(window, document);</script>
-    <link rel="alternate" hreflang="x-default" href="https://imgbb.com/">
-    <link rel="alternate" hreflang="en" href="https://imgbb.com/">
-    <link rel="alternate" hreflang="ar" href="https://ar.imgbb.com/">
-    <link rel="alternate" hreflang="bg-bg" href="https://bg-bg.imgbb.com/">
-    <link rel="alternate" hreflang="cs" href="https://cs.imgbb.com/">
-    <link rel="alternate" hreflang="da" href="https://da.imgbb.com/">
-    <link rel="alternate" hreflang="de" href="https://de.imgbb.com/">
-    <link rel="alternate" hreflang="el" href="https://el.imgbb.com/">
-    <link rel="alternate" hreflang="es" href="https://es.imgbb.com/">
-    <link rel="alternate" hreflang="et-ee" href="https://et-ee.imgbb.com/">
-    <link rel="alternate" hreflang="fa" href="https://fa.imgbb.com/">
-    <link rel="alternate" hreflang="fi" href="https://fi.imgbb.com/">
-    <link rel="alternate" hreflang="fr" href="https://fr.imgbb.com/">
-    <link rel="alternate" hreflang="he" href="https://he.imgbb.com/">
-    <link rel="alternate" hreflang="hr" href="https://hr.imgbb.com/">
-    <link rel="alternate" hreflang="hu" href="https://hu.imgbb.com/">
-    <link rel="alternate" hreflang="id" href="https://id.imgbb.com/">
-    <link rel="alternate" hreflang="it" href="https://it.imgbb.com/">
-    <link rel="alternate" hreflang="ja" href="https://ja.imgbb.com/">
-    <link rel="alternate" hreflang="ko" href="https://ko.imgbb.com/">
-    <link rel="alternate" hreflang="lt-lt" href="https://lt-lt.imgbb.com/">
-    <link rel="alternate" hreflang="nb" href="https://nb.imgbb.com/">
-    <link rel="alternate" hreflang="nl" href="https://nl.imgbb.com/">
-    <link rel="alternate" hreflang="pl" href="https://pl.imgbb.com/">
-    <link rel="alternate" hreflang="pt" href="https://pt.imgbb.com/">
-    <link rel="alternate" hreflang="pt-br" href="https://pt-br.imgbb.com/">
-    <link rel="alternate" hreflang="ru" href="https://ru.imgbb.com/">
-    <link rel="alternate" hreflang="sk" href="https://sk.imgbb.com/">
-    <link rel="alternate" hreflang="sr-rs" href="https://sr-rs.imgbb.com/">
-    <link rel="alternate" hreflang="sv" href="https://sv.imgbb.com/">
-    <link rel="alternate" hreflang="th" href="https://th.imgbb.com/">
-    <link rel="alternate" hreflang="tr" href="https://tr.imgbb.com/">
-    <link rel="alternate" hreflang="uk" href="https://uk.imgbb.com/">
-    <link rel="alternate" hreflang="vi" href="https://vi.imgbb.com/">
-    <link rel="alternate" hreflang="zh-cn" href="https://zh-cn.imgbb.com/">
-    <link rel="alternate" hreflang="zh-tw" href="https://zh-tw.imgbb.com/">
-    <link rel="shortcut icon" href="//simgbb.com/images/favicon.png">
-    <link rel="icon" type="image/png" href="//simgbb.com/images/favicon.png" sizes="192x192">
-    <link rel="apple-touch-icon" href="//simgbb.com/images/favicon.png" sizes="180x180">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://imgbb.com">
-    <meta property="og:title" content="Upload Image — Free Image Hosting">
-    <meta property="og:site_name" content="ImgBB">
-    <meta property="og:description"
-          content="Free image hosting and sharing service, upload pictures, photo host. Offers integration solutions for uploading images to forums.">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:description"
-          content="Free image hosting and sharing service, upload pictures, photo host. Offers integration solutions for uploading images to forums.">
-    <meta name="twitter:title" content="ImgBB — Upload Image — Free Image Hosting">
-    <meta name="twitter:site" content="@imgbb_com">
-    <script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6721704972914349"
-            crossorigin="anonymous"></script>
+
     <style type="text/css"></style>
     <style type="text/css">/* Copyright 2014-present Evernote Corporation. All rights reserved. */
     @keyframes caretBlink {
@@ -291,85 +243,20 @@
 </head>
 <body id="index" class="split">
 <header id="top-bar" class="top-bar">
+
+<%--    Top Bar--%>
     <div class="content-width">
-        <div id="logo" class="top-bar-logo"><a href="https://imgbb.com"><img width="116px" height="24px"
-                                                                             src="//simgbb.com/images/logo.png"
-                                                                             alt="ImgBB"></a></div>
+        <div id="logo" class="top-bar-logo"><a href="https://imgbb.com">
+            <img width="116px" height="24px"
+                 src="//simgbb.com/images/logo.png"
+                 alt="ImgBB"></a></div>
         <ul class="top-bar-left float-left">
             <li data-action="top-bar-menu-full" data-nav="mobile-menu"
                 class="top-btn-el phone-show phablet-show hidden">
                 <span class="top-btn-text"><span class="icon icon-bars"></span></span>
             </li>
-            <li data-nav="about" class="phone-hide phablet-hide pop-btn pop-keep-click">
-                <span class="top-btn-text"><span class="icon icon-circle-question"></span><span
-                        class="btn-text phone-hide phablet-hide">About</span><span class="arrow-down"></span></span>
-                <div class="pop-box arrow-box arrow-box-top anchor-left">
-                    <div class="pop-box-inner pop-box-menu">
-                        <ul>
-                            <li class="with-icon"><a href="https://imgbb.com/plugin"><span
-                                    class="btn-icon icon-code"></span> Plugin</a></li>
-                            <li class="with-icon"><a href="https://api.imgbb.com/"><span
-                                    class="btn-icon icon-gear"></span> API</a></li>
-                            <li class="with-icon"><a href="https://imgbb.com/tos"><span
-                                    class="btn-icon icon-landmark"></span> Terms of service</a></li>
-                            <li class="with-icon"><a href="https://imgbb.com/privacy"><span
-                                    class="btn-icon icon-lock"></span> Privacy</a></li>
-                            <li class="with-icon"><a href="https://imgbb.com/contact"><span
-                                    class="btn-icon icon-at"></span> Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li data-nav="language" class="phablet-hide phone-hide pop-btn">
-                <span class="top-btn-text"><span class="icon icon-language"></span><span class="btn-text">EN</span><span
-                        class="arrow-down"></span></span>
-                <div class="pop-box pbcols5 arrow-box arrow-box-top anchor-left">
-                    <div class="pop-box-inner pop-box-menu pop-box-menucols">
-                        <ul>
-                            <li><a href="https://ar.imgbb.com/" onclick="changeLanguage('ar');">العربية</a></li>
-                            <li><a href="https://bg-bg.imgbb.com/" onclick="changeLanguage('bg-bg');">Български</a></li>
-                            <li><a href="https://cs.imgbb.com/" onclick="changeLanguage('cs');">Čeština</a></li>
-                            <li><a href="https://da.imgbb.com/" onclick="changeLanguage('da');">Dansk</a></li>
-                            <li><a href="https://de.imgbb.com/" onclick="changeLanguage('de');">Deutsch</a></li>
-                            <li><a href="https://el.imgbb.com/" onclick="changeLanguage('el');">Ελληνικά</a></li>
-                            <li class="current"><a href="https://imgbb.com/" onclick="changeLanguage('en');">English</a>
-                            </li>
-                            <li><a href="https://es.imgbb.com/" onclick="changeLanguage('es');">Español</a></li>
-                            <li><a href="https://et-ee.imgbb.com/" onclick="changeLanguage('et-ee');">Eesti (Eesti)</a>
-                            </li>
-                            <li><a href="https://fa.imgbb.com/" onclick="changeLanguage('fa');">فارسی</a></li>
-                            <li><a href="https://fi.imgbb.com/" onclick="changeLanguage('fi');">Suomi</a></li>
-                            <li><a href="https://fr.imgbb.com/" onclick="changeLanguage('fr');">Français</a></li>
-                            <li><a href="https://he.imgbb.com/" onclick="changeLanguage('he');">עברית</a></li>
-                            <li><a href="https://hr.imgbb.com/" onclick="changeLanguage('hr');">Hrvatski</a></li>
-                            <li><a href="https://hu.imgbb.com/" onclick="changeLanguage('hu');">Magyar</a></li>
-                            <li><a href="https://id.imgbb.com/" onclick="changeLanguage('id');">Bahasa Indonesia</a>
-                            </li>
-                            <li><a href="https://it.imgbb.com/" onclick="changeLanguage('it');">Italiano</a></li>
-                            <li><a href="https://ja.imgbb.com/" onclick="changeLanguage('ja');">日本語</a></li>
-                            <li><a href="https://ko.imgbb.com/" onclick="changeLanguage('ko');">한국어</a></li>
-                            <li><a href="https://lt-lt.imgbb.com/" onclick="changeLanguage('lt-lt');">Lietuvių
-                                (Lietuva)</a></li>
-                            <li><a href="https://nb.imgbb.com/" onclick="changeLanguage('nb');">‪Norsk Bokmål‬</a></li>
-                            <li><a href="https://nl.imgbb.com/" onclick="changeLanguage('nl');">Nederlands</a></li>
-                            <li><a href="https://pl.imgbb.com/" onclick="changeLanguage('pl');">Polski</a></li>
-                            <li><a href="https://pt.imgbb.com/" onclick="changeLanguage('pt');">Português</a></li>
-                            <li><a href="https://pt-br.imgbb.com/" onclick="changeLanguage('pt-br');">Português
-                                (Brasil)</a></li>
-                            <li><a href="https://ru.imgbb.com/" onclick="changeLanguage('ru');">Русский</a></li>
-                            <li><a href="https://sk.imgbb.com/" onclick="changeLanguage('sk');">Slovenčina</a></li>
-                            <li><a href="https://sr-rs.imgbb.com/" onclick="changeLanguage('sr-rs');">Српски</a></li>
-                            <li><a href="https://sv.imgbb.com/" onclick="changeLanguage('sv');">Svenska</a></li>
-                            <li><a href="https://th.imgbb.com/" onclick="changeLanguage('th');">ไทย</a></li>
-                            <li><a href="https://tr.imgbb.com/" onclick="changeLanguage('tr');">Türkçe</a></li>
-                            <li><a href="https://uk.imgbb.com/" onclick="changeLanguage('uk');">Українська</a></li>
-                            <li><a href="https://vi.imgbb.com/" onclick="changeLanguage('vi');">Tiếng Việt</a></li>
-                            <li><a href="https://zh-cn.imgbb.com/" onclick="changeLanguage('zh-cn');">简体中文</a></li>
-                            <li><a href="https://zh-tw.imgbb.com/" onclick="changeLanguage('zh-tw');">繁體中文</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
+
+
         </ul>
         <ul class="top-bar-right float-right keep-visible">
             <li data-action="top-bar-upload" data-nav="upload" class="pop-btn current"><span class="top-btn-text"><span
@@ -397,7 +284,7 @@
                  data-ad-slot="2725978955" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
-        <h1>Upload and share your images.</h1>
+        <h1>PHOTOSYN TEST</h1>
         <p class="c20 center-box text-align-center phone-hide phablet-hide">Drag and drop anywhere you want and start
             uploading your images now. 32 MB limit. Direct image links, BBCode and HTML thumbnails.</p>
         <div class="home-buttons"><a data-trigger="anywhere-upload-input" class="btn btn-big blue">Start uploading</a>
@@ -423,6 +310,9 @@
         </div>
     </div>
 </div>
+
+
+<%--업로드 박스--%>
 <div id="anywhere-upload" class="upload-box upload-box--fixed upload-box--hidden queueEmpty upload-box--show"
      data-queue-size="0">
     <div class="content-width">
@@ -432,8 +322,7 @@
                     <div data-group="upload" style="padding: 80px 0;">
                         <span class="icon icon-cloud-arrow-up cursor-pointer"
                               data-trigger="anywhere-upload-input"></span>
-                        <div class="heading"><a data-trigger="anywhere-upload-input">Drag and drop or paste images here
-                            to upload</a></div>
+                        <div class="heading"><a data-trigger="anywhere-upload-input">PHOTO SYN - UPLOAD TEST</a></div>
                         <div class="upload-box-status-text">You can also <a data-trigger="anywhere-upload-input">browse
                             from your computer</a> or <a data-modal="form" data-target="anywhere-upload-paste-url">add
                             image URLs</a>.
@@ -479,6 +368,8 @@
                     </div>
                 </div>
             </div>
+
+<%--사진 넣기--%>
             <input id="anywhere-upload-input" data-action="anywhere-upload-input" class="hidden-visibility" type="file"
                    accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.pdf,.jpeg,.tiff,.heif" multiple="">
             <input id="anywhere-upload-input-camera" data-action="anywhere-upload-input" class="hidden-visibility"
@@ -488,35 +379,7 @@
             <div id="anywhere-upload-submit" class="btn-container text-align-center margin-bottom-0 soft-hidden"
                  data-group="upload-queue-ready" style="display: none;">
                 <div data-group="upload-queue-ready" style="display: none;">
-                    <div class="input-label upload-input-col center-box text-align-left"><label for="upload-expiration">Auto
-                        delete image</label><select type="text" name="upload-expiration" id="upload-expiration"
-                                                    class="text-input">
-                        <option value="" selected="">Don't autodelete</option>
-                        <option value="PT5M">After 5 minutes</option>
-                        <option value="PT15M">After 15 minutes</option>
-                        <option value="PT30M">After 30 minutes</option>
-                        <option value="PT1H">After 1 hour</option>
-                        <option value="PT3H">After 3 hours</option>
-                        <option value="PT6H">After 6 hours</option>
-                        <option value="PT12H">After 12 hours</option>
-                        <option value="P1D">After 1 day</option>
-                        <option value="P2D">After 2 days</option>
-                        <option value="P3D">After 3 days</option>
-                        <option value="P4D">After 4 days</option>
-                        <option value="P5D">After 5 days</option>
-                        <option value="P6D">After 6 days</option>
-                        <option value="P1W">After 1 week</option>
-                        <option value="P2W">After 2 weeks</option>
-                        <option value="P3W">After 3 weeks</option>
-                        <option value="P1M">After 1 month</option>
-                        <option value="P2M">After 2 months</option>
-                        <option value="P3M">After 3 months</option>
-                        <option value="P4M">After 4 months</option>
-                        <option value="P5M">After 5 months</option>
-                        <option value="P6M">After 6 months</option>
-                    </select></div>
-                    <button class="btn btn-big green" data-action="upload">Upload</button>
-                </div>
+
                 <div data-group="uploading" class="soft-hidden" style="display: none;">
                     <button class="btn btn-big disabled off" disabled="">Uploading</button>
                     <span class="btn-alt">or <a data-action="cancel-upload" data-button="close-cancel">cancel</a><a
@@ -818,17 +681,10 @@
     <div class="clear-both"></div>
     <br><br>
 </div>
-<div class="footer">
-    <ul>
-        <li class="with-icon"><a href="https://imgbb.com/plugin"><span class="btn-icon icon-code"></span> Plugin</a>
-        </li>
-        <li class="with-icon"><a href="https://api.imgbb.com/"><span class="btn-icon icon-gear"></span> API</a></li>
-        <li class="with-icon"><a href="https://imgbb.com/contact"><span class="btn-icon icon-at"></span> Contact</a>
-        </li>
-    </ul>
-    Use of ImgBB constitutes acceptance of our <a href="https://imgbb.com/tos" target="_blank">Terms of Service</a> and
-    <a href="https://imgbb.com/privacy" target="_blank">Privacy Policy</a>.
-</div>
+
+
+
+
 <script defer="" src="//simgbb.com/1311/jquery2.js" onload="jQueryLoaded(this, event)"></script>
 <script defer="" src="//simgbb.com/1311/ibb.js" id="ibbjs"></script>
 <script>
