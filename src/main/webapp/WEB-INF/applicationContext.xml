@@ -31,7 +31,7 @@
     </bean>
 
     <!-- multipart. 다운로드 -->
-    <bean id="fileDown" class="com.upload.util.DownloadView"></bean>
+    <bean id="fileDown" class="com.gallery.util.DownloadView"></bean>
 
     <!-- 파일 업로드 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

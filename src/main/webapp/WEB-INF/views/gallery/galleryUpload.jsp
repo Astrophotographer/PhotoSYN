@@ -369,7 +369,7 @@
                 </div>
             </div>
 
-<%--사진 넣기--%>
+            <%--사진 넣기--%>
             <input id="anywhere-upload-input" data-action="anywhere-upload-input" class="hidden-visibility" type="file"
                    accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.pdf,.jpeg,.tiff,.heif" multiple="">
             <input id="anywhere-upload-input-camera" data-action="anywhere-upload-input" class="hidden-visibility"
@@ -495,6 +495,9 @@
                 </div>
             </li>
         </div>
+
+
+<%--        메타데이터 정보 나올곳--%>
         <div id="anywhere-upload-edit-item">
             <span class="modal-box-title">Edit</span>
             <div class="modal-form">
@@ -503,6 +506,7 @@
                     <label for="form-title">Title <span class="optional">optional</span></label>
                     <input type="text" id="form-title" name="form-title" class="text-input" value="" maxlength="100">
                 </div>
+
                 <div class="input-label" data-action="resize-combo-input">
                     <label for="form-width" class="display-block-forced">Resize image</label>
                     <div class="c6 overflow-auto clear-both">
@@ -531,156 +535,57 @@
                                               name="urls"></textarea></div>
         </div>
     </div>
-    <div data-modal="form-uploaded-create-album" class="hidden" data-is-xhr=""
-         data-submit-fn="CHV.fn.submit_upload_edit" data-ajax-deferred="CHV.fn.complete_upload_edit">
-        <span class="modal-box-title">Create album</span>
-        <p>The uploaded content will be moved to this newly created album. You must <a href="https://imgbb.com/signup">create
-            an account</a> or <a href="https://imgbb.com/login">sign in</a> if you want to edit this album later on.</p>
-        <div class="modal-form">
-            <div name="move-new-album" id="move-new-album" data-content="form-new-album" data-view="switchable">
-                <div class="c7 input-label">
-                    <label for="form-album-name">Album name</label>
-                    <input type="text" name="form-album-name" class="text-input" value="" placeholder="Album name"
-                           maxlength="100" required="">
-                </div>
-                <div class="input-label">
-                    <label for="form-album-description">Album description <span class="optional">optional</span></label>
-                    <textarea id="form-album-description" name="form-album-description" class="text-input no-resize"
-                              placeholder="Brief description of this album"></textarea>
-                </div>
-                <div class="input-label overflow-auto">
-                    <div class="c7 grid-columns">
-                        <label for="form-privacy">Album privacy</label>
-                        <select name="form-privacy" id="form-privacy" class="text-input" data-combo="form-privacy-combo"
-                                rel="template-tooltip" data-tiptip="right" data-title="Who can view this content">
-                            <option value="public">Public</option>
-                            <option value="private_but_link">Private (anyone with the link)</option>
-                            <option value="password">Private (password protected)</option>
-                        </select>
-                    </div>
-                </div>
-                <div id="form-privacy-combo">
-                    <div data-combo-value="password" class="switch-combo soft-hidden">
-                        <div class="input-label overflow-auto">
-                            <div class="c7 grid-columns">
-                                <label for="form-album-password">Album password</label>
-                                <input type="text" name="form-album-password" class="text-input" value=""
-                                       data-required="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div data-modal="failed-upload-result" class="hidden"><span class="modal-box-title">Error report</span>
         <ul data-content="failed-upload-result" style="max-height: 115px;" class="overflow-auto"></ul>
     </div>
 </div>
-<div id="modal-share" class="hidden">
-    <span class="modal-box-title">Share</span>
-    <div class="image-preview"></div>
-    <p class="highlight margin-bottom-20 font-size-small text-align-center" data-content="privacy-private">
-        __privacy_notes__</p>
-    <ul class="panel-share-networks">
-        <li><a data-href="http://www.facebook.com/share.php?u=__url__" class="popup-link btn-32 btn-social btn-facebook"
-               rel="tooltip" data-tiptip="top" title="Facebook"><span class="btn-icon fab icon-facebook"></span></a>
-        </li>
-        <li>
-            <a data-href="https://twitter.com/intent/tweet?original_referer=__url__&amp;url=__url__&amp;text=__title__&amp;via=imgbb_com"
-               class="popup-link btn-32 btn-social btn-twitter" rel="tooltip" data-tiptip="top" title="Twitter"><span
-                    class="btn-icon fab icon-twitter"></span></a></li>
-        <li><a data-href="whatsapp://send?text=__title__ - view on ImgBB: __url__"
-               class="popup-link btn-32 btn-social btn-whatsapp" rel="tooltip" data-tiptip="top" title="WhatsApp"><span
-                class="btn-icon fab icon-whatsapp"></span></a></li>
-        <li><a data-href="http://vk.com/share.php?url=__url__" class="popup-link btn-32 btn-social btn-vk" rel="tooltip"
-               data-tiptip="top" title="VK"><span class="btn-icon fab icon-vk"></span></a></li>
-        <li><a data-href="http://reddit.com/submit?url=__url__" class="popup-link btn-32 btn-social btn-reddit"
-               rel="tooltip" data-tiptip="top" title="reddit"><span class="btn-icon fab icon-reddit"></span></a></li>
-        <li>
-            <a data-href="http://www.blogger.com/blog-this.g?n=__title__&amp;source=&amp;b=%3Ca%20href%3D%22__url__%22%20title%3D%22__title__%22%3E%3Cimg%20src%3D%22__image__%22%20%2F%3E%3C%2Fa%3E"
-               class="popup-link btn-32 btn-social btn-blogger" rel="tooltip" data-tiptip="top" title="Blogger"><span
-                    class="btn-icon fab icon-blogger"></span></a></li>
-        <li>
-            <a data-href="http://www.tumblr.com/share/photo?source=__image__&amp;caption=__title__&amp;clickthru=__url__&amp;title=__title__"
-               class="popup-link btn-32 btn-social btn-tumblr" rel="tooltip" data-tiptip="top" title="Tumblr."><span
-                    class="btn-icon fab icon-tumblr"></span></a></li>
-        <li>
-            <a data-href="http://www.pinterest.com/pin/create/bookmarklet/?media=__image__&amp;url=__url__&amp;is_video=false&amp;description=description&amp;title=__title__"
-               class="popup-link btn-32 btn-social btn-pinterest" rel="tooltip" data-tiptip="top"
-               title="Pinterest"><span class="btn-icon fab icon-pinterest"></span></a></li>
-        <li><a data-href="mailto:?subject=__title__&amp;body=__url__" class="popup-link btn-32 btn-social btn-at"
-               rel="tooltip" data-tiptip="top" title="Email"><span class="btn-icon fas icon-at"></span></a></li>
-    </ul>
-    <div class="input-label margin-bottom-0">
-        <label for="modal-share-url">Link</label>
-        <div class="position-relative">
-            <input type="text" name="modal-share-url" id="modal-share-url" class="text-input" value="__url__"
-                   data-focus="select-all" readonly="">
-            <button class="input-action" data-action="copy" data-action-target="#modal-share-url" value="">copy</button>
-        </div>
-    </div>
-</div>
-<div class="about" id="home-cover-content">
-    <div id="inner-cover-pricing" class="inner-cover">
-        <div class="c22 center-box"><h1>ImgBB Pro account</h1>
-            <p>ImgBB is a free image hosting service. Upgrade to unlock all the features.</p>
-        </div>
-    </div>
-    <br>
-    <div id="pricing-tier" class="c22 phablet-c1 center-box overflow-visible">
-        <div class="pricing-tier-box grid-columns c7 phone-c1 phablet-c1 margin-right-30">
-            <h2 class="background-red">3 Year Pro</h2>
-            <div class="pricing-tier-price"><span class="value"><span class="currency">$</span>3.99</span><span
-                    class="desc">Billed $143.64</span></div>
-            <a href="https://imgbb.com/login" class="btn btn-big red c5">UPGRADE</a>
-            <ul class="sentence-wrap text-align-left">
-                <li>No Ads</li>
-                <li>Direct Linking</li>
-                <li>Unlimited space</li>
-                <li>Replace image feature</li>
-                <li>64 MB file size per image</li>
-                <li><a href="https://api.imgbb.com/" target="_blank">API Access</a></li>
-            </ul>
-            <div class="pricing-ribbon">
-                <div>69% OFF</div>
-            </div>
-        </div>
-        <div class="pricing-tier-box grid-columns c7 phone-c1 phablet-c1 margin-right-30">
-            <h2 class="background-blue">Annual Plan</h2>
-            <div class="pricing-tier-price"><span class="value"><span class="currency">$</span>7.99</span><span
-                    class="desc">Billed $95.88</span></div>
-            <a href="https://imgbb.com/login" class="btn btn-big blue c5">UPGRADE</a>
-            <ul class="sentence-wrap text-align-left">
-                <li>No Ads</li>
-                <li>Direct Linking</li>
-                <li>Unlimited space</li>
-                <li>Replace image feature</li>
-                <li>64 MB file size per image</li>
-                <li><a href="https://api.imgbb.com/" target="_blank">API Access</a></li>
-            </ul>
-            <div class="pricing-ribbon">
-                <div>38% OFF</div>
-            </div>
-        </div>
-        <div class="pricing-tier-box grid-columns c7 phone-c1 phablet-c1">
-            <h2 class="background-grey">Monthly Plan</h2>
-            <div class="pricing-tier-price"><span class="value"><span class="currency">$</span>12.99</span><span
-                    class="desc">&nbsp;</span></div>
-            <a href="https://imgbb.com/login" class="btn btn-big grey c5">UPGRADE</a>
-            <ul class="sentence-wrap text-align-left">
-                <li>No Ads</li>
-                <li>Direct Linking</li>
-                <li>Unlimited space</li>
-                <li>Replace image feature</li>
-                <li>64 MB file size per image</li>
-                <li><a href="https://api.imgbb.com/" target="_blank">API Access</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="clear-both"></div>
-    <br><br>
-</div>
+
+<%--<div id="modal-share" class="hidden">--%>
+<%--    <span class="modal-box-title">Share</span>--%>
+<%--    <div class="image-preview"></div>--%>
+<%--    <p class="highlight margin-bottom-20 font-size-small text-align-center" data-content="privacy-private">--%>
+<%--        __privacy_notes__</p>--%>
+<%--    <ul class="panel-share-networks">--%>
+<%--        <li><a data-href="http://www.facebook.com/share.php?u=__url__" class="popup-link btn-32 btn-social btn-facebook"--%>
+<%--               rel="tooltip" data-tiptip="top" title="Facebook"><span class="btn-icon fab icon-facebook"></span></a>--%>
+<%--        </li>--%>
+<%--        <li>--%>
+<%--            <a data-href="https://twitter.com/intent/tweet?original_referer=__url__&amp;url=__url__&amp;text=__title__&amp;via=imgbb_com"--%>
+<%--               class="popup-link btn-32 btn-social btn-twitter" rel="tooltip" data-tiptip="top" title="Twitter"><span--%>
+<%--                    class="btn-icon fab icon-twitter"></span></a></li>--%>
+<%--        <li><a data-href="whatsapp://send?text=__title__ - view on ImgBB: __url__"--%>
+<%--               class="popup-link btn-32 btn-social btn-whatsapp" rel="tooltip" data-tiptip="top" title="WhatsApp"><span--%>
+<%--                class="btn-icon fab icon-whatsapp"></span></a></li>--%>
+<%--        <li><a data-href="http://vk.com/share.php?url=__url__" class="popup-link btn-32 btn-social btn-vk" rel="tooltip"--%>
+<%--               data-tiptip="top" title="VK"><span class="btn-icon fab icon-vk"></span></a></li>--%>
+<%--        <li><a data-href="http://reddit.com/submit?url=__url__" class="popup-link btn-32 btn-social btn-reddit"--%>
+<%--               rel="tooltip" data-tiptip="top" title="reddit"><span class="btn-icon fab icon-reddit"></span></a></li>--%>
+<%--        <li>--%>
+<%--            <a data-href="http://www.blogger.com/blog-this.g?n=__title__&amp;source=&amp;b=%3Ca%20href%3D%22__url__%22%20title%3D%22__title__%22%3E%3Cimg%20src%3D%22__image__%22%20%2F%3E%3C%2Fa%3E"--%>
+<%--               class="popup-link btn-32 btn-social btn-blogger" rel="tooltip" data-tiptip="top" title="Blogger"><span--%>
+<%--                    class="btn-icon fab icon-blogger"></span></a></li>--%>
+<%--        <li>--%>
+<%--            <a data-href="http://www.tumblr.com/share/photo?source=__image__&amp;caption=__title__&amp;clickthru=__url__&amp;title=__title__"--%>
+<%--               class="popup-link btn-32 btn-social btn-tumblr" rel="tooltip" data-tiptip="top" title="Tumblr."><span--%>
+<%--                    class="btn-icon fab icon-tumblr"></span></a></li>--%>
+<%--        <li>--%>
+<%--            <a data-href="http://www.pinterest.com/pin/create/bookmarklet/?media=__image__&amp;url=__url__&amp;is_video=false&amp;description=description&amp;title=__title__"--%>
+<%--               class="popup-link btn-32 btn-social btn-pinterest" rel="tooltip" data-tiptip="top"--%>
+<%--               title="Pinterest"><span class="btn-icon fab icon-pinterest"></span></a></li>--%>
+<%--        <li><a data-href="mailto:?subject=__title__&amp;body=__url__" class="popup-link btn-32 btn-social btn-at"--%>
+<%--               rel="tooltip" data-tiptip="top" title="Email"><span class="btn-icon fas icon-at"></span></a></li>--%>
+<%--    </ul>--%>
+<%--    <div class="input-label margin-bottom-0">--%>
+<%--        <label for="modal-share-url">Link</label>--%>
+<%--        <div class="position-relative">--%>
+<%--            <input type="text" name="modal-share-url" id="modal-share-url" class="text-input" value="__url__"--%>
+<%--                   data-focus="select-all" readonly="">--%>
+<%--            <button class="input-action" data-action="copy" data-action-target="#modal-share-url" value="">copy</button>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
+
 
 
 
