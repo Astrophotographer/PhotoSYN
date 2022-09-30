@@ -35,7 +35,7 @@
                     메인태그 : <input type="text" name="MT_NAME">
                 </label>
                 <label>
-                    추가태그 : <input type="text" name="B_TAG1">
+                    추가태그 : <input type="text" name="B_TAG1" placeholder="#으로 구분하여 추가해주세요. 예시 #고양이">
                 </label>
             </div>
         </div>

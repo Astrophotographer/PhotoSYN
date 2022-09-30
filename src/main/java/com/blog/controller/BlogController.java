@@ -45,6 +45,7 @@ public class BlogController {
         log.info("goSingle Start...");
 
         model.addAttribute("blog", blogService.getBlogSingle(b_no));
+        model.addAttribute("mainTag", blogService.getMainTag());
 
         return "blog/blogsingle";
     }

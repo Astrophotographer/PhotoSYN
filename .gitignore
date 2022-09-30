@@ -7,6 +7,10 @@ db-connection.properties
 #editor 하위 폴더
 #src/main/webapp/resources/testEditor/static/sample/viewer/
 
+# intellij configs 추가. 전부다 gitignore추가
+.idea/
+
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,windows,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,windows,java
 
