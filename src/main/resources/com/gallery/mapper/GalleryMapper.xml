@@ -27,5 +27,6 @@
     <select id="getGallerySingle" resultType="com.gallery.domain.GalleryDTO">
         select * from gallery where g_no = #{G_NO}
     </select>
+
 </mapper>
 

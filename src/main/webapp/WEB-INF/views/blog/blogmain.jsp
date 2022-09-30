@@ -181,12 +181,23 @@
         </div>
     </div>
 </section>
-<!-- 글 작성. 로그인시 보이기-->
+<!-- 글 작성. 로그인시 보이게 하기-->
 <div>
     <button id="gowrite" onclick="goWrite()">글 작성</button>
 </div>
 
 <!-- 글 영역 -->
+<div>
+    <select name="option" id="">
+        <option value="reg">최신순</option>
+        <option value="like">좋아요순</option>
+        <option value="readcount">조회순</option>
+    </select>
+    <select name="sort">
+        <option value="desc">내림차순</option>
+        <option value="asc">오름차순</option>
+    </select>
+</div>
 <section class="section-padding">
 
     <div class="container">
@@ -198,7 +209,7 @@
                         <div class="col-lg-3 col-md-6">
                             <article class="post-grid mb-5">
                                 <a class="post-thumb mb-4 d-block" href="/blog/single?b_no=${board.b_NO}">
-                                    <img src="../resources/blog/images/news/f1.jpg" alt="" class="img-fluid w-100">
+                                    <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid w-100" style="width: 300px; height: 200px; object-fit:cover">
                                 </a>
                                 <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out
                                         value="${board.MT_NAME}"/></span>
