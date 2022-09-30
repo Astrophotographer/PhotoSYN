@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: pmwkd
@@ -6,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Blog Editor</title>
@@ -32,10 +34,16 @@
                     작성자 : <input type="text" name="U_ID">
                 </label>
                 <label>
-                    메인태그 : <input type="text" name="MT_NAME">
+                    메인태그 :
+                    <%--<input type="text" name="MT_NAME">--%>
+                    <select name="MT_NAME">
+                        <c:forEach items="${mainTag}" var="mainTagList">
+                            <option value="${mainTagList.MT_NAME}">${mainTagList.MT_NAME}</option>
+                        </c:forEach>
+                    </select>
                 </label>
                 <label>
-                    추가태그 : <input type="text" name="B_TAG1" placeholder="#으로 구분하여 추가해주세요. 예시 #고양이">
+                    추가태그 : <input type="text" name="B_TAG1" placeholder="#으로 구분하여 추가해주세요. 예시 #고양이" width="200">
                 </label>
             </div>
         </div>

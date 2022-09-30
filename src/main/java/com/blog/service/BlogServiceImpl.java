@@ -4,6 +4,7 @@ import com.blog.domain.BlogDTO;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.mapper.BlogMapper;
+import com.gallery.domain.MaintagDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +72,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Blog_Img getMainImg(int b_no) {
         return blogMapper.getMainImg(b_no);
+    }
+
+    @Override
+    public List<MaintagDTO> getMainTag() {
+        return blogMapper.getMainTag();
     }
 }
 

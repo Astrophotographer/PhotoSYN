@@ -1,6 +1,7 @@
 package com.blog.controller;
 
 import com.blog.domain.BlogDTO;
+import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.service.BlogService;
@@ -19,6 +20,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.security.Principal;
 import java.util.*;
 
 @Controller
@@ -28,11 +30,28 @@ public class BlogController {
 
     @Autowired
     private BlogService blogService;
-    private Object tempimg;
 
     @RequestMapping(value = "main")
-    public String goMain(Model model) {
+    public String goMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
+    //public String goMain(Model model, String user_id, String option, String sort) {
+
+        //option -- reg, like, readcount
+        //sort -- desc(latest/ popular/ highest_view), asc(oldest/ unpopular/ lowest_view)
+
+        //정렬(sort)    desc/asc
+        //reg 최신순    latest/ oldest4115@in.
+        //like 인기순   popular/ unpopular
+        //view 조회순   highest_view/ lowest_view
         log.info("goMain Start...");
+
+        //userid 값 받아오기? TODO 확인해주기..
+        principal.getName();
+//        principal.
+
+        //TODO 유저아이디 담아주기
+        blog_criteria.setU_id("test");
+
+        log.info("blog_criteria : " + blog_criteria.toString());
 
         model.addAttribute("list", blogService.getBlogList());
 
@@ -45,7 +64,7 @@ public class BlogController {
         log.info("goSingle Start...");
 
         model.addAttribute("blog", blogService.getBlogSingle(b_no));
-        model.addAttribute("mainTag", blogService.getMainTag());
+
 
         return "blog/blogsingle";
     }
@@ -53,8 +72,13 @@ public class BlogController {
 
     // 블로그 글 작성 페이지
     @RequestMapping(value = "write", method = RequestMethod.GET)
-    public String writeBoard() {
+    public String writeBoard(Model model) {
         log.info("writeBoard start...");
+        model.addAttribute("mainTag", blogService.getMainTag());
+
+        //출력 확인용
+//        List test = blogService.getMainTag();
+//        log.info("test : " + test.toString());
 
         return "blog/write";
     }
@@ -109,6 +133,7 @@ public class BlogController {
             printWriter.println("{\"filename\" : \"" + fileName + "\", \"uploaded\" : 1, \"url\":\"" + fileUrl + "\"}");
             printWriter.flush();
 
+            //TODO 유저이름 test에서 수정해주기
             blog_img_temp.setU_ID("test");
             blog_img_temp.setBI_NAME(uid + "_" + fileName);
             blog_img_temp.setBI_UUID(uid.toString());
@@ -251,6 +276,7 @@ public class BlogController {
         log.info("UUID : " + UUID);
 
         //임시 사진저장 테이블에 들어있는 데이터들 삭제 및 메인 지정
+        //TODO  test를 유저아이디로 바꿔주기
         blogService.updateImg("test", UUID);
 
 
@@ -306,6 +332,14 @@ public class BlogController {
                 out.close();
             }
         }
+    }
+
+    // 유저 한명의 글 모아보기
+    @RequestMapping(value = "usermain")
+    public String goUserMain(Model model, Blog_Criteria blog_criteria){
+        log.info("goUserMain start...");
+
+        return "blog/blogusermain";
     }
 }
 

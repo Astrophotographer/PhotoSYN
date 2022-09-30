@@ -3,6 +3,7 @@ package com.blog.mapper;
 import com.blog.domain.BlogDTO;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
+import com.gallery.domain.MaintagDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,4 +31,6 @@ public interface BlogMapper {
     public List checkMainImg();
 
     public Blog_Img getMainImg(int b_no);
+
+    public List<MaintagDTO> getMainTag();
 }
