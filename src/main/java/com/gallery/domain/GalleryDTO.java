@@ -2,6 +2,8 @@ package com.gallery.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class GalleryDTO {
 
@@ -13,8 +15,8 @@ public class GalleryDTO {
     private Double G_HPRICE;
     private Double G_LPRICE;
     private String G_CONTENT;
-    private String G_REG;
-    private String G_EDIT;
+    private Date G_REG;
+    private Date G_EDIT;
     private int G_STATUS;
     private Double G_SALES;
     private long G_READCOUNT;
