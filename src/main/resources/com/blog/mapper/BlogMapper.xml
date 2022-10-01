@@ -26,6 +26,7 @@
         set BI_MAIN = 1
         where BI_UUID = #{uuid}
     </update>
+
     <delete id="deleteTempImg">
         delete
         from blog_img_temp
@@ -42,22 +43,65 @@
         from dual
     </select>
 
-    <select id="getBlogList" resultType="com.blog.domain.BlogDTO">
+    <select id="getBlogList" resultType="com.blog.domain.BlogDTO" parameterType="com.blog.domain.Blog_Criteria">
         select * from blog
-<!-- 옵션 수정 전 -->
-<!--        <trim>-->
-<!--            <if test="option_reg != null and (option_reg eq 'latest'.toString())">-->
-<!--                order by B_REGDATE desc-->
-<!--            </if>-->
-<!--            <if test="option_reg != null and (option_reg eq 'oldest'.toString())">-->
-<!--                order by B_REGDATE asc-->
-<!--            </if>-->
-<!--                <if test="option_like != null">-->
-<!--                    <if test="option_like eq 'most'.toString()">-->
-<!--                        order by B_LIKE desc-->
-<!--                    </if>-->
+        <!-- 옵션 수정 전 -->
+        <!--        <trim>-->
+        <!--            <if test="option_reg != null and (option_reg eq 'latest'.toString())">-->
+        <!--                order by B_REGDATE desc-->
+        <!--            </if>-->
+        <!--            <if test="option_reg != null and (option_reg eq 'oldest'.toString())">-->
+        <!--                order by B_REGDATE asc-->
+        <!--            </if>-->
+        <!--                <if test="option_like != null">-->
+        <!--                    <if test="option_like eq 'most'.toString()">-->
+        <!--                        order by B_LIKE desc-->
+        <!--                    </if>-->
+        <!--                </if>-->
+        <!--        </trim>-->
+
+        <!-- 유저 메인인 경우 where 문 실행 -->
+        <!-- <if test="@com.blog.domain.Blog_Criteria@isNotEmpty(u_id)">-->
+        <!--<if test="@com.blog.domain.Blog_Criteria@isNotNull(U_ID)">-->
+        <if test='u_id != null'>
+            where U_ID = #{u_id}
+        </if>
+        <choose>
+            <!-- 최신보기(reg) desc - 최신순, asc - 오래된순 -->
+            <when test='option eq "reg".toString()'>
+                order by B_REG
+                <if test='sort eq "desc".toString()'>
+                    desc
+                </if>
+                <if test='sort eq "asc".toString()'>
+                    asc
+                </if>
+            </when>
+            <!-- 좋아요(like) desc - 좋아요 많은순, asc - 좋아요 적은순 -->
+<!--            <when test='option equals("like")'>-->
+<!--                order by B_LIKE-->
+<!--                <if test='sort equals("desc")'>-->
+<!--                    desc-->
 <!--                </if>-->
-<!--        </trim>-->
+<!--                <if test='sort equals("asc")'>-->
+<!--                    asc-->
+<!--                </if>-->
+<!--            </when>-->
+            <!-- 조회순(readcount desc - 조회 많은순, asc - 조회 적은순 -->
+            <when test='option=="readcount"'>
+                order by B_READCOUNT
+                <if test='sort=="desc"'>
+                    desc
+                </if>
+                <if test='sort=="asc"'>
+                    asc
+                </if>
+            </when>
+            <!-- 옵션이 없는 경우 -->
+            <otherwise>
+                order by B_REG desc
+            </otherwise>
+        </choose>
     </select>
 
     <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">

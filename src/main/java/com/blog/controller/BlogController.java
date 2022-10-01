@@ -44,16 +44,23 @@ public class BlogController {
         //view 조회순   highest_view/ lowest_view
         log.info("goMain Start...");
 
+
+
+        if(principal != null) {
+            log.info(principal.getName());
+            blog_criteria.setU_id(principal.getName());
+        }else{
+            log.info("principal is null");
+        }
         //userid 값 받아오기? TODO 확인해주기..
-        principal.getName();
-//        principal.
+        //principal.getName();
 
         //TODO 유저아이디 담아주기
-        blog_criteria.setU_id("test");
+//        blog_criteria.setU_id("작성자1");
 
         log.info("blog_criteria : " + blog_criteria.toString());
 
-        model.addAttribute("list", blogService.getBlogList());
+        model.addAttribute("list", blogService.getBlogList(blog_criteria));
 
         return "blog/blogmain";
     }

@@ -1,6 +1,7 @@
 package com.blog.mapper;
 
 import com.blog.domain.BlogDTO;
+import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.gallery.domain.MaintagDTO;
@@ -24,7 +25,7 @@ public interface BlogMapper {
 
     public int checkBlogSeq();
 
-    public List<BlogDTO> getBlogList();
+    public List<BlogDTO> getBlogList(Blog_Criteria blog_criteria);
 
     public BlogDTO getBlogSingle(Long B_NO);
 
