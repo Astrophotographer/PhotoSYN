@@ -28,6 +28,10 @@ import java.util.*;
 @RequestMapping("blog/*")
 public class BlogController {
 
+    //TODO 1001 : 블로그 페이징처리
+    //글 가져오기 조건. 페이징X, ajax로 요청
+    //댓글만 페이징 처리.
+
     @Autowired
     private BlogService blogService;
 
@@ -343,8 +347,16 @@ public class BlogController {
 
     // 유저 한명의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria){
+    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal){
         log.info("goUserMain start...");
+
+        //option, sort 담아옴.
+        log.info("blog_criteria : " + blog_criteria.toString());
+
+        //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
+        if(principal != null){
+            blog_criteria.setU_id(principal.getName());
+        }
 
         return "blog/blogusermain";
     }
