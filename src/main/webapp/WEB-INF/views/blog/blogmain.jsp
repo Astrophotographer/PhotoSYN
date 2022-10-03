@@ -188,20 +188,20 @@
 
 <!-- 글 영역 -->
 <div>
-    <select name="option" id="">
-        <option value="reg">최신순</option>
-        <option value="like">좋아요순</option>
-        <option value="readcount">조회순</option>
-    </select>
-    <select name="sort">
-        <option value="desc">내림차순</option>
-        <option value="asc">오름차순</option>
-    </select>
+<%--    <select name="option" id="">--%>
+<%--        <option value="reg">최신순</option>--%>
+<%--        <option value="like">좋아요순</option>--%>
+<%--        <option value="readcount">조회순</option>--%>
+<%--    </select>--%>
+<%--    <select name="sort">--%>
+<%--        <option value="desc">내림차순</option>--%>
+<%--        <option value="asc">오름차순</option>--%>
+<%--    </select>--%>
     <div>
-        <a href="javascript:void(0);" onclick="optionIs(this)" >최신순</a>
-        <a href="javascript:void(0);" onclick="optionIs(this)" >오래된순</a>
-        <a href="javascript:void(0);" onclick="optionIs(this)" >좋아요순</a>
-        <a href="javascript:void(0);" onclick="optionIs(this)" >조회순</a>
+        <a href="#" onclick="optionIs('recentDesc')" >최신순</a>
+        <a href="#" onclick="optionIs('recentAsc')" >오래된순</a>
+        <a href="#" onclick="optionIs('like')" >좋아요순</a>
+        <a href="#" onclick="optionIs('readcount')" >조회순</a>
     </div>
 </div>
 <section class="section-padding">
@@ -337,8 +337,24 @@
         // console.log('click');
         window.location.href="/blog/write";
     }
-    function optionIs(obj){
-        console.log($* <object data="" type=""></object>)
+    function optionIs(option){
+        console.log("optionIs Start...");
+        console.log("option is : " + option);
+        $.ajax({
+            url: "/blog/getList.do",
+            type: "POST",
+            data: {
+                option: option
+            },
+            success: function (data) {
+                console.log("success");
+                console.log(data);
+            },
+            error: function (data) {
+                console.log("error");
+                console.log(data);
+            }
+        });
     }
 </script>
 
