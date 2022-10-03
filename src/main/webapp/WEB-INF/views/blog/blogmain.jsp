@@ -197,6 +197,12 @@
         <option value="desc">내림차순</option>
         <option value="asc">오름차순</option>
     </select>
+    <div>
+        <a href="javascript:void(0);" onclick="optionIs(this)" >최신순</a>
+        <a href="javascript:void(0);" onclick="optionIs(this)" >오래된순</a>
+        <a href="javascript:void(0);" onclick="optionIs(this)" >좋아요순</a>
+        <a href="javascript:void(0);" onclick="optionIs(this)" >조회순</a>
+    </div>
 </div>
 <section class="section-padding">
 
@@ -330,6 +336,9 @@
     function goWrite(){
         // console.log('click');
         window.location.href="/blog/write";
+    }
+    function optionIs(obj){
+        console.log($* <object data="" type=""></object>)
     }
 </script>
 

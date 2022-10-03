@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -31,6 +32,8 @@ public class BlogController {
     //TODO 1001 : 블로그 페이징처리
     //글 가져오기 조건. 페이징X, ajax로 요청
     //댓글만 페이징 처리.
+
+    //TODO 1004 : 블로그 페이징처리. ajax, responsebody 구현
 
     @Autowired
     private BlogService blogService;
@@ -67,6 +70,52 @@ public class BlogController {
         model.addAttribute("list", blogService.getBlogList(blog_criteria));
 
         return "blog/blogmain";
+    }
+    //메인 글 옵션으로 가져오기
+    // 최신순/오래된순, 좋아요 많은순, 조회수 많은순
+    @RequestMapping(value="getList.do")
+    @ResponseBody
+    public void getList(HttpServletResponse response, Blog_Criteria blog_criteria, Principal principal, String option) throws IOException {
+        //TODO 문법확인. 1003
+        log.info("getList Start...");
+
+        if(principal != null) {
+            log.info(principal.getName());
+            blog_criteria.setU_id(principal.getName());
+        }else{
+            log.info("principal is null");
+        }
+
+        log.info("blog_criteria : " + blog_criteria.toString());
+
+        List<BlogDTO> list = blogService.getBlogList(blog_criteria);
+
+        //json으로 변환
+        String json = "";
+        json += "[";
+        for(int i=0; i<list.size(); i++){
+            json += "{";
+            json += "\"b_no\":\"" + list.get(i).getB_NO() + "\",";
+            json += "\"b_title\":\"" + list.get(i).getB_SUBJECT() + "\",";
+            json += "\"b_content\":\"" + list.get(i).getB_CONTENT() + "\",";
+            json += "\"b_regdate\":\"" + list.get(i).getB_REG() + "\",";
+            json += "\"b_like\":\"" + list.get(i).getB_LIKE() + "\",";
+            json += "\"b_readcount\":\"" + list.get(i).getB_READCOUNT() + "\",";
+            json += "\"u_id\":\"" + list.get(i).getU_ID() + "\"";
+            json += "}";
+            if(i != list.size()-1){
+                json += ",";
+            }
+        }
+        json += "]";
+
+        log.info("json : " + json);
+
+        response.setContentType("application/json; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
+        out.close();
     }
 
     //블로그 글 한개 보기
