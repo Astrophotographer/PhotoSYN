@@ -82,5 +82,10 @@ public class BlogServiceImpl implements BlogService {
     public List<MaintagDTO> getMainTag() {
         return blogMapper.getMainTag();
     }
+
+    @Override
+    public List<Blog_Img> getImg(Long b_no) {
+        return blogMapper.getImg(b_no);
+    }
 }
 

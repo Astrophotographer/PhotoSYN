@@ -35,12 +35,12 @@
 <body>
 
 
-
 <div class="header-logo py-5 d-none d-lg-block">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
-                <a class="navbar-brand" href="../resources/blog/index.html"><img src="../resources/blog/images/logo.png" alt="" class="img-fluid w-100"></a>
+                <a class="navbar-brand" href="../resources/blog/index.html"><img src="../resources/blog/images/logo.png"
+                                                                                 alt="" class="img-fluid w-100"></a>
             </div>
         </div>
     </div>
@@ -49,15 +49,18 @@
 <header class="header-top bg-grey justify-content-center">
     <nav class="navbar navbar-expand-lg navigation">
         <div class="container">
-            <a class="navbar-brand d-lg-none" href="../resources/blog/index.html"><img src="../resources/blog/images/logo.png" alt="" class="img-fluid"></a>
+            <a class="navbar-brand d-lg-none" href="../resources/blog/index.html"><img
+                    src="../resources/blog/images/logo.png" alt="" class="img-fluid"></a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="ti-menu"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul id="menu" class="menu navbar-nav ">
                     <li class="nav-item dropdown  pl-0">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Home
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -70,20 +73,25 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Blog Posts
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" href="../resources/blog/standard-fullwidth.html">Standard Fullwidth</a>
-                            <a class="dropdown-item" href="../resources/blog/standard-left-sidebar.html">Standard Left Sidebar</a>
-                            <a class="dropdown-item" href="../resources/blog/standard-right-sidebar.html">Standard Right Sidebar</a>
+                            <a class="dropdown-item" href="../resources/blog/standard-fullwidth.html">Standard
+                                Fullwidth</a>
+                            <a class="dropdown-item" href="../resources/blog/standard-left-sidebar.html">Standard Left
+                                Sidebar</a>
+                            <a class="dropdown-item" href="../resources/blog/standard-right-sidebar.html">Standard Right
+                                Sidebar</a>
                         </div>
                     </li>
 
                     <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                     <li class="nav-item"><a href="fashion.html" class="nav-link">Category</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Post Formats
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
@@ -95,7 +103,9 @@
                         </div>
                     </li>
                     <li class="nav-item"><a href="../resources/blog/contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item d-lg-none"><div class="search_toggle p-3 d-inline-block bg-white"><i class="ti-search"></i></div></li>
+                    <li class="nav-item d-lg-none">
+                        <div class="search_toggle p-3 d-inline-block bg-white"><i class="ti-search"></i></div>
+                    </li>
                 </ul>
             </div>
 
@@ -135,8 +145,10 @@
                 <div class="single-post">
                     <div class="post-header mb-5 text-center">
                         <div class="meta-cat">
-                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1" href="#">Health ,</a>
-                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"  href="#">lifestyle</a>
+                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
+                               href="#">Health ,</a>
+                            <a class="post-category font-extra text-color text-uppercase font-sm letter-spacing-1"
+                               href="#">lifestyle</a>
                         </div>
                         <!-- 글 제목 -->
                         <h2 class="post-title mt-2">
@@ -164,6 +176,12 @@
                             <a href="#">#Tour</a>
                         </div>
 
+                        <!-- 수정하기 버튼 -->
+                        <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
+                        <div>
+                            <a href="/blog/update?b_no=${blog.b_NO}" class="btn btn-primary">수정하기</a>
+                        </div>
+
 
                         <div class="tags-share-box center-box d-flex text-center justify-content-between border-top border-bottom py-3">
 
@@ -187,12 +205,14 @@
                 <!-- 자기소개 + sns링크 -->
                 <div class="post-author d-flex my-5">
                     <div class="author-img">
-                        <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo" width="100" height="100">
+                        <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
+                             width="100" height="100">
                     </div>
 
                     <div class="author-content pl-4">
                         <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">Themefisher</a></h4>
-                        <p>Hey there. My name is Liam. I was born with the love for traveling. I also love taking photos with my phone in order to capture moment..</p>
+                        <p>Hey there. My name is Liam. I was born with the love for traveling. I also love taking photos
+                            with my phone in order to capture moment..</p>
 
                         <a target="_blank" class="author-social" href="#"><i class="ti-facebook"></i></a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-twitter"></i></a>
@@ -228,11 +248,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="post-block-wrapper mb-4 mb-lg-0">
                                 <a href="blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-1.jpg" alt="post-thumbnail"/>
+                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-1.jpg"
+                                         alt="post-thumbnail"/>
                                 </a>
                                 <div class="post-content mt-3">
-                                    <h5 >
-                                        <a href="../resources/blog/blog-single.html">Intel’s new smart glasses actually look good</a>
+                                    <h5>
+                                        <a href="../resources/blog/blog-single.html">Intel’s new smart glasses actually
+                                            look good</a>
                                     </h5>
                                 </div>
                             </div>
@@ -240,11 +262,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="post-block-wrapper mb-4 mb-lg-0">
                                 <a href="../resources/blog/blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-2.jpg" alt="post-thumbnail"/>
+                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-2.jpg"
+                                         alt="post-thumbnail"/>
                                 </a>
                                 <div class="post-content mt-3">
-                                    <h5 >
-                                        <a href="../resources/blog/blog-single.html">Free Two-Hour Delivery From Whole Foods</a>
+                                    <h5>
+                                        <a href="../resources/blog/blog-single.html">Free Two-Hour Delivery From Whole
+                                            Foods</a>
                                     </h5>
                                 </div>
                             </div>
@@ -252,11 +276,13 @@
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="post-block-wrapper">
                                 <a href="../resources/blog/blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-3.jpg" alt="post-thumbnail"/>
+                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-3.jpg"
+                                         alt="post-thumbnail"/>
                                 </a>
                                 <div class="post-content mt-3">
-                                    <h5 >
-                                        <a href="../resources/blog/blog-single.html">Snow and Freezing Rain in Paris Forces the</a>
+                                    <h5>
+                                        <a href="../resources/blog/blog-single.html">Snow and Freezing Rain in Paris
+                                            Forces the</a>
                                     </h5>
                                 </div>
                             </div>
@@ -268,14 +294,16 @@
                 <div class="comment-area my-5">
                     <h3 class="mb-4 text-center">2 Comments</h3>
                     <div class="comment-area-box media">
-                        <img alt="" src="../resources/blog/images/blog-user-2.jpg" class="img-fluid float-left mr-3 mt-2">
+                        <img alt="" src="../resources/blog/images/blog-user-2.jpg"
+                             class="img-fluid float-left mr-3 mt-2">
 
                         <div class="media-body ml-4">
                             <h4 class="mb-0">Micle harison </h4>
                             <span class="date-comm font-sm text-capitalize text-color"><i class="ti-time mr-2"></i>June 7, 2019 </span>
 
                             <div class="comment-content mt-3">
-                                <p>Lorem ipsum dolor sit amet, usu ut perfecto postulant deterruisset, libris causae volutpat at est, ius id modus laoreet urbanitas. Mel ei delenit dolores.</p>
+                                <p>Lorem ipsum dolor sit amet, usu ut perfecto postulant deterruisset, libris causae
+                                    volutpat at est, ius id modus laoreet urbanitas. Mel ei delenit dolores.</p>
                             </div>
                             <div class="comment-meta mt-4 mt-lg-0 mt-md-0">
                                 <a href="#" class="text-underline ">Reply</a>
@@ -284,14 +312,16 @@
                     </div>
 
                     <div class="comment-area-box media mt-5">
-                        <img alt="" src="../resources/blog/images/blog-user-3.jpg" class="mt-2 img-fluid float-left mr-3">
+                        <img alt="" src="../resources/blog/images/blog-user-3.jpg"
+                             class="mt-2 img-fluid float-left mr-3">
 
                         <div class="media-body ml-4">
                             <h4 class="mb-0 ">John Doe </h4>
                             <span class="date-comm font-sm text-capitalize text-color"><i class="ti-time mr-2"></i>June 7, 2019 </span>
 
                             <div class="comment-content mt-3">
-                                <p>Some consultants are employed indirectly by the client via a consultancy staffing company. </p>
+                                <p>Some consultants are employed indirectly by the client via a consultancy staffing
+                                    company. </p>
                             </div>
                             <div class="comment-meta mt-4 mt-lg-0 mt-md-0">
                                 <a href="#" class="text-underline">Reply</a>
@@ -303,10 +333,11 @@
 
                 <!-- 댓글 작성 -->
                 <form class="comment-form mb-5 gray-bg p-5" id="comment-form">
-                    <h3 class="mb-4 text-center">Leave  a comment</h3>
+                    <h3 class="mb-4 text-center">Leave a comment</h3>
                     <div class="row">
                         <div class="col-lg-12">
-                            <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5" placeholder="Comment"></textarea>
+                            <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
+                                      placeholder="Comment"></textarea>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
@@ -320,7 +351,8 @@
                         </div>
                     </div>
 
-                    <input class="btn btn-primary" type="submit" name="submit-contact" id="submit_contact" value="Submit Message">
+                    <input class="btn btn-primary" type="submit" name="submit-contact" id="submit_contact"
+                           value="Submit Message">
                 </form>
                 <!-- 댓글 작성 끝 -->
 
@@ -338,7 +370,8 @@
                             </div>
                             <h4 class="mb-0 mt-4">Liam Mason</h4>
                             <p>Travel Blogger</p>
-                            <p>I'm Liam, last year I decided to quit my job and travel the world. You can follow my journey on this blog!</p>
+                            <p>I'm Liam, last year I decided to quit my job and travel the world. You can follow my
+                                journey on this blog!</p>
                             <img src="../resources/blog/images/liammason.png" alt="" class="img-fluid">
                         </div>
 
@@ -346,8 +379,8 @@
                             <h4 class="text-center widget-title">Follow Me</h4>
                             <div class="follow-socials">
                                 <a href="#"><i class="ti-facebook"></i></a>
-                                <a href="#" ><i class="ti-twitter"></i></a>
-                                <a href="#" ><i class="ti-instagram"></i></a>
+                                <a href="#"><i class="ti-twitter"></i></a>
+                                <a href="#"><i class="ti-instagram"></i></a>
                                 <a href="#"><i class="ti-youtube"></i></a>
                                 <a href="#"><i class="ti-pinterest"></i></a>
                             </div>
@@ -358,26 +391,32 @@
                             <h4 class="text-center widget-title">Trending Posts</h4>
 
                             <div class="sidebar-post-item-big">
-                                <a href="blog-single.html"><img src="../resources/blog/images/news/img-1.jpg" alt="" class="img-fluid"></a>
+                                <a href="blog-single.html"><img src="../resources/blog/images/news/img-1.jpg" alt=""
+                                                                class="img-fluid"></a>
                                 <div class="mt-3 media-body">
                                     <span class="text-muted letter-spacing text-uppercase font-sm">September 10, 2019</span>
-                                    <h4 ><a href="../resources/blog/blog-single.html">Meeting With Clarissa, Founder Of Purple Conversation App</a></h4>
+                                    <h4><a href="../resources/blog/blog-single.html">Meeting With Clarissa, Founder Of
+                                        Purple Conversation App</a></h4>
                                 </div>
                             </div>
 
                             <div class="media border-bottom py-3 sidebar-post-item">
-                                <a href="#"><img class="mr-4" src="../resources/blog/images/news/thumb-1.jpg" alt=""></a>
+                                <a href="#"><img class="mr-4" src="../resources/blog/images/news/thumb-1.jpg"
+                                                 alt=""></a>
                                 <div class="media-body">
                                     <span class="text-muted letter-spacing text-uppercase font-sm">September 10, 2019</span>
-                                    <h4 ><a href="../resources/blog/blog-single.html">Thoughtful living in los Angeles</a></h4>
+                                    <h4><a href="../resources/blog/blog-single.html">Thoughtful living in los
+                                        Angeles</a></h4>
                                 </div>
                             </div>
 
                             <div class="media py-3 sidebar-post-item">
-                                <a href="#"><img class="mr-4" src="../resources/blog/images/news/thumb-2.jpg" alt=""></a>
+                                <a href="#"><img class="mr-4" src="../resources/blog/images/news/thumb-2.jpg"
+                                                 alt=""></a>
                                 <div class="media-body">
                                     <span class="text-muted letter-spacing text-uppercase font-sm">September 10, 2019</span>
-                                    <h4 ><a href="../resources/blog/blog-single.html">Vivamus molestie gravida turpis.</a></h4>
+                                    <h4><a href="../resources/blog/blog-single.html">Vivamus molestie gravida
+                                        turpis.</a></h4>
                                 </div>
                             </div>
                         </div>
@@ -415,7 +454,8 @@
 
                         <!-- 광고 사진 -->
                         <div class="sidebar-widget sidebar-adv mb-5">
-                            <a href="#"><img src="../resources/blog/images/sidebar-banner3.png" alt="" class="img-fluid w-100"></a>
+                            <a href="#"><img src="../resources/blog/images/sidebar-banner3.png" alt=""
+                                             class="img-fluid w-100"></a>
                         </div>
 
                     </div>

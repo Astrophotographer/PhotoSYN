@@ -7,7 +7,7 @@
 
     <insert id="insertTempImg">
         insert into blog_img_temp
-        values (#{U_ID}, #{BI_NAME}, #{BI_UUID}, #{BI_ORIGINNAME})
+        values (#{U_ID}, #{BIT_NAME}, #{BIT_UUID}, #{BIT_ORIGINNAME})
     </insert>
 
     <select id="getTempImg" resultType="com.blog.domain.Blog_Img_Temp">
@@ -125,6 +125,11 @@
     <select id="getMainTag" resultType="com.gallery.domain.MaintagDTO">
         select *
         from maintag
+    </select>
+
+    <select id="getImg" resultType="com.blog.domain.Blog_Img">
+        select * from blog_img
+        where b_no = #{B_NO} order by bi_no desc
     </select>
 
 

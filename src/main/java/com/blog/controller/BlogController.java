@@ -195,9 +195,9 @@ public class BlogController {
 
             //TODO 유저이름 test에서 수정해주기
             blog_img_temp.setU_ID("test");
-            blog_img_temp.setBI_NAME(uid + "_" + fileName);
-            blog_img_temp.setBI_UUID(uid.toString());
-            blog_img_temp.setBI_ORIGINNAME(fileName);
+            blog_img_temp.setBIT_NAME(uid + "_" + fileName);
+            blog_img_temp.setBIT_UUID(uid.toString());
+            blog_img_temp.setBIT_ORIGINNAME(fileName);
 
             int tempResult = blogService.insertTempImg(blog_img_temp);
             log.info("------------------------------------------------------------------------------");
@@ -308,12 +308,12 @@ public class BlogController {
                 log.info("for문 사용 " + list.get(i).toString());
                 log.info("----- getClass.getname" + list.get(i).getClass().getName());
                 blog_img.setB_NO(blog_seq);
-                blog_img.setBI_NAME(list.get(i).getBI_NAME());
+                blog_img.setBI_NAME(list.get(i).getBIT_NAME());
                 //메인 여부
                 blog_img.setBI_MAIN(0);
 
-                blog_img.setBI_UUID(list.get(i).getBI_UUID());
-                blog_img.setBI_ORIGINNAME(list.get(i).getBI_ORIGINNAME());
+                blog_img.setBI_UUID(list.get(i).getBIT_UUID());
+                blog_img.setBI_ORIGINNAME(list.get(i).getBIT_ORIGINNAME());
 
                 log.info("blog_img.toString() : " + blog_img.toString());
                 blogService.insertImg(blog_img);
@@ -408,6 +408,40 @@ public class BlogController {
         }
 
         return "blog/blogusermain";
+    }
+
+    //  10-04 작업중
+    @RequestMapping(value="update", method = RequestMethod.GET)
+    public String goUpdate(Model model, Long b_no, Principal principal){
+        log.info("update start...");
+        log.info("b_no : " + b_no);
+        //글 번호 가져와서 뿌려주기
+        model.addAttribute("blog", blogService.getBlogSingle(b_no));
+        model.addAttribute("mainTag", blogService.getMainTag());
+        model.addAttribute("blog_imgs", blogService.getImg(b_no));
+
+
+        return "blog/update";
+    }
+    @RequestMapping(value="update.do", method = RequestMethod.POST)
+    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no){
+        //http://localhost:8080/blog/update.do?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
+        //형색으로 주소 넘어감.
+        log.info("afterUpdate start...");
+        log.info(blogDTO.toString());
+        //TODO 1004 메인 이미지 수정해주기
+
+        //TODO 1004 가져온 데이터 DB에 저장
+
+
+        return "redirect:usermain";
+    }
+    @RequestMapping(value="delete", method = RequestMethod.DELETE)
+    public String delete(){
+        //http://localhost:8080/blog/delete?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
+        //형식으로 주소 넘어감.
+        log.info("delete start...");
+        return "redirect:usermain";
     }
 }
 
