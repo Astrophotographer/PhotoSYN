@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:beans="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://mybatis.org/schema/mybatis-spring
+       http://mybatis.org/schema/mybatis-spring-1.2.xsd
+    http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop
+  	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--DB connect -->
+    <util:properties id="dataSourceConfig" location="classpath:db-connection.properties"/>
+
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+        <property name="jdbcUrl" value="#{dataSourceConfig['url']}"/>
+        <property name="username" value="#{dataSourceConfig['username']}"/>
+        <property name="password" value="#{dataSourceConfig['password']}"/>
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <constructor-arg ref="hikariConfig"></constructor-arg>
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations" value="classpath:com/**/*Mapper.xml"></property>
+        <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+    </bean>
+
+    <!-- Google Email bean -->
+    <bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="jangyesung7@gmail.com"/>
+        <property name="password" value="qpqjwokvvpaqlrkz"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- multipart. 다운로드 -->
+    <bean id="fileDown" class="com.upload.util.DownloadView"></bean>
+
+    <!-- 파일 업로드 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 사이즈 제한 없음 -->
+        <property name="maxUploadSize" value="-1"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!-- mapper, component(service등) 추가 -->
+
+    <!--    <mybatis-spring:scan base-package="com.test.persistence"/>-->
+    <!--    <context:component-scan base-package="com.test.service"/>-->
+
+    <!--    <context:component-scan base-package="com.gallery.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.gallery.mapper"/>-->
+
+    <!--    <context:component-scan base-package="com.blog.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.blog.mapper"/>-->
+
+    <context:component-scan base-package="com.member.service"/>
+    <mybatis-spring:scan base-package="com.member.mapper"/>
+
+    <!--    <context:component-scan base-package="com.admin.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
+
+
+</beans>
