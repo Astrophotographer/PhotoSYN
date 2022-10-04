@@ -40,7 +40,7 @@ public class BlogController {
 
     @RequestMapping(value = "main")
     public String goMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
-    //public String goMain(Model model, String user_id, String option, String sort) {
+        //public String goMain(Model model, String user_id, String option, String sort) {
 
         //option -- reg, like, readcount
         //sort -- desc(latest/ popular/ highest_view), asc(oldest/ unpopular/ lowest_view)
@@ -52,11 +52,10 @@ public class BlogController {
         log.info("goMain Start...");
 
 
-
-        if(principal != null) {
+        if (principal != null) {
             log.info(principal.getName());
             blog_criteria.setU_id(principal.getName());
-        }else{
+        } else {
             log.info("principal is null");
         }
         //userid 값 받아오기? TODO 확인해주기..
@@ -71,18 +70,19 @@ public class BlogController {
 
         return "blog/blogmain";
     }
+
     //메인 글 옵션으로 가져오기
     // 최신순/오래된순, 좋아요 많은순, 조회수 많은순
-    @RequestMapping(value="getList.do")
+    @RequestMapping(value = "getList.do")
     @ResponseBody
     public void getList(HttpServletResponse response, Blog_Criteria blog_criteria, Principal principal, String option) throws IOException {
         //TODO 문법확인. 1003
         log.info("getList Start...");
 
-        if(principal != null) {
+        if (principal != null) {
             log.info(principal.getName());
             blog_criteria.setU_id(principal.getName());
-        }else{
+        } else {
             log.info("principal is null");
         }
 
@@ -93,7 +93,7 @@ public class BlogController {
         //json으로 변환
         String json = "";
         json += "[";
-        for(int i=0; i<list.size(); i++){
+        for (int i = 0; i < list.size(); i++) {
             json += "{";
             json += "\"b_no\":\"" + list.get(i).getB_NO() + "\",";
             json += "\"b_title\":\"" + list.get(i).getB_SUBJECT() + "\",";
@@ -103,7 +103,7 @@ public class BlogController {
             json += "\"b_readcount\":\"" + list.get(i).getB_READCOUNT() + "\",";
             json += "\"u_id\":\"" + list.get(i).getU_ID() + "\"";
             json += "}";
-            if(i != list.size()-1){
+            if (i != list.size() - 1) {
                 json += ",";
             }
         }
@@ -145,9 +145,7 @@ public class BlogController {
 
     // 블로그 사진 업로드 시 진행 페이지
     @RequestMapping(value = "write", method = RequestMethod.POST)
-    public void imageUpload4(HttpServletRequest request,
-                             HttpServletResponse response, MultipartHttpServletRequest multiFile
-            , @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
+    public void imageUpload4(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
 
@@ -224,10 +222,7 @@ public class BlogController {
     // 서버로 전송된 이미지 글에다가 뿌려주기
     //이미지 태그 에서도 사진 불러오기 위해 사용.
     @RequestMapping(value = "/write/ckImgSubmit.do")
-    public void ckSubmit4(@RequestParam(value = "uid") String uid
-            , @RequestParam(value = "fileName") String fileName
-            , HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void ckSubmit4(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //서버에 저장된 이미지 경로
 //        String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
@@ -345,9 +340,7 @@ public class BlogController {
 
     //메인 이미지 링크 뿌려주기
     @RequestMapping(value = "getmainimg")
-    public void getmainimg(@RequestParam("b_no") int b_no, Blog_Img blog_img
-            , HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void getmainimg(@RequestParam("b_no") int b_no, Blog_Img blog_img, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("getmainimg start...");
 
         //blog_img에 b_no 주고 메인이미지 가져오기
@@ -396,14 +389,14 @@ public class BlogController {
 
     // 유저 한명의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal){
+    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
         log.info("goUserMain start...");
 
         //option, sort 담아옴.
         log.info("blog_criteria : " + blog_criteria.toString());
 
         //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
-        if(principal != null){
+        if (principal != null) {
             blog_criteria.setU_id(principal.getName());
         }
 
@@ -411,33 +404,70 @@ public class BlogController {
     }
 
     //  10-04 작업중
-    @RequestMapping(value="update", method = RequestMethod.GET)
-    public String goUpdate(Model model, Long b_no, Principal principal){
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public String goUpdate(Model model, Long b_no, Principal principal) {
         log.info("update start...");
         log.info("b_no : " + b_no);
         //글 번호 가져와서 뿌려주기
         model.addAttribute("blog", blogService.getBlogSingle(b_no));
         model.addAttribute("mainTag", blogService.getMainTag());
+        //글과 관련된 사진들 가져오기
         model.addAttribute("blog_imgs", blogService.getImg(b_no));
 
 
         return "blog/update";
     }
-    @RequestMapping(value="update.do", method = RequestMethod.POST)
-    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no){
+
+    @RequestMapping(value="update.imagedelete", method = RequestMethod.POST)
+    public void updateDeleteImage(@RequestParam("bi_name") String bi_name, String uuid, String originName, HttpServletResponse response) throws IOException {
+        log.info("updateDeleteImage start...");
+
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+
+        log.info(bi_name);
+
+//        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
+//        if(file.exists()) {
+//            if(file.delete()) {
+//                log.info("파일삭제 성공");
+//                response.getWriter().print("success");
+//            } else {
+//                log.info("파일삭제 실패");
+//                response.getWriter().print("fail");
+//            }
+//        }else{
+//            log.info("파일이 존재하지 않습니다.");
+//            response.getWriter().print("not_exist");
+//        }
+
+    }
+
+    @RequestMapping(value = "update.do", method = RequestMethod.POST)
+    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no) {
         //http://localhost:8080/blog/update.do?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
         //형색으로 주소 넘어감.
         log.info("afterUpdate start...");
         log.info(blogDTO.toString());
-        //TODO 1004 메인 이미지 수정해주기
-
         //TODO 1004 가져온 데이터 DB에 저장
+        int result = blogService.updateBlog(blogDTO);
+        log.info("DB저장 result : " + result);
 
+        //TODO 1004 메인 이미지 수정해주기
+        return "update.do";
+        //return "redirect:usermain";
+    }
+
+    //사진들 뿌려주고 메인 사진 고르기.
+    @RequestMapping(value = "update.do", method = RequestMethod.GET)
+    public String updateMainImg() {
+        log.info("updateMainImg start...");
 
         return "redirect:usermain";
     }
-    @RequestMapping(value="delete", method = RequestMethod.DELETE)
-    public String delete(){
+
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public String delete() {
         //http://localhost:8080/blog/delete?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
         //형식으로 주소 넘어감.
         log.info("delete start...");

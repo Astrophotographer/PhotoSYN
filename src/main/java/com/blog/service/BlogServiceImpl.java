@@ -87,5 +87,10 @@ public class BlogServiceImpl implements BlogService {
     public List<Blog_Img> getImg(Long b_no) {
         return blogMapper.getImg(b_no);
     }
+
+    @Override
+    public int updateBlog(BlogDTO blogDTO) {
+        return blogMapper.updateBlog(blogDTO);
+    }
 }
 

@@ -132,6 +132,15 @@
         where b_no = #{B_NO} order by bi_no desc
     </select>
 
+    <update id="updateBlog">
+        update blog
+        set b_subject = #{B_SUBJECT},
+            b_content = #{B_CONTENT},
+            b_tag1 = #{B_TAG1},
+            b_edit = sysdate
+        where b_no = #{B_NO}
+    </update>
+
 
 </mapper>
 

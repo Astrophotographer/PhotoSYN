@@ -36,4 +36,6 @@ public interface BlogMapper {
     public List<MaintagDTO> getMainTag();
 
     public List<Blog_Img> getImg(Long b_no);
+
+    public int updateBlog(BlogDTO blogDTO);
 }
