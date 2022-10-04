@@ -8,7 +8,7 @@
 </head>
 <body>
 <section class="login-form">
-    <h1>Photo SYN</h1>
+    <h1><a href="/member/main" style="text-decoration: none; color: white;">Photo SYN</a></h1>
     <form action="/member/signup" method="POST">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div style="text-align: center; color: white;">
@@ -17,7 +17,7 @@
         </div>
         <div class="int-area">
             <input type="text" name="id" id="id" autocomplete="off" required/>
-            <label for="id">이메일</label>
+            <label for="id">아이디</label>
         </div>
         <div>
             <span id="idCheck"></span>
@@ -39,11 +39,12 @@
             <label for="phone">전화번호</label>
         </div>
         <div class="btn-area">
+
             <button id="btn" type="submit">회원가입</button>
         </div>
     </form>
     <div class="caption">
-        <a href="">비밀번호 까먹었냐?</a>
+        <a href="/member/searchPw">비밀번호 찾기</a>
     </div>
     <!-- 카카오 로그인 -->
     <a href="https://kauth.kakao.com/oauth/authorize?client_id=c67a03f0334b4eff20b7eb96995f64dd&redirect_uri=http://localhost:8080/member/loginPro&response_type=code">
@@ -77,7 +78,7 @@
         }
     });
     // 아이디 중복확인
-    $("#id").blur(function() {
+    $("#id").blur(function () {
         if ($('#id').val() != '') {
             // 아이디를 서버로 전송 > DB 유효성 검사 > 결과 반환받기
             $.ajax({

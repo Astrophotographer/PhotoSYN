@@ -3,11 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.member.mapper.MemberMapper">
-    <!-- 카카오 회원가입 -->
+    <!-- 카카오 회원가입
     <insert id="kakaoInsert">
         insert into user_list(u_id, u_nick, u_pic)
         values (#{id}, #{name}, #{pic})
     </insert>
+    -->
+
     <!-- 일반 회원가입 -->
     <insert id="addMember">
         insert into user_list(u_id, u_pw, u_phone, u_nick, u_reg)
@@ -45,23 +47,28 @@
         <result property="auth" column="auth"/>
     </resultMap>
 
-    <!-- 회원 정보 가져오기 -->
+    <!-- 회원 정보 가져오기 (접근 권한까지) -->
     <select id="getMember" resultMap="memberMap">
         SELECT m.*, a.*
         FROM user_list m,
              user_auth a
-        WHERE m.u_id = a.id
-          AND m.u_id = #{id}
+        WHERE m.U_ID = a.id
+          AND m.U_ID = #{id}
     </select>
+
     <select id="idCheck" parameterType="String" resultType="Integer">
         SELECT COUNT(*)
         FROM USER_LIST
         WHERE U_ID = #{id}
     </select>
+
     <!-- 비밀번호 변경 -->
     <update id="updatePw">
-        UPDATE USER_LIST SET PW = #{pw} WHERE ID = #{id}
+        update user_list
+        set u_pw = #{pw}
+        where u_id = #{id}
     </update>
+
 
     <!--
     <update id="updateMember">
@@ -78,12 +85,6 @@
 		WHERE id = #{id}
 	</delete>
 
-	<select id="idPwCheck" resultType="int">
-		SELECT COUNT(*) FROM memberSec WHERE id = #{id}
-		<if test="pw != null">
-			AND pw = #{pw}
-		</if>
-	</select>
 -->
 
 </mapper>

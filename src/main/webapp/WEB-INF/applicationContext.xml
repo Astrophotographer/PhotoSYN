@@ -4,6 +4,7 @@
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:beans="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://mybatis.org/schema/mybatis-spring
        http://mybatis.org/schema/mybatis-spring-1.2.xsd
@@ -28,9 +29,25 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
-        <!-- 예성 추가 -->
         <property name="mapperLocations" value="classpath:com/**/*Mapper.xml"></property>
         <property name="configLocation" value="classpath:/mybatis-config.xml"></property>
+    </bean>
+
+    <!-- Google Email bean -->
+    <bean id="mailSender"
+          class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="port" value="587"/>
+        <property name="username" value="jangyesung7@gmail.com"/>
+        <property name="password" value="qpqjwokvvpaqlrkz"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">smtp</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.debug">true</prop>
+            </props>
+        </property>
     </bean>
 
     <!-- multipart. 다운로드 -->
@@ -45,20 +62,20 @@
 
     <!-- mapper, component(service등) 추가 -->
 
-<!--    <mybatis-spring:scan base-package="com.test.persistence"/>-->
-<!--    <context:component-scan base-package="com.test.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.test.persistence"/>-->
+    <!--    <context:component-scan base-package="com.test.service"/>-->
 
-<!--    <context:component-scan base-package="com.gallery.service"/>-->
-<!--    <mybatis-spring:scan base-package="com.gallery.mapper"/>-->
+    <!--    <context:component-scan base-package="com.gallery.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.gallery.mapper"/>-->
 
-<!--    <context:component-scan base-package="com.blog.service"/>-->
-<!--    <mybatis-spring:scan base-package="com.blog.mapper"/>-->
+    <!--    <context:component-scan base-package="com.blog.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.blog.mapper"/>-->
 
     <context:component-scan base-package="com.member.service"/>
     <mybatis-spring:scan base-package="com.member.mapper"/>
 
-<!--    <context:component-scan base-package="com.admin.service"/>-->
-<!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
+    <!--    <context:component-scan base-package="com.admin.service"/>-->
+    <!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
 
 
 </beans>

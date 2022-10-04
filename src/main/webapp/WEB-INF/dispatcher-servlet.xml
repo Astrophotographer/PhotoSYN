@@ -4,6 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:beans="http://www.springframework.org/schema/c"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/mvc
@@ -27,14 +28,17 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+
     <!-- 테스트하기 위해 post 방식 사용시 시큐리티 방식사용? -->
     <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 
     <!-- controller 추가 -->
-<!--    <context:component-scan base-package="com.test.controller"/>-->
+    <!--    <context:component-scan base-package="com.test.controller"/>-->
 
-<!--    <context:component-scan base-package="com.blog.controller"/>-->
-<!--    <context:component-scan base-package="com.gallery.controller"/>-->
+    <!--    <context:component-scan base-package="com.blog.controller"/>-->
+    <!--    <context:component-scan base-package="com.gallery.controller"/>-->
     <context:component-scan base-package="com.member.controller"/>
-<!--    <context:component-scan base-package="com.admin.controller"/>-->
+    <!--    <context:component-scan base-package="com.admin.controller"/>-->
+
+
 </beans>

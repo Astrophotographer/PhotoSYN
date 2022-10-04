@@ -22,7 +22,7 @@
     <security:http>
         <!-- 특정 URI에 접근 제한 설정 -->
         <security:intercept-url pattern="/member/*" access="permitAll"/>
-        <security:intercept-url pattern="/mypage/*" access="hasRole('ROLE_MEMBER')"/>
+        <security:intercept-url pattern="/member/mypage/*" access="hasRole('ROLE_MEMBER')"/>
         <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
         <!-- 접근 제한시 403 페이지 대신 보여줄 페이지 세팅 아래 bean 적용하면 -->
         <security:access-denied-handler error-page="/member/accessError"/>
