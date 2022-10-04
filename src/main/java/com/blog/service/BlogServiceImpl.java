@@ -1,6 +1,7 @@
 package com.blog.service;
 
 import com.blog.domain.BlogDTO;
+import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.mapper.BlogMapper;
@@ -55,8 +56,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public List<BlogDTO> getBlogList() {
-        return blogMapper.getBlogList();
+    public List<BlogDTO> getBlogList(Blog_Criteria blog_criteria) {
+
+        //blog_criteria = Blog_Criteria(u_id=test, option=null, sort=null)
+        System.out.println("blog_criteria = " + blog_criteria.toString());
+        return blogMapper.getBlogList(blog_criteria);
     }
 
     @Override
@@ -77,6 +81,16 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<MaintagDTO> getMainTag() {
         return blogMapper.getMainTag();
+    }
+
+    @Override
+    public List<Blog_Img> getImg(Long b_no) {
+        return blogMapper.getImg(b_no);
+    }
+
+    @Override
+    public int updateBlog(BlogDTO blogDTO) {
+        return blogMapper.updateBlog(blogDTO);
     }
 }
 

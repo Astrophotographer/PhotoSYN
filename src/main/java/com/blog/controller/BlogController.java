@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -28,12 +29,18 @@ import java.util.*;
 @RequestMapping("blog/*")
 public class BlogController {
 
+    //TODO 1001 : 블로그 페이징처리
+    //글 가져오기 조건. 페이징X, ajax로 요청
+    //댓글만 페이징 처리.
+
+    //TODO 1004 : 블로그 페이징처리. ajax, responsebody 구현
+
     @Autowired
     private BlogService blogService;
 
     @RequestMapping(value = "main")
     public String goMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
-    //public String goMain(Model model, String user_id, String option, String sort) {
+        //public String goMain(Model model, String user_id, String option, String sort) {
 
         //option -- reg, like, readcount
         //sort -- desc(latest/ popular/ highest_view), asc(oldest/ unpopular/ lowest_view)
@@ -44,18 +51,71 @@ public class BlogController {
         //view 조회순   highest_view/ lowest_view
         log.info("goMain Start...");
 
+
+        if (principal != null) {
+            log.info(principal.getName());
+            blog_criteria.setU_id(principal.getName());
+        } else {
+            log.info("principal is null");
+        }
         //userid 값 받아오기? TODO 확인해주기..
-        principal.getName();
-//        principal.
+        //principal.getName();
 
         //TODO 유저아이디 담아주기
-        blog_criteria.setU_id("test");
+//        blog_criteria.setU_id("작성자1");
 
         log.info("blog_criteria : " + blog_criteria.toString());
 
-        model.addAttribute("list", blogService.getBlogList());
+        model.addAttribute("list", blogService.getBlogList(blog_criteria));
 
         return "blog/blogmain";
+    }
+
+    //메인 글 옵션으로 가져오기
+    // 최신순/오래된순, 좋아요 많은순, 조회수 많은순
+    @RequestMapping(value = "getList.do")
+    @ResponseBody
+    public void getList(HttpServletResponse response, Blog_Criteria blog_criteria, Principal principal, String option) throws IOException {
+        //TODO 문법확인. 1003
+        log.info("getList Start...");
+
+        if (principal != null) {
+            log.info(principal.getName());
+            blog_criteria.setU_id(principal.getName());
+        } else {
+            log.info("principal is null");
+        }
+
+        log.info("blog_criteria : " + blog_criteria.toString());
+
+        List<BlogDTO> list = blogService.getBlogList(blog_criteria);
+
+        //json으로 변환
+        String json = "";
+        json += "[";
+        for (int i = 0; i < list.size(); i++) {
+            json += "{";
+            json += "\"b_no\":\"" + list.get(i).getB_NO() + "\",";
+            json += "\"b_title\":\"" + list.get(i).getB_SUBJECT() + "\",";
+            json += "\"b_content\":\"" + list.get(i).getB_CONTENT() + "\",";
+            json += "\"b_regdate\":\"" + list.get(i).getB_REG() + "\",";
+            json += "\"b_like\":\"" + list.get(i).getB_LIKE() + "\",";
+            json += "\"b_readcount\":\"" + list.get(i).getB_READCOUNT() + "\",";
+            json += "\"u_id\":\"" + list.get(i).getU_ID() + "\"";
+            json += "}";
+            if (i != list.size() - 1) {
+                json += ",";
+            }
+        }
+        json += "]";
+
+        log.info("json : " + json);
+
+        response.setContentType("application/json; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
+        out.close();
     }
 
     //블로그 글 한개 보기
@@ -85,9 +145,7 @@ public class BlogController {
 
     // 블로그 사진 업로드 시 진행 페이지
     @RequestMapping(value = "write", method = RequestMethod.POST)
-    public void imageUpload4(HttpServletRequest request,
-                             HttpServletResponse response, MultipartHttpServletRequest multiFile
-            , @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
+    public void imageUpload4(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
 
@@ -135,9 +193,9 @@ public class BlogController {
 
             //TODO 유저이름 test에서 수정해주기
             blog_img_temp.setU_ID("test");
-            blog_img_temp.setBI_NAME(uid + "_" + fileName);
-            blog_img_temp.setBI_UUID(uid.toString());
-            blog_img_temp.setBI_ORIGINNAME(fileName);
+            blog_img_temp.setBIT_NAME(uid + "_" + fileName);
+            blog_img_temp.setBIT_UUID(uid.toString());
+            blog_img_temp.setBIT_ORIGINNAME(fileName);
 
             int tempResult = blogService.insertTempImg(blog_img_temp);
             log.info("------------------------------------------------------------------------------");
@@ -164,10 +222,7 @@ public class BlogController {
     // 서버로 전송된 이미지 글에다가 뿌려주기
     //이미지 태그 에서도 사진 불러오기 위해 사용.
     @RequestMapping(value = "/write/ckImgSubmit.do")
-    public void ckSubmit4(@RequestParam(value = "uid") String uid
-            , @RequestParam(value = "fileName") String fileName
-            , HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void ckSubmit4(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //서버에 저장된 이미지 경로
 //        String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
@@ -248,12 +303,12 @@ public class BlogController {
                 log.info("for문 사용 " + list.get(i).toString());
                 log.info("----- getClass.getname" + list.get(i).getClass().getName());
                 blog_img.setB_NO(blog_seq);
-                blog_img.setBI_NAME(list.get(i).getBI_NAME());
+                blog_img.setBI_NAME(list.get(i).getBIT_NAME());
                 //메인 여부
                 blog_img.setBI_MAIN(0);
 
-                blog_img.setBI_UUID(list.get(i).getBI_UUID());
-                blog_img.setBI_ORIGINNAME(list.get(i).getBI_ORIGINNAME());
+                blog_img.setBI_UUID(list.get(i).getBIT_UUID());
+                blog_img.setBI_ORIGINNAME(list.get(i).getBIT_ORIGINNAME());
 
                 log.info("blog_img.toString() : " + blog_img.toString());
                 blogService.insertImg(blog_img);
@@ -285,9 +340,7 @@ public class BlogController {
 
     //메인 이미지 링크 뿌려주기
     @RequestMapping(value = "getmainimg")
-    public void getmainimg(@RequestParam("b_no") int b_no, Blog_Img blog_img
-            , HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void getmainimg(@RequestParam("b_no") int b_no, Blog_Img blog_img, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         log.info("getmainimg start...");
 
         //blog_img에 b_no 주고 메인이미지 가져오기
@@ -336,10 +389,89 @@ public class BlogController {
 
     // 유저 한명의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria){
+    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
         log.info("goUserMain start...");
 
+        //option, sort 담아옴.
+        log.info("blog_criteria : " + blog_criteria.toString());
+
+        //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
+        if (principal != null) {
+            blog_criteria.setU_id(principal.getName());
+        }
+
         return "blog/blogusermain";
+    }
+
+    //  10-04 작업중
+    @RequestMapping(value = "update", method = RequestMethod.GET)
+    public String goUpdate(Model model, Long b_no, Principal principal) {
+        log.info("update start...");
+        log.info("b_no : " + b_no);
+        //글 번호 가져와서 뿌려주기
+        model.addAttribute("blog", blogService.getBlogSingle(b_no));
+        model.addAttribute("mainTag", blogService.getMainTag());
+        //글과 관련된 사진들 가져오기
+        model.addAttribute("blog_imgs", blogService.getImg(b_no));
+
+
+        return "blog/update";
+    }
+
+    @RequestMapping(value="update.imagedelete", method = RequestMethod.POST)
+    public void updateDeleteImage(@RequestParam("bi_name") String bi_name, String uuid, String originName, HttpServletResponse response) throws IOException {
+        log.info("updateDeleteImage start...");
+
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+
+        log.info(bi_name);
+
+//        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
+//        if(file.exists()) {
+//            if(file.delete()) {
+//                log.info("파일삭제 성공");
+//                response.getWriter().print("success");
+//            } else {
+//                log.info("파일삭제 실패");
+//                response.getWriter().print("fail");
+//            }
+//        }else{
+//            log.info("파일이 존재하지 않습니다.");
+//            response.getWriter().print("not_exist");
+//        }
+
+    }
+
+    @RequestMapping(value = "update.do", method = RequestMethod.POST)
+    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no) {
+        //http://localhost:8080/blog/update.do?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
+        //형색으로 주소 넘어감.
+        log.info("afterUpdate start...");
+        log.info(blogDTO.toString());
+        //TODO 1004 가져온 데이터 DB에 저장
+        int result = blogService.updateBlog(blogDTO);
+        log.info("DB저장 result : " + result);
+
+        //TODO 1004 메인 이미지 수정해주기
+        return "update.do";
+        //return "redirect:usermain";
+    }
+
+    //사진들 뿌려주고 메인 사진 고르기.
+    @RequestMapping(value = "update.do", method = RequestMethod.GET)
+    public String updateMainImg() {
+        log.info("updateMainImg start...");
+
+        return "redirect:usermain";
+    }
+
+    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    public String delete() {
+        //http://localhost:8080/blog/delete?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
+        //형식으로 주소 넘어감.
+        log.info("delete start...");
+        return "redirect:usermain";
     }
 }
 
