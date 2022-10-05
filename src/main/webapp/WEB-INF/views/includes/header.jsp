@@ -13,13 +13,13 @@
     <meta name="_csrf" content="${_csrf.token}"/>
     <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/font-awesome.min.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/slicknav.min.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/fresco.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/slick.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/bootstrap/main/css/style.css" type="text/css"/>
-    <link rel="stylesheet" href="/resources/css/menu.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/slicknav.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/fresco.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/slick.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/bootstrap/main/css/style.css" type="text/css"/>
+    <link rel="stylesheet" href="/resources/member/css/menu.css" type="text/css"/>
 </head>
 <body>
 <header class="header">
@@ -31,7 +31,8 @@
             </div>
             <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
                 <a href="/member/main" class="site-logo">
-                    <img src="/resources/bootstrap/main/img/logo_sub-removebg-preview.png" alt="logo" style="display : block; margin : auto;">
+                    <img src="/resources/member/bootstrap/main/img/logo_sub-removebg-preview.png" alt="logo"
+                         style="display : block; margin : auto;">
                 </a>
             </div>
             <sec:authorize access="isAnonymous()">
@@ -61,7 +62,7 @@
             <ul class="nav__menu">
                 <li><a href="/member/main">Home</a></li> <!-- class="menu--active" -->
                 <li><a href="#">Gallery</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog/main">Blog</a></li>
             </ul>
         </nav>
     </sec:authorize>
@@ -70,7 +71,7 @@
             <ul class="nav__menu">
                 <li><a href="/member/main">Home</a></li> <!-- class="menu--active" -->
                 <li><a href="#">Gallery</a></li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog/main">Blog</a></li>
                 <li><a href="/member/mypage/profile">Mypage</a>
                     <ul class="sub__menu">
                         <li><a href="/member/mypage/profile">내정보</a></li>
