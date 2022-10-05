@@ -332,7 +332,7 @@ ol {
  -----------------------*/
 
 .header {
-	padding: 40px 45px 0;
+	padding: 0px 40px 45px;
 	padding-top: 40px;
 }
 
@@ -761,18 +761,19 @@ ol {
  -------------------*/
 
 .gallery__page {
-	padding: 80px 15px 65px;
+	padding: 40px 15px 65px;
 }
 
 @media (max-width: 576px) {
 	.gallery__page {
-		padding: 30px 15px 65px;
+		padding: 30px 15px 65px 230px;
 	}
 }
 
 .gallery__warp {
 	max-width: 1570px;
 	margin: 0 auto;
+	padding: 30px 15px 65px 230px;
 }
 
 .gallery__item {

@@ -128,14 +128,14 @@ public class MemberController {
     }
     */ // 카카오 로그인
 
-    /* *********************************** 임시 비밀번호 이메일 전송 *********************************** */
-    // 비밀번호 변경 페이지
+    /* *********************************** 비밀번호 (이메일 전송, 변경)  *********************************** */
+    // 비밀번호 찾기 페이지
     @RequestMapping(value = "searchPw", method = RequestMethod.GET)
     public void searchPwPage() {
 
     }
 
-    // 비밀번호 변경
+    // 임시 비밀번호 이메일 전송
     @RequestMapping(value = "searchPwPro", method = RequestMethod.POST)
     public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, ModelMap model, ModelAndView mv,
                                         HttpServletResponse response, MemberDTO memberDTO) throws Exception {
@@ -173,6 +173,9 @@ public class MemberController {
         mv.setViewName("/member/login");
         return mv;
     }
+
+
+
 
 
 
