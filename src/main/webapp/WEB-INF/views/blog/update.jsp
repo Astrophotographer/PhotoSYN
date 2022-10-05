@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Blog Modify</title>
@@ -19,7 +20,8 @@
 <body>
 
 <%-- 헤더 수정하기.. 임시로 test 를 줌--%>
-<jsp:include page="/WEB-INF/views/includes/test.jsp"/>
+<%--<jsp:include page="/WEB-INF/views/includes/test.jsp"/>--%>
+<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
 <%--<form class="form-horizontal" role="form" id="editorForm" method="post" action="/blog/update.do">--%>
 <form class="form-horizontal" role="form" id="editorForm" action="#">
@@ -37,11 +39,13 @@
                     <c:forEach items="${blog_imgs}" var="img">
                         <img src="${pageContext.request.contextPath}/resources/saveImgckImage/${img.BI_NAME}"
                              width="100px" height="100px">
-                        <button onclick="confirmUpdateDeleteImage('${img.BI_NAME}', '${img.BI_UUID}', '${img.BI_ORIGINNAME}')">${delNum}번 사진삭제</button>
+                        <button onclick="confirmUpdateDeleteImage('${img.BI_NAME}', '${img.BI_UUID}', '${img.BI_ORIGINNAME}')">${delNum}번
+                            사진삭제
+                        </button>
                         <c:set var="delNum" value="${delNum+1}"/>
                     </c:forEach>
                 </div>
-<%--                <jsp:include page="updatebottom.jsp"/>--%>
+                <%--                <jsp:include page="updatebottom.jsp"/>--%>
 
                 <!-- 작성자는 원래 자동으로 들어가야 함. 임시로 넣어주기 -->
                 <label>
@@ -79,6 +83,7 @@
                     <input type="hidden" name="B_READCOUNT" value="${blog.b_READCOUNT}"/>
                     <input type="hidden" name="B_REPORTCOUNT" value="${blog.b_REPORTCOUNT}"/>
                     <input type="hidden" name="B_NO" value="${blog.b_NO}">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 </div>
             </div>
         </div>
@@ -144,7 +149,7 @@
     });
 
     function confirmUpdateDeleteImage(delName, uid, originName) {
-        console.log("confirmUpdateDeleteImage.delName :"+delName+" uid : "+uid+" originName : "+originName);
+        console.log("confirmUpdateDeleteImage.delName :" + delName + " uid : " + uid + " originName : " + originName);
         if (confirm("이미지를 삭제하시겠습니까?(DB및 서버에서 삭제 진행). 이미지태그 삭제는..")) {
             (() => {
                 console.log("updateDeleteImage");
@@ -162,8 +167,8 @@
                     success: function (data) {
                         console.log(data);
                         //document.location.reload(true);
-                        (()=>{
-                            $("#imgList").load(window.location.href+" #imgList");
+                        (() => {
+                            $("#imgList").load(window.location.href + " #imgList");
                         })();
                     },
                     error: function (e) {
