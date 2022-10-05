@@ -394,14 +394,18 @@ public class BlogController {
         }
     }
 
-    // 유저 한명의 글 모아보기
+    // 유저 한명(u_id)의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal) {
+    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal, String u_id) {
         log.info("goUserMain start...");
 
         //option, sort 담아옴.
         log.info("blog_criteria : " + blog_criteria.toString());
 
+        //넘어온 u_id가 있으면 그 u_id로 검색
+        if(u_id != null){
+           blog_criteria.setU_id(u_id);
+        }
         //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
         if (principal != null) {
             blog_criteria.setU_id(principal.getName());
@@ -438,6 +442,7 @@ public class BlogController {
 
         blogService.deleteImg(bi_name, uid, originName);
 
+        //파일 삭제 서비스단에다 구현. 아래는 삭제해도 괜찮음.
 //        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
 //        if(file.exists()) {
 //            if(file.delete()) {
@@ -520,7 +525,9 @@ public class BlogController {
         if(principal!=null){
             user_id = principal.getName();
         }
-        blogService.
+        //user_id로 temp테이블 값 모두 삭제,
+        //uuid로 uuid값이 일치하는 temp테이블의 bi_main값을 1로 변경
+        blogService.updateImg(user_id, UUID);
 
         return "redirect:usermain";
     }
