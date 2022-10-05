@@ -31,7 +31,7 @@
     </bean>
 
     <!-- multipart. 다운로드 -->
-    <bean id="fileDown" class="com.gallery.util.DownloadView"></bean>
+    <bean id="fileDown" class="com.upload.util.DownloadView"></bean>
 
     <!-- 파일 업로드 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -45,17 +45,17 @@
     <mybatis-spring:scan base-package="com.test.persistence"/>
     <context:component-scan base-package="com.test.service"/>
 
-   <context:component-scan base-package="com.gallery.service"/>
-   <mybatis-spring:scan base-package="com.gallery.mapper"/>
+    <context:component-scan base-package="com.gallery.service"/>
+    <mybatis-spring:scan base-package="com.gallery.mapper"/>
 
     <context:component-scan base-package="com.blog.service"/>
     <mybatis-spring:scan base-package="com.blog.mapper"/>
 
-<!--    <context:component-scan base-package="com.member.service"/>-->
-<!--    <mybatis-spring:scan base-package="com.member.mapper"/>-->
+    <context:component-scan base-package="com.member.service"/>
+    <mybatis-spring:scan base-package="com.member.mapper"/>
 
-<!--    <context:component-scan base-package="com.admin.service"/>-->
-<!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
+    <context:component-scan base-package="com.admin.service"/>
+    <mybatis-spring:scan base-package="com.admin.mapper"/>
 
 
 
