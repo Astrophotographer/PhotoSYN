@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.member.mapper.CartMapper">
+
+    <!-- 일반 회원가입 -->
+    <insert id="addMember">
+        insert into user_list(u_id, u_pw, u_phone, u_nick, u_reg)
+        values (#{id}, #{pw}, #{phone}, #{name}, sysdate)
+    </insert>
+    <!-- 접근 권한 추가 -->
+    <insert id="addAuth">
+        INSERT INTO user_auth(id, auth)
+        VALUES (#{id}, #{auth})
+    </insert>
+
+    <!--
+    MemberDTO 안에 컬렉션 List가 있으므로 SLEECT 날려서 가져오는 결과를 MemberDTO 안에 바인딩 시키고,
+    결과물을 리턴해주기 위해 result(리턴)타입인 MemberDTO타입을 Mybatis에서 잘 처리되도록 새로 정의하기 : resultMap 태그 사용.
+    -->
+    <!-- 회원정보 테이블의 데이터를 MemberDTO 의 변수에 각각 바인딩되도록 컬럼 - 변수 세트 명확히 정의 -->
+    <resultMap type="com.member.domain.MemberDTO" id="memberMap">
+        <id property="id" column="u_id"/> <!-- primary key 지정 -->
+        <result property="id" column="u_id"/>
+        <result property="pw" column="u_pw"/>
+        <result property="phone" column="u_phone"/>
+        <result property="name" column="u_nick"/>
+        <result property="reg" column="u_reg"/>
+        <result property="status" column="u_status"/>
+        <result property="pic" column="u_pic"/>
+        <result property="point" column="u_point"/>
+        <result property="membership" column="ms_membership"/>
+        <result property="sns" column="u_sns"/>
+        <result property="snsToken" column="u_snsToken"/>
+        <collection property="authDTOList" resultMap="authMap"></collection>
+    </resultMap>
+    <!-- 권한 테이블 값을 AuthDTO 클래스에 대입하는 것 명확히 정의 -->
+    <resultMap type="com.member.domain.AuthDTO" id="authMap">
+        <result property="id" column="id"/>
+        <result property="auth" column="auth"/>
+    </resultMap>
+
+    <!-- 회원 정보 가져오기 (접근 권한까지) -->
+    <select id="getMember" resultMap="memberMap">
+        SELECT m.*, a.*
+        FROM user_list m,
+             user_auth a
+        WHERE m.U_ID = a.id
+          AND m.U_ID = #{id}
+    </select>
+
+    <select id="idCheck" parameterType="String" resultType="Integer">
+        SELECT COUNT(*)
+        FROM USER_LIST
+        WHERE U_ID = #{id}
+    </select>
+
+    <!-- 비밀번호 변경 -->
+    <update id="updatePw">
+        update user_list
+        set u_pw = #{pw}
+        where u_id = #{id}
+    </update>
+
+
+    <!--
+    <update id="updateMember">
+		UPDATE memberSec set name = #{name}, email = #{email}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteMember">
+		DELETE FROM memberSec
+		where id = #{id}
+	</delete>
+	<delete id="deleteAuth">
+		DELETE FROM memberSec_auth
+		WHERE id = #{id}
+	</delete>
+
+-->
+
+</mapper>
