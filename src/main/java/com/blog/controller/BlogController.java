@@ -35,6 +35,9 @@ public class BlogController {
 
     //TODO 1004 : 블로그 페이징처리. ajax, responsebody 구현
 
+    //TODO 1005 : security 사용시 ajax 토큰 넣어줘야 함. 사진 업로드는 post 방식이기에 사용해야함... 임시로 토큰 미사용중.
+    //TODO 1005 : 글 처음작성, 및 수정시 메인이미지 강제로 하나 적용시켜야함.
+
     @Autowired
     private BlogService blogService;
 
@@ -325,14 +328,18 @@ public class BlogController {
     }
 
     @RequestMapping(value = "checkmainimg", method = RequestMethod.GET)
-    public String finishSubmit(String mainImg, String UUID) {
+    public String finishSubmit(String mainImg, String UUID, Principal principal) {
         log.info("finishSubmit start...");
         log.info("mainImg : " + mainImg);
         log.info("UUID : " + UUID);
 
+        String user_id = "test";
         //임시 사진저장 테이블에 들어있는 데이터들 삭제 및 메인 지정
         //TODO  test를 유저아이디로 바꿔주기
-        blogService.updateImg("test", UUID);
+        if(principal != null){
+            user_id = principal.getName();
+        }
+        blogService.updateImg(user_id, UUID);
 
 
         return "redirect:/blog/main";
@@ -452,12 +459,13 @@ public class BlogController {
 
     }
 
-    @RequestMapping(value = "update.do", method = RequestMethod.POST)
-    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no) {
+    @RequestMapping(value = "update.do")
+    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no, Model model, Blog_Img blog_img) throws  Exception{
         //http://localhost:8080/blog/update.do?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
         //형색으로 주소 넘어감.
         log.info("afterUpdate start...");
-        log.info(blogDTO.toString());
+        log.info(blogDTO.toString());   // 정상적 들어감
+        log.info("b_no : " + b_no);     // 정상적 들어감
         int result = blogService.updateBlog(blogDTO);
         log.info("DB저장 result : " + result);
 
@@ -465,19 +473,54 @@ public class BlogController {
         //ckeckmainimg 사용
 //        return "/blog/updatemainimage?bno=" + b_no;
         //return "redirect:usermain";
-        return "forward:update.do?b_no=" + b_no;
+//        return "forward:updatemainimage?b_no=" + b_no;
+
+        String user_id = "test";
+
+        if(principal != null) {
+            user_id = principal.getName();
+        }
+
+        List<Blog_Img_Temp> templist = blogService.getTempImg(user_id);
+        List<Blog_Img> imglist = blogService.getImg(b_no);
+
+//        log.info("templist : " + templist.toString());
+//        log.info("imglist : " + imglist.toString());
+
+        model.addAttribute("templist", templist);
+        model.addAttribute("imglist", imglist);
+
+        for (int i = 0; i < templist.size(); i++) {
+            log.info("for문 사용 " + templist.get(i).toString());
+            log.info("----- getClass.getname" + templist.get(i).getClass().getName());
+            blog_img.setB_NO(b_no);
+            blog_img.setBI_NAME(templist.get(i).getBIT_NAME());
+            //메인 여부
+            blog_img.setBI_MAIN(0);
+
+            blog_img.setBI_UUID(templist.get(i).getBIT_UUID());
+            blog_img.setBI_ORIGINNAME(templist.get(i).getBIT_ORIGINNAME());
+
+            log.info("blog_img.toString() : " + blog_img.toString());
+            blogService.insertImg(blog_img);
+            Thread.sleep(100);
+        }
+
+        return "blog/updatemainimage";
     }
 
     //사진들 뿌려주고 메인 사진 고르기.
-    @RequestMapping(value = "update.do", method = RequestMethod.GET)
-    public String updateMainImg(Long b_no, Model model, Principal principal) {
+    @RequestMapping(value = "updatemainimage", method = RequestMethod.GET)
+    public String updateMainImg(Long b_no, String UUID, Principal principal) {
         log.info("updateMainImg start...");
         log.info("b_no : " + b_no);
+        log.info("uuid : " + UUID);
 
-        String u_id= "test";
+        String user_id= "test";
         if(principal!=null){
-            u_id = principal.getName();
+            user_id = principal.getName();
         }
+        blogService.
 
         return "redirect:usermain";
     }
