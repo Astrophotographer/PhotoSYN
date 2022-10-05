@@ -33,12 +33,12 @@
 </ul>
 </div>
 </div>
--->
+--> <!-- 사이드바 -->
 <div class="gallery__page">
     <div class="gallery__warp">
         <div style="font-size: 50px; font-weight: 800;">내정보</div>
         <div>
-            <img src="/resources/bootstrap/main/img/profile.jpg" alt="profile_picture"
+            <img src="/resources/member/bootstrap/main/img/profile.jpg" alt="profile_picture"
                  style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;">
             <sec:authentication property="principal.member.name"/>님의 회원등급은 <b style="color: #44b525;">${membership}</b>입니다.
             <div style="padding: 15px;">
