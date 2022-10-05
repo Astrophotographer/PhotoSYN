@@ -140,9 +140,4 @@ public class SampleUsage {
     /**
      * Write all extracted values to stdout.
      */
-
-
-
-
-
 }

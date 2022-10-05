@@ -1,0 +1,9 @@
+.border-white-10 {
+	border-color: rgba($white, .1) !important;
+}
+
+@each $color, $value in $grays {
+  .border-gray-#{$color} {
+    border-color: $value  !important;
+  }
+}

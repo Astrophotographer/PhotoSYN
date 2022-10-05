@@ -258,6 +258,8 @@
 
 
         </ul>
+
+<%--        Upload 버튼 위치한 곳 --%>
         <ul class="top-bar-right float-right keep-visible">
             <li data-action="top-bar-upload" data-nav="upload" class="pop-btn current"><span class="top-btn-text"><span
                     class="icon icon-cloud-arrow-up"></span><span class="btn-text phone-hide phablet-hide">Upload</span></span>
