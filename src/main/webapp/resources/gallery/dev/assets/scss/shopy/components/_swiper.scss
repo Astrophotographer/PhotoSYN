@@ -1,0 +1,125 @@
+:root {
+    --swiper-theme-color: #{$primary};
+}
+
+.swiper-arrow-style-01 {
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: $dark;
+    z-index: 1;
+    text-align: center;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    right: 10px;
+    transition: ease all 0.35s;
+    font-size: 26px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    &.swiper-button-disabled {
+    	opacity: 0.5 !important;
+    	pointer-events: none;
+    }
+    &:hover {
+    	background: $primary;
+    	color: $white;
+    }
+    .swiper-hover-arrow & {
+    	opacity: 0;
+    }
+    .swiper-hover-arrow:hover & {
+    	opacity: 1;
+    }
+    &.swiper-prev {
+    	left: 10px;
+    	right: auto;
+    }
+}
+
+
+.swiper-arrow-style-02 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: $dark;
+    z-index: 1;
+    text-align: center;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease all 0.35s;
+    font-size: 20px;
+    width: 15px;
+    height: 25px;
+    border-radius: 50%;
+    &.swiper-button-disabled {
+        .swiper-hover-arrow:hover & {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+    &:hover {
+        color: $primary;
+    }
+    .swiper-hover-arrow & {
+        opacity: 0;
+    }
+    .swiper-hover-arrow:hover & {
+        opacity: 1;
+    }
+    &.swiper-next {
+        right: -15px;
+        @include media-breakpoint-down(lg) {
+            right: 0;
+        }
+    }
+    &.swiper-prev {
+        left: -15px;
+        @include media-breakpoint-down(lg) {
+            left: 0;
+        }
+    }
+}
+
+.swiper-arrow-style-03 {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    color: $dark;
+    z-index: 1;
+    text-align: center;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    right: 10px;
+    transition: ease all 0.35s;
+    font-size: 18px;
+    width: 20px;
+    height: 30px;
+    &.swiper-button-disabled {
+        opacity: 0.5 !important;
+        pointer-events: none;
+    }
+    &:hover {
+        background: $primary;
+        color: $white;
+    }
+    .swiper-hover-arrow & {
+        opacity: 0;
+    }
+    .swiper-hover-arrow:hover & {
+        opacity: 1;
+    }
+    &.swiper-prev {
+        left: 10px;
+        right: auto;
+    }
+}

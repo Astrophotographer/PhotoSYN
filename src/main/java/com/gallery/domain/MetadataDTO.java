@@ -8,6 +8,7 @@ import java.util.Date;
 public class MetadataDTO {
 
     private long G_NO;
+    private String Gallery_img_Temp;  // 메타데이터 확인용 임시 변수
     private String M_LONGITUDE; //경도
     private String M_LATITUDE;  // 위도
     private String M_IMGLENS;   // 렌즈모델

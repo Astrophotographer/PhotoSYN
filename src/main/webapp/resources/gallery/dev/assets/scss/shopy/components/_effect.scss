@@ -1,0 +1,45 @@
+.effect-section {
+	position: relative;
+	overflow: hidden;
+	.effect {
+		position: absolute;
+	}
+	.effect-top-start {
+		top: 20%;
+		left: 0;
+	}
+	.effect-bottom-end {
+		bottom: 20%;
+		right: 0;
+	}
+}
+
+.hover-scale {
+	.hover-scale-in {
+		overflow: hidden;
+		position: relative;
+		img {
+			transition: ease all 0.35s;
+			transform: scale(1);
+		}
+	}
+	&:hover {
+		.hover-scale-in {
+			img {
+				transform: scale(1.08);
+			}
+		}
+	}
+}
+
+.hover-opacity {
+	.hover-opacity-in {
+		opacity: 0;
+		transition: ease all 0.35s;
+	}
+	&:hover {
+		.hover-opacity-in {
+			opacity: 1;
+		}
+	}
+}

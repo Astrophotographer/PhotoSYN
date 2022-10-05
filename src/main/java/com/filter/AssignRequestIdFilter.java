@@ -1,7 +1,9 @@
-//assignRequestIdFilter
-
-
-
+//package com.filter;
+//
+////assignRequestIdFilter
+//
+//
+//
 //package com.web.filter;
 //
 //import com.http.HttpRequestConstant;
@@ -30,6 +32,7 @@
 //    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 //
 //        try {
+//            //Request Id가 존재할 경우 새로 부여하지 않게 처리
 //            String requestId = UUID.randomUUID().toString();
 //            request.setAttribute(HttpRequestConstant.REQUEST_ID.getId(), requestId);
 //        } catch (Exception e) {
@@ -37,6 +40,5 @@
 //        } finally {
 //            chain.doFilter(request, response);
 //        }
-//
 //    }
 //}

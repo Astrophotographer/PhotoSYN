@@ -8,7 +8,7 @@ import java.util.List;
 public interface MetadataService {
 
 
-    public MetadataDTO checkMetadata(Long G_NO);
+    public void checkMetadata(Long G_NO);
 
     public MetadataDTO insertMetadata(Long G_NO);
 

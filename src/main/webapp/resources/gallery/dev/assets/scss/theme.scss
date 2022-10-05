@@ -1,0 +1,74 @@
+/*----------------------------------------------------------------------
+  * shopy – Multipurpose Template
+  * Copyright 2022 uiocean.com by pxdraft
+------------------------------------------------------------------------*/
+
+// shopy setup
+@import 'dev/assets/vendor/bootstrap/scss/functions';
+
+
+// shopy setup
+@import 'variables';
+@import "dev/assets/scss/shopy/components/utilitie";
+
+// Custom setup
+@import 'dev/assets/scss/custom/user-variables';
+
+// Bootstrap core
+@import 'dev/assets/vendor/bootstrap/scss/bootstrap';
+
+
+// bootstrap icon
+@import '../vendor/bootstrap/icon/bootstrap-icons.css';
+
+//feather icon
+@import '../vendor/feather/feather.css';
+
+// swiper
+@import '../vendor/swiper/swiper-bundle.min.css';
+// magnific
+@import '../vendor/magnific/magnific-popup.css';
+
+
+
+@import 'dev/assets/scss/shopy/fonts';
+@import 'dev/assets/scss/shopy/layout/wrapper';
+
+// Header
+@import 'dev/assets/scss/shopy/header';
+@import 'dev/assets/scss/shopy/header/header-top-01';
+@import 'dev/assets/scss/shopy/header/header-01';
+
+// footer
+@import 'dev/assets/scss/shopy/footer';
+
+// Mega Menu
+@import 'dev/assets/scss/shopy/mega-menu';
+
+
+@import 'dev/assets/scss/shopy/components/spinner';
+@import 'dev/assets/scss/shopy/components/section';
+@import 'dev/assets/scss/shopy/components/buttons';
+@import 'dev/assets/scss/shopy/components/font-weight';
+@import 'dev/assets/scss/shopy/components/swiper';
+@import 'dev/assets/scss/shopy/components/icon';
+@import 'dev/assets/scss/shopy/components/background';
+@import 'dev/assets/scss/shopy/components/heading';
+@import 'dev/assets/scss/shopy/components/border';
+@import 'dev/assets/scss/shopy/components/avatar';
+@import 'dev/assets/scss/shopy/components/effect';
+@import 'dev/assets/scss/shopy/components/img';
+@import 'dev/assets/scss/shopy/components/from';
+@import 'dev/assets/scss/shopy/components/modal';
+@import 'dev/assets/scss/shopy/components/link';
+@import 'dev/assets/scss/shopy/components/dropdown';
+@import 'dev/assets/scss/shopy/components/product-card';
+@import 'dev/assets/scss/shopy/components/catargory-card';
+@import 'dev/assets/scss/shopy/components/shop';
+@import 'dev/assets/scss/shopy/components/product-details';
+@import 'dev/assets/scss/shopy/components/browser';
+
+
+
+// Custom core
+@import 'dev/assets/scss/custom/user';
