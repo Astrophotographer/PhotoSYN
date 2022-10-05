@@ -28,6 +28,7 @@
     </bean>
 
     <!-- 테스트하기 위해 post 방식 사용시 시큐리티 방식사용? -->
+    <security:global-method-security pre-post-annotations="enabled" secured-annotations="enabled"/>
 
 
     <!-- controller 추가 -->

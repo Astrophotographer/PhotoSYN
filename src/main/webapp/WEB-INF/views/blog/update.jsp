@@ -37,11 +37,11 @@
                     <c:forEach items="${blog_imgs}" var="img">
                         <img src="${pageContext.request.contextPath}/resources/saveImgckImage/${img.BI_NAME}"
                              width="100px" height="100px">
-                        <button onclick="updateDeleteImage('${img.BI_NAME}')">testClick ${delNum}</button>
+                        <button onclick="confirmUpdateDeleteImage('${img.BI_NAME}', '${img.BI_UUID}', '${img.BI_ORIGINNAME}')">${delNum}번 사진삭제</button>
                         <c:set var="delNum" value="${delNum+1}"/>
                     </c:forEach>
-
                 </div>
+<%--                <jsp:include page="updatebottom.jsp"/>--%>
 
                 <!-- 작성자는 원래 자동으로 들어가야 함. 임시로 넣어주기 -->
                 <label>
@@ -78,6 +78,7 @@
                     <input type="hidden" name="B_LIKE" value="${blog.b_LIKE}"/>
                     <input type="hidden" name="B_READCOUNT" value="${blog.b_READCOUNT}"/>
                     <input type="hidden" name="B_REPORTCOUNT" value="${blog.b_REPORTCOUNT}"/>
+                    <input type="hidden" name="B_NO" value="${blog.b_NO}">
                 </div>
             </div>
         </div>
@@ -121,7 +122,7 @@
 
             if (type === "update") {
                 url = "/blog/update.do?b_no=${blog.b_NO}";
-                method = "put";
+                method = "post";
                 console.log("수정");
                 formObject.attr("action", url).attr("method", method).submit();
             } else if (type === "delete") {
@@ -142,25 +143,39 @@
 
     });
 
-    function updateDeleteImage(delName) {
-        console.log("test");
-        console.log(delName);
+    function confirmUpdateDeleteImage(delName, uid, originName) {
+        console.log("confirmUpdateDeleteImage.delName :"+delName+" uid : "+uid+" originName : "+originName);
+        if (confirm("이미지를 삭제하시겠습니까?(DB및 서버에서 삭제 진행). 이미지태그 삭제는..")) {
+            (() => {
+                console.log("updateDeleteImage");
+                console.log(delName);
 
-        $.ajax({
-            // url: "/blog/updateDeleteImage",
-            url: "/blog/update.imagedelete",
-            type: "post",
-            data: {
-                "bi_name": delName
-            },
-            success: function (data) {
-                console.log(data);
-                document.location.reload(true);
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
+                $.ajax({
+                    // url: "/blog/updateDeleteImage",
+                    url: "/blog/update.imagedelete",
+                    type: "post",
+                    data: {
+                        "bi_name": delName,
+                        "uid": uid,
+                        "originName": originName
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        //document.location.reload(true);
+                        (()=>{
+                            $("#imgList").load(window.location.href+" #imgList");
+                        })();
+                    },
+                    error: function (e) {
+                        console.log(e);
+                    }
+                });
+
+            })();
+        } else {
+            alert("취소되었습니다.");
+        }
+
     }
 </script>
 

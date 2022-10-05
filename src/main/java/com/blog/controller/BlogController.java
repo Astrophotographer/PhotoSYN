@@ -419,19 +419,28 @@ public class BlogController {
     }
 
     @RequestMapping(value="update.imagedelete", method = RequestMethod.POST)
-    public void updateDeleteImage(@RequestParam("bi_name") String bi_name, String uuid, String originName, HttpServletResponse response) throws IOException {
+    public void updateDeleteImage(@RequestParam("bi_name") String bi_name, @RequestParam("uid") String uid, @RequestParam("originName") String originName, HttpServletResponse response) throws IOException {
         log.info("updateDeleteImage start...");
 
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html;charset=utf-8");
+//        response.setCharacterEncoding("utf-8");
+//        response.setContentType("text/html;charset=utf-8");
 
         log.info(bi_name);
+        log.info(uid);
+        log.info(originName);
+
+        blogService.deleteImg(bi_name, uid, originName);
 
 //        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
 //        if(file.exists()) {
 //            if(file.delete()) {
-//                log.info("파일삭제 성공");
-//                response.getWriter().print("success");
+//                if(blogService.deleteImg(uid)>0) {
+//                    log.info("이미지 삭제 성공+DB삭제 성공");
+//                    response.getWriter().print("success");
+//                } else {
+//                    log.info("이미지 삭제 성공+DB삭제 실패");
+//                    response.getWriter().print("fail");
+//                }
 //            } else {
 //                log.info("파일삭제 실패");
 //                response.getWriter().print("fail");
@@ -449,19 +458,26 @@ public class BlogController {
         //형색으로 주소 넘어감.
         log.info("afterUpdate start...");
         log.info(blogDTO.toString());
-        //TODO 1004 가져온 데이터 DB에 저장
         int result = blogService.updateBlog(blogDTO);
         log.info("DB저장 result : " + result);
 
         //TODO 1004 메인 이미지 수정해주기
-        return "update.do";
+        //ckeckmainimg 사용
+//        return "/blog/updatemainimage?bno=" + b_no;
         //return "redirect:usermain";
+        return "forward:update.do?b_no=" + b_no;
     }
 
     //사진들 뿌려주고 메인 사진 고르기.
     @RequestMapping(value = "update.do", method = RequestMethod.GET)
-    public String updateMainImg() {
+    public String updateMainImg(Long b_no, Model model, Principal principal) {
         log.info("updateMainImg start...");
+        log.info("b_no : " + b_no);
+
+        String u_id= "test";
+        if(principal!=null){
+            u_id = principal.getName();
+        }
 
         return "redirect:usermain";
     }
