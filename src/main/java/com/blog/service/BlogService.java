@@ -39,4 +39,6 @@ public interface BlogService {
     public List<Blog_Img> getImg(Long b_no);
 
     public int updateBlog(BlogDTO blogDTO);
+
+    public int deleteImg(String bi_name, String uuid, String originName);
 }

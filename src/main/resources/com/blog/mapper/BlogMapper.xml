@@ -141,6 +141,11 @@
         where b_no = #{B_NO}
     </update>
 
+    <delete id="deleteImg">
+        delete from blog_img
+        where bi_uuid=#{uuid}
+    </delete>
+
 
 </mapper>
 

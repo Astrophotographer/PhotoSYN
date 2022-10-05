@@ -6,14 +6,17 @@ import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.mapper.BlogMapper;
 import com.gallery.domain.MaintagDTO;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
+@Log4j
 public class BlogServiceImpl implements BlogService {
 
     @Autowired
@@ -91,6 +94,29 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public int updateBlog(BlogDTO blogDTO) {
         return blogMapper.updateBlog(blogDTO);
+    }
+
+    @Override
+    public int deleteImg(String bi_name, String uuid, String originName) {
+
+        int result = blogMapper.deleteImg(uuid);
+
+        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
+        if (file.exists()) {
+            if (file.delete()) {
+                if (result > 0) {
+                    log.info("이미지 삭제 성공+DB삭제 성공");
+                } else {
+                    log.info("이미지 삭제 성공+DB삭제 실패");
+                }
+            } else {
+                log.info("파일삭제 실패");
+            }
+        } else {
+            log.info("파일이 존재하지 않습니다.");
+        }
+
+        return result;
     }
 }
 

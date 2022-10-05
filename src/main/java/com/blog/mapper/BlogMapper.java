@@ -38,4 +38,6 @@ public interface BlogMapper {
     public List<Blog_Img> getImg(Long b_no);
 
     public int updateBlog(BlogDTO blogDTO);
+
+    public int deleteImg(String uuid);
 }
