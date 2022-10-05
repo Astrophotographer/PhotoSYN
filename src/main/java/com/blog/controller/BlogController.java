@@ -463,14 +463,21 @@ public class BlogController {
 
         //TODO 1004 메인 이미지 수정해주기
         //ckeckmainimg 사용
-        return "/blog/update.do";
+//        return "/blog/updatemainimage?bno=" + b_no;
         //return "redirect:usermain";
+        return "forward:update.do?b_no=" + b_no;
     }
 
     //사진들 뿌려주고 메인 사진 고르기.
     @RequestMapping(value = "update.do", method = RequestMethod.GET)
-    public String updateMainImg() {
+    public String updateMainImg(Long b_no, Model model, Principal principal) {
         log.info("updateMainImg start...");
+        log.info("b_no : " + b_no);
+
+        String u_id= "test";
+        if(principal!=null){
+            u_id = principal.getName();
+        }
 
         return "redirect:usermain";
     }
