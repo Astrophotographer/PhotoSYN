@@ -43,6 +43,8 @@
     Welcome to Blog User Main
 </div>
 
+<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+
 <!-- preloader -->
 <section>
     <div class="container-fluid p-sm-0">

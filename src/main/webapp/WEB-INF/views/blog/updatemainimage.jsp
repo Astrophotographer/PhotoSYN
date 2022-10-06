@@ -17,6 +17,9 @@
 <c:set var="i" value="${1}"/>
 
 <form action="/blog/updatemainimage" method="get">
+    <input type="hidden" name="b_no" value="${b_no}"/>
+    b_no : ${b_no}
+    <br>
 
     <c:forEach var="templists" items="${templist}">
         ${templists} <br>

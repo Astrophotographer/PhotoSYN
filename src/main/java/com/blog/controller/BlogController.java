@@ -466,8 +466,7 @@ public class BlogController {
 
     @RequestMapping(value = "update.do")
     public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no, Model model, Blog_Img blog_img) throws  Exception{
-        //http://localhost:8080/blog/update.do?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
-        //형색으로 주소 넘어감.
+
         log.info("afterUpdate start...");
         log.info(blogDTO.toString());   // 정상적 들어감
         log.info("b_no : " + b_no);     // 정상적 들어감
@@ -494,7 +493,9 @@ public class BlogController {
 
         model.addAttribute("templist", templist);
         model.addAttribute("imglist", imglist);
+        model.addAttribute("b_no", b_no);
 
+        //임시 테이블에있는 이미지들을 실제 테이블에 넣어주기
         for (int i = 0; i < templist.size(); i++) {
             log.info("for문 사용 " + templist.get(i).toString());
             log.info("----- getClass.getname" + templist.get(i).getClass().getName());
@@ -507,6 +508,7 @@ public class BlogController {
             blog_img.setBI_ORIGINNAME(templist.get(i).getBIT_ORIGINNAME());
 
             log.info("blog_img.toString() : " + blog_img.toString());
+            //insert시 이미 블로그글이 존재하기에 추가적인 시퀀스 값을 추가안해도 됨.
             blogService.insertImg(blog_img);
             Thread.sleep(100);
         }
@@ -520,23 +522,46 @@ public class BlogController {
         log.info("updateMainImg start...");
         log.info("b_no : " + b_no);
         log.info("uuid : " + UUID);
+//        INFO : com.blog.controller.BlogController - updateMainImg start...
+//        INFO : com.blog.controller.BlogController - b_no : null
+//        INFO : com.blog.controller.BlogController - uuid : d8a5e6be-b355-48c9-8bf4-0b4da3935f6a
 
         String user_id= "test";
         if(principal!=null){
             user_id = principal.getName();
         }
+
+
+        //실제 테이블에 있는 이미지들도 메인 값 0으로 설정
+        log.info("updateBlogMainImg : "+blogService.updateBlogMainImg(b_no));
+
+        //+추가... 메인 값 다 0으로 준 후에 메인 이미지를 골라 주지 않았다면...
+        //이미지 수정 작업(하단의 main값 수정해주는 작업)을 하지않았기에 기존의 메인값이 남아있게 됨.
+        // temp 테이블도 남아있음 --> 후에 스케줄러로 삭제
+
         //user_id로 temp테이블 값 모두 삭제,
         //uuid로 uuid값이 일치하는 temp테이블의 bi_main값을 1로 변경
-        blogService.updateImg(user_id, UUID);
+        log.info("updateImg : "+blogService.updateImg(user_id, UUID));
+
 
         return "redirect:usermain";
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
-    public String delete() {
-        //http://localhost:8080/blog/delete?B_SUBJECT=&B_CONTENT=&U_ID=&B_TAG1=
-        //형식으로 주소 넘어감.
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
+    public String delete(Long b_no) {
         log.info("delete start...");
+        log.info("b_no : " + b_no); // 정상적 들어감
+
+        //blog 테이블 숨김처리 = 삭제
+        //사진테이블 삭제도 같이 진행
+        //서버에 저장된 사진 삭제
+        blogService.hideBlog(b_no);
+
+
+
+
+
+
         return "redirect:usermain";
     }
 }
