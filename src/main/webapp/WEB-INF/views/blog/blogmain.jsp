@@ -34,6 +34,7 @@
 </head>
 </head>
 <body>
+<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <div>
     <h1>TEST BLOG MAIN</h1>
     <table>

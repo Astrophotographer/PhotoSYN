@@ -34,6 +34,8 @@
 </head>
 <body>
 
+<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+
 
 <div class="header-logo py-5 d-none d-lg-block">
     <div class="container">

@@ -13,6 +13,9 @@
 </head>
 <body>
 <div>
+
+    <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
+
     <h1>이미지 체크</h1>
 
     <form action="/blog/checkmainimg" method="get">
