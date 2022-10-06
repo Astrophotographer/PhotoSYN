@@ -1,18 +1,18 @@
 package com.gallery.service;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.Gallery_Criteria;
 import com.gallery.domain.MaintagDTO;
-import com.gallery.mapper.GalleryMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class GalleryServiceImpl implements GalleryService {
-
-    @Autowired
-    private GalleryMapper galleryMapper;
+    @Override
+    public int uploadGallery(GalleryDTO galleryDTO) {
+        return 0;
+    }
 
     @Override
     public String insertTempImg(String gallery_img_temp) {
@@ -25,14 +25,10 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public int insertImg() {
-        return 0;
+    public List<GalleryDTO> getGalleryList(Gallery_Criteria cri) {
+        return null;
     }
 
-    @Override
-    public int insertGallery(GalleryDTO galleryDTO) {
-        return 0;
-    }
 
     @Override
     public int checkGallerySeq() {
@@ -40,14 +36,13 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public List<GalleryDTO> getGalleryList()
-    {
-        return galleryMapper.getGalleryList();
+    public List<GalleryDTO> getGalleryList() {
+        return null;
     }
 
     @Override
     public GalleryDTO getGallerySingle(Long G_NO) {
-        return galleryMapper.getGallerySingle(G_NO);
+        return null;
     }
 
     @Override
@@ -55,19 +50,26 @@ public class GalleryServiceImpl implements GalleryService {
         return null;
     }
 
+
     @Override
-    public List checkMainImg() {
-        return null;
+    public boolean updateGallery(GalleryDTO galleryDTO) {
+        return false;
     }
 
     @Override
-    public int updateGallery(GalleryDTO galleryDTO) {
+    public boolean deleteGallery(long G_NO) {
+        return false;
+    }
+
+
+    @Override
+    public int getTotal(Gallery_Criteria cri) {
         return 0;
     }
 
     @Override
-    public int deleteImg(String bi_name, String uuid, String originName) {
-        return 0;
+    public boolean deleteGallery(Long g_no) {
+        return false;
     }
 }
 
