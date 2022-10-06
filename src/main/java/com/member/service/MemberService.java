@@ -6,20 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Member;
 
 public interface MemberService {
-    /*
-    // 카카오 로그인 & 로그아웃
-    public String getAccessToken(String code);
-
-    public MemberDTO getUserInfo(String access_token);
-
-    public void kakaoInsert(MemberDTO userInfo);
-
-    public void kakaoLogout(String access_token);
-    */ // 카카오 로그인
-
-    /******************************************************************************************************************/
-
-    // 일반 회원가입
+    // 회원가입
     public int addMember(MemberDTO memberDTO);
 
     // 회원 접근 권한 추가
@@ -37,7 +24,10 @@ public interface MemberService {
     // 아이디 중복 확인
     public int idCheck(String id);
 
+    // 비밀번호 변경
     public int updatePw(MemberDTO memberDTO) throws Exception;
 
+    // 프로필 사진 변경
+    public int updateImg(String id, String pic) throws Exception;
 
 }

@@ -3,6 +3,7 @@
 
 
 <br/><br/>
+<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <div>
     <sec:authorize access="isAuthenticated()">
         <h1>로그인됨</h1>

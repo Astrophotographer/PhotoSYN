@@ -86,48 +86,6 @@ public class MemberController {
         log.info("########## 접근제한 ##########: " + auth);
     }
 
-    /* *********************************** 카카오 로그인 ***********************************
-    // 카카오 회원가입 & 로그인
-    @RequestMapping(value = "kakao_callback", method = RequestMethod.GET)
-    public String kakaoLogin(@RequestParam(value = "code") String code, String auth, HttpSession session,
-                             HttpServletRequest request) throws Exception {
-        // 접속 토큰 get
-        String access_token = memberService.getAccessToken(code);
-        // 접속자 정보 get
-        MemberDTO memberDTO = memberService.getUserInfo(access_token);
-        memberService.kakaoInsert(memberDTO);
-        //memberService.addAuth(auth, memberDTO.getId());     // 권한 추가
-
-        // 닉네임이 존재할 때, 세션에 해당 닉네임과 토큰 등록. (닉네임 == 필수동의)
-        if (memberDTO.getName() != null) {
-            session.setAttribute("nickname", memberDTO.getName());
-            session.setAttribute("access_token", access_token);
-            // 없으면 회원가입 -> 회원가입 폼에 카카오에서 받은 email, nickname, thumbnail 보내놓기
-        } else {
-            return "/member/signup";
-        }
-
-        return "redirect:/member/main";
-    }
-
-    // 카카오 로그아웃
-    @RequestMapping(value = "/logout")
-    public String logout(HttpSession session) {
-        String access_Token = (String) session.getAttribute("access_Token");
-
-        if (access_Token != null && !"".equals(access_Token)) {
-            memberService.kakaoLogout(access_Token);
-            session.removeAttribute("access_Token");
-            session.removeAttribute("nickname");
-        } else {
-            System.out.println("access_Token is null");
-            //return "redirect:/";
-        }
-        //return "index";
-        return "redirect:/member/main";
-    }
-    */ // 카카오 로그인
-
     /* *********************************** 비밀번호 (이메일 전송, 변경)  *********************************** */
     // 비밀번호 찾기 페이지
     @RequestMapping(value = "searchPw", method = RequestMethod.GET)

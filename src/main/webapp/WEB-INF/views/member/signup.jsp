@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/member/css/style.css" type="text/css">
     <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
 </head>
 <body>
@@ -39,19 +39,12 @@
             <label for="phone">전화번호</label>
         </div>
         <div class="btn-area">
-
             <button id="btn" type="submit">회원가입</button>
         </div>
     </form>
     <div class="caption">
         <a href="/member/searchPw">비밀번호 찾기</a>
     </div>
-    <!-- 카카오 로그인
-    <a href="https://kauth.kakao.com/oauth/authorize?client_id=c67a03f0334b4eff20b7eb96995f64dd&redirect_uri=http://localhost:8080/member/loginPro&response_type=code">
-        <img src="https://i0.wp.com/forhappywomen.com/wp-content/uploads/2018/11/산부인과-포해피우먼-문의-카카오플러스친구-버튼.png?fit=586%2C586&ssl=1"
-             alt="" width="50" height="50">
-    </a>
-    --> <!-- 카카오 로그인 -->
 </section>
 
 <script>

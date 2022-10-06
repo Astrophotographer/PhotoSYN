@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/member/css/style.css" type="text/css">
     <script src="/resources/css/jquery-3.6.1.min.js"></script>
 </head>
 <body>
