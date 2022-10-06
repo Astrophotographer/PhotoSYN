@@ -226,5 +226,10 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.updatePw(memberDTO);
     }
 
+    @Override
+    public int updateImg(String id, String pic) throws Exception {
+        return memberMapper.updateImg(id, pic);
+    }
+
 
 }
