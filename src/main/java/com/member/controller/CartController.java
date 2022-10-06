@@ -24,6 +24,7 @@ public class CartController {
      * 5: 로그인 필요
      *
      */
+    //456
     @PostMapping("/cart/add")
     @ResponseBody
     public String addCartPOST(CartDTO cart) {
