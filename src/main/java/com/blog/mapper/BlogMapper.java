@@ -43,4 +43,8 @@ public interface BlogMapper {
 
     public int updateBlogMainImg(Long b_no);
 
+    public int hideBlog(Long b_no);
+
+    public int deleteImgs(Long b_no);
+
 }

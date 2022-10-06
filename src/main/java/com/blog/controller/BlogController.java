@@ -552,11 +552,15 @@ public class BlogController {
         log.info("delete start...");
         log.info("b_no : " + b_no); // 정상적 들어감
 
-        //blog 테이블 숨김처리
-
-        //사진테이블 삭제
-
+        //blog 테이블 숨김처리 = 삭제
+        //사진테이블 삭제도 같이 진행
         //서버에 저장된 사진 삭제
+        blogService.hideBlog(b_no);
+
+
+
+
+
 
         return "redirect:usermain";
     }

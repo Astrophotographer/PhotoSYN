@@ -44,4 +44,6 @@ public interface BlogService {
 
     public int updateBlogMainImg(Long b_no);
 
+    public int hideBlog(Long b_no);
+
 }

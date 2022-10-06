@@ -123,5 +123,36 @@ public class BlogServiceImpl implements BlogService {
     public int updateBlogMainImg(Long b_no) {
         return blogMapper.updateBlogMainImg(b_no);
     }
+
+    @Override
+    public int hideBlog(Long b_no) {
+
+        List<Blog_Img> blog_img_list = blogMapper.getImg(b_no);
+
+        //글 숨김처리(삭제처리용)
+        blogMapper.hideBlog(b_no);
+        //사진 테이블 삭제(숨김x)
+        int result = blogMapper.deleteImgs(b_no);
+
+        for (int i = 0; i < blog_img_list.size(); i++) {
+            File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + blog_img_list.get(i).getBI_NAME());
+            if (file.exists()) {
+                if (file.delete()) {
+                    if (result > 0) {
+                        log.info("이미지 삭제 성공+DB삭제 성공. 이미지명 : " + blog_img_list.get(i).getBI_NAME());
+                    } else {
+                        log.info("이미지 삭제 성공+DB삭제 실패. 이미지명 : " + blog_img_list.get(i).getBI_NAME());
+                    }
+                } else {
+                    log.info("파일삭제 실패");
+                }
+            } else {
+                log.info("파일이 존재하지 않습니다.");
+            }
+        }
+
+
+        return 0;
+    }
 }
 //
