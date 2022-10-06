@@ -6,10 +6,29 @@
 <mapper namespace="com.gallery.mapper.GalleryMapper">
 
 
-<!--        <insert id="insertTempImg">-->
-<!--            insert into blog_img_temp-->
-<!--            values (#{U_ID}, #{BIT_NAME}, #{BIT_UUID}, #{BIT_ORIGINNAME})-->
-<!--        </insert>-->
+    <insert id="insertTempImg">
+        insert into gallery_img_temp
+        values (#{U_ID}, #{BIT_NAME}, #{BIT_UUID}, #{BIT_ORIGINNAME})
+    </insert>
+
+
+
+
+    <select id="insertMetadata" resultType="com.gallery.domain.MetadataDTO">
+        select * from gallery
+    </select>
+
+
+    <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
+        select * from gallery
+    </select>
+
+    <select id="getGallerySingle" resultType="com.gallery.domain.GalleryDTO">
+        select * from gallery where g_no = #{G_NO}
+    </select>
+
+
+
 
 <!--        <select id="getTempImg" resultType="com.blog.domain.Blog_Img_Temp">-->
 <!--            select *-->
@@ -145,19 +164,6 @@
 
 
 
-
-    <select id="insertMetadata" resultType="com.gallery.domain.MetadataDTO">
-        select * from gallery
-    </select>
-
-
-    <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
-        select * from gallery
-    </select>
-
-    <select id="getGallerySingle" resultType="com.gallery.domain.GalleryDTO">
-        select * from gallery where g_no = #{G_NO}
-    </select>
 
 </mapper>
 
