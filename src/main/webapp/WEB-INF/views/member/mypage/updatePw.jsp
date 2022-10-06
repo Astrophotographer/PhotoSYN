@@ -9,32 +9,25 @@
 <body>
 <section class="login-form">
     <h1><a href="/member/main" style="text-decoration: none; color: white;">Photo SYN</a></h1>
-    <h2 style="color: white"><c:out value="${error}"/></h2>
-    <h2 style="color: white"><c:out value="${logout}"/></h2>
 
-    <form action="/login" method="POST">
+    <form action="/member/mypage/updatePwPro" method="POST">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="int-area">
-            <input type="text" name="username" id="id" required/>
-            <label for="id">아이디</label>
+            <input type="password" name="pw1" id="pw1" autocomplete="off" required/>
+            <label for="pw1">현재 비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="password" id="pw" autocomplete="off" required/>
-            <label for="pw">비밀번호</label>
+            <input type="password" name="pw2" id="pw2" autocomplete="off" required/>
+            <label for="pw2">변경 비밀번호</label>
         </div>
-        <br/>
-        <div style="color: white;">
-            <input type="checkbox" name="remember-me" id="remember-me"/>
-            <label for="remember-me">로그인 상태 유지</label>
+        <div class="int-area">
+            <input type="password" name="pw3" id="pw3" autocomplete="off" required/>
+            <label for="pw3">변경 비밀번호 확인</label>
         </div>
         <div class="btn-area">
-            <button id="btn" type="submit">로그인</button>
+            <button id="btn" type="submit">변경하기</button>
         </div>
     </form>
-    <div class="caption">
-        <a href="/member/searchPw" style="text-decoration: none;">비밀번호 찾기</a><b style="color: #696969;">&nbsp;｜</b>
-        <a href="/member/signup" style="text-decoration: none;">회원가입</a>
-    </div>
 </section>
 
 <script>

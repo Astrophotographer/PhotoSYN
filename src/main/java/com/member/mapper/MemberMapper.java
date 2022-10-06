@@ -14,7 +14,7 @@ public interface MemberMapper {
     public int addAuth(AuthDTO auth);
 
     // 회원 정보 수정
-    public int updateMember(MemberDTO memberDTO);
+    public void updateMember(MemberDTO memberDTO);
 
     // 회원 정보 삭제
     public int deleteMember(String id);
@@ -30,6 +30,6 @@ public interface MemberMapper {
 
 
     // 프로필 사진 변경
-    public int updateImg(String id, String pic) throws Exception;
+    public int updateImg(MemberDTO memberDTO) throws Exception;
 
 }

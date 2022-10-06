@@ -12,8 +12,8 @@
 
     <!-- 일반 회원가입 -->
     <insert id="addMember">
-        insert into user_list(u_id, u_pw, u_phone, u_nick, u_pic, u_reg)
-        values (#{id}, #{pw}, #{phone}, #{name}, default, sysdate)
+        insert into user_list(u_id, u_pw, u_phone, u_nick, u_reg)
+        values (#{id}, #{pw}, #{phone}, #{name}, sysdate)
     </insert>
     <!-- 접근 권한 추가 -->
     <insert id="addAuth">
@@ -56,6 +56,15 @@
           AND m.U_ID = #{id}
     </select>
 
+    <!-- 회원 정보 수정 -->
+    <update id="updateMember">
+        UPDATE USER_LIST
+        SET U_NICK  = #{name},
+            U_PHONE = #{phone},
+        WHERE U_ID = #{id}
+    </update>
+
+    <!-- 아이디 확인 -->
     <select id="idCheck" parameterType="String" resultType="Integer">
         SELECT COUNT(*)
         FROM USER_LIST
@@ -75,6 +84,7 @@
         set u_pic = #{pic}
         where u_id = #{id}
     </update>
+
 
     <!--
     <update id="updateMember">

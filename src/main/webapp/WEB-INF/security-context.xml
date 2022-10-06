@@ -36,11 +36,9 @@
         <!-- token-validity-seconds : 쿠키 유효시간 설정 : 604800초(7일) -->
         <security:remember-me data-source-ref="dataSource" token-validity-seconds="604800"/>
 
-
         <!-- false로 나중에 살려주기 -->
         <!-- false일시 post 방식시 csrf 토큰을 사용하도록 설정 -->
         <security:csrf disabled="true"/>
-
     </security:http>
 
     <!-- 인증과 권한 처리해주는 태그 -->

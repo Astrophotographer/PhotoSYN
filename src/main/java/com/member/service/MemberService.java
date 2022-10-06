@@ -16,7 +16,7 @@ public interface MemberService {
     public MemberDTO getMember(String id);
 
     // 회원 정보 수정
-    public int modifyMember(MemberDTO memberDTO);
+    public void updateMember(MemberDTO memberDTO);
 
     // 회원 탈퇴
     public int deleteMember(MemberDTO memberDTO);
@@ -28,6 +28,6 @@ public interface MemberService {
     public int updatePw(MemberDTO memberDTO) throws Exception;
 
     // 프로필 사진 변경
-    public int updateImg(String id, String pic) throws Exception;
+    public int updateImg(MemberDTO memberDTO) throws Exception;
 
 }
