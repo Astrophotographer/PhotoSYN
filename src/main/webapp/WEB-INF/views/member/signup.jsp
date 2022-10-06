@@ -23,12 +23,12 @@
             <span id="idCheck"></span>
         </div>
         <div class="int-area">
-            <input type="password" name="pw" id="pw" autocomplete="off" required/>
-            <label for="pw">비밀번호</label>
+            <input type="password" name="pw" id="pw1" autocomplete="off" required/>
+            <label for="pw1">비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pwch" id="pwch" autocomplete="off" required/>
-            <label for="pwch">비밀번호 확인</label>
+            <input type="password" name="pwch" id="pw2" autocomplete="off" required/>
+            <label for="pw2">비밀번호 확인</label>
         </div>
         <div class="int-area">
             <input type="text" name="name" id="name" autocomplete="off" required/>
@@ -48,29 +48,6 @@
 </section>
 
 <script>
-    let id = $('id');
-    let pw = $('pw');
-    let name = $('name')
-    let btn = $('btn');
-
-    $(btn).on('click', function () {
-        if ($(id).val() == "") {
-            $(id).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        } else if ($(pw).val() == "") {
-            $(pw).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        } else if ($(name).val() == "") {
-            $(name).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        }
-    });
     // 아이디 중복확인
     $("#id").blur(function () {
         if ($('#id').val() != '') {
@@ -95,6 +72,19 @@
             });
         }
     });
+    /*
+    function pw() {
+        var p1 = document.getElementById('pw1').value;
+        var p2 = document.getElementById('pw2').value;
+        if (p1 != p2) {
+            alert("비밀번호가 일치 하지 않습니다");
+            return false;
+        } else {
+            alert("비밀번호가 일치합니다");
+            return true;
+        }
+    }
+    */
 </script>
 
 </body>
