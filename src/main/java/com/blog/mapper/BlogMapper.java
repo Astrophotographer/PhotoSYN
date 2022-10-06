@@ -40,4 +40,7 @@ public interface BlogMapper {
     public int updateBlog(BlogDTO blogDTO);
 
     public int deleteImg(String uuid);
+
+    public int updateBlogMainImg(Long b_no);
+
 }

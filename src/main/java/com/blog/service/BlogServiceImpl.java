@@ -118,5 +118,10 @@ public class BlogServiceImpl implements BlogService {
 
         return result;
     }
-}
 
+    @Override
+    public int updateBlogMainImg(Long b_no) {
+        return blogMapper.updateBlogMainImg(b_no);
+    }
+}
+//

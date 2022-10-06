@@ -41,4 +41,7 @@ public interface BlogService {
     public int updateBlog(BlogDTO blogDTO);
 
     public int deleteImg(String bi_name, String uuid, String originName);
+
+    public int updateBlogMainImg(Long b_no);
+
 }
