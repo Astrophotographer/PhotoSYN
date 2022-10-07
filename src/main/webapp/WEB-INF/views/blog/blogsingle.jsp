@@ -37,87 +37,6 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
 
-<div class="header-logo py-5 d-none d-lg-block">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 text-center">
-                <a class="navbar-brand" href="../resources/blog/index.html"><img src="../resources/blog/images/logo.png"
-                                                                                 alt="" class="img-fluid w-100"></a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<header class="header-top bg-grey justify-content-center">
-    <nav class="navbar navbar-expand-lg navigation">
-        <div class="container">
-            <a class="navbar-brand d-lg-none" href="../resources/blog/index.html"><img
-                    src="../resources/blog/images/logo.png" alt="" class="img-fluid"></a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
-                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="ti-menu"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul id="menu" class="menu navbar-nav ">
-                    <li class="nav-item dropdown  pl-0">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Home
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../resources/blog/index.html">Home 1</a>
-                            <a class="dropdown-item" href="../resources/blog/index-2.html">Home 2</a>
-                            <a class="dropdown-item" href="../resources/blog/index-3.html">Home 3</a>
-                            <a class="dropdown-item" href="../resources/blog/index-4.html">Home 4</a>
-                            <a class="dropdown-item" href="../resources/blog/index-5.html">Home 5</a>
-                            <a class="dropdown-item" href="../resources/blog/index-6.html">Home 6</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Blog Posts
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                            <a class="dropdown-item" href="../resources/blog/standard-fullwidth.html">Standard
-                                Fullwidth</a>
-                            <a class="dropdown-item" href="../resources/blog/standard-left-sidebar.html">Standard Left
-                                Sidebar</a>
-                            <a class="dropdown-item" href="../resources/blog/standard-right-sidebar.html">Standard Right
-                                Sidebar</a>
-                        </div>
-                    </li>
-
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="fashion.html" class="nav-link">Category</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Post Formats
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                            <a class="dropdown-item" href="post-video.html">Video Formats</a>
-                            <a class="dropdown-item" href="post-audio.html">Audio Format</a>
-                            <a class="dropdown-item" href="post-link.html">Quote Format</a>
-                            <a class="dropdown-item" href="post-gallery.html">Gallery Format</a>
-                            <a class="dropdown-item" href="post-image.html">Image Format</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a href="../resources/blog/contact.html" class="nav-link">Contact</a></li>
-                    <li class="nav-item d-lg-none">
-                        <div class="search_toggle p-3 d-inline-block bg-white"><i class="ti-search"></i></div>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="text-right search d-none d-lg-block">
-                <div class="search_toggle"><i class="ti-search"></i></div>
-            </div>
-        </div>
-    </nav>
-
-</header>
 <!--search overlay start-->
 <div class="search-wrap">
     <div class="overlay">
@@ -188,18 +107,13 @@
 
                         <div class="tags-share-box center-box d-flex text-center justify-content-between border-top border-bottom py-3">
 
+                            <!-- 댓글 수 -->
                             <span class="single-comment-o"><i class="fa fa-comment-o"></i>0 comment</span>
 
                             <div class="post-share">
+                                <!-- 좋아요 수, 좋아요 하트모양 사진 -->
                                 <span class="count-number-like">2</span>
                                 <a class="penci-post-like single-like-button"><i class="ti-heart"></i></a>
-                            </div>
-
-                            <div class="list-posts-share">
-                                <a target="_blank" rel="nofollow" href="#"><i class="ti-facebook"></i></a>
-                                <a target="_blank" rel="nofollow" href="#"><i class="ti-twitter"></i></a>
-                                <a target="_blank" rel="nofollow" href="#"><i class="ti-pinterest"></i></a>
-                                <a target="_blank" rel="nofollow" href="#"><i class="ti-linkedin"></i></a>
                             </div>
                         </div>
                     </div>
@@ -208,12 +122,14 @@
                 <!-- 자기소개 + sns링크 -->
                 <div class="post-author d-flex my-5">
                     <div class="author-img">
+                        <!-- 유저 이미지 사진 -->
                         <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
                              width="100" height="100">
                     </div>
 
                     <div class="author-content pl-4">
-                        <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">Themefisher</a></h4>
+                        <!-- 유저 자기소개 -->
+                        <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
                         <p>Hey there. My name is Liam. I was born with the love for traveling. I also love taking photos
                             with my phone in order to capture moment..</p>
 

@@ -5,6 +5,9 @@ import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.gallery.domain.MaintagDTO;
+import com.member.domain.MemberDTO;
+import com.member.domain.User_Intro;
+import com.member.domain.User_SNS;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,5 +51,11 @@ public interface BlogMapper {
     public int deleteImgs(Long b_no);
 
     public int updateBlogReadCount(Long b_no);
+
+    public User_Intro getUserIntro(String u_id);
+
+    public User_SNS getUserSNS(String u_id);
+
+    public MemberDTO getUserInfo(String u_id);
 
 }

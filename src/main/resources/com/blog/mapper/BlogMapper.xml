@@ -193,6 +193,23 @@
         where b_no = #{B_NO}
     </update>
 
+    <select id="getUserIntro" resultType="com.member.domain.User_Intro">
+        select *
+        from user_intro
+        where u_id = #{u_id}
+    </select>
+
+    <select id="getUserSNS" resultType="com.member.domain.User_SNS">
+        select *
+        from sns
+        where u_id = #{u_id}
+    </select>
+
+    <select id="getUserInfo" resultType="com.member.domain.MemberDTO">
+        select *
+        from user_list
+        where u_id = #{u_id}
+    </select>
 
 </mapper>
 
