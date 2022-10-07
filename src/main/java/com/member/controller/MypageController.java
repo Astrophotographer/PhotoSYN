@@ -1,7 +1,6 @@
 package com.member.controller;
 
 import com.member.domain.MemberDTO;
-import com.member.domain.PasswordDTO;
 import com.member.security.MemberUser;
 import com.member.security.MemberUserDetailsService;
 import com.member.service.MemberService;
@@ -11,14 +10,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -33,7 +31,7 @@ public class MypageController {
     @Autowired
     private MemberUserDetailsService memberUserDetailsService;
     @Autowired
-    private PasswordEncoder encoder;
+    private BCryptPasswordEncoder encoder;
 
     @GetMapping("profile")
     public String profile(Model model, Authentication auth) {
@@ -85,41 +83,73 @@ public class MypageController {
 
     // 프로필 정보 수정
     @RequestMapping(value = "profileInfoModify", method = RequestMethod.POST)
-    public String profileInfoModify(Authentication auth, @RequestParam("password") String pw, MemberDTO memberDTO, RedirectAttributes rttr) {
+    public String profileInfoModify(Authentication auth,
+                                    @RequestParam("pw") String pw, MemberDTO memberDTO, RedirectAttributes rttr) throws Exception {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String password = user.getMember().getPw();
 
         if (encoder.matches(pw, password)) {
-            //memberService.updateMember(memberDTO); (에러발생)
+            memberDTO.setId(user.getMember().getId());
+            memberService.updateMember(memberDTO);
         } else {
             rttr.addFlashAttribute("msg", "비밀번호를 다시 확인해 주세요.");
+
             return "redirect:/member/mypage/profileModify";
         }
 
         return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
     }
 
+    // 닉네임 중복확인
+    @ResponseBody
+    @PostMapping("nameCheck")
+    public int nameCheck(@RequestParam("name") String name) throws Exception {
+
+        return memberService.nameCheck(name);
+    }
+
     // 비밀번호 변경
     @GetMapping("updatePw")
-    public void updatePw() {
+    public void updatePwPage() {
 
     }
 
     @PostMapping("updatePwPro")
-    public String updatePwPro(Authentication auth, @RequestParam("password1") String pw1, @RequestParam("password2") String pw2,
-                              @RequestParam("password3") String pw3, MemberDTO memberDTO, RedirectAttributes rttr) throws Exception {
+    public String updatePwPro(Authentication auth,
+                              @RequestParam("pw1") String pw1,
+                              @RequestParam("pw2") String pw2,
+                              @RequestParam("pw3") String pw3, MemberDTO memberDTO, RedirectAttributes rttr) throws Exception {
+
         MemberUser user = (MemberUser) auth.getPrincipal();
-        String password1 = user.getMember().getPw();
+        String password = user.getMember().getPw();
 
-        if (encoder.matches(pw1, password1)) {
-            if (pw2.equals(pw3)) {
-                String changePw = encoder.encode(pw2);
-                memberService.updatePw(memberDTO);
-                ((MemberUser) auth.getPrincipal()).getMember().setPw(changePw);
-            }
+        log.info(">>>>>>>>>>>>>>> " + password);  // 기존 암호화된 비밀번호
+        log.info(">>>>>>>>>>>>>>> " + pw1);       // form 에서 받은 "현재 비밀번호"
+        log.info(">>>>>>>>>>>>>>> " + pw2);       // form 에서 받은 "새 비밀번호"
+        log.info(">>>>>>>>>>>>>>> " + pw3);       // form 에서 받은 "새 비밀번호 확인"
+
+        // 현재 비밀번호와 새 비밀번호 둘 다 일치할 때, 비밀번호 변경
+        if (encoder.matches(pw1, password) && pw2.equals(pw3)) {
+            String changePw = encoder.encode(pw2);
+            memberDTO.setPw(changePw);
+            memberDTO.setId(user.getMember().getId());
+            memberService.updatePw(memberDTO);
+            ((MemberUser) auth.getPrincipal()).getMember().setPw(changePw);
+            rttr.addFlashAttribute("msg1", "비밀번호 변경이 완료되었습니다.");
         }
+        // 현재 비밀번호는 일치하지만 새 비밀번호가 일치하지 않음.
+        if (encoder.matches(pw1, password) && !pw2.equals(pw3)) {
+            rttr.addFlashAttribute("msg2", "새 비밀번호가 일치하지 않습니다.");
+            return "redirect:/member/mypage/updatePw";
+        }
+        // 새 비밀번호는 일치하지만 현재 비밀번호가 일치하지 않음.
+        if (!encoder.matches(pw1, password) && pw2.equals(pw3)) {
+            rttr.addFlashAttribute("msg3", "현재 비밀번호가 일치하지 않습니다.");
+            return "redirect:/member/mypage/updatePw";
+        }
+        renewalAuth();
 
-        return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
+        return "redirect:/member/mypage/profile";
     }
 
     // 시큐리티 정보 갱신
@@ -134,7 +164,7 @@ public class MypageController {
         return true;
     }
 
-    // 기존 권한과 사용자 id를 받아서, 새 principal로 인증과 토큰 갱신해주는 메서드
+    // 기존 권한과 사용자 id를 받아서,  new principal로 인증과 토큰 갱신해주는 메서드
     protected Authentication createNewAuthentication(Authentication currentAuth, String username) {
         UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB가서 새로운 정보로 가져와 pricipal 새로만들기
         // 새로운 principal로 시큐리티 인증 권한(토큰) 생성
@@ -143,5 +173,6 @@ public class MypageController {
 
         return newAuth;
     }
-
 }
+
+

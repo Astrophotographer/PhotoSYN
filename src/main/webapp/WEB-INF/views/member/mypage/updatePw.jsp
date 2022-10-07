@@ -17,36 +17,47 @@
             <label for="pw1">현재 비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pw2" id="pw2" autocomplete="off" required/>
-            <label for="pw2">변경 비밀번호</label>
+            <input type="password" name="pw2" id="pw2" autocomplete="off" onchange="isSame()" required/>
+            <label for="pw2">새 비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pw3" id="pw3" autocomplete="off" required/>
-            <label for="pw3">변경 비밀번호 확인</label>
+            <input type="password" name="pw3" id="pw3" autocomplete="off" onchange="isSame()" required/>
+            <label for="pw3">새 비밀번호 확인</label>
         </div>
+        <span id="same"></span>
         <div class="btn-area">
-            <button id="btn" type="submit">변경하기</button>
+            <button id="btn" type="submit">비밀번호 변경</button>
         </div>
     </form>
+    <div class="caption">
+        <a href="/member/searchPw" style="text-decoration: none;">비밀번호 찾기</a>
+    </div>
 </section>
 
 <script>
-    let id = $('id');
-    let pw = $('pw');
-    let btn = $('btn');
-    $(btn).on('click', function () {
-        if ($(id).val() == "") {
-            $(id).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        } else if ($(pw).val() == "") {
-            $(pw).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
+    function isSame() {
+        var pw = $('#pw2').val();
+        var confirmPw = $('#pw3').val();
+        if (pw != '' && confirmPw != '') {
+            if (pw == confirmPw) {
+                document.getElementById('same').innerHTML = '비밀번호가 일치합니다';
+                document.getElementById('same').style.color = 'blue';
+            } else {
+                document.getElementById('same').innerHTML = '비밀번호가 일치하지 않습니다';
+                document.getElementById('same').style.color = 'red';
+            }
         }
-    });
+    }
+
+    var msg2 = '${msg2}';
+    var msg3 = '${msg3}';
+
+    if (msg2 === "새 비밀번호가 일치하지 않습니다.") {
+        alert("새 비밀번호가 일치하지 않습니다.");
+    }
+    if (msg3 === "현재 비밀번호가 일치하지 않습니다.") {
+        alert("현재 비밀번호가 일치하지 않습니다.");
+    }
 </script>
 
 </body>

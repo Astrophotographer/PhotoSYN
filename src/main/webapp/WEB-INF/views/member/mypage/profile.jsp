@@ -53,7 +53,7 @@
                 </c:otherwise>
             </c:choose>
             ${princi.member.name}님의 회원등급은 ${princi.member.membership}
-            <c:if test="princi.member.membership == 0">
+            <c:if test="${princi.member.membership} == 0">
                 <b style="color: #a76d27;">브론즈</b>
             </c:if>
             <c:if test="princi.member.membership == 1">
@@ -74,6 +74,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    var msg1 = '${msg1}';
+    if (msg1 === "비밀번호 변경이 완료되었습니다.") {
+        alert("비밀번호 변경이 완료되었습니다.");
+    }
+</script>
 
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
