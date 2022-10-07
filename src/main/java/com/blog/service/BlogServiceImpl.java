@@ -6,6 +6,9 @@ import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.mapper.BlogMapper;
 import com.gallery.domain.MaintagDTO;
+import com.member.domain.MemberDTO;
+import com.member.domain.User_Intro;
+import com.member.domain.User_SNS;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public BlogDTO getBlogSingle(Long B_NO) {
+        // 글 가져오면서 조회수 증가시키기
+        blogMapper.updateBlogReadCount(B_NO);
         return blogMapper.getBlogSingle(B_NO);
     }
 
@@ -154,5 +159,20 @@ public class BlogServiceImpl implements BlogService {
 
         return 0;
     }
+
+    @Override
+    public User_Intro getUserIntro(String u_id) {
+        return blogMapper.getUserIntro(u_id);
+    }
+
+    @Override
+    public User_SNS getUserSNS(String u_id) {
+        return blogMapper.getUserSNS(u_id);
+    }
+
+    @Override
+    public MemberDTO getUserInfo(String u_id) {
+        return blogMapper.getUserInfo(u_id);
+    }
 }
-//
+

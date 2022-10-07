@@ -39,10 +39,6 @@
 </head>
 <body>
 
-<div>
-    Welcome to Blog User Main
-</div>
-
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
 <!-- preloader -->
@@ -69,8 +65,40 @@
             </c:forEach>
         </div>
     </div>
-
 </section>
+
+<!-- 자기소개 + sns링크 -->
+<!-- 우측 사이드바 개념. 유저 정보 -->
+<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+    <%--<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" style="position: fixed ; top:1em; right: 0">
+    CSS 하나두 모루게따...
+    --%>
+    <div class="sidebar sidebar-right">
+        <div class="sidebar-wrap mt-5 mt-lg-0">
+            <div class="sidebar-widget about mb-5 text-center p-3">
+                <div class="about-author">
+                    <img src="../resources/blog/images/author.jpg" alt="" class="img-fluid">
+                </div>
+                <h4 class="mb-0 mt-4">Liam Mason(블로그 유저 이름)</h4>
+                <p>Travel Blogger(맴버쉽등급)</p>
+                <p>I'm Liam, last year I decided to quit my job and travel the world. You can follow my journey on this blog!(한줄 자기소개?)</p>
+                <img src="../resources/blog/images/liammason.png" alt="" class="img-fluid">
+            </div>
+
+            <div class="sidebar-widget follow mb-5 text-center">
+                <h4 class="text-center widget-title">Follow Me</h4>
+                <div class="follow-socials">
+                    <a href="#"><i class="ti-facebook"></i></a>
+                    <a href="#" ><i class="ti-twitter"></i></a>
+                    <a href="#" ><i class="ti-instagram"></i></a>
+                    <a href="#"><i class="ti-youtube"></i></a>
+                    <a href="#"><i class="ti-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- featured post -->
 <!-- 유저 블로그 글중에서 상단 노출 되는 글 (조회순, 최신순 등)-->

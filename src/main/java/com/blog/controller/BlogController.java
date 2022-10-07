@@ -39,6 +39,10 @@ public class BlogController {
     //TODO 1005 : security 사용시 ajax 토큰 넣어줘야 함. 사진 업로드는 post 방식이기에 사용해야함... 임시로 토큰 미사용중.
     //TODO 1005 : 글 처음작성, 및 수정시 메인이미지 강제로 하나 적용시켜야함.
 
+    //TODO 1007 : 어노테이션 preauth 사용시 500 에러.
+    //org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
+    // 임시로 어노테이션들 모두다 주석처리함.
+
     @Autowired
     private BlogService blogService;
 
@@ -106,7 +110,18 @@ public class BlogController {
     public String goSingle(Model model, @RequestParam("b_no") Long b_no) {
         log.info("goSingle Start...");
 
-        model.addAttribute("blog", blogService.getBlogSingle(b_no));
+        BlogDTO blogDTO = blogService.getBlogSingle(b_no);
+
+        //여러개 가져올거면 service 단에서 hashmap 으로 가져올수 있지 않나..?
+
+        //조회수 추가 + 글 가져오기
+        model.addAttribute("blog", blogDTO);
+        //작성자 자기소개글 테이블에서 값 가져오기
+        model.addAttribute("user_intro",blogService.getUserIntro(blogDTO.getU_ID()));
+        //작성자 SNS 가져오기
+        model.addAttribute("user_sns",blogService.getUserSNS(blogDTO.getU_ID()));
+        //유저 정보가져오기(유저 사진 경로 위해)
+        model.addAttribute("user_info",blogService.getUserInfo(blogDTO.getU_ID()));
 
 
         return "blog/blogsingle";
@@ -114,7 +129,7 @@ public class BlogController {
 
 
     // 블로그 글 작성 페이지
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.GET)
     public String writeBoard(Model model) {
         log.info("writeBoard start...");
@@ -128,7 +143,7 @@ public class BlogController {
     }
 
     // 블로그 사진 업로드 시 진행 페이지
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.POST)
     public void imageUpload4(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
@@ -206,7 +221,7 @@ public class BlogController {
     //    String fileUrl = "../resources/saveImgckImage/" + uid + "_" + fileName; // 작성화면(에디터에 저장되는 텍스트 문구)
     // 서버로 전송된 이미지 글에다가 뿌려주기
     //이미지 태그 에서도 사진 불러오기 위해 사용.
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/write/ckImgSubmit.do")
     public void ckSubmit4(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -254,7 +269,7 @@ public class BlogController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.POST)
     public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model) {
         try {
@@ -311,7 +326,7 @@ public class BlogController {
         }
     }
 
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.GET)
     public String finishSubmit(String mainImg, String UUID, Principal principal) {
         log.info("finishSubmit start...");
@@ -425,27 +440,6 @@ public class BlogController {
         log.info(originName);
 
         blogService.deleteImg(bi_name, uid, originName);
-
-        //파일 삭제 서비스단에다 구현. 아래는 삭제해도 괜찮음.
-//        File file = new File("C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/" + bi_name);
-//        if(file.exists()) {
-//            if(file.delete()) {
-//                if(blogService.deleteImg(uid)>0) {
-//                    log.info("이미지 삭제 성공+DB삭제 성공");
-//                    response.getWriter().print("success");
-//                } else {
-//                    log.info("이미지 삭제 성공+DB삭제 실패");
-//                    response.getWriter().print("fail");
-//                }
-//            } else {
-//                log.info("파일삭제 실패");
-//                response.getWriter().print("fail");
-//            }
-//        }else{
-//            log.info("파일이 존재하지 않습니다.");
-//            response.getWriter().print("not_exist");
-//        }
-
     }
 
     @RequestMapping(value = "update.do")
@@ -542,6 +536,12 @@ public class BlogController {
         blogService.hideBlog(b_no);
 
         return "redirect:usermain";
+    }
+
+    //좋아요 눌렀을때, 좋아요 취소할때
+    @RequestMapping(value="like.do")
+    public void likeClick(){
+
     }
 }
 
