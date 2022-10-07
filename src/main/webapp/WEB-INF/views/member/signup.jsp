@@ -23,7 +23,7 @@
             <span id="idCheck"></span>
         </div>
         <div class="int-area">
-            <input type="password" name="pw" id="pw1" autocomplete="off" required/>
+            <input type="password" name="pw1" id="pw1" autocomplete="off" required/>
             <label for="pw1">비밀번호</label>
         </div>
         <div class="int-area">
