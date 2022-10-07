@@ -43,6 +43,7 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public int checkGallerySeq() {
         return galleryMapper.checkGallerySeq();
+
     }
 
 
