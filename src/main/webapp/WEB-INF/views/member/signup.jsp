@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/resources/member/css/style.css" type="text/css">
     <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
 </head>
 <body>
@@ -23,12 +23,12 @@
             <span id="idCheck"></span>
         </div>
         <div class="int-area">
-            <input type="password" name="pw" id="pw" autocomplete="off" required/>
-            <label for="pw">비밀번호</label>
+            <input type="password" name="pw" id="pw1" autocomplete="off" required/>
+            <label for="pw1">비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pwch" id="pwch" autocomplete="off" required/>
-            <label for="pwch">비밀번호 확인</label>
+            <input type="password" name="pwch" id="pw2" autocomplete="off" required/>
+            <label for="pw2">비밀번호 확인</label>
         </div>
         <div class="int-area">
             <input type="text" name="name" id="name" autocomplete="off" required/>
@@ -39,45 +39,15 @@
             <label for="phone">전화번호</label>
         </div>
         <div class="btn-area">
-
             <button id="btn" type="submit">회원가입</button>
         </div>
     </form>
     <div class="caption">
         <a href="/member/searchPw">비밀번호 찾기</a>
     </div>
-    <!-- 카카오 로그인
-    <a href="https://kauth.kakao.com/oauth/authorize?client_id=c67a03f0334b4eff20b7eb96995f64dd&redirect_uri=http://localhost:8080/member/loginPro&response_type=code">
-        <img src="https://i0.wp.com/forhappywomen.com/wp-content/uploads/2018/11/산부인과-포해피우먼-문의-카카오플러스친구-버튼.png?fit=586%2C586&ssl=1"
-             alt="" width="50" height="50">
-    </a>
-    --> <!-- 카카오 로그인 -->
 </section>
 
 <script>
-    let id = $('id');
-    let pw = $('pw');
-    let name = $('name')
-    let btn = $('btn');
-
-    $(btn).on('click', function () {
-        if ($(id).val() == "") {
-            $(id).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        } else if ($(pw).val() == "") {
-            $(pw).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        } else if ($(name).val() == "") {
-            $(name).next('label').addClass('warning');
-            setTimeout(function () {
-                $('label').removeClass('warning');
-            }, 1500);
-        }
-    });
     // 아이디 중복확인
     $("#id").blur(function () {
         if ($('#id').val() != '') {
@@ -102,6 +72,19 @@
             });
         }
     });
+    /*
+    function pw() {
+        var p1 = document.getElementById('pw1').value;
+        var p2 = document.getElementById('pw2').value;
+        if (p1 != p2) {
+            alert("비밀번호가 일치 하지 않습니다");
+            return false;
+        } else {
+            alert("비밀번호가 일치합니다");
+            return true;
+        }
+    }
+    */
 </script>
 
 </body>

@@ -4,11 +4,6 @@ import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
 
 public interface MemberMapper {
-    /*
-    // 카카오 회원가입 & 로그인
-    public void kakaoInsert(MemberDTO userInfo);
-    */ // 카카오 로그인
-
     // 회원가입
     public int addMember(MemberDTO memberDTO);
 
@@ -19,7 +14,7 @@ public interface MemberMapper {
     public int addAuth(AuthDTO auth);
 
     // 회원 정보 수정
-    public int updateMember(MemberDTO memberDTO);
+    public void updateMember(MemberDTO memberDTO);
 
     // 회원 정보 삭제
     public int deleteMember(String id);
@@ -33,5 +28,8 @@ public interface MemberMapper {
     // 비밀번호 변경
     public int updatePw(MemberDTO memberDTO) throws Exception;
 
+
+    // 프로필 사진 변경
+    public int updateImg(MemberDTO memberDTO) throws Exception;
 
 }

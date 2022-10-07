@@ -8,20 +8,27 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Blog Editor</title>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/testEditor/ckeditor/ckeditor.js"></script>
-    <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-</head>
-<body>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<%--<html>--%>
+<%--<head>--%>
+<%--    <title>Blog Editor</title>--%>
+<%--    <script type="text/javascript"--%>
+<%--            src="${pageContext.request.contextPath}/resources/testEditor/ckeditor/ckeditor.js"></script>--%>
+<%--    <script--%>
+<%--            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--%>
+<%--</head>--%>
+<%--<body>--%>
+
+<script type="text/javascript"
+        src="${pageContext.request.contextPath}/resources/testEditor/ckeditor/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <%-- 헤더 수정하기.. 임시로 test 를 줌--%>
-<jsp:include page="/WEB-INF/views/includes/test.jsp"/>
+<jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
 <form class="form-horizontal" role="form" id="editorForm" method="post" action="/blog/checkmainimg">
+
     <div class="form-group">
         <div class="form-group">
             <div class="col-lg-12">
@@ -47,12 +54,15 @@
                 </label>
             </div>
         </div>
+        <sec:csrfInput/>
+        <%--    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>--%>
         <div class="form-group">
             <div class="col-lg-12" align="right">
                 <button type="submit" class="btn btn-default">저장</button>
             </div>
         </div>
     </div>
+
 </form>
 
 <script type="text/javascript">
@@ -71,6 +81,7 @@
     });
 </script>
 
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
 
-</body>
-</html>
+<%--</body>--%>
+<%--</html>--%>

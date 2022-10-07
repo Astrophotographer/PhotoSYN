@@ -37,12 +37,39 @@
 <div class="gallery__page">
     <div class="gallery__warp">
         <div style="font-size: 50px; font-weight: 800;">내정보</div>
+        <hr>
+        <sec:authentication property="principal" var="princi"/>
         <div>
-            <img src="/resources/member/bootstrap/main/img/profile.jpg" alt="profile_picture"
-                 style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;">
-            <sec:authentication property="principal.member.name"/>님의 회원등급은 <b style="color: #44b525;">${membership}</b>입니다.
+            <c:choose>
+                <c:when test="${princi.member.pic == null}">
+                    <br/>
+                    <img src="/resources/member/bootstrap/main/img/user.png" alt="profile_img"
+                         style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
+                </c:when>
+                <c:otherwise>
+                    <br/>
+                    <img src="/resources/member/img/profile/${princi.member.pic}" alt="profile_img"
+                         style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
+                </c:otherwise>
+            </c:choose>
+            ${princi.member.name}님의 회원등급은 ${princi.member.membership}
+            <c:if test="princi.member.membership == 0">
+                <b style="color: #a76d27;">브론즈</b>
+            </c:if>
+            <c:if test="princi.member.membership == 1">
+                <b style="color: #7b7f7b;">실버</b>
+            </c:if>
+            <c:if test="princi.member.membership == 2">
+                <b style="color: #a99a31;">골드</b>
+            </c:if>
+            <c:if test="princi.member.membership == 3">
+                <b style="color: #28e3d4;">다이아</b>
+            </c:if>
+            입니다.
             <div style="padding: 15px;">
-                <button class="profileBtn" type="button">프로필 수정</button>
+                <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/profileModify'">
+                    프로필 수정
+                </button>
             </div>
         </div>
     </div>

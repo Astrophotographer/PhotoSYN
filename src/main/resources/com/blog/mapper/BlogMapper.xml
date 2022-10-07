@@ -146,6 +146,23 @@
         where bi_uuid=#{uuid}
     </delete>
 
+    <update id="updateBlogMainImg">
+        update blog_img
+        set bi_main = 0
+        where b_no = #{B_NO}
+    </update>
+
+    <update id="hideBlog">
+        update blog
+        set b_status = 1
+        where b_no = #{B_NO}
+    </update>
+
+    <delete id="deleteImgs">
+        delete from blog_img
+        where b_no = #{B_NO}
+    </delete>
+
 
 </mapper>
 

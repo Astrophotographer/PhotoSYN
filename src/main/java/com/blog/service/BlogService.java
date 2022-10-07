@@ -15,7 +15,7 @@ public interface BlogService {
     //사진 저장시 임시 저장되는 테이블
     public int insertTempImg(Blog_Img_Temp blog_img_temp);
 
-    public List getTempImg(String user_id);
+    public List<Blog_Img_Temp> getTempImg(String user_id);
 
     public int insertImg(Blog_Img blog_img);
 
@@ -41,4 +41,9 @@ public interface BlogService {
     public int updateBlog(BlogDTO blogDTO);
 
     public int deleteImg(String bi_name, String uuid, String originName);
+
+    public int updateBlogMainImg(Long b_no);
+
+    public int hideBlog(Long b_no);
+
 }

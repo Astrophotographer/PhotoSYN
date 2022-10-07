@@ -1,6 +1,5 @@
 package com.gallery.service;
 
-import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.MetadataDTO;
 import com.gallery.mapper.GalleryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
-
-
-
-import java.util.List;
 
 @Service
 @Log4j
@@ -130,6 +125,16 @@ public class MetadataServiceImpl implements MetadataService{
     @Override
     public MetadataDTO insertMetadata(Long G_NO) {
        return galleryMapper.insertMetadata(G_NO);
+    }
+
+    @Override
+    public void getMetadata(Long G_NO) {
+
+    }
+
+    @Override
+    public boolean updateMetadata(MetadataDTO metadataDTO) {
+        return false;
     }
 }
 

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="/resources/member/bootstrap/main/css/slick.css" type="text/css"/>
     <link rel="stylesheet" href="/resources/member/bootstrap/main/css/style.css" type="text/css"/>
     <link rel="stylesheet" href="/resources/member/css/menu.css" type="text/css"/>
+    <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 <header class="header">
