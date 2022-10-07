@@ -187,6 +187,12 @@
         where b_no = #{B_NO}
     </delete>
 
+    <update id="updateBlogReadCount">
+        update blog
+        set b_readcount = b_readcount + 1
+        where b_no = #{B_NO}
+    </update>
+
 
 </mapper>
 

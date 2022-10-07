@@ -68,6 +68,8 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public BlogDTO getBlogSingle(Long B_NO) {
+        // 글 가져오면서 조회수 증가시키기
+        blogMapper.updateBlogReadCount(B_NO);
         return blogMapper.getBlogSingle(B_NO);
     }
 

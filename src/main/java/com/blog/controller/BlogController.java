@@ -106,6 +106,7 @@ public class BlogController {
     public String goSingle(Model model, @RequestParam("b_no") Long b_no) {
         log.info("goSingle Start...");
 
+        //조회수 추가 + 글 가져오기
         model.addAttribute("blog", blogService.getBlogSingle(b_no));
 
 
