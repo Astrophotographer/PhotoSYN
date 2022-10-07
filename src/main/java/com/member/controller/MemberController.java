@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("signup")
-    public String signupPro(MemberDTO memberDTO, String auth, RedirectAttributes redirectAttributes) {
+    public String signupPro(MemberDTO memberDTO, String auth, RedirectAttributes redirectAttributes) throws Exception {
         log.info("************* signupPro memberDTO : " + memberDTO);
         log.info("************* signupPro auth : " + auth);
 
@@ -72,9 +72,9 @@ public class MemberController {
         }
     }
 
-    @GetMapping("idCheck")
     @ResponseBody
-    public int idCheck(@RequestParam("id") String id, HttpServletRequest req, HttpServletResponse httpServletResponse, HttpSession session) {
+    @GetMapping("idCheck")
+    public int idCheck(@RequestParam("id") String id) throws Exception {
         int result = memberService.idCheck(id);
 
         return result;

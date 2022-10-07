@@ -42,12 +42,15 @@
                     <input type="text" id="name" name="name" value="${princi.member.name}" autocomplete="off"/>
                 </div>
                 <div>
+                    <span id="nameCk" name="nameCk"></span>
+                </div>
+                <div>
                     <label for="phone">휴대폰 번호</label>
                     <input type="text" id="phone" name="phone" value="${princi.member.phone}" autocomplete="off"/>
                 </div>
                 <div>
-                    <label for="password">비밀번호</label>
-                    <input type="password" id="password" name="password" autocomplete="off"/>
+                    <label for="pw">비밀번호</label>
+                    <input type="password" id="pw" name="pw" autocomplete="off"/>
                 </div>
                 <div>
                     <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/updatePw'">
@@ -76,10 +79,32 @@
     });
 
     var msg = '${msg}';
-    if (msg === '비밀번호를 다시 확인해 주세요.') {
+    if (msg === "비밀번호를 다시 확인해 주세요.") {
         alert("비밀번호를 다시 확인해 주세요.");
     }
 
+    $('#name').blur(function () {
+        if ($('#name').val() != '') {
+            $.ajax({
+                url     : '/member/mypage/nameCheck',
+                type    : 'post',
+                data    : 'name=' + $('#name').val(),
+                dataType: 'json',
+                success : function (result) {
+                    if (result == '1') {
+                        $("#nameCk").text('중복된 닉네임입니다.');
+                        $("#nameCk").css('color', 'red');
+                    } else {
+                        $("#nameCk").text('사용 가능한 닉네임입니다.');
+                        $("#nameCk").css('color', 'blue');
+                    }
+                },
+                error   : function (a, b, c) {
+                    console.log(a, b, c);
+                }
+            });
+        }
+    });
 </script>
 
 

@@ -30,14 +30,14 @@ public class MemberServiceImpl implements MemberService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public int addMember(MemberDTO memberDTO) {
+    public int addMember(MemberDTO memberDTO) throws Exception {
         memberDTO.setPw(bCryptPasswordEncoder.encode(memberDTO.getPw())); // 비밀번호 암호화
 
         return memberMapper.addMember(memberDTO);
     }
 
     @Override
-    public int addAuth(String auth, String id) {
+    public int addAuth(String auth, String id) throws Exception {
         int result = -1;
         AuthDTO authDTO = new AuthDTO();
         authDTO.setId(id);
@@ -57,21 +57,20 @@ public class MemberServiceImpl implements MemberService {
         return result;
     }
 
+    // 회원 정보 가져오기 (접근 권한까지)
     @Override
     public MemberDTO getMember(String id) {
         return memberMapper.getMember(id);
     }
 
+    // 회원 정보 수정
     @Override
-    public void updateMember(MemberDTO memberDTO) {
-//        MemberDTO dataMember = getMember(memberDTO.getId());
-//        if (bCryptPasswordEncoder.matches(memberDTO.getPw(), dataMember.getPw())) {
-//        }
+    public void updateMember(MemberDTO memberDTO) throws Exception {
         memberMapper.updateMember(memberDTO);
     }
 
     @Override
-    public int deleteMember(MemberDTO memberDTO) {
+    public int deleteMember(MemberDTO memberDTO) throws Exception {
         int result = 0;
         MemberDTO dataMember = getMember(memberDTO.getId());
         if (bCryptPasswordEncoder.matches(memberDTO.getPw(), dataMember.getPw())) {
@@ -85,8 +84,14 @@ public class MemberServiceImpl implements MemberService {
         return result;
     }
 
+    // 닉네임 중복확인
+    public int nameCheck(String name) throws Exception {
+        return memberMapper.nameCheck(name);
+    }
+
+    // 아이디 확인
     @Override
-    public int idCheck(String id) {
+    public int idCheck(String id) throws Exception {
         return memberMapper.idCheck(id);
     }
 
@@ -96,6 +101,7 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.updatePw(memberDTO);
     }
 
+    // 프로필 사진 변경
     @Override
     public int updateImg(MemberDTO memberDTO) throws Exception {
         return memberMapper.updateImg(memberDTO);
