@@ -8,8 +8,16 @@ public class Blog_Criteria {
 //    private String option_like; // 좋아요  popular/ unpopular
 //    private String option_view; // 조회수  highest_view/ lowest_view
     private String u_id;    //유저 아이디    usermain보기 위한 아이디 저장.
-    private String option;  //reg, like, readcount
-    private String sort;    //high(latest/ popular/ highest_view), low(oldest/ unpopular/ lowest_view)
+
+    //수정 전
+    // 옵션 + 정렬
+//    private String option;  //reg, like, readcount
+//    private String sort;    //high(latest/ popular/ highest_view), low(oldest/ unpopular/ lowest_view)
+
+    //수정후
+    // 옵션만
+    // 최신순, 오래된순, 좋아요순, 조회순
+    private String option;  //latest, oldest, like, readcount
 
     //한 페이지당 게시판글 10개 불러오기
     private int pageNum;

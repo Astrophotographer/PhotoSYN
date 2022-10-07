@@ -73,7 +73,8 @@
                 <!-- 값 넘겨주기 -->
                 <div>
                     <c:if test="${blog.b_STATUS == 0}">
-                        <h1>정상 상태</h1>
+                        <h6>정상 상태</h6>
+                        ${blog.b_STATUS} 상태입니다. 0이면 리스트에 노출중...
                     </c:if>
                     <input type="hidden" name="B_REG" value="${blog.b_REG}"/>
                     <c:if test="${blog.b_EDIT != null}">
@@ -185,6 +186,8 @@
 </script>
 
 
-</body>
-</html>
+<%--footer--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>
 

@@ -187,5 +187,7 @@ CSS 하나두 모루게따...
 <script src="../resources/blog/blogUserMain/js/script.js"></script>
 
 
-</body>
-</html>
+<%--footer--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>

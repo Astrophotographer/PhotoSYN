@@ -530,6 +530,7 @@
 <!-- main js -->
 <script src="../resources/blog/js/custom.js"></script>
 
-
-</body>
-</html>
+<%--footer--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>

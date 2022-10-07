@@ -32,7 +32,6 @@
     <!-- manin stylesheet -->
     <link rel="stylesheet" href="../resources/blog/css/style.css">
 </head>
-</head>
 <body>
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <div>
@@ -41,61 +40,20 @@
         <c:forEach var="board" items="${list}">
             <tr>
                 <td>U_ID : ${board.u_ID}</td>
+                <td>REG : ${board.b_REG}</td>
             </tr>
         </c:forEach>
     </table>
 </div>
 
 
-<header class="header-top bg-grey justify-content-center">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Logo -->
-            <%--            <div class="col-lg-2 col-md-4 text-center d-none d-lg-block">--%>
-            <%--                <a class="navbar-brand " href="../resources/blog/index.html">--%>
-            <%--                    <img src="../resources/blog/images/logo.png" alt="" class="img-fluid">--%>
-            <%--                </a>--%>
-            <%--            </div>--%>
-
-            <div class="col-lg-8 col-md-12">
-                <nav class="navbar navbar-expand-lg navigation-2 navigation">
-                    <a class="navbar-brand text-uppercase d-lg-none" href="#">
-                        <img src="../resources/blog/images/logo.png" alt="" class="img-fluid">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
-                            aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="ti-menu"></span>
-                    </button>
-
-
-                    <ul class="list-inline mb-0 d-block d-lg-none">
-                        <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-pinterest"></i></a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="col-lg-2 col-md-4 col-6">
-                <div class="header-socials-2 text-right d-none d-lg-block">
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ti-pinterest"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
 <!-- slide -->
+<%-- 슬라이드 조건은 뭐로하지.. --%>
 <section class="slider mt-4">
     <div class="container-fluid">
         <div class="row no-gutters">
             <div class="col-lg-12 col-sm-12 col-md-12 slider-wrap">
+
                 <div class="slider-item">
                     <div class="slider-item-content">
                         <div class="post-thumb mb-4">
@@ -189,20 +147,30 @@
 
 <!-- 글 영역 -->
 <div>
-<%--    <select name="option" id="">--%>
-<%--        <option value="reg">최신순</option>--%>
-<%--        <option value="like">좋아요순</option>--%>
-<%--        <option value="readcount">조회순</option>--%>
-<%--    </select>--%>
-<%--    <select name="sort">--%>
-<%--        <option value="desc">내림차순</option>--%>
-<%--        <option value="asc">오름차순</option>--%>
-<%--    </select>--%>
+    <%--    <select name="option" id="">--%>
+    <%--        <option value="reg">최신순</option>--%>
+    <%--        <option value="like">좋아요순</option>--%>
+    <%--        <option value="readcount">조회순</option>--%>
+    <%--    </select>--%>
+    <%--    <select name="sort">--%>
+    <%--        <option value="desc">내림차순</option>--%>
+    <%--        <option value="asc">오름차순</option>--%>
+    <%--    </select>--%>
     <div>
-        <a href="#" onclick="optionIs('recentDesc')" >최신순</a>
-        <a href="#" onclick="optionIs('recentAsc')" >오래된순</a>
-        <a href="#" onclick="optionIs('like')" >좋아요순</a>
-        <a href="#" onclick="optionIs('readcount')" >조회순</a>
+        <form id="mainsortForm" action="main" method="post">
+            <input type="hidden" name="option" id="optionSort" value="latest">
+
+            <button type="submit" data-service="latest">최신순</button>
+            <button type="submit" data-service="oldest">오래된순</button>
+            <button type="submit" data-service="like">좋아요순</button>
+            <button type="submit" data-service="readcount">조회순</button>
+
+
+<%--            <a href="#" onclick="optionIs('latest')">최신순</a>--%>
+<%--            <a href="#" onclick="optionIs('oldest')">오래된순</a>--%>
+<%--            <a href="#" onclick="optionIs('like')">좋아요순</a>--%>
+<%--            <a href="#" onclick="optionIs('readcount')">조회순</a>--%>
+        </form>
     </div>
 </div>
 <section class="section-padding">
@@ -216,13 +184,16 @@
                         <div class="col-lg-3 col-md-6">
                             <article class="post-grid mb-5">
                                 <a class="post-thumb mb-4 d-block" href="/blog/single?b_no=${board.b_NO}">
-                                    <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid w-100" style="width: 300px; height: 200px; object-fit:cover">
+                                    <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid w-100"
+                                         style="width: 300px; height: 200px; object-fit:cover">
                                 </a>
                                 <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out
                                         value="${board.MT_NAME}"/></span>
-                                <h3 class="post-title mt-1"><a href="/blog/single?b_no=${board.b_NO}"><c:out value="${board.b_SUBJECT}"/></a></h3>
+                                <h3 class="post-title mt-1"><a href="/blog/single?b_no=${board.b_NO}"><c:out
+                                        value="${board.b_SUBJECT}"/></a></h3>
 
-                                <span class="text-muted letter-spacing text-uppercase font-sm"><c:out value="${board.b_REG}"/></span>
+                                <span class="text-muted letter-spacing text-uppercase font-sm"><c:out
+                                        value="${board.b_REG}"/></span>
 
                             </article>
                         </div>
@@ -334,31 +305,71 @@
 <script src="../resources/blog/js/custom.js"></script>
 
 <script type="text/javascript">
-    function goWrite(){
+    function goWrite() {
         // console.log('click');
-        window.location.href="/blog/write";
+        window.location.href = "/blog/write";
     }
-    function optionIs(option){
+
+    $(document).ready(function(){
+        console.log('ready...');
+
+        let formObj = $("#mainsortForm");
+        let optionElement = document.getElementById("optionSort");
+        console.log("optionElement", optionElement);
+
+        $("button").on("click", function(e){
+            e.preventDefault();
+            let service_data = $(this).data("service");
+            console.log(service_data);
+
+            if (service_data == "latest"){
+                optionElement.value = "latest";
+                formObj.submit();
+            } else if (service_data == "oldest"){
+                optionElement.value = "oldest";
+                formObj.submit();
+            } else if (service_data == "like"){
+                optionElement.value = "like";
+                formObj.submit();
+            } else if(service_data == "readcount"){
+                optionElement.value = "readcount";
+                formObj.submit();
+            }
+        })
+    })
+
+
+    function optionIs(option) {
         console.log("optionIs Start...");
         console.log("option is : " + option);
-        $.ajax({
-            url: "/blog/getList.do",
-            type: "POST",
-            data: {
-                option: option
-            },
-            success: function (data) {
-                console.log("success");
-                console.log(data);
-            },
-            error: function (data) {
-                console.log("error");
-                console.log(data);
-            }
-        });
+
+
+
+        <%--$.ajax({--%>
+        <%--    &lt;%&ndash;beforeSend: function (xhr) {&ndash;%&gt;--%>
+        <%--    &lt;%&ndash;    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");&ndash;%&gt;--%>
+        <%--    &lt;%&ndash;},&ndash;%&gt;--%>
+        <%--    // url: "/blog/getList.do",--%>
+        <%--    url: "/blog/main",--%>
+        <%--    type: "POST",--%>
+        <%--    data: {--%>
+        <%--        option: option--%>
+        <%--    },--%>
+        <%--    success: function (data) {--%>
+        <%--        console.log("success");--%>
+        <%--        console.log(data);--%>
+        <%--        // window.location.reload();--%>
+        <%--        location.reload();--%>
+        <%--    },--%>
+        <%--    error: function (data) {--%>
+        <%--        console.log("error");--%>
+        <%--        console.log(data);--%>
+        <%--    }--%>
+        <%--});--%>
     }
 </script>
 
-
-</body>
-</html>
+<%-- footer 적용--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>

@@ -44,5 +44,7 @@
     <input type="submit" value="선택">
 </form>
 
-</body>
-</html>
+<%--footer--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>

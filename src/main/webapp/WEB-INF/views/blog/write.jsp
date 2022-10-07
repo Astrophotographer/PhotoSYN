@@ -77,11 +77,12 @@
                 height: '60%',
                 //사진이 올라올 경우 데이터가 해당 링크로 들어가게 된다.
                 filebrowserUploadUrl: '/blog/write'
+                //url 에 get방식처럼 ?토큰네임=토큰값 보내주면 405  에러 안뜸
             });
     });
 </script>
 
+<%--footer--%>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
-
 <%--</body>--%>
 <%--</html>--%>

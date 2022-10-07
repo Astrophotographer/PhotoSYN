@@ -41,7 +41,7 @@ public class CartController {
     @GetMapping("/cart/{memberId}")
     public String cartPageGET(@PathVariable("memberId") String memberId, Model model) {
 
-        model.addAttribute("cartInfo", cartService.getCartList(memberId));
+//        model.addAttribute("cartInfo", cartService.getCartList(memberId));
 
         return "/cart";
     }
@@ -51,10 +51,11 @@ public class CartController {
     @PostMapping("/cart/delete")
     public String deleteCartPOST(CartDTO cart) {
 
-        cartService.deleteCart(cart.getCartId());
+//        cartService.deleteCart(cart.getCartId());
 
-        return "redirect:/cart/" + cart.getMemberId();
+//        return "redirect:/cart/" + cart.getMemberId();
 
+        return "";
     }
 }
 

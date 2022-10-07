@@ -7,6 +7,7 @@ import com.blog.domain.Blog_Img_Temp;
 import com.blog.service.BlogService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,15 +53,18 @@ public class BlogController {
         //reg 최신순    latest/ oldest4115@in.
         //like 인기순   popular/ unpopular
         //view 조회순   highest_view/ lowest_view
+
+        //option 수정. 4가지로 정의. 정렬 없음
+        //latest, oldest, like, readcount
         log.info("goMain Start...");
 
 
-        if (principal != null) {
-            log.info(principal.getName());
-            blog_criteria.setU_id(principal.getName());
-        } else {
-            log.info("principal is null");
-        }
+//        if (principal != null) {
+//            log.info(principal.getName());
+//            blog_criteria.setU_id(principal.getName());
+//        } else {
+//            log.info("principal is null");
+//        }
         //userid 값 받아오기? TODO 확인해주기..
         //principal.getName();
 
@@ -77,8 +81,7 @@ public class BlogController {
     //메인 글 옵션으로 가져오기
     // 최신순/오래된순, 좋아요 많은순, 조회수 많은순
     @RequestMapping(value = "getList.do")
-    @ResponseBody
-    public void getList(HttpServletResponse response, Blog_Criteria blog_criteria, Principal principal, String option) throws IOException {
+    public String getList(HttpServletResponse response, Blog_Criteria blog_criteria, Principal principal, String option, Model model) throws IOException {
         //TODO 문법확인. 1003
         log.info("getList Start...");
 
@@ -93,32 +96,9 @@ public class BlogController {
 
         List<BlogDTO> list = blogService.getBlogList(blog_criteria);
 
-        //json으로 변환
-        String json = "";
-        json += "[";
-        for (int i = 0; i < list.size(); i++) {
-            json += "{";
-            json += "\"b_no\":\"" + list.get(i).getB_NO() + "\",";
-            json += "\"b_title\":\"" + list.get(i).getB_SUBJECT() + "\",";
-            json += "\"b_content\":\"" + list.get(i).getB_CONTENT() + "\",";
-            json += "\"b_regdate\":\"" + list.get(i).getB_REG() + "\",";
-            json += "\"b_like\":\"" + list.get(i).getB_LIKE() + "\",";
-            json += "\"b_readcount\":\"" + list.get(i).getB_READCOUNT() + "\",";
-            json += "\"u_id\":\"" + list.get(i).getU_ID() + "\"";
-            json += "}";
-            if (i != list.size() - 1) {
-                json += ",";
-            }
-        }
-        json += "]";
+        model.addAttribute("list", list);
 
-        log.info("json : " + json);
-
-        response.setContentType("application/json; charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.print(json);
-        out.flush();
-        out.close();
+        return "blog/blogmain";
     }
 
     //블로그 글 한개 보기
@@ -134,6 +114,7 @@ public class BlogController {
 
 
     // 블로그 글 작성 페이지
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.GET)
     public String writeBoard(Model model) {
         log.info("writeBoard start...");
@@ -147,6 +128,7 @@ public class BlogController {
     }
 
     // 블로그 사진 업로드 시 진행 페이지
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.POST)
     public void imageUpload4(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
@@ -224,6 +206,7 @@ public class BlogController {
     //    String fileUrl = "../resources/saveImgckImage/" + uid + "_" + fileName; // 작성화면(에디터에 저장되는 텍스트 문구)
     // 서버로 전송된 이미지 글에다가 뿌려주기
     //이미지 태그 에서도 사진 불러오기 위해 사용.
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/write/ckImgSubmit.do")
     public void ckSubmit4(@RequestParam(value = "uid") String uid, @RequestParam(value = "fileName") String fileName, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -271,6 +254,7 @@ public class BlogController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.POST)
     public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model) {
         try {
@@ -327,6 +311,7 @@ public class BlogController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.GET)
     public String finishSubmit(String mainImg, String UUID, Principal principal) {
         log.info("finishSubmit start...");
@@ -414,7 +399,6 @@ public class BlogController {
         return "blog/blogusermain";
     }
 
-    //  10-04 작업중
     @RequestMapping(value = "update", method = RequestMethod.GET)
     public String goUpdate(Model model, Long b_no, Principal principal) {
         log.info("update start...");
@@ -556,11 +540,6 @@ public class BlogController {
         //사진테이블 삭제도 같이 진행
         //서버에 저장된 사진 삭제
         blogService.hideBlog(b_no);
-
-
-
-
-
 
         return "redirect:usermain";
     }
