@@ -125,20 +125,21 @@
                         <!-- 유저 이미지 사진 -->
                         <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
                              width="100" height="100">
+                        이미지 주소 : ${user_info.u_PIC}
                     </div>
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
                         <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
-                        <p>Hey there. My name is Liam. I was born with the love for traveling. I also love taking photos
-                            with my phone in order to capture moment..</p>
+                        <p>자기소개 : ${user_intro.u_INTRO}</p>
 
-                        <a target="_blank" class="author-social" href="#"><i class="ti-facebook"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-twitter"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i class="ti-facebook"></i>${user_sns.s_FACEBOOK}</a>
+                        <a target="_blank" class="author-social" href="#"><i class="ti-twitter"></i>${user_sns.s_TWITTER}</a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-google-plus"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-instagram"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i class="ti-instagram"></i>${user_sns.s_INSTAGRAM}</a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-pinterest"></i></a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-tumblr"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i class="ti-youtube"></i>${user_sns.s_YOUTUBE}</a>
                     </div>
                 </div>
 
