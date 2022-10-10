@@ -17,9 +17,7 @@
         </div>
         <div class="int-area">
             <input type="text" name="id" id="id" autocomplete="off" required/>
-            <label for="id">아이디</label>
-        </div>
-        <div>
+            <label for="id">이메일</label>
             <span id="idCheck"></span>
         </div>
         <div class="int-area">
@@ -27,12 +25,14 @@
             <label for="pw1">비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pwch" id="pw2" autocomplete="off" required/>
+            <input type="password" name="pwch" id="pw2" autocomplete="off" onchange="isSame()" required/>
             <label for="pw2">비밀번호 확인</label>
+            <span id="same"></span>
         </div>
         <div class="int-area">
             <input type="text" name="name" id="name" autocomplete="off" required/>
             <label for="name">닉네임</label>
+            <span id="nameCk"></span>
         </div>
         <div class="int-area">
             <input type="text" name="phone" id="phone" autocomplete="off" required/>
@@ -43,7 +43,8 @@
         </div>
     </form>
     <div class="caption">
-        <a href="/member/searchPw">비밀번호 찾기</a>
+        <a href="/member/searchPw">비밀번호 찾기</a><b style="color: #696969;">&nbsp;｜</b>
+        <a href="/member/login" style="text-decoration: none;">로그인</a>
     </div>
 </section>
 
@@ -72,19 +73,43 @@
             });
         }
     });
-    /*
-    function pw() {
-        var p1 = document.getElementById('pw1').value;
-        var p2 = document.getElementById('pw2').value;
-        if (p1 != p2) {
-            alert("비밀번호가 일치 하지 않습니다");
-            return false;
-        } else {
-            alert("비밀번호가 일치합니다");
-            return true;
+
+    $('#name').blur(function () {
+        if ($('#name').val() != '') {
+            $.ajax({
+                url     : '/member/nameCheck',
+                type    : 'post',
+                data    : 'name=' + $('#name').val(),
+                dataType: 'json',
+                success : function (result) {
+                    if (result == '1') {
+                        $("#nameCk").text('중복된 닉네임입니다.');
+                        $("#nameCk").css('color', 'red');
+                    } else {
+                        $("#nameCk").text('사용 가능한 닉네임입니다.');
+                        $("#nameCk").css('color', 'blue');
+                    }
+                },
+                error   : function (a, b, c) {
+                    console.log(a, b, c);
+                }
+            });
+        }
+    });
+
+    function isSame() {
+        var pw = $('#pw1').val();
+        var confirmPw = $('#pw2').val();
+        if (pw != '' && confirmPw != '') {
+            if (pw == confirmPw) {
+                document.getElementById('same').innerHTML = '비밀번호가 일치합니다';
+                document.getElementById('same').style.color = 'blue';
+            } else {
+                document.getElementById('same').innerHTML = '비밀번호가 일치하지 않습니다';
+                document.getElementById('same').style.color = 'red';
+            }
         }
     }
-    */
 </script>
 
 </body>

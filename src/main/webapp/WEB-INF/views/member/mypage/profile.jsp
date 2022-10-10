@@ -66,11 +66,27 @@
                 <b style="color: #28e3d4;">다이아</b>
             </c:if>
             입니다.
-            <div style="padding: 15px;">
+
+            <div style="text-align: right">${princi.member.point} P</div>
+
+            <div style="padding: 15px; display: flex; justify-content: space-between;">
                 <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/profileModify'">
                     프로필 수정
                 </button>
+                <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/pointAdd'">
+                    포인트 충전
+                </button>
             </div>
+        </div>
+        <hr>
+        <div style="padding: 15px; display: flex; justify-content: space-between;">베스트 사진
+            <div>총 판매금액</div>
+            <div>누적 다운로드 수</div>
+        </div>
+        <div style="padding: 15px; display: flex; justify-content: space-between;">
+            <img src="" alt="사진"/>
+            <div>0 원</div>
+            <div>0 회</div>
         </div>
     </div>
 </div>
