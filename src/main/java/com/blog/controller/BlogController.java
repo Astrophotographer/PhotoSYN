@@ -43,6 +43,9 @@ public class BlogController {
     //org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
     // 임시로 어노테이션들 모두다 주석처리함.
 
+    //TODO 1009 : 블로그 글 작성시 태그들 넣어주기.
+    //TODO ~1014. 댓글, 태그처리, SECURITY, 페이징처리
+
     @Autowired
     private BlogService blogService;
 
@@ -269,6 +272,7 @@ public class BlogController {
         }
     }
 
+    //글 작성후 들어오는 페이지
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.POST)
     public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model) {
@@ -279,6 +283,15 @@ public class BlogController {
             log.info(blogDTO.toString());
             blogService.insertBlog(blogDTO);
             int blog_seq = blogService.checkBlogSeq();
+
+            //태그값 넣어주기
+            log.info("TAGS: " + blogDTO.getB_TAG1());
+            String[] tag = blogDTO.getB_TAG1().split("#");
+
+            for(int i=0;i<tag.length;i++){
+                log.info("tag["+i+"]:"+tag[i]);
+            }
+
 
             //정상적으로 시퀀스값 가져옴.
             log.info("checkmainimg_blog_seq:" + blog_seq);  //작성한 시퀀스 값 가져옴
