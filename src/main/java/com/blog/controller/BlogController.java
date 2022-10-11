@@ -27,7 +27,7 @@ import java.util.*;
 
 @Controller
 @Log4j
-@RequestMapping("blog/*")
+@RequestMapping("/blog/*")
 public class BlogController {
 
     //TODO 1001 : 블로그 페이징처리

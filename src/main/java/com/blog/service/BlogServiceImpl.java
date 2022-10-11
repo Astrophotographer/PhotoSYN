@@ -71,7 +71,8 @@ public class BlogServiceImpl implements BlogService {
         blogMapper.upsertTag(tags);
 
         //관심태그 비교 및 등록
-        
+        //TODO : 없으면 새로 생기고 시작되어야 하는데 이미 있는 태그들 다 가져와서 만들어 버림..
+
 
 
         return blogMapper.insertBlog(blogDTO);
