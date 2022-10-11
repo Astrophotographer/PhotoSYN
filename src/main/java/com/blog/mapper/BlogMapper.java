@@ -58,4 +58,6 @@ public interface BlogMapper {
 
     public MemberDTO getUserInfo(String u_id);
 
+    public int upsertTag(List<String> tags);
+
 }

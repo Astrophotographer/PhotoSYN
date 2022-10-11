@@ -114,17 +114,24 @@ public class BlogController {
         log.info("goSingle Start...");
 
         BlogDTO blogDTO = blogService.getBlogSingle(b_no);
+        String[] tagsARR = blogDTO.getB_TAG1().substring(1).split("#");
+        log.info("tagsARR : " + tagsARR.toString());
+//        String tags = blogDTO.getB_TAG1().substring(1);
+//        String[] tagArr = tags.split("#");
+//        log.info("tagArr : " + tagArr.toString());
 
         //여러개 가져올거면 service 단에서 hashmap 으로 가져올수 있지 않나..?
 
         //조회수 추가 + 글 가져오기
         model.addAttribute("blog", blogDTO);
         //작성자 자기소개글 테이블에서 값 가져오기
-        model.addAttribute("user_intro",blogService.getUserIntro(blogDTO.getU_ID()));
+        model.addAttribute("user_intro", blogService.getUserIntro(blogDTO.getU_ID()));
         //작성자 SNS 가져오기
-        model.addAttribute("user_sns",blogService.getUserSNS(blogDTO.getU_ID()));
+        model.addAttribute("user_sns", blogService.getUserSNS(blogDTO.getU_ID()));
         //유저 정보가져오기(유저 사진 경로 위해)
-        model.addAttribute("user_info",blogService.getUserInfo(blogDTO.getU_ID()));
+        model.addAttribute("user_info", blogService.getUserInfo(blogDTO.getU_ID()));
+
+        model.addAttribute("tagArr", tagsARR);
 
 
         return "blog/blogsingle";
@@ -284,13 +291,13 @@ public class BlogController {
             blogService.insertBlog(blogDTO);
             int blog_seq = blogService.checkBlogSeq();
 
-            //태그값 넣어주기
-            log.info("TAGS: " + blogDTO.getB_TAG1());
-            String[] tag = blogDTO.getB_TAG1().split("#");
-
-            for(int i=0;i<tag.length;i++){
-                log.info("tag["+i+"]:"+tag[i]);
-            }
+            //태그값 넣어주기 --> service에서 처리
+//            log.info("TAGS: " + blogDTO.getB_TAG1());
+//            String[] tag = blogDTO.getB_TAG1().split("#");
+//
+//            for (int i = 0; i < tag.length; i++) {
+//                log.info("tag[" + i + "]:" + tag[i]);
+//            }
 
 
             //정상적으로 시퀀스값 가져옴.
@@ -339,7 +346,7 @@ public class BlogController {
         }
     }
 
-//    @PreAuthorize("isAuthenticated()")
+    //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.GET)
     public String finishSubmit(String mainImg, String UUID, Principal principal) {
         log.info("finishSubmit start...");
@@ -349,7 +356,7 @@ public class BlogController {
         String user_id = "test";
         //임시 사진저장 테이블에 들어있는 데이터들 삭제 및 메인 지정
         //TODO  test를 유저아이디로 바꿔주기
-        if(principal != null){
+        if (principal != null) {
             user_id = principal.getName();
         }
         blogService.updateImg(user_id, UUID);
@@ -416,8 +423,8 @@ public class BlogController {
         log.info("blog_criteria : " + blog_criteria.toString());
 
         //넘어온 u_id가 있으면 그 u_id로 검색
-        if(u_id != null){
-           blog_criteria.setU_id(u_id);
+        if (u_id != null) {
+            blog_criteria.setU_id(u_id);
         }
         //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
         if (principal != null) {
@@ -441,7 +448,7 @@ public class BlogController {
         return "blog/update";
     }
 
-    @RequestMapping(value="update.imagedelete", method = RequestMethod.POST)
+    @RequestMapping(value = "update.imagedelete", method = RequestMethod.POST)
     public void updateDeleteImage(@RequestParam("bi_name") String bi_name, @RequestParam("uid") String uid, @RequestParam("originName") String originName, HttpServletResponse response) throws IOException {
         log.info("updateDeleteImage start...");
 
@@ -456,7 +463,7 @@ public class BlogController {
     }
 
     @RequestMapping(value = "update.do")
-    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no, Model model, Blog_Img blog_img) throws  Exception{
+    public String afterUpdate(BlogDTO blogDTO, Principal principal, Long b_no, Model model, Blog_Img blog_img) throws Exception {
 
         log.info("afterUpdate start...");
         log.info(blogDTO.toString());   // 정상적 들어감
@@ -472,7 +479,7 @@ public class BlogController {
 
         String user_id = "test";
 
-        if(principal != null) {
+        if (principal != null) {
             user_id = principal.getName();
         }
 
@@ -517,14 +524,14 @@ public class BlogController {
 //        INFO : com.blog.controller.BlogController - b_no : null
 //        INFO : com.blog.controller.BlogController - uuid : d8a5e6be-b355-48c9-8bf4-0b4da3935f6a
 
-        String user_id= "test";
-        if(principal!=null){
+        String user_id = "test";
+        if (principal != null) {
             user_id = principal.getName();
         }
 
 
         //실제 테이블에 있는 이미지들도 메인 값 0으로 설정
-        log.info("updateBlogMainImg : "+blogService.updateBlogMainImg(b_no));
+        log.info("updateBlogMainImg : " + blogService.updateBlogMainImg(b_no));
 
         //+추가... 메인 값 다 0으로 준 후에 메인 이미지를 골라 주지 않았다면...
         //이미지 수정 작업(하단의 main값 수정해주는 작업)을 하지않았기에 기존의 메인값이 남아있게 됨.
@@ -532,7 +539,7 @@ public class BlogController {
 
         //user_id로 temp테이블 값 모두 삭제,
         //uuid로 uuid값이 일치하는 temp테이블의 bi_main값을 1로 변경
-        log.info("updateImg : "+blogService.updateImg(user_id, UUID));
+        log.info("updateImg : " + blogService.updateImg(user_id, UUID));
 
 
         return "redirect:usermain";
@@ -552,8 +559,32 @@ public class BlogController {
     }
 
     //좋아요 눌렀을때, 좋아요 취소할때
-    @RequestMapping(value="like.do")
-    public void likeClick(){
+    @RequestMapping(value = "like.do")
+    public void likeClick() {
+
+    }
+
+    /////////////////////
+    @RequestMapping(value = "blogTest", method = RequestMethod.GET)
+    public String blogTestGet() {
+        log.info("blogTestGet start...");
+        return "blog/blogTest";
+    }
+
+    @RequestMapping(value = "blogTest", method = RequestMethod.POST)
+    public String blogTestPost(@RequestParam("tags") String tags, Model model) {
+        log.info("blogTestPost start...");
+        log.info("tags : " + tags);
+        tags = tags.substring(1);
+
+        String[] tagArr = tags.split("#");
+        for(int i=0;i<tagArr.length;i++) {
+            log.info("tagArr["+i+"] : " + tagArr[i]);
+        }
+
+        model.addAttribute("tagArr", tagArr);
+
+        return "blog/blogTestPost";
 
     }
 }

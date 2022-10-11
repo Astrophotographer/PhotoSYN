@@ -211,31 +211,33 @@
         where u_id = #{u_id}
     </select>
 
-    <!--    interesttag에서 흥미 태그 추가.-->
-<!--    <update id="testMapper">-->
-<!--        MERGE INTO INTERESTTAG IT-->
-<!--            USING TAGLIST T-->
-<!--            ON (IT.T_ID = T.T_ID)-->
-<!--            WHEN MATCHED THEN-->
-<!--                &#45;&#45; update-->
-<!--                UPDATE SET IT.IT_COUNT = IT_COUNT + 1 WHERE IT.t_id = 2-->
-<!--            WHEN NOT MATCHED THEN-->
-<!--            &#45;&#45; insert-->
-<!--                INSERT (U_ID, T_ID, IT_COUNT) VALUES ('TEST01', T.T_ID, 1);-->
-<!--    </update>-->
-
     <!--    태그 있으면 +1 없으면 생성-->
-<!--    <update id="testMapper2">-->
-<!--        MERGE INTO TAGLIST T-->
-<!--            USING DUAL-->
-<!--            ON (T.T_ID = 4)-->
-<!--            WHEN MATCHED THEN-->
-<!--                &#45;&#45; UPDATE-->
-<!--                UPDATE SET T.T_COUNT = T.T_COUNT + 1, T.T_DAYCOUNT = T.T_DAYCOUNT + 1-->
-<!--            WHEN NOT MATCHED THEN-->
-<!--                &#45;&#45; INSERT-->
-<!--                INSERT VALUES (TAGLIST_SEQ.NEXTVAL, '멍멍이', 1, 1);-->
-<!--    </update>-->
+    <update id="upsertTag" parameterType="java.util.List">
+        BEGIN
+        <foreach collection="list" item="item" separator="">
+            MERGE INTO TAGLIST T
+            USING DUAL
+            ON (T.T_NAME = #{item})
+            WHEN MATCHED THEN
+            UPDATE SET T.T_COUNT = T.T_COUNT + 1, T.T_DAYCOUNT = T.T_DAYCOUNT + 1
+            WHEN NOT MATCHED THEN
+            INSERT VALUES (TAGLIST_SEQ.NEXTVAL, #{item}, 1, 1);
+        </foreach>
+        END;
+    </update>
+
+    <!--    interesttag에서 흥미 태그 추가.-->
+    <!--    <update id="testMapper">-->
+    <!--        MERGE INTO INTERESTTAG IT-->
+    <!--            USING TAGLIST T-->
+    <!--            ON (IT.T_ID = T.T_ID)-->
+    <!--            WHEN MATCHED THEN-->
+    <!--                &#45;&#45; update-->
+    <!--                UPDATE SET IT.IT_COUNT = IT_COUNT + 1 WHERE IT.t_id = 2-->
+    <!--            WHEN NOT MATCHED THEN-->
+    <!--            &#45;&#45; insert-->
+    <!--                INSERT (U_ID, T_ID, IT_COUNT) VALUES ('TEST01', T.T_ID, 1);-->
+    <!--    </update>-->
 
 </mapper>
 

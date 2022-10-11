@@ -91,11 +91,12 @@
                         </div>
 
                         <!-- 태그들 -->
+                        <%-- 태그 누르면 태그명으로 검색한 효과? 갤러리로? 아니면 블로그로? --%>
+                        <c:forEach items="${tagArr}" var="tag">
                         <div class="post-tags py-4">
-                            <a href="#">#Health</a>
-                            <a href="#">#Game</a>
-                            <a href="#">#Tour</a>
+                            <a href="#">#${tag}</a>
                         </div>
+                        </c:forEach>
 
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
