@@ -104,16 +104,15 @@ public class MypageController {
     @ResponseBody
     @PostMapping("nameCheck")
     public int nameCheck(@RequestParam("name") String name) throws Exception {
-
         return memberService.nameCheck(name);
     }
 
-    // 비밀번호 변경
+    // 비밀번호 변경 페이지
     @GetMapping("updatePw")
     public void updatePwPage() {
 
     }
-
+    // 비밀번호 변경
     @PostMapping("updatePwPro")
     public String updatePwPro(Authentication auth,
                               @RequestParam("pw1") String pw1,
@@ -151,6 +150,15 @@ public class MypageController {
 
         return "redirect:/member/mypage/profile";
     }
+
+    // 포인트 충전 페이지
+    @GetMapping("profilePointAdd")
+    public void pointAddPage() {
+
+    }
+
+    // 포인트 충전
+    
 
     // 시큐리티 정보 갱신
     private boolean renewalAuth() {

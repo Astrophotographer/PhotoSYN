@@ -71,13 +71,21 @@ public class MemberController {
             model.addAttribute("logout", "Logout!!");
         }
     }
-
+    
+    // 아이디 중복확인
     @ResponseBody
     @GetMapping("idCheck")
     public int idCheck(@RequestParam("id") String id) throws Exception {
         int result = memberService.idCheck(id);
 
         return result;
+    }
+
+    // 닉네임 중복확인
+    @ResponseBody
+    @PostMapping("nameCheck")
+    public int nameCheck(@RequestParam("name") String name) throws Exception {
+        return memberService.nameCheck(name);
     }
 
     // 접근 제한시 보여줄 페이지 경로 매핑
