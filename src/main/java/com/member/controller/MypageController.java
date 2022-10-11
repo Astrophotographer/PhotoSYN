@@ -152,7 +152,7 @@ public class MypageController {
     }
 
     // 포인트 충전 페이지
-    @GetMapping("pointAdd")
+    @GetMapping("profilePointAdd")
     public void pointAddPage() {
 
     }
