@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/resources/member/bootstrap/main/css/style.css" type="text/css"/>
     <link rel="stylesheet" href="/resources/member/css/menu.css" type="text/css"/>
     <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 <header class="header">

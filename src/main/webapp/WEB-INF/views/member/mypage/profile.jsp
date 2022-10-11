@@ -56,13 +56,13 @@
             <c:if test="${princi.member.membership} == 0">
                 <b style="color: #a76d27;">브론즈</b>
             </c:if>
-            <c:if test="princi.member.membership == 1">
+            <c:if test="${princi.member.membership} == 1">
                 <b style="color: #7b7f7b;">실버</b>
             </c:if>
-            <c:if test="princi.member.membership == 2">
+            <c:if test="${princi.member.membership} == 2">
                 <b style="color: #a99a31;">골드</b>
             </c:if>
-            <c:if test="princi.member.membership == 3">
+            <c:if test="${princi.member.membership} == 3">
                 <b style="color: #28e3d4;">다이아</b>
             </c:if>
             입니다.
@@ -70,10 +70,12 @@
             <div style="text-align: right">${princi.member.point} P</div>
 
             <div style="padding: 15px; display: flex; justify-content: space-between;">
-                <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/profileModify'">
+                <button class="profileBtn" type="button"
+                        onclick="window.location.href='/member/mypage/profileModify'">
                     프로필 수정
                 </button>
-                <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/pointAdd'">
+                <button class="profileBtn" type="button"
+                        onclick="window.location.href='/member/mypage/profilePointAdd'">
                     포인트 충전
                 </button>
             </div>

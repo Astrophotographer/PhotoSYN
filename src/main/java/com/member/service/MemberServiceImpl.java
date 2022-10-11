@@ -1,25 +1,19 @@
 package com.member.service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.HashMap;
 
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
+import com.member.domain.PointDTO;
 import com.member.mapper.MemberMapper;
-import org.apache.commons.mail.HtmlEmail;
+import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import lombok.extern.log4j.Log4j;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Log4j
@@ -106,6 +100,13 @@ public class MemberServiceImpl implements MemberService {
     public int updateImg(MemberDTO memberDTO) throws Exception {
         return memberMapper.updateImg(memberDTO);
     }
+    
+    // 포인트 충전
+    @Override
+    public int updatePoint(MemberDTO memberDTO) throws Exception {
+        return memberMapper.updatePoint(memberDTO);
+    }
+
 
 
 }
