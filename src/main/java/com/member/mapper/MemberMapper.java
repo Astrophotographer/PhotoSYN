@@ -2,6 +2,7 @@ package com.member.mapper;
 
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
+import com.member.domain.PointDTO;
 
 public interface MemberMapper {
     // 회원가입
@@ -33,5 +34,8 @@ public interface MemberMapper {
 
     // 프로필 사진 변경
     public int updateImg(MemberDTO memberDTO) throws Exception;
+
+    // 포인트 충전
+    public int updatePoint(MemberDTO memberDTO) throws Exception;
 
 }

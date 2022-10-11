@@ -21,12 +21,12 @@
             <span id="idCheck"></span>
         </div>
         <div class="int-area">
-            <input type="password" name="pw1" id="pw1" autocomplete="off" required/>
-            <label for="pw1">비밀번호</label>
+            <input type="password" name="pw" id="password" autocomplete="off" required/>
+            <label for="password">비밀번호</label>
         </div>
         <div class="int-area">
-            <input type="password" name="pwch" id="pw2" autocomplete="off" onchange="isSame()" required/>
-            <label for="pw2">비밀번호 확인</label>
+            <input type="password" name="passwordCh" id="passwordCh" autocomplete="off" onchange="isSame()" required/>
+            <label for="passwordCh">비밀번호 확인</label>
             <span id="same"></span>
         </div>
         <div class="int-area">
@@ -98,8 +98,8 @@
     });
 
     function isSame() {
-        var pw = $('#pw1').val();
-        var confirmPw = $('#pw2').val();
+        var pw = $('#password').val();
+        var confirmPw = $('#passwordCh').val();
         if (pw != '' && confirmPw != '') {
             if (pw == confirmPw) {
                 document.getElementById('same').innerHTML = '비밀번호가 일치합니다';
