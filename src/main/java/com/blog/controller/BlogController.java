@@ -5,6 +5,9 @@ import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.service.BlogService;
+import com.member.domain.MemberDTO;
+import com.member.domain.User_Intro;
+import com.member.domain.User_SNS;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,6 +33,8 @@ import java.util.*;
 @RequestMapping("/blog/*")
 public class BlogController {
 
+    //C:\\Users\\tjoeun\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
+    //"C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";
     static String imgServerPath = "";
 
     //TODO 1001 : 블로그 페이징처리
@@ -451,11 +456,16 @@ public class BlogController {
         model.addAttribute("blog", list);
 
         //작성자 자기소개글 테이블에서 값 가져오기
-        model.addAttribute("user_intro", blogService.getUserIntro(blog_criteria.getU_id()));
+        User_Intro intro =  blogService.getUserIntro(blog_criteria.getU_id());
+        model.addAttribute("user_intro",intro);
         //작성자 SNS 가져오기
-        model.addAttribute("user_sns", blogService.getUserSNS(blog_criteria.getU_id()));
+        User_SNS sns = blogService.getUserSNS(blog_criteria.getU_id());
+        model.addAttribute("user_sns", sns);
         //유저 정보가져오기(유저 사진 경로 위해)
-        model.addAttribute("user_info", blogService.getUserInfo(blog_criteria.getU_id()));
+        MemberDTO memberDTO = blogService.getUserInfo(blog_criteria.getU_id());
+        model.addAttribute("user_info", memberDTO);
+        log.info("intro" + intro);
+        log.info("user_info : " + memberDTO);
 
         return "blog/blogusermain";
     }

@@ -205,7 +205,28 @@
         where u_id = #{u_id}
     </select>
 
-    <select id="getUserInfo" resultType="com.member.domain.MemberDTO">
+    <resultMap type="com.member.domain.MemberDTO" id="memberMap">
+        <id property="id" column="u_id"/> <!-- primary key 지정 -->
+        <result property="id" column="u_id"/>
+        <result property="pw" column="u_pw"/>
+        <result property="phone" column="u_phone"/>
+        <result property="name" column="u_nick"/>
+        <result property="reg" column="u_reg"/>
+        <result property="status" column="u_status"/>
+        <result property="pic" column="u_pic"/>
+        <result property="point" column="u_point"/>
+        <result property="membership" column="ms_membership"/>
+        <result property="sns" column="u_sns"/>
+        <result property="snsToken" column="u_snsToken"/>
+        <collection property="authDTOList" resultMap="authMap"></collection>
+    </resultMap>
+    <resultMap type="com.member.domain.AuthDTO" id="authMap">
+        <result property="id" column="id"/>
+        <result property="auth" column="auth"/>
+    </resultMap>
+
+<!--    <select id="getUserInfo" resultType="com.member.domain.MemberDTO">-->
+    <select id="getUserInfo" resultMap="memberMap">
         select *
         from user_list
         where u_id = #{u_id}

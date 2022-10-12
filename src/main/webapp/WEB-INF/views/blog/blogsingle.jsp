@@ -98,7 +98,6 @@
                                 <a href="#">#${tag}</a>
                             </div>
                         </c:forEach>
-
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
                         <div>
@@ -132,7 +131,8 @@
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
-                        <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
+                        <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author"
+                                            class="text-capitalize">${blog.u_ID}</a></h4>
                         <p>자기소개 : ${user_intro.u_INTRO}</p>
 
                         <a target="_blank" class="author-social" href="#"><i
@@ -511,7 +511,7 @@
                 str += '<img class="d-flex mr-3 rounded-circle" src="../resources/blog/images/user.png" alt="">';
                 str += '<div class="media-body">';
                 // <a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author" class="text-capitalize">${blog.u_ID}</a>
-                str += '<h5 class="mt-0">작성자 : <a href="/blog/usermain?u_id='+result[i].U_ID+'" title="" rel="author" class="text-capitalize">' + result[i].U_ID + '</a></h5>';
+                str += '<h5 class="mt-0">작성자 : <a href="/blog/usermain?u_id=' + result[i].U_ID + '" title="" rel="author" class="text-capitalize">' + result[i].U_ID + '</a></h5>';
                 str += '댓글내용 : ' + result[i].R_REPLY;
                 str += '</div>';
                 str += '</div>';
