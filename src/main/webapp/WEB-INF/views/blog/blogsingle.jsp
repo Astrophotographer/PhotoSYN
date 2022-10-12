@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -91,11 +92,12 @@
                         </div>
 
                         <!-- 태그들 -->
-                        <div class="post-tags py-4">
-                            <a href="#">#Health</a>
-                            <a href="#">#Game</a>
-                            <a href="#">#Tour</a>
-                        </div>
+                        <%-- 태그 누르면 태그명으로 검색한 효과? 갤러리로? 아니면 블로그로? --%>
+                        <c:forEach items="${tagArr}" var="tag">
+                            <div class="post-tags py-4">
+                                <a href="#">#${tag}</a>
+                            </div>
+                        </c:forEach>
 
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
@@ -125,97 +127,104 @@
                         <!-- 유저 이미지 사진 -->
                         <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
                              width="100" height="100">
+                        이미지 주소 : ${user_info.u_PIC}
                     </div>
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
                         <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
-                        <p>Hey there. My name is Liam. I was born with the love for traveling. I also love taking photos
-                            with my phone in order to capture moment..</p>
+                        <p>자기소개 : ${user_intro.u_INTRO}</p>
 
-                        <a target="_blank" class="author-social" href="#"><i class="ti-facebook"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-twitter"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i
+                                class="ti-facebook"></i>${user_sns.s_FACEBOOK}</a>
+                        <a target="_blank" class="author-social" href="#"><i
+                                class="ti-twitter"></i>${user_sns.s_TWITTER}</a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-google-plus"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-instagram"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i
+                                class="ti-instagram"></i>${user_sns.s_INSTAGRAM}</a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-pinterest"></i></a>
                         <a target="_blank" class="author-social" href="#"><i class="ti-tumblr"></i></a>
+                        <a target="_blank" class="author-social" href="#"><i
+                                class="ti-youtube"></i>${user_sns.s_YOUTUBE}</a>
                     </div>
                 </div>
 
                 <!-- 다음글 이전글 -->
-                <nav class="post-pagination clearfix border-top border-bottom py-4">
-                    <div class="prev-post">
-                        <a href="../resources/blog/blog-single.html">
-                            <span class="text-uppercase font-sm letter-spacing">Next</span>
-                            <h4 class="mt-3"> Intel’s new smart glasses actually look good</h4>
-                        </a>
-                    </div>
-                    <div class="next-post">
-                        <a href="../resources/blog/blog-single.html">
-                            <span class="text-uppercase font-sm letter-spacing">Previous</span>
-                            <h4 class="mt-3">Free Two-Hour Delivery From Whole Foods</h4>
-                        </a>
-                    </div>
-                </nav>
+                <%--                <nav class="post-pagination clearfix border-top border-bottom py-4">--%>
+                <%--                    <div class="prev-post">--%>
+                <%--                        <a href="../resources/blog/blog-single.html">--%>
+                <%--                            <span class="text-uppercase font-sm letter-spacing">Next</span>--%>
+                <%--                            <h4 class="mt-3"> Intel’s new smart glasses actually look good</h4>--%>
+                <%--                        </a>--%>
+                <%--                    </div>--%>
+                <%--                    <div class="next-post">--%>
+                <%--                        <a href="../resources/blog/blog-single.html">--%>
+                <%--                            <span class="text-uppercase font-sm letter-spacing">Previous</span>--%>
+                <%--                            <h4 class="mt-3">Free Two-Hour Delivery From Whole Foods</h4>--%>
+                <%--                        </a>--%>
+                <%--                    </div>--%>
+                <%--                </nav>--%>
 
                 <!-- 추천글. 관련 좋아할만한 글 -->
-                <div class="related-posts-block mt-5">
-                    <h3 class="news-title mb-4 text-center">
-                        You May Also Like
-                    </h3>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="post-block-wrapper mb-4 mb-lg-0">
-                                <a href="blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-1.jpg"
-                                         alt="post-thumbnail"/>
-                                </a>
-                                <div class="post-content mt-3">
-                                    <h5>
-                                        <a href="../resources/blog/blog-single.html">Intel’s new smart glasses actually
-                                            look good</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="post-block-wrapper mb-4 mb-lg-0">
-                                <a href="../resources/blog/blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-2.jpg"
-                                         alt="post-thumbnail"/>
-                                </a>
-                                <div class="post-content mt-3">
-                                    <h5>
-                                        <a href="../resources/blog/blog-single.html">Free Two-Hour Delivery From Whole
-                                            Foods</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6">
-                            <div class="post-block-wrapper">
-                                <a href="../resources/blog/blog-single.html">
-                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-3.jpg"
-                                         alt="post-thumbnail"/>
-                                </a>
-                                <div class="post-content mt-3">
-                                    <h5>
-                                        <a href="../resources/blog/blog-single.html">Snow and Freezing Rain in Paris
-                                            Forces the</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <%--                <div class="related-posts-block mt-5">--%>
+                <%--                    <h3 class="news-title mb-4 text-center">--%>
+                <%--                        You May Also Like--%>
+                <%--                    </h3>--%>
+                <%--                    <div class="row">--%>
+                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
+                <%--                            <div class="post-block-wrapper mb-4 mb-lg-0">--%>
+                <%--                                <a href="blog-single.html">--%>
+                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-1.jpg"--%>
+                <%--                                         alt="post-thumbnail"/>--%>
+                <%--                                </a>--%>
+                <%--                                <div class="post-content mt-3">--%>
+                <%--                                    <h5>--%>
+                <%--                                        <a href="../resources/blog/blog-single.html">Intel’s new smart glasses actually--%>
+                <%--                                            look good</a>--%>
+                <%--                                    </h5>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
+                <%--                            <div class="post-block-wrapper mb-4 mb-lg-0">--%>
+                <%--                                <a href="../resources/blog/blog-single.html">--%>
+                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-2.jpg"--%>
+                <%--                                         alt="post-thumbnail"/>--%>
+                <%--                                </a>--%>
+                <%--                                <div class="post-content mt-3">--%>
+                <%--                                    <h5>--%>
+                <%--                                        <a href="../resources/blog/blog-single.html">Free Two-Hour Delivery From Whole--%>
+                <%--                                            Foods</a>--%>
+                <%--                                    </h5>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
+                <%--                            <div class="post-block-wrapper">--%>
+                <%--                                <a href="../resources/blog/blog-single.html">--%>
+                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-3.jpg"--%>
+                <%--                                         alt="post-thumbnail"/>--%>
+                <%--                                </a>--%>
+                <%--                                <div class="post-content mt-3">--%>
+                <%--                                    <h5>--%>
+                <%--                                        <a href="../resources/blog/blog-single.html">Snow and Freezing Rain in Paris--%>
+                <%--                                            Forces the</a>--%>
+                <%--                                    </h5>--%>
+                <%--                                </div>--%>
+                <%--                            </div>--%>
+                <%--                        </div>--%>
+                <%--                    </div>--%>
+                <%--                </div>--%>
 
                 <!-- 댓글 -->
                 <div class="comment-area my-5">
+                    <!-- 댓글 갯수 -->
                     <h3 class="mb-4 text-center">2 Comments</h3>
+
+                    <!-- 댓글 한개 -->
                     <div class="comment-area-box media">
                         <img alt="" src="../resources/blog/images/blog-user-2.jpg"
                              class="img-fluid float-left mr-3 mt-2">
-
                         <div class="media-body ml-4">
                             <h4 class="mb-0">Micle harison </h4>
                             <span class="date-comm font-sm text-capitalize text-color"><i class="ti-time mr-2"></i>June 7, 2019 </span>
@@ -229,6 +238,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 댓글 한개 끝 -->
 
                     <div class="comment-area-box media mt-5">
                         <img alt="" src="../resources/blog/images/blog-user-3.jpg"
@@ -251,21 +261,23 @@
                 <!-- 댓글 보여주기 끝 -->
 
                 <!-- 댓글 작성 -->
-                <form class="comment-form mb-5 gray-bg p-5" id="comment-form">
+                <!-- 로그인 한 상태일때만 폼 보이게 만들어주기.. sec:authorize 사용 -->
+                <form class="comment-form mb-5 gray-bg p-5" id="comment-form" action="reply/add" method="post">
                     <h3 class="mb-4 text-center">Leave a comment</h3>
                     <div class="row">
                         <div class="col-lg-12">
-                            <textarea class="form-control mb-3" name="comment" id="comment" cols="30" rows="5"
+                            <textarea class="form-control mb-3" name="R_REPLY" id="comment" cols="30" rows="5"
                                       placeholder="Comment"></textarea>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="name" id="name" placeholder="Name:">
+                                <%--                                <input class="form-control" type="hidden" name="U_ID" id="name" value='<sec:authentication property="principal.username"/>'/>--%>
+                                <input class="form-control" type="hidden" name="U_ID" id="name" value='test01'/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">
+<%--                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
                             </div>
                         </div>
                     </div>
@@ -446,7 +458,120 @@
 <!-- main js -->
 <script src="../resources/blog/js/custom.js"></script>
 
-<%--footer--%>
-<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
-<%--</body>--%>
-<%--</html>--%>
+<script type="text/javascript">
+    $(document).ready(function () {
+        let bnoVal = '${blog.b_NO}';
+        console.log("bnoVal: " + bnoVal);
+
+        showReplyList();
+
+        function showReplyList() {
+            console.log("함수 시작...");
+            $.ajax({
+                type: "GET",
+                url: "${pageContext.request.contextPath}/reply/list/" + bnoVal + ".json",
+                // url: "/reply/list/" + bnoVal + ".json",
+                data: {bno: bnoVal},
+                success: function (result) {
+                    console.log(result);
+                    console.log("댓글 목록 가져오기 성공");
+
+                    makeList(result);
+                },
+                error: function (e) {
+                    console.log(e);
+                    console.log("댓글 목록 가져오기 실패");
+                }
+            })
+        }
+
+
+        // let replyContainer = $(".reply-container");
+        let replyContainer = $(".comment-area");
+
+        function makeList(result) {
+            console.log('makeList()...');
+            console.log(result);
+            console.log('result.length : ' + result.length);
+
+            if (result == null || result.length == 0) {
+                console.log('댓글이 없습니다.');
+                replyContainer.html('<p class="text-center">댓글이 없습니다.</p>');
+                return;
+            }
+
+            let str = "";
+            for (let i = 0; i < result.length; i++) {
+                str += '<div class="media mb-4">';
+                str += '<img class="d-flex mr-3 rounded-circle" src="../resources/blog/images/user.png" alt="">';
+                str += '<div class="media-body">';
+                str += '<h5 class="mt-0">작성자 : ' + result[i].U_ID + '</h5>';
+                str += '댓글내용 : '+result[i].R_REPLY;
+                str += '</div>';
+                str += '</div>';
+
+            }
+            replyContainer.html(str);
+        }
+
+        $("#submit_contact").on("click", function () {
+            console.log("댓글 등록 버튼 클릭");
+
+            //text area id= comment
+            let replyVal = $("#comment").val();
+            let replyer = $("#name").val();
+            console.log("replyVal : " + replyVal);
+            console.log("replyer : " + replyer);
+
+            let reqData = {
+                B_NO: bnoVal,
+                U_ID: replyer,
+                R_REPLY: replyVal
+            };
+
+            console.log("reqData : " + reqData);
+            console.log(reqData);
+            console.log("reqData.b_no : " + reqData.B_NO);
+            console.log("reqData.u_id : " + reqData.U_ID);
+            console.log("reqData.r_reply : " + reqData.R_REPLY);
+
+            $.ajax({
+                type: "POST",
+                url: "${pageContext.request.contextPath}/reply/add",
+                data: JSON.stringify(reqData),
+                contentType: "application/json; charset=utf-8",
+                // contentType: "application/json",
+                dataType : "text",
+                //post 방식 시큐리티 위해 추가
+                //요청을 날리기 전에.. 명령어 beforeSend
+                // beforeSend: function (xhr) {
+                //     xhr.setRequestHeader(header, token);
+                // },
+                success: function (result, status, xhr) {
+                    console.log("ajax 요청 성공!");
+                    console.log(result);
+                    console.log(status);
+                    //xhr...?
+
+                    //작성 성공시 다시 보여주기 위해서
+                    showReplyList();
+
+                    //댓글 등록 후 input 공백으로 만들어주기
+                    $("#reply").val("");
+                    // $("#replyer").val("");
+                },
+                error: function (e) {
+                    console.log("ajax 요청 실패")
+                    console.log(e);
+                }
+
+            });
+
+        })
+
+    })
+</script>
+    <%--footer--%>
+    <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+    <%--</body>--%>
+    <%--</html>--%>

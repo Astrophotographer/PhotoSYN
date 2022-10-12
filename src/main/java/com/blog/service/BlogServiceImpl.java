@@ -14,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Log4j
@@ -53,6 +56,25 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public int insertBlog(BlogDTO blogDTO) {
+
+        //태그 등록
+        String[] tag = blogDTO.getB_TAG1().substring(1).trim().split("#");
+//        List<String> tags = Arrays.asList(tag);
+        List<String> tags = Stream.of(tag).collect(Collectors.toList());    //잘 담김.
+
+        for(int i=0;i<tag.length;i++){
+            log.info("tag : " + tag[i]);
+            log.info("tags : " + tags.get(i));  //둘다 정상 출력
+        }
+
+        //태그비교 및 등록
+        blogMapper.upsertTag(tags);
+
+        //관심태그 비교 및 등록
+        //TODO : 없으면 새로 생기고 시작되어야 하는데 이미 있는 태그들 다 가져와서 만들어 버림..
+
+
+
         return blogMapper.insertBlog(blogDTO);
     }
 
