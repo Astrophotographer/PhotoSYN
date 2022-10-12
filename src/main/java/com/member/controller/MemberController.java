@@ -43,7 +43,7 @@ public class MemberController {
     public void signupPage() {
 
     }
-
+    // 회원가입
     @PostMapping("signup")
     public String signupPro(MemberDTO memberDTO, String auth, RedirectAttributes redirectAttributes) throws Exception {
         log.info("************* signupPro memberDTO : " + memberDTO);

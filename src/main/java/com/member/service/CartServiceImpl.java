@@ -3,28 +3,23 @@ package com.member.service;
 import com.member.domain.CartDTO;
 import com.member.mapper.CartMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
 
     @Autowired
-    private CartMapper cartMapper;
+    CartMapper mapper;
 
     @Override
-    public int addCart(CartDTO cart) {
-        // 장바구니 데이터 체크
-        CartDTO checkCart = cartMapper.checkCart(cart);
+    public int addCart(CartDTO cartDTO) {
+        String u_id = "user01";
+        int g_no = 1;
 
-        if(checkCart != null) {
-            return 2;
-        }
+        cartDTO.setU_id(u_id);
+        cartDTO.setG_no(g_no);
 
-        // 장바구니 등록 & 에러 시 0반환
-        try {
-            return cartMapper.addCart(cart);
-        } catch (Exception e) {
-            return 0;
-        }
+        int result = 0;
+        result = mapper.addCart(cartDTO);
+
+        return 0;
     }
 }

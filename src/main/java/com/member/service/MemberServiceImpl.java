@@ -4,11 +4,8 @@ import java.util.HashMap;
 
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
-//import com.member.domain.PointDTO;
 import com.member.mapper.MemberMapper;
-import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,8 @@ public class MemberServiceImpl implements MemberService {
 
         return memberMapper.addMember(memberDTO);
     }
-
+    
+    // 회원 탈퇴
     @Override
     public int addAuth(String auth, String id) throws Exception {
         int result = -1;
@@ -67,13 +65,12 @@ public class MemberServiceImpl implements MemberService {
     public int deleteMember(MemberDTO memberDTO) throws Exception {
         int result = 0;
         MemberDTO dataMember = getMember(memberDTO.getId());
+
         if (bCryptPasswordEncoder.matches(memberDTO.getPw(), dataMember.getPw())) {
             result = 1;
             // FK 제약조건 때문에 Auth 먼저 삭제하고 member 삭제
             int deleteRes = memberMapper.deleteAuth(memberDTO.getId());
-            log.info("********** delete member auth res : " + deleteRes);
             deleteRes = memberMapper.deleteMember(memberDTO.getId());
-            log.info("********** delete member res : " + deleteRes);
         }
         return result;
     }

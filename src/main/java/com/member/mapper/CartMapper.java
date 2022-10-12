@@ -5,9 +5,8 @@ import com.member.domain.CartDTO;
 import java.util.List;
 
 public interface CartMapper {
-
     /* 카트 추가 */
-    public int addCart(CartDTO cart);
+    public int addCart(CartDTO cartDTO);
 
     /* 카트 삭제 */
     public int deleteCart(int g_no);
@@ -16,5 +15,5 @@ public interface CartMapper {
     public List<CartDTO> getCart(String u_id);
 
     /* 카트 확인 */
-    public CartDTO checkCart(CartDTO cart);
+    public CartDTO checkCart(CartDTO cartDTO);
 }

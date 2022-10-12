@@ -58,6 +58,18 @@
         WHERE U_ID = #{id}
     </update>
 
+    <!-- 회원 탈퇴 (접근 권한까지) -->
+    <delete id="deleteMember">
+        DELETE
+        FROM USER_LIST
+        WHERE U_ID = #{id}
+    </delete>
+    <delete id="deleteAuth">
+        DELETE
+        FROM USER_AUTH
+        WHERE ID = #{id}
+    </delete>
+
     <!-- 닉네임 중복확인 -->
     <select id="nameCheck" resultType="Integer">
         SELECT COUNT(*)
@@ -93,22 +105,5 @@
         where u_id = #{id}
     </update>
 
-
-    <!--
-    <update id="updateMember">
-		UPDATE memberSec set name = #{name}, email = #{email}
-		WHERE id = #{id}
-	</update>
-
-	<delete id="deleteMember">
-		DELETE FROM memberSec
-		where id = #{id}
-	</delete>
-	<delete id="deleteAuth">
-		DELETE FROM memberSec_auth
-		WHERE id = #{id}
-	</delete>
-
--->
 
 </mapper>
