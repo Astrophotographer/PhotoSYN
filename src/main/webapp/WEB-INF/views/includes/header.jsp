@@ -64,23 +64,23 @@
     <sec:authorize access="isAnonymous()">
         <nav class="main__menu">
             <ul class="nav__menu">
-                <li><a href="/member/main">Home</a></li> <!-- class="menu--active" -->
-                <li><a href="#">Gallery</a></li>
-                <li><a href="/blog/main">Blog</a></li>
+                <li><a href="/member/main">메인</a></li> <!-- class="menu--active" -->
+                <li><a href="#">갤러리</a></li>
+                <li><a href="/blog/main">블로그</a></li>
             </ul>
         </nav>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
         <nav class="main__menu">
             <ul class="nav__menu">
-                <li><a href="/member/main">Home</a></li> <!-- class="menu--active" -->
-                <li><a href="#">Gallery</a></li>
-                <li><a href="/blog/main">Blog</a></li>
-                <li><a href="/member/mypage/profile">My page</a>
+                <li><a href="/member/main">메인</a></li> <!-- class="menu--active" -->
+                <li><a href="#">갤러리</a></li>
+                <li><a href="/blog/main">블로그</a></li>
+                <li><a href="/member/mypage/profile">마이페이지</a>
                     <ul class="sub__menu">
                         <li><a href="/member/mypage/profile">내정보</a></li>
-                        <li><a href="#">장바구니</a></li>
-                        <li><a href="#">구매 · 판매내역</a></li>
+                        <li><a href="/member/mypage/profileCart">장바구니</a></li>
+                        <li><a href="/member/mypage/profileBuySell">구매 · 판매내역</a></li>
                         <li><a href="#">환급신청</a></li>
                     </ul>
                 </li>

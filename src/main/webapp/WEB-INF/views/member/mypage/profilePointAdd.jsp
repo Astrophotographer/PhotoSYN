@@ -21,7 +21,7 @@
                     <option value="1000000">1,000,000P</option>
                 </select>
             </div>
-            <button class="profileBtn" type="button" id="check_module">결제하기</button>
+            <button class="profileBtn2" type="button" id="check_module" style="width: 80px">결제하기</button>
         </form>
     </div>
 </div>
