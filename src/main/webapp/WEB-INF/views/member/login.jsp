@@ -12,7 +12,7 @@
     <h2 style="color: white"><c:out value="${error}"/></h2>
     <h2 style="color: white"><c:out value="${logout}"/></h2>
 
-    <form action="/login" method="POST">
+    <form action="/login" method="POST" onsubmit="return checkpw()">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="int-area">
             <input type="text" name="username" id="id" required/>
@@ -38,34 +38,23 @@
 </section>
 
 <script>
-    let id = $('id');
-    let pw = $('pw');
-    let btn = $('btn');
+    let id = $('#id');
+    let pw = $('#pw');
+    let btn = $('#btn');
+
     $(btn).on('click', function () {
-        if ($(id).val() == "") {
-            $(id).next('label').addClass('warning');
+        if (id.val() == "") {
+            id.next('label').addClass('warning');
             setTimeout(function () {
-                $('label').removeClass('warning');
+                id.next('label').removeClass('warning');
             }, 1500);
-        } else if ($(pw).val() == "") {
-            $(pw).next('label').addClass('warning');
+        } else if (pw.val() == "") {
+            pw.next('label').addClass('warning');
             setTimeout(function () {
-                $('label').removeClass('warning');
+                pw.next('label').removeClass('warning');
             }, 1500);
         }
     });
-
-    function pw() {
-        var p1 = document.getElementById('pw1').value;
-        var p2 = document.getElementById('pw2').value;
-        if (p1 != p2) {
-            alert("비밀번호가 일치 하지 않습니다");
-            return false;
-        } else {
-            alert("비밀번호가 일치합니다");
-            return true;
-        }
-    }
 
 </script>
 

@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/resources/member/bootstrap/main/css/style.css" type="text/css"/>
     <link rel="stylesheet" href="/resources/member/css/menu.css" type="text/css"/>
     <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 <header class="header">
@@ -28,6 +30,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-3 order-2 order-sm-1">
                 <div class="header__social">
+                    <a href="#"><i class="fa fa-instagram"></i></a>
                 </div>
             </div>
             <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
@@ -73,7 +76,7 @@
                 <li><a href="/member/main">Home</a></li> <!-- class="menu--active" -->
                 <li><a href="#">Gallery</a></li>
                 <li><a href="/blog/main">Blog</a></li>
-                <li><a href="/member/mypage/profile">Mypage</a>
+                <li><a href="/member/mypage/profile">My page</a>
                     <ul class="sub__menu">
                         <li><a href="/member/mypage/profile">내정보</a></li>
                         <li><a href="#">장바구니</a></li>

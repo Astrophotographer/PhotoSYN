@@ -34,23 +34,23 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div style="padding: 15px;">
                 <div>
-                    <label>아이디</label>
-                    <input type="text" id="id" name="id" value="${princi.member.id}" autocomplete="off" readonly/>
+                    <strong><label for="id">아이디</label></strong>
+                    <p><input type="text" id="id" name="id" value="${princi.member.id}" autocomplete="off" readonly/>
+                    </p>
                 </div>
                 <div>
-                    <label for="name">닉네임</label>
-                    <input type="text" id="name" name="name" value="${princi.member.name}" autocomplete="off"/>
-                </div>
-                <div>
+                    <strong><label for="name">닉네임</label></strong>
+                    <p><input type="text" id="name" name="name" value="${princi.member.name}" autocomplete="off"/></p>
                     <span id="nameCk" name="nameCk"></span>
                 </div>
                 <div>
-                    <label for="phone">휴대폰 번호</label>
-                    <input type="text" id="phone" name="phone" value="${princi.member.phone}" autocomplete="off"/>
+                    <strong><label for="phone">휴대폰 번호</label></strong>
+                    <p><input type="text" id="phone" name="phone" value="${princi.member.phone}" autocomplete="off"/>
+                    </p>
                 </div>
                 <div>
-                    <label for="pw">비밀번호</label>
-                    <input type="password" id="pw" name="pw" autocomplete="off"/>
+                    <strong><label for="pw">비밀번호</label></strong>
+                    <p><input type="password" id="pw" name="pw" autocomplete="off"/></p>
                 </div>
                 <div>
                     <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/updatePw'">

@@ -1,6 +1,7 @@
 package com.member.service;
 
 import com.member.domain.MemberDTO;
+import com.member.domain.PointDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Member;
@@ -32,5 +33,8 @@ public interface MemberService {
 
     // 프로필 사진 변경
     public int updateImg(MemberDTO memberDTO) throws Exception;
+
+    // 포인트 충전
+    public int updatePoint(MemberDTO memberDTO) throws Exception;
 
 }
