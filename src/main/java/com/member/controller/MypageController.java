@@ -108,6 +108,8 @@ public class MypageController {
         return memberService.nameCheck(name);
     }
 
+
+
     // 비밀번호 변경
     @GetMapping("updatePw")
     public void updatePwPage() {

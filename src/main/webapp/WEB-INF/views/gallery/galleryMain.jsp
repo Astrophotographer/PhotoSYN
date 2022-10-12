@@ -700,7 +700,8 @@
                             }
                         }'>
                         <div class="swiper-wrapper">
-                            <!-- Blog Card -->
+
+                            <!-- Blog Card 6-->
                             <div class="swiper-slide">
                                 <div class="hover-scale">
                                     <div class="hover-scale-in position-relative">
@@ -708,102 +709,10 @@
                                             <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
                                         </div>
                                         <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-1.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
-                                        <span class="fs-sm">Furniture</span>
-                                        <h5 class="pt-2"><a href="#" class="link-effect text-reset">Easy Fixes for Home Decor</a></h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                        <a class="link-effect text-primary text-uppercase fw-600 fs-sm" href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Blog Card -->
-                            <div class="swiper-slide">
-                                <div class="hover-scale">
-                                    <div class="hover-scale-in position-relative">
-                                        <div class="position-absolute top-0 end-0 p-3 z-index-1">
-                                            <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
-                                        </div>
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-2.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
-                                        <span class="fs-sm">Furniture</span>
-                                        <h5 class="pt-2"><a href="#" class="link-effect text-reset">Easy Fixes for Home Decor</a></h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                        <a class="link-effect text-primary text-uppercase fw-600 fs-sm" href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Blog Card -->
-                            <div class="swiper-slide">
-                                <div class="hover-scale">
-                                    <div class="hover-scale-in position-relative">
-                                        <div class="position-absolute top-0 end-0 p-3 z-index-1">
-                                            <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
-                                        </div>
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-3.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
-                                        <span class="fs-sm">Furniture</span>
-                                        <h5 class="pt-2"><a href="#" class="link-effect text-reset">Easy Fixes for Home Decor</a></h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                        <a class="link-effect text-primary text-uppercase fw-600 fs-sm" href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Blog Card -->
-                            <div class="swiper-slide">
-                                <div class="hover-scale">
-                                    <div class="hover-scale-in position-relative">
-                                        <div class="position-absolute top-0 end-0 p-3 z-index-1">
-                                            <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
-                                        </div>
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-4.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
-                                        <span class="fs-sm">Furniture</span>
-                                        <h5 class="pt-2"><a href="#" class="link-effect text-reset">Easy Fixes for Home Decor</a></h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                        <a class="link-effect text-primary text-uppercase fw-600 fs-sm" href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Blog Card -->
-                            <div class="swiper-slide">
-                                <div class="hover-scale">
-                                    <div class="hover-scale-in position-relative">
-                                        <div class="position-absolute top-0 end-0 p-3 z-index-1">
-                                            <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
-                                        </div>
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-5.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
-                                        <span class="fs-sm">Furniture</span>
-                                        <h5 class="pt-2"><a href="#" class="link-effect text-reset">Easy Fixes for Home Decor</a></h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
-                                        <a class="link-effect text-primary text-uppercase fw-600 fs-sm" href="#">Read More</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Blog Card -->
-                            <div class="swiper-slide">
-                                <div class="hover-scale">
-                                    <div class="hover-scale-in position-relative">
-                                        <div class="position-absolute top-0 end-0 p-3 z-index-1">
-                                            <span class="bg-dark text-white d-inline-flex px-3 fs-sm py-2">18 FEB</span>
-                                        </div>
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/blog-6.jpg" title="" alt="">
+                                            <c:forEach var="i" begin="1" end="6" step="1">
+                                                <img src="../resources/gallery/shopy/assets/img/blog-${i}.jpg" title="" alt="">
+                                            </c:forEach>
+
                                         </a>
                                     </div>
                                     <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">
@@ -823,7 +732,7 @@
             </div>
         </section>
         <!-- End section -->
-        <!-- section -->
+        <!-- section -->중
         <section class="py-5 bg-gray-100 border-top">
             <div class="container">
                 <div class="row gy-2">
