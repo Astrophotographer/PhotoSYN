@@ -19,7 +19,7 @@
     <bean id="memberLogoutSuccessHandler" class="com.member.security.MemberLogoutSuccessHandler"/>
 
     <!-- 블로그 이미지 업로드 시 인증예외처리 -->
-    <security:http pattern="/blog/write**" security="none"/>
+<!--    <security:http pattern="/blog/write**" security="none"/>-->
 
     <!-- 접근제한 설정 -->
     <security:http>
@@ -42,7 +42,7 @@
 
         <!-- false로 나중에 살려주기 -->
         <!-- false일시 post 방식시 csrf 토큰을 사용하도록 설정 -->
-        <security:csrf disabled="true"/>
+        <security:csrf disabled="false"/>
     </security:http>
 
     <!-- 인증과 권한 처리해주는 태그 -->

@@ -142,6 +142,7 @@ public class BlogController {
 
 
         return "blog/blogsingle";
+//        return "blog/blogsingleTest";
     }
 
 
@@ -544,6 +545,9 @@ public class BlogController {
             log.info("blog_img.toString() : " + blog_img.toString());
             //insert시 이미 블로그글이 존재하기에 추가적인 시퀀스 값을 추가안해도 됨.
             blogService.insertImg(blog_img);
+
+            //위 546 에러터지는중. 글 수정시 글만 수정하게 되면 무결성 제약 조건 위배.
+
             Thread.sleep(100);
         }
 
@@ -621,8 +625,13 @@ public class BlogController {
         model.addAttribute("tagArr", tagArr);
 
         return "blog/blogTestPost";
-
     }
+
+    @RequestMapping(value="blogsingleTest")
+    public void blogsingleTest() {
+        log.info("blogsingleTest start...");
+    }
+
 }
 
 

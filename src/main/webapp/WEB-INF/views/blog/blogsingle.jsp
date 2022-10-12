@@ -280,7 +280,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                        <%--                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
+                                        <%-- <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
                                 </div>
                             </div>
                         </div>
@@ -577,6 +577,9 @@
 
     })
 </script>
+<div>
+    <h1>?????</h1>
+</div>
 <%--footer--%>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
 <%--</body>--%>
