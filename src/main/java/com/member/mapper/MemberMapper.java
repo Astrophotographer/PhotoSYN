@@ -3,6 +3,7 @@ package com.member.mapper;
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
 
+
 public interface MemberMapper {
     // 회원가입
     public int addMember(MemberDTO memberDTO) throws Exception;

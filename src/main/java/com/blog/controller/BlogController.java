@@ -30,6 +30,8 @@ import java.util.*;
 @RequestMapping("/blog/*")
 public class BlogController {
 
+    static String imgServerPath = "";
+
     //TODO 1001 : 블로그 페이징처리
     //글 가져오기 조건. 페이징X, ajax로 요청
     //댓글만 페이징 처리.
@@ -416,20 +418,44 @@ public class BlogController {
 
     // 유저 한명(u_id)의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal, String u_id) {
+//    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal, String u_id) {
+    public String goUserMain(Model model, BlogDTO blogDTO, Blog_Criteria blog_criteria, Principal principal) {
         log.info("goUserMain start...");
 
         //option, sort 담아옴.
         log.info("blog_criteria : " + blog_criteria.toString());
 
-        //넘어온 u_id가 있으면 그 u_id로 검색
-        if (u_id != null) {
-            blog_criteria.setU_id(u_id);
+        try {
+            // isEmpty 에서 nullpointException 발생
+//            if (blog_criteria.getU_id().isEmpty() || blog_criteria.getU_id() == null || blog_criteria.getU_id().equals("")) {
+            if (blog_criteria.getU_id() == null || blog_criteria.getU_id().equals("")) {
+                log.info("blogCriteria is null");
+                return "redirect:/blog/main";
+            }
+        } catch (Exception e) {
+            log.info(e);
+            return "redirect:/blog/main";
         }
+
+        log.info("after Try Catch");
+
+        List<BlogDTO> list = blogService.getBlogList(blog_criteria);
+        log.info("list : " + list.toString());
+
+
         //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
-        if (principal != null) {
-            blog_criteria.setU_id(principal.getName());
-        }
+//        if (principal != null) {
+//            blog_criteria.setU_id(principal.getName());
+//        }
+
+        model.addAttribute("blog", list);
+
+        //작성자 자기소개글 테이블에서 값 가져오기
+        model.addAttribute("user_intro", blogService.getUserIntro(blog_criteria.getU_id()));
+        //작성자 SNS 가져오기
+        model.addAttribute("user_sns", blogService.getUserSNS(blog_criteria.getU_id()));
+        //유저 정보가져오기(유저 사진 경로 위해)
+        model.addAttribute("user_info", blogService.getUserInfo(blog_criteria.getU_id()));
 
         return "blog/blogusermain";
     }
@@ -578,8 +604,8 @@ public class BlogController {
         tags = tags.substring(1);
 
         String[] tagArr = tags.split("#");
-        for(int i=0;i<tagArr.length;i++) {
-            log.info("tagArr["+i+"] : " + tagArr[i]);
+        for (int i = 0; i < tagArr.length; i++) {
+            log.info("tagArr[" + i + "] : " + tagArr[i]);
         }
 
         model.addAttribute("tagArr", tagArr);

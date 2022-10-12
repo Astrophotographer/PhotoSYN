@@ -1,6 +1,9 @@
 package com.member.service;
 
 import com.member.domain.MemberDTO;
+import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Member;
+
 
 public interface MemberService {
     // 회원가입
