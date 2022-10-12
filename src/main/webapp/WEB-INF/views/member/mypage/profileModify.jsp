@@ -26,7 +26,7 @@
                 </c:otherwise>
             </c:choose>
             <div style="padding: 15px;">
-                <label class="profileBtn" for="uploadFile">업로드</label>
+                <label class="profileBtn2" for="uploadFile">업로드</label>
                 <input type="file" id="uploadFile" name="uploadFile">
             </div>
         </form>
@@ -53,13 +53,18 @@
                     <p><input type="password" id="pw" name="pw" autocomplete="off"/></p>
                 </div>
                 <div>
-                    <button class="profileBtn" type="button" onclick="window.location.href='/member/mypage/updatePw'">
+                    <button class="profileBtn2" type="button" style="width: 110px"
+                            onclick="window.location.href='/member/mypage/updatePw'">
                         비밀번호 변경
+                    </button>
+                    <button class="profileBtn2" type="button" style="width: 70px; margin: 0px 0px 0px 115px;"
+                            onclick="window.location.href='/member/mypage/profileDelete'">
+                        회원탈퇴
                     </button>
                 </div>
             </div>
             <div style="padding: 15px; text-align: right;">
-                <button class="profileBtn" type="submit">완료</button>
+                <button class="profileBtn2" type="submit">완료</button>
             </div>
         </form>
     </div>

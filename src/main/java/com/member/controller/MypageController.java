@@ -8,6 +8,7 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,8 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -177,6 +176,37 @@ public class MypageController {
         return "redirect:/member/mypage/profile";
     }
 
+    // 회원 탈퇴 페이지
+    @GetMapping("profileDelete")
+    public void profileDeletePage() {
+
+    }
+
+    // 회원 탈퇴
+    @PostMapping("deletePro")
+    public String memberDelete(MemberDTO memberDTO, @AuthenticationPrincipal MemberUser memberUser) throws Exception {
+        memberDTO.setId(memberUser.getUsername());
+        int result = memberService.deleteMember(memberDTO);
+
+        SecurityContextHolder.clearContext(); // 인증 객체 초기화
+
+        return "/member/main";
+    }
+
+    // 프로필 장바구니
+    @GetMapping("profileCart")
+    public void cartPage() {
+
+    }
+
+
+
+    // 프로필 구매 판매 내역
+    @GetMapping("profileBuySell")
+    public void buySell() {
+
+    }
+
     // 시큐리티 정보 갱신
     private boolean renewalAuth() {
         // 기존 정보 꺼내기
@@ -198,6 +228,7 @@ public class MypageController {
 
         return newAuth;
     }
+
 }
 
 
