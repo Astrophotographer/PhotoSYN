@@ -2,7 +2,7 @@ package com.member.mapper;
 
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
-import com.member.domain.PointDTO;
+//import com.member.domain.PointDTO;
 
 public interface MemberMapper {
     // 회원가입

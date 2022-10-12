@@ -1,7 +1,7 @@
 package com.member.service;
 
 import com.member.domain.MemberDTO;
-import com.member.domain.PointDTO;
+//import com.member.domain.PointDTO;
 
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Member;

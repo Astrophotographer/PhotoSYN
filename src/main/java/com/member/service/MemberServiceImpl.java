@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.member.domain.AuthDTO;
 import com.member.domain.MemberDTO;
-import com.member.domain.PointDTO;
+//import com.member.domain.PointDTO;
 import com.member.mapper.MemberMapper;
 import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
