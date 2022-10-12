@@ -44,8 +44,8 @@
                 <label for="ckeditor"></label><textarea name="B_CONTENT" id="ckeditor"></textarea>
                 <!-- 작성자는 원래 자동으로 들어가야 함. 임시로 넣어주기 -->
                 <label>
-                    whoami? <sec:authentication property="principal.member.name"/> <br>
-                    작성자 : <input type="text" name="U_ID" value='<sec:authentication property="principal.member.name"/>' readonly="readonly" placeholder='<sec:authentication property="principal.member.name"/>'>
+                    whoami?(닉네임) <sec:authentication property="principal.member.name"/> <br>
+                    작성자 : <input type="text" name="U_ID" value='<sec:authentication property="principal.username"/>' readonly="readonly" placeholder='<sec:authentication property="principal.username"/>'>
                 </label>
                 <label>
                     메인태그 :

@@ -113,7 +113,7 @@
 
                             <div class="post-share">
                                 <!-- 좋아요 수, 좋아요 하트모양 사진 -->
-                                <span class="count-number-like">2</span>
+                                <span class="count-number-like">${blog.b_LIKE}</span>
                                 <a class="penci-post-like single-like-button"><i class="ti-heart"></i></a>
                             </div>
                         </div>
@@ -275,7 +275,7 @@
                                 <div class="form-group">
                                         <%--                                <input class="form-control" type="hidden" name="U_ID" id="name" value='<sec:authentication property="principal.username"/>'/>--%>
                                     <input class="form-control" type="hidden" name="U_ID" id="name"
-                                           value="<sec:authentication property="principal.member.name"/>"/>
+                                           value="<sec:authentication property="principal.username"/>"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -519,6 +519,8 @@
             }
             replyContainer.html(str);
         }
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
 
         $("#submit_contact").on("click", function () {
             console.log("댓글 등록 버튼 클릭");
@@ -550,9 +552,9 @@
                 dataType: "text",
                 //post 방식 시큐리티 위해 추가
                 //요청을 날리기 전에.. 명령어 beforeSend
-                // beforeSend: function (xhr) {
-                //     xhr.setRequestHeader(header, token);
-                // },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
                 success: function (result, status, xhr) {
                     console.log("ajax 요청 성공!");
                     console.log(result);
