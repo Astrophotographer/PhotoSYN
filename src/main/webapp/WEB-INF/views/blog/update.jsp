@@ -25,6 +25,7 @@
 
 <%--<form class="form-horizontal" role="form" id="editorForm" method="post" action="/blog/update.do">--%>
 <form class="form-horizontal" role="form" id="editorForm" action="#">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     <div class="form-group">
         <div class="form-group">
             <div class="col-lg-12">
@@ -112,7 +113,7 @@
                 width: '80%',
                 height: '60%',
                 //사진이 올라올 경우 데이터가 해당 링크로 들어가게 된다.
-                filebrowserUploadUrl: '/blog/write'
+                filebrowserUploadUrl: '/blog/write/${_csrf.parameterName}=${_csrf.token}'
             });
     });
 

@@ -98,7 +98,6 @@
                                 <a href="#">#${tag}</a>
                             </div>
                         </c:forEach>
-
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
                         <div>
@@ -114,7 +113,7 @@
 
                             <div class="post-share">
                                 <!-- 좋아요 수, 좋아요 하트모양 사진 -->
-                                <span class="count-number-like">2</span>
+                                <span class="count-number-like">${blog.b_LIKE}</span>
                                 <a class="penci-post-like single-like-button"><i class="ti-heart"></i></a>
                             </div>
                         </div>
@@ -132,7 +131,8 @@
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
-                        <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
+                        <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author"
+                                            class="text-capitalize">${blog.u_ID}</a></h4>
                         <p>자기소개 : ${user_intro.u_INTRO}</p>
 
                         <a target="_blank" class="author-social" href="#"><i
@@ -275,12 +275,12 @@
                                 <div class="form-group">
                                         <%--                                <input class="form-control" type="hidden" name="U_ID" id="name" value='<sec:authentication property="principal.username"/>'/>--%>
                                     <input class="form-control" type="hidden" name="U_ID" id="name"
-                                           value="<sec:authentication property="principal.member.name"/>"/>
+                                           value="<sec:authentication property="principal.username"/>"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                        <%--                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
+                                        <%-- <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
                                 </div>
                             </div>
                         </div>
@@ -511,7 +511,7 @@
                 str += '<img class="d-flex mr-3 rounded-circle" src="../resources/blog/images/user.png" alt="">';
                 str += '<div class="media-body">';
                 // <a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author" class="text-capitalize">${blog.u_ID}</a>
-                str += '<h5 class="mt-0">작성자 : <a href="/blog/usermain?u_id='+result[i].U_ID+'" title="" rel="author" class="text-capitalize">' + result[i].U_ID + '</a></h5>';
+                str += '<h5 class="mt-0">작성자 : <a href="/blog/usermain?u_id=' + result[i].U_ID + '" title="" rel="author" class="text-capitalize">' + result[i].U_ID + '</a></h5>';
                 str += '댓글내용 : ' + result[i].R_REPLY;
                 str += '</div>';
                 str += '</div>';
@@ -519,6 +519,8 @@
             }
             replyContainer.html(str);
         }
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
 
         $("#submit_contact").on("click", function () {
             console.log("댓글 등록 버튼 클릭");
@@ -550,9 +552,9 @@
                 dataType: "text",
                 //post 방식 시큐리티 위해 추가
                 //요청을 날리기 전에.. 명령어 beforeSend
-                // beforeSend: function (xhr) {
-                //     xhr.setRequestHeader(header, token);
-                // },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
                 success: function (result, status, xhr) {
                     console.log("ajax 요청 성공!");
                     console.log(result);
@@ -577,6 +579,9 @@
 
     })
 </script>
+<div>
+    <h1>?????</h1>
+</div>
 <%--footer--%>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
 <%--</body>--%>

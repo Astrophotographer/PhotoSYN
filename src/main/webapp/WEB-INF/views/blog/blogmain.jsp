@@ -37,14 +37,14 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <div>
     <h1>TEST BLOG MAIN</h1>
-    <table>
-        <c:forEach var="board" items="${list}">
-            <tr>
-                <td>U_ID : ${board.u_ID}</td>
-                <td>REG : ${board.b_REG}</td>
-            </tr>
-        </c:forEach>
-    </table>
+<%--    <table>--%>
+<%--        <c:forEach var="board" items="${list}">--%>
+<%--            <tr>--%>
+<%--                <td>U_ID : ${board.u_ID}</td>--%>
+<%--                <td>REG : ${board.b_REG}</td>--%>
+<%--            </tr>--%>
+<%--        </c:forEach>--%>
+<%--    </table>--%>
 </div>
 
 
