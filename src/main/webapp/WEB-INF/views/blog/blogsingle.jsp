@@ -277,7 +277,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">
+<%--                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
                             </div>
                         </div>
                     </div>
@@ -486,7 +486,8 @@
         }
 
 
-        let replyContainer = $(".reply-container");
+        // let replyContainer = $(".reply-container");
+        let replyContainer = $(".comment-area");
 
         function makeList(result) {
             console.log('makeList()...');
@@ -504,8 +505,8 @@
                 str += '<div class="media mb-4">';
                 str += '<img class="d-flex mr-3 rounded-circle" src="../resources/blog/images/user.png" alt="">';
                 str += '<div class="media-body">';
-                str += '<h5 class="mt-0">' + result[i].r_writer + '</h5>';
-                str += result[i].r_content;
+                str += '<h5 class="mt-0">작성자 : ' + result[i].U_ID + '</h5>';
+                str += '댓글내용 : '+result[i].R_REPLY;
                 str += '</div>';
                 str += '</div>';
 
@@ -523,23 +524,29 @@
             console.log("replyer : " + replyer);
 
             let reqData = {
-                b_no: bnoVal,
-                u_id: replyer,
-                r_reply: replyVal
+                B_NO: bnoVal,
+                U_ID: replyer,
+                R_REPLY: replyVal
             };
 
             console.log("reqData : " + reqData);
+            console.log(reqData);
+            console.log("reqData.b_no : " + reqData.B_NO);
+            console.log("reqData.u_id : " + reqData.U_ID);
+            console.log("reqData.r_reply : " + reqData.R_REPLY);
 
             $.ajax({
                 type: "POST",
-                url: "/reply/add",
+                url: "${pageContext.request.contextPath}/reply/add",
                 data: JSON.stringify(reqData),
-                contentType: "application/json;charset=UTF-8",
-                //0901 post 방식 시큐리티 위해 추가
+                contentType: "application/json; charset=utf-8",
+                // contentType: "application/json",
+                dataType : "text",
+                //post 방식 시큐리티 위해 추가
                 //요청을 날리기 전에.. 명령어 beforeSend
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader(header, token);
-                },
+                // beforeSend: function (xhr) {
+                //     xhr.setRequestHeader(header, token);
+                // },
                 success: function (result, status, xhr) {
                     console.log("ajax 요청 성공!");
                     console.log(result);
@@ -551,7 +558,7 @@
 
                     //댓글 등록 후 input 공백으로 만들어주기
                     $("#reply").val("");
-                    $("#replyer").val("");
+                    // $("#replyer").val("");
                 },
                 error: function (e) {
                     console.log("ajax 요청 실패")
@@ -563,7 +570,7 @@
         })
 
     })
-
+</script>
     <%--footer--%>
     <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
     <%--</body>--%>

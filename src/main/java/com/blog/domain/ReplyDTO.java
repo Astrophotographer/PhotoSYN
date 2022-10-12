@@ -1,18 +1,18 @@
 package com.blog.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import java.sql.Timestamp;
 
 @Data
 public class ReplyDTO {
-    private Long R_NO;
-    private String U_ID;
-    private Long B_NO;
-    private String R_REPLY;
-    private Timestamp R_REG;
-    private int R_GRP;
-    private int R_LEVEL;
-    private int R_STEP;
+    public Long R_NO;
+    public String U_ID;
+    public Long B_NO;
+    public String R_REPLY;
+    public Timestamp R_REG;
+    public int R_GRP;
+    public int R_LEVEL;
+    public int R_STEP;
 
 }

@@ -10,8 +10,8 @@
     </select>
 
     <insert id="add">
-        insert into reply(r_no, b_no, r_reply, u_id)
-        values(reply_seq.nextval, #{bno}, #{r_reply}, #{u_id})
+        insert into reply
+        values(reply_seq.nextval, #{U_ID}, #{B_NO}, #{R_REPLY}, sysdate, 0,0,0)
     </insert>
 
 </mapper>
