@@ -82,6 +82,5 @@ public class GalleryServiceImpl implements GalleryService {
         return galleryMapper.getTotal(cri);
     }
 
-    @Override
-    public boolean deleteGallery(Long G_NO) {return galleryMapper.deleteGallery(G_NO);}
+
 }

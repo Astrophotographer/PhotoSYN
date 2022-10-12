@@ -111,7 +111,7 @@ public class MypageController {
         return memberService.nameCheck(name);
     }
 
-    // 비밀번호 변경 페이지
+
     @GetMapping("updatePw")
     public void updatePwPage() {
 

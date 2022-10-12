@@ -16,6 +16,11 @@
         VALUES (gallery_seq.nextval, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, #{G_HPRICE}, #{G_LPRICE}, #{G_CONTENT}, sysdate, sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
     </insert>
 
+    <insert id="insertMetadata">
+        insert into Metadata (G_NO, M_IMGLENS, M_IMGCAMERA, M_IMGHQLY, M_IMGLQLY, M_APERTURE, M_ISO, M_FLENGTH, M_SHUTTERSPEED)
+        VALUES  (gallery_seq.nextval, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
+    </insert>
+
 
 
 
@@ -29,7 +34,6 @@
     </select>
 
 
-
     <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
         select * from gallery
         <if test='u_id != null'>
@@ -38,7 +42,7 @@
         <choose>
         <!-- 최신보기(reg) desc - 최신순, asc - 오래된순 -->
         <when test='option eq "reg".toString()'>
-            order by B_REG
+            order by G_REG
             <if test='sort eq "desc".toString()'>
                 desc
             </if>
@@ -80,6 +84,16 @@
         select * from gallery where g_no = #{G_NO}
     </select>
 
+    <select id="checkGallerySeq" resultType="_int">
+        select gallery_seq.currval
+        from dual
+    </select>
+
+    <update id="hideGallery">
+        update gallery
+        set g_status = 2
+        where g_no = #{G_NO}
+    </update>
 
     <update id="updateGallery">
         update Gallery
@@ -89,6 +103,12 @@
             g_edit = sysdate
         g_status = #{G_STATUS}
         where g_no = #{G_NO}
+    </update>
+
+    <update id="updateGalleryReadCount">
+        update gallery
+        set g_readcount = g_readcount + 1
+        where b_no = #{G_NO}
     </update>
 
 

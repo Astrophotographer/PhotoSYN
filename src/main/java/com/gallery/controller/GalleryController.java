@@ -25,6 +25,7 @@ import javax.swing.*;
 public class GalleryController {
 
 
+
     @Autowired
     private GalleryService galleryService;
 
@@ -32,29 +33,30 @@ public class GalleryController {
     public String list(Model model, Gallery_Criteria cri) {
         log.info("gallery main!!");
 
-        // model로 list jsp에 뿌려줄 글 목록 전달
-        model.addAttribute("main", galleryService.getGalleryList(cri));
-        log.info("************ cri : " + cri);
-
-        int total = galleryService.getTotal(cri); // 게시글 개수 가져오기
-        log.info("******************* total : " + total);
-        model.addAttribute("pager", new Gallery_PageDTO(cri, total));
+//        // model로 list jsp에 뿌려줄 글 목록 전달
+//        model.addAttribute("main", galleryService.getGalleryList(cri));
+//        log.info("************ cri : " + cri);
+//
+//        int total = galleryService.getTotal(cri); // 게시글 개수 가져오기
+//        log.info("******************* total : " + total);
+//        model.addAttribute("pager", new Gallery_PageDTO(cri, total));
 
         return "gallery/galleryMain";
     }
 
+
     // 글 등록 폼
     @GetMapping("upload")
-    @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
-    public void upload() {
-    }
+    //@PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
+   // public void upload() {
+  //  }
     // 글 등록 처리
-    @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
+   //@PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
     @PostMapping("upload")
     public String uploadGallery(GalleryDTO galleryDTO, RedirectAttributes rttr) {
         log.info("upload 처리 : " + galleryDTO);
 
-        galleryService.uploadGallery(galleryDTO);
+       // galleryService.uploadGallery(galleryDTO);
         // RedirectAttributes : Model처럼 스프링MVC가 자동으로 전달해주는 객체
         // addFlashAttribute(key, value) : url뒤에 데이터가 붙지 않고,
         //		일회성 데이터로 페이지를 새로고침하면 데이터 날라감.
@@ -65,8 +67,18 @@ public class GalleryController {
         rttr.addFlashAttribute("result", galleryDTO.getG_NO());
         // 등록처리후 글 고유번호 속성으로 추가해서 전달 (main에서 사용)
 
-        return "redirect:/main/galleryMain";
+       // return "redirect:/gallery/galleryMain";
+        return "gallery/galleryUpload";
     }
+
+    @RequestMapping("metadata")
+    public String metadata(GalleryDTO galleryDTO, RedirectAttributes rttr) {
+        log.info("metadata 처리 : " + galleryDTO);
+
+
+        return "gallery/galleryMetadata";
+    }
+
 //    @RequestMapping(value ="upload")
 //    public String upload(Model model) {
 //        log.info("gallery upload!!");
@@ -104,7 +116,7 @@ public class GalleryController {
 //    }
 
 
-    @PreAuthorize("principal.useranme == #writer") // 작성자와 로그인한 사람이 같은지 확인
+    //@PreAuthorize("principal.useranme == #writer") // 작성자와 로그인한 사람이 같은지 확인
     @PostMapping("delete")
     public String delete(Long G_NO, String writer, Gallery_Criteria cri, RedirectAttributes rttr) {
         // 삭제 처리
@@ -116,4 +128,5 @@ public class GalleryController {
     }
 
 }
+
 
