@@ -53,7 +53,13 @@
     <!--    <select id="getMemberDTOList" resultType="com.member.domain.MemberDTO">-->
     <select id="getMemberDTOList" resultMap="memberMap">
         select *
-        from user_list
+        from user_list order by u_reg desc
     </select>
+
+    <update id="updateMemberShip">
+        update user_list
+        set ms_membership = #{membership}
+        where u_id = #{id}
+    </update>
 
 </mapper>

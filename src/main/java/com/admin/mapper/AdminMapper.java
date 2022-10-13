@@ -14,4 +14,6 @@ public interface AdminMapper {
     public int getRecentBlogCount();
 
     public List<MemberDTO> getMemberDTOList();
+
+    public int updateMemberShip(MemberDTO memberDTO);
 }

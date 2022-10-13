@@ -12,4 +12,8 @@ public interface AdminService {
     public AdminMainDTO getAdminMainDTO();
 
     public List<MemberDTO> getMemberDTOList();
+
+    public MemberDTO getMemberDTO(String u_id);
+
+    public int updateMemberShip(MemberDTO memberDTO);
 }
