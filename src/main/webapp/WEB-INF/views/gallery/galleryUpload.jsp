@@ -373,7 +373,7 @@
 
             <%--사진 넣기--%>
             <input id="anywhere-upload-input" data-action="anywhere-upload-input" class="hidden-visibility" type="file"
-                   accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.pdf,.jpeg,.tiff,.heif" multiple="">
+                   accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.jpeg,.tiff,.heif" multiple="">
             <input id="anywhere-upload-input-camera" data-action="anywhere-upload-input" class="hidden-visibility"
                    type="file" capture="camera" accept="image/*">
             <ul id="anywhere-upload-queue" class="upload-box-queue content-width soft-hidden queueEmpty"
