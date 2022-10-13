@@ -1,0 +1,63 @@
+.catargory-card-01 {
+	.swiper-wrapper & {
+		margin: 1px;
+	}
+	.catargory-media {
+		background: $white;
+		border: 1px solid $gray-300;
+	    border-radius: 50%;
+		overflow: hidden;
+		a {
+			overflow: hidden;
+			display: block;
+		}
+		img {
+			transition: ease all 0.35s;
+			transform: scale(1);
+			display: block;
+			margin: 0 auto;
+		}
+	}
+	.catargory-info {
+		padding-top: 10px;
+		text-align: center;
+		h6 {
+			margin: 0;
+			a {
+				display: inline-flex;
+				position: relative;
+				color: $dark;
+				&:after {
+					content: "";
+					position: absolute;
+					bottom: 0;
+					left: auto;
+					right: 0;
+					width: 0px;
+					height: 1px;
+					background: currentColor;
+					transition: ease all 0.35s;
+				}
+			}
+		}
+	}
+	&:hover {
+		.catargory-media {
+			img {
+				transform: scale(1.05);
+			}
+		}
+		.catargory-info {
+			h6 {
+				a {
+					color: $primary;
+					&:after {
+						width: 100%;
+						left: 0;
+						right: auto;
+					}
+				}
+			}
+		}
+	}
+}

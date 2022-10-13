@@ -1,0 +1,74 @@
+/*----------------------------------------------------------------------
+  * shopy – Multipurpose Template
+  * Copyright 2022 uiocean.com by pxdraft
+------------------------------------------------------------------------*/
+
+// shopy setup
+@import '../vendor/bootstrap/scss/functions';
+
+
+// shopy setup
+@import 'variables';
+@import "shopy/components/utilitie";
+
+// Custom setup
+@import 'custom/user-variables';
+
+// Bootstrap core
+@import '../vendor/bootstrap/scss/bootstrap';
+
+
+// bootstrap icon
+@import '../vendor/bootstrap/icon/bootstrap-icons.css';
+
+//feather icon
+@import '../vendor/feather/feather.css';
+
+// swiper
+@import '../vendor/swiper/swiper-bundle.min.css';
+// magnific
+@import '../vendor/magnific/magnific-popup.css';
+
+
+
+@import 'shopy/fonts';
+@import 'shopy/layout/wrapper';
+
+// Header
+@import 'shopy/header';
+@import 'shopy/header/header-top-01';
+@import 'shopy/header/header-01';
+
+// footer
+@import 'shopy/footer';
+
+// Mega Menu
+@import 'shopy/mega-menu';
+
+
+@import 'shopy/components/spinner';
+@import 'shopy/components/section';
+@import 'shopy/components/buttons';
+@import 'shopy/components/font-weight';
+@import 'shopy/components/swiper';
+@import 'shopy/components/icon';
+@import 'shopy/components/background';
+@import 'shopy/components/heading';
+@import 'shopy/components/border';
+@import 'shopy/components/avatar';
+@import 'shopy/components/effect';
+@import 'shopy/components/img';
+@import 'shopy/components/from';
+@import 'shopy/components/modal';
+@import 'shopy/components/link';
+@import 'shopy/components/dropdown';
+@import 'shopy/components/product-card';
+@import 'shopy/components/catargory-card';
+@import 'shopy/components/shop';
+@import 'shopy/components/product-details';
+@import 'shopy/components/browser';
+
+
+
+// Custom core
+@import 'custom/user';

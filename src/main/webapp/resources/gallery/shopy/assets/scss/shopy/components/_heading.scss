@@ -1,0 +1,9 @@
+.section-heading {
+    @include media-breakpoint-up(md) {
+        margin-bottom: 2.5rem;
+    }
+    @include media-breakpoint-up(lg) {
+        margin-bottom: 3rem;
+    }
+    margin-bottom: 2rem;
+}

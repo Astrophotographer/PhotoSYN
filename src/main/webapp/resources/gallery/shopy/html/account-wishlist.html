@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="zxx" class="dark">
+
+<head>
+    @@include('./_head.html', {
+    "path": "../assets",
+    "title": "Shopy – eCommerce Bootstrap 5 Template"
+    })
+</head>
+
+<body>
+    <!-- Skippy & Prload -->
+    @@include('./_skippy.html',{
+    "path": "",
+    })
+    <!-- Edn Skippy & Prload -->
+    <!-- All Modal -->
+    @@include('./_common-modal.html',{
+    "path": "",
+    })
+    <!-- Edn All Modal -->
+    <!-- 
+    ========================
+        Wrapper 
+    ========================
+    -->
+    <div class="wrapper">
+        <!-- Header Height -->
+        <div class="header-height-bar"></div>
+        <!--  -->
+        <!-- Header -->
+        @@include('./header/_header01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        "HeaderClass": "navbar-light fixed-top header-height bg-white shadow-sm",
+        })
+        <!-- End Header -->
+        <!-- Main -->
+        <main>
+            <!-- Page Title -->
+            @@include('./_page-heading.html', {
+            "title": "Wishlist",
+            })
+            <!-- End Page Title -->
+            <!-- Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col-lg-4 pb-4 pb-lg-0 col-xxl-3  pe-xxl-5">
+                            <div class="bg-white border border-bottom-0">
+                                <ul class="list-unstyled mb-0 theme-link">
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-order.html">
+                                            <i class="bi bi-bag me-2"></i> Order <div class="ms-auto badge-pill badge bg-primary rounded-3">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center active p-3" href="account-wishlist.html">
+                                            <i class="bi bi-heart me-2"></i>Wishlist <div class="ms-auto badge-pill badge bg-primary rounded-3">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-tickets.html">
+                                            <i class="bi bi-bookmark me-2"></i>Support Tickets <div class="ms-auto badge-pill badge bg-primary rounded-3">0</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-profile.html">
+                                            <i class="bi bi-person-circle me-2"></i>Profile info
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-address.html">
+                                            <i class="bi bi-map-fill me-2"></i>Addresses
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-payment.html">
+                                            <i class="bi bi-credit-card me-2"></i>Payment
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="#">
+                                            <i class="bi bi-box-arrow-left me-2"></i>Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-xxl-9">
+                            <div class="row g-3 row-cols-2 row-cols-md-4">
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-1.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-2.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-3.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-4.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-5.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-6.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-7.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="product-card-01">
+                                        <div class="product-media">
+                                            <div class="product-media-hover">
+                                                <a href="#">
+                                                    <img src="../resources/gallery/shopy/assets/img/product-8.jpg" title="" alt="">
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-info">
+                                            <h6 class="product-title">
+                                                <a href="#">Fine-knit sweater</a>
+                                            </h6>
+                                            <div class="product-price">
+                                                <span class="text-primary">$28.<small>50</small></span>
+                                                <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                            </div>
+                                            <div class="product-cart-btn">
+                                                <a class="btn btn-outline-danger">
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mt-5">
+                                <div class="d-none d-lg-block">Showing: 1 - 12 of 17</div>
+                                <div class="ms-lg-auto">
+                                    <ul class="pagination m-0">
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Previous">
+                                                <span aria-hidden="true">«</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="#" aria-label="Next">
+                                                <span aria-hidden="true">»</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer -->
+        @@include('./footer/_footer01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        })
+        <!-- End Footer -->
+    </div>
+    <!-- 
+    ========================
+       End Wrapper 
+    ========================
+    -->
+    <!-- script start -->
+    @@include('./_scripts.html', {
+    "path": "../assets",
+    })
+    <!-- End script start -->
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!-- Header -->
+<header class="main-header main-header-01 headroom @@HeaderClass">
+    @@include('./header/header-top/_top-header-01.html', {
+    "path": ".",
+    "TopBarClass":"bg-dark border-bottom d-none d-md-block",
+    "TopBarLink":"text-white",
+    })
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <!-- Logo Start -->
+            <a href="#" class="navbar-brand header-navbar-brand me-lg-5">
+                <img class="logo-dark" src="@@imgPath/img/logo.svg" title="" alt="">
+                <img class="logo-light" src="@@imgPath/img/logo-light.svg" title="" alt="">
+            </a>
+            <!-- Logo End -->
+            <!-- Collapse Start -->
+            <div class="navbar-collapse collapse" id="main_header_nav">
+                <!-- Navigation Start -->
+                <ul class="navbar-nav @@navbarClass">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@@path/index.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Pages
+                        </a>
+                        <ul class="dropdown-menu start">
+                            <li><a class="dropdown-item" href="@@path/about.html">About Us</a></li>
+                            <li><a class="dropdown-item" href="@@path/contact.html">Contact Us</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Shop
+                        </a>
+                        <ul class="dropdown-menu start">
+                            <li><a class="dropdown-item" href="@@path/shop.html">Product Grid </a></li>
+                            <li><a class="dropdown-item" href="@@path/shop-list.html">Product List </a></li>
+                            <li><a class="dropdown-item" href="@@path/product-details.html">Product Detail</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Blog
+                        </a>
+                        <ul class="dropdown-menu start">
+                            <li><a class="dropdown-item" href="@@path/blog-list.html">Blog List</a></li>
+                            <li><a class="dropdown-item" href="@@path/blog-detail.html">Blog Detail</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Account
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled">
+                                        <li><a class="dropdown-item" href="@@path/login.html">Login</a></li>
+                                        <li><a class="dropdown-item" href="@@path/sign-up.html">Sign Up</a></li>
+                                        <li><a class="dropdown-item" href="@@path/reset-password.html">Forgot Password</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-order.html">Order</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-single-order.html">Order Detail</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-address.html">Address</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-payment.html">Payment</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6">
+                                    <ul class="list-unstyled">
+                                        <li><a class="dropdown-item" href="@@path/account-profile.html">Profile</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-tickets.html">Support Ticket</a></li>
+                                        <li><a class="dropdown-item" href="@@path/account-wishlist.html">Wishlist</a></li>
+                                        <li><a class="dropdown-item" href="@@path/shopping-cart.html">Shopping Cart</a></li>
+                                        <li><a class="dropdown-item" href="@@path/checkout.html">Checkout</a></li>
+                                        <li><a class="dropdown-item" href="@@path/order-completed.html">Order Completed</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <!-- Navigation End -->
+            </div>
+            <!-- Header Right -->
+            <div class="nav flex-nowrap align-items-center header-right">
+                <!-- Nav Search-->
+                <div class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#search-open" href="javascript:void(0)">
+                        <i class="fi-search"> </i>
+                    </a>
+                </div>
+                <!-- Acount -->
+                <div class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" id="dropdown_myaccount" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fi-user"> </i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end mt-2 shadow" aria-labelledby="dropdown_myaccount">
+                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="#">Register</a>
+                        <a class="dropdown-item" href="#">Wishlist</a>
+                        <a class="dropdown-item" href="#">My account</a>
+                    </div>
+                </div>
+                <!-- Wishlist -->
+                <div class="nav-item d-none d-xl-block">
+                    <a class="nav-link" href="#">
+                        <i class="fi-heart"> </i>
+                        <sup>10</sup>
+                    </a>
+                </div>
+                <!-- Cart -->
+                <div class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modalMiniCart" href="javascript:void(0)">
+                        <i class="fi-shopping-cart"> </i>
+                        <sup>10</sup>
+                    </a>
+                </div>
+                <!-- Mobile Toggle -->
+                <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#main_header_nav" aria-controls="main_header_nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- End Mobile Toggle -->
+            </div>
+            <!-- Header Right End -->
+        </div>
+    </nav>
+</header>
+<!-- End Header -->

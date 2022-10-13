@@ -1,0 +1,39 @@
+@each $color, $value in $theme-soft-colors {
+    .bg-#{$color}-soft {
+        background-color: $value;
+    }
+}
+
+@each $color, $value in $grays {
+    .bg-gray-#{$color} {
+        background-color: $value;
+    }
+}
+
+@each $color, $value in $theme-gradient-colors {
+  .bg-#{$color} {
+    background: linear-gradient(180deg, $value, rgba($white, 0) 100%) !important;
+  }
+}
+
+
+.bg-gray-gradient-reverse {
+    background: linear-gradient(0deg, rgba($gray-100, 1), rgba(255, 255, 255, 0) 100%) !important;
+}
+
+.bg-gray-gradient {
+    background: linear-gradient(0deg, rgba($white, 0), rgba($gray-100, 1) 100%) !important;
+}
+
+
+.bg-cover {
+    background-size: cover;
+}
+
+.bg-no-repeat {
+    background-repeat: no-repeat;
+}
+
+.bg-center {
+    background-position: center;
+}

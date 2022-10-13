@@ -17,8 +17,12 @@
     </insert>
 
     <insert id="insertMetadata">
+
+<!--            <selectKey keyProperty="G_NO" order="BEFORE" resultType="long">-->
+<!--                select gallery_seq.nextval from dual-->
+<!--            </selectKey>-->
         insert into Metadata (G_NO, M_IMGLENS, M_IMGCAMERA, M_IMGHQLY, M_IMGLQLY, M_APERTURE, M_ISO, M_FLENGTH, M_SHUTTERSPEED)
-        VALUES  (gallery_seq.nextval, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
+        VALUES  (metadata_seq.nextval, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
     </insert>
 
 

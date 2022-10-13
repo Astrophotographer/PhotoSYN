@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zxx" class="dark">
+
+<head>
+    @@include('./_head.html', {
+    "path": "../assets",
+    "title": "Shopy – eCommerce Bootstrap 5 Template"
+    })
+</head>
+
+<body>
+    <!-- Skippy & Prload -->
+    @@include('./_skippy.html',{
+    "path": "",
+    })
+    <!-- Edn Skippy & Prload -->
+    <!-- All Modal -->
+    @@include('./_common-modal.html',{
+    "path": "",
+    })
+    <!-- Edn All Modal -->
+    <!-- 
+    ========================
+        Wrapper 
+    ========================
+    -->
+    <div class="wrapper">
+        <!-- Header Height -->
+        <div class="header-height-bar"></div>
+        <!--  -->
+        <!-- Header -->
+        @@include('./header/_header01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        "HeaderClass": "navbar-light fixed-top header-height bg-white shadow-sm",
+        })
+        <!-- End Header -->
+        <!-- Main -->
+        <main>
+            <!-- Page Title -->
+            @@include('./_page-heading.html', {
+            "title": "Cart",
+            })
+            <!-- End Page Title -->
+            <!-- Section -->
+            <div class="section">
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col-md-7">
+                            <ul class="list-group mb-6">
+                                <li class="list-group-item p-3">
+                                    <div class="row g-2">
+                                        <div class="col-3 col-md-2">
+                                            <!-- Image -->
+                                            <a href="#">
+                                                <img src="../resources/gallery/shopy/assets/img/product-1.jpg" alt="..." class="img-fluid">
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <!-- Title -->
+                                            <div class="d-flex fw-600">
+                                                <a class="text-dark" href="#">Fine-knit sweater</a> <span class="ms-auto">$40.00</span>
+                                            </div>
+                                            <!-- Text -->
+                                            <p class="mb-2 fs-sm text-muted">
+                                                Size: M <br>
+                                                Color: Red
+                                            </p>
+                                            <!--Footer -->
+                                            <div class="d-flex align-items-center">
+                                                <!-- Select -->
+                                                <select class="form-select form-select-sm w-auto">
+                                                    <option value="1">1</option>
+                                                    <option value="1">2</option>
+                                                    <option value="1">3</option>
+                                                </select>
+                                                <!-- Remove -->
+                                                <a class="ms-auto text-danger fs-sm" href="#!">
+                                                    <i class="bi bi-x"></i> Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item p-3">
+                                    <div class="row g-2">
+                                        <div class="col-3 col-md-2">
+                                            <!-- Image -->
+                                            <a href="#">
+                                                <img src="../resources/gallery/shopy/assets/img/product-2.jpg" alt="..." class="img-fluid">
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <!-- Title -->
+                                            <div class="d-flex fw-600">
+                                                <a class="text-dark" href="#">Fine-knit sweater</a> <span class="ms-auto">$40.00</span>
+                                            </div>
+                                            <!-- Text -->
+                                            <p class="mb-2 fs-sm text-muted">
+                                                Size: M <br>
+                                                Color: Red
+                                            </p>
+                                            <!--Footer -->
+                                            <div class="d-flex align-items-center">
+                                                <!-- Select -->
+                                                <select class="form-select form-select-sm w-auto">
+                                                    <option value="1">1</option>
+                                                    <option value="1">2</option>
+                                                    <option value="1">3</option>
+                                                </select>
+                                                <!-- Remove -->
+                                                <a class="ms-auto text-danger fs-sm" href="#!">
+                                                    <i class="bi bi-x"></i> Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item p-3">
+                                    <div class="row g-2">
+                                        <div class="col-3 col-md-2">
+                                            <!-- Image -->
+                                            <a href="#">
+                                                <img src="../resources/gallery/shopy/assets/img/product-3.jpg" alt="..." class="img-fluid">
+                                            </a>
+                                        </div>
+                                        <div class="col">
+                                            <!-- Title -->
+                                            <div class="d-flex fw-600">
+                                                <a class="text-dark" href="#">Fine-knit sweater</a> <span class="ms-auto">$40.00</span>
+                                            </div>
+                                            <!-- Text -->
+                                            <p class="mb-2 fs-sm text-muted">
+                                                Size: M <br>
+                                                Color: Red
+                                            </p>
+                                            <!--Footer -->
+                                            <div class="d-flex align-items-center">
+                                                <!-- Select -->
+                                                <select class="form-select form-select-sm w-auto">
+                                                    <option value="1">1</option>
+                                                    <option value="1">2</option>
+                                                    <option value="1">3</option>
+                                                </select>
+                                                <!-- Remove -->
+                                                <a class="ms-auto text-danger fs-sm" href="#!">
+                                                    <i class="bi bi-x"></i> Remove
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="row align-items-end justify-content-between mb-10 mb-md-0">
+                                <div class="col-md-7">
+                                    <!-- Coupon -->
+                                    <form class="mb-3 mb-md-0">
+                                        <label class="fs-sm fw-600 pb-2" for="cart_Coupon_Code">
+                                            Coupon code:
+                                        </label>
+                                        <div class="row form-row">
+                                            <div class="col">
+                                                <!-- Input -->
+                                                <input class="form-control" id="cart_Coupon_Code" type="text" placeholder="Enter coupon code*">
+                                            </div>
+                                            <div class="col-auto">
+                                                <!-- Button -->
+                                                <button class="btn btn-dark" type="submit">
+                                                    Apply
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-auto">
+                                    <!-- Button -->
+                                    <button class="btn btn-sm btn-outline-dark">Update Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-5 col-lg-4 offset-lg-1 sticky-lg-top">
+                            <!-- Total -->
+                            <div class="card mb-4 bg-gray-100">
+                                <div class="card-body py-0 px-4">
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex bg-transparent px-0 py-3">
+                                            <span>Subtotal</span> <span class="ms-auto">$89.00</span>
+                                        </li>
+                                        <li class="list-group-item d-flex bg-transparent px-0 py-3">
+                                            <span>Tax</span> <span class="ms-auto">$00.00</span>
+                                        </li>
+                                        <li class="list-group-item d-flex bg-transparent px-0 py-3 fs-lg fw-600">
+                                            <span>Total</span> <span class="ms-auto">$89.00</span>
+                                        </li>
+                                        <li class="list-group-item bg-transparent py-3 text-muted fs-sm px-0">
+                                            Shipping cost calculated at Checkout *
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row g-2">
+                                <div class="col-sm">
+                                    <a class="btn btn-block btn-dark mb-2 w-100" href="#">Checkout</a>
+                                </div>
+                                <div class="col-sm">
+                                    <a class="btn btn-outline-dark w-100" href="#">
+                                        <i class="bi bi-chevron-left"></i> Continue Shopping
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer -->
+        @@include('./footer/_footer01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        })
+        <!-- End Footer -->
+    </div>
+    <!-- 
+    ========================
+       End Wrapper 
+    ========================
+    -->
+    <!-- script start -->
+    @@include('./_scripts.html', {
+    "path": "../assets",
+    })
+    <!-- End script start -->
+</body>
+
+</html>
