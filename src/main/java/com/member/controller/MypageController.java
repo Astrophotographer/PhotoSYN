@@ -1,5 +1,6 @@
 package com.member.controller;
 
+import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 import com.member.security.MemberUser;
 import com.member.security.MemberUserDetailsService;
@@ -190,13 +191,28 @@ public class MypageController {
 
         SecurityContextHolder.clearContext(); // 인증 객체 초기화
 
-        return "/member/main";
+        return "redirect:/member/main";
     }
 
-    // 프로필 장바구니
+    // 프로필 장바구니 페이지
     @GetMapping("profileCart")
     public void cartPage() {
 
+    }
+    /* 장바구니 담기 */
+    @PostMapping("insertCart")
+    public String insertCart(Long G_NO) {
+        memberService.insertCart(G_NO);
+
+        return "redirect:/member/mypage/profileCart";
+    }
+
+    /* 장바구니 삭제 */
+    @PostMapping("deleteCart")
+    public String cartDelete(Long g_no) {
+        memberService.deleteCart(g_no);
+
+        return "redirect:/member/mypage/profileCart";
     }
 
 

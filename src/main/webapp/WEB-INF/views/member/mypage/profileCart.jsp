@@ -6,7 +6,7 @@
         <div style="font-size: 50px; font-weight: 800;">장바구니</div>
         <hr>
         <div style="display: flex; justify-content: space-between;">
-            <button type="button" class="profileBtn2">삭제</button>
+            <button type="button" class="profileBtn2" onclick="window.location.href='/member/mypage/deleteCart'">삭제</button>
         </div>
         <br/>
 
@@ -20,17 +20,18 @@
                 <th>개수</th>
                 <th>가격</th>
             </tr>
-<%--            <c:set var="tot" value="${0}"/>--%>
-<%--            <c:forEach items="${}"--%>
-            <tr>
-                <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
-                <td>dd</td>
-                <td>dd</td>
-                <td>dd</td>
-                <td>dd</td>
-                <td>dd</td>
-                <td>dd</td>
-            </tr>
+            <c:set var="tot" value="${0}"/>
+            <c:forEach var="gallery" items="${list}">
+                <tr>
+                    <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
+                    <td>${gallery.G_NO}</td>
+                    <td>dd</td>
+                    <td>dd</td>
+                    <td>dd</td>
+                    <td>dd</td>
+                    <td>dd</td>
+                </tr>
+            </c:forEach>
 
             <!--
             <tr>

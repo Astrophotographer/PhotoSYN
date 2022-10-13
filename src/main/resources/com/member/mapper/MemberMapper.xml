@@ -105,5 +105,33 @@
         where u_id = #{id}
     </update>
 
+    <!-- 장바구니 담기 -->
+
+    <!-- 장바구니 목록 -->
+
+
+    <!-- 장바구니 삭제 -->
+    <delete id="deleteCart">
+        delete
+        from user_cart
+        where g_no = #{g_no}
+    </delete>
+
+    <!-- 장바구니 목록 -->
+    <select id="getCart" resultType="com.member.domain.CartDTO">
+        select a.u_id, a.g_no, a.m_imgQly, b.g_lname, b.hprice, b.lprice
+        from user_cart a
+                 left outer join gallery b on a.g_no = b.g_no
+        where u_id = #{u_id}
+    </select>
+
+    <!-- 장바구니 확인 -->
+    <select id="checkCart" resultType="com.member.domain.CartDTO">
+        select *
+        from user_cart
+        where u_id = #{u_id}
+          and g_no = #{g_no}
+    </select>
+
 
 </mapper>

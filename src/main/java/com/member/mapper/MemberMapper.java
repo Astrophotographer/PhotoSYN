@@ -1,8 +1,11 @@
 package com.member.mapper;
 
+import com.gallery.domain.GalleryDTO;
 import com.member.domain.AuthDTO;
+import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 
+import java.util.List;
 
 public interface MemberMapper {
     // 회원가입
@@ -37,5 +40,17 @@ public interface MemberMapper {
 
     // 포인트 충전
     public int updatePoint(MemberDTO memberDTO) throws Exception;
+
+    /* 장바구니 담기 */
+    public void insertCart(Long g_no);
+
+    /* 장바구니 삭제 */
+    public int deleteCart(Long g_no);
+
+    /* 장바구니 목록 */
+    public List<CartDTO> listCart(String u_id);
+
+    /* 장바구니 확인 */
+    public CartDTO checkCart(CartDTO cartDTO);
 
 }
