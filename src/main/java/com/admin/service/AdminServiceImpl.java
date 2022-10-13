@@ -1,6 +1,7 @@
 package com.admin.service;
 
 import com.admin.domain.AdminMainDTO;
+import com.admin.domain.AdminMemberDTO;
 import com.admin.mapper.AdminMapper;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
@@ -60,7 +61,22 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public AdminMemberDTO getMemeberINFO(String u_id) {
+        return adminMapper.getMemeberINFO(u_id);
+    }
+
+    @Override
     public int updateMemberShip(MemberDTO memberDTO){
         return adminMapper.updateMemberShip(memberDTO);
+    }
+
+    @Override
+    public int updatePoint(MemberDTO memberDTO) {
+        return adminMapper.updatePoint(memberDTO);
+    }
+
+    @Override
+    public int updateUserStatus(MemberDTO memberDTO) {
+        return adminMapper.updateUserStatus(memberDTO);
     }
 }

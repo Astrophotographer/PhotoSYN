@@ -53,12 +53,48 @@
     <!--    <select id="getMemberDTOList" resultType="com.member.domain.MemberDTO">-->
     <select id="getMemberDTOList" resultMap="memberMap">
         select *
-        from user_list order by u_reg desc
+        from user_list
+        order by u_reg desc
     </select>
 
     <update id="updateMemberShip">
         update user_list
         set ms_membership = #{membership}
+        where u_id = #{id}
+    </update>
+
+    <update id="updatePoint">
+        update user_list
+        set u_point = u_point + #{point}
+        where u_id = #{id}
+    </update>
+
+    <select id="getMemeberINFO" resultType="com.admin.domain.AdminMemberDTO">
+        select ul.*,
+               au.auth,
+               ac.A_ACCOUNT,
+               ac.A_BANK,
+               ac.A_HOLDER,
+               sns.S_INSTAGRAM,
+               sns.S_TWITTER,
+               sns.S_FACEBOOK,
+               sns.S_YOUTUBE,
+               ui.U_INTRO
+        from USER_LIST ul,
+             USER_AUTH au,
+             ACCOUNTLIST ac,
+             SNS sns,
+             USER_INTRO ui
+        WHERE ul.U_ID = au.ID(+)
+          and ul.U_ID = ac.U_ID(+)
+          and ul.U_ID = sns.U_ID(+)
+          and UL.U_ID = ui.U_ID(+)
+          and UL.U_ID = #{u_id}
+    </select>
+
+    <update id="updateUserStatus">
+        update user_list
+        set u_status = #{status}
         where u_id = #{id}
     </update>
 
