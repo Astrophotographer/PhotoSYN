@@ -253,6 +253,13 @@ public class MypageController {
         return newAuth;
     }
 
+    @PostMapping("money")
+    public String money() {
+
+
+        return "redirect:/member/gallery/main";
+    }
+
 
 }
 
