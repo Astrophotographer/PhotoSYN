@@ -79,20 +79,26 @@
                 <div class="about-author">
                     <img src="../resources/blog/images/author.jpg" alt="" class="img-fluid">
                 </div>
-                <h4 class="mb-0 mt-4">Liam Mason(블로그 유저 이름)</h4>
-                <p>Travel Blogger(맴버쉽등급)</p>
-                <p>I'm Liam, last year I decided to quit my job and travel the world. You can follow my journey on this blog!(한줄 자기소개?)</p>
-                <img src="../resources/blog/images/liammason.png" alt="" class="img-fluid">
+                <h4 class="mb-0 mt-4">닉네임 or ID ? ${user_info.name} or ${user_info.id}</h4>
+                <p>맴버쉽등급 ${user_info.membership}</p>
+                <p>자기소개 ${user_intro.u_INTRO}</p>
             </div>
 
             <div class="sidebar-widget follow mb-5 text-center">
                 <h4 class="text-center widget-title">Follow Me</h4>
                 <div class="follow-socials">
-                    <a href="#"><i class="ti-facebook"></i></a>
-                    <a href="#" ><i class="ti-twitter"></i></a>
-                    <a href="#" ><i class="ti-instagram"></i></a>
-                    <a href="#"><i class="ti-youtube"></i></a>
-                    <a href="#"><i class="ti-pinterest"></i></a>
+                    <c:if test="${user_sns.u_FACEBOOK != null}">
+                        <a href="${user_sns.u_FACEBOOK}"><i class="ti-facebook"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_TWITTER != null}">
+                        <a href="${user_sns.u_TWITTER}"><i class="ti-twitter"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_INSTAGRAM != null}">
+                        <a href="${user_sns.u_INSTAGRAM}"><i class="ti-instagram"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_YOUTUBE != null}">
+                        <a href="${user_sns.u_YOUTUBE}"><i class="ti-youtube"></i></a>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -117,7 +123,24 @@
 <!-- blog post -->
 <section class="section">
     <div class="container">
+
         <div class="row masonry-container">
+
+<c:forEach var="blogList" items="${blog}">
+            <div class="col-lg-4 col-sm-6 mb-5">
+                <article class="text-center">
+                    <img class="img-fluid mb-4"
+                         src="/blog/getmainimg?b_no=${blogList.b_NO}" alt="post-thumb">
+                    <p class="text-uppercase mb-2">${blogList.MT_NAME}(메인 카테고리)</p>
+                    <h4 class="title-border"><a class="text-dark" href="blog-single.html">${blogList.b_SUBJECT}(블로그글 제목)</a></h4>
+                    <p>Lorem ipsum dolor sit amet,(블로그 글 내용은 어떻게 들어가지.. 사진이 들어가는데...)</p>
+                    <a href="/blog/single?b_no=${blogList.b_NO}" class="btn btn-transparent">read more</a>
+                </article>
+            </div>
+</c:forEach>
+
+
+
             <c:forEach var="i" begin="1" end="13" step="1">
                 <div class="col-lg-4 col-sm-6 mb-5">
                     <article class="text-center">

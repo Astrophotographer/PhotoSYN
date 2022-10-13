@@ -14,6 +14,8 @@
 
     <!--DB connect -->
     <util:properties id="dataSourceConfig" location="classpath:db-connection.properties"/>
+    <!--Mail -->
+    <util:properties id="mailConfig" location="classpath:mail-connection.properties"/>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
@@ -38,8 +40,8 @@
           class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="smtp.gmail.com"/>
         <property name="port" value="587"/>
-        <property name="username" value="jangyesung7@gmail.com"/>
-        <property name="password" value="qpqjwokvvpaqlrkz"/>
+        <property name="username" value="#{mailConfig['username']}"/>
+        <property name="password" value="#{mailConfig['password']}"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
@@ -80,8 +82,8 @@
     <context:component-scan base-package="com.member.service"/>
     <mybatis-spring:scan base-package="com.member.mapper"/>
 
-    <!--    <context:component-scan base-package="com.admin.service"/>-->
-    <!--    <mybatis-spring:scan base-package="com.admin.mapper"/>-->
+    <context:component-scan base-package="com.admin.service"/>
+    <mybatis-spring:scan base-package="com.admin.mapper"/>
 
 
     <!-- aop 설정 -->

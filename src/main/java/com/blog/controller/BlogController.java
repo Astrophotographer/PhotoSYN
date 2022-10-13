@@ -5,6 +5,9 @@ import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_Img;
 import com.blog.domain.Blog_Img_Temp;
 import com.blog.service.BlogService;
+import com.member.domain.MemberDTO;
+import com.member.domain.User_Intro;
+import com.member.domain.User_SNS;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,6 +32,10 @@ import java.util.*;
 @Log4j
 @RequestMapping("/blog/*")
 public class BlogController {
+
+    //C:\\Users\\tjoeun\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
+    //"C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";
+    static String imgServerPath = "";
 
     //TODO 1001 : 블로그 페이징처리
     //글 가져오기 조건. 페이징X, ajax로 요청
@@ -135,6 +142,7 @@ public class BlogController {
 
 
         return "blog/blogsingle";
+//        return "blog/blogsingleTest";
     }
 
 
@@ -416,20 +424,49 @@ public class BlogController {
 
     // 유저 한명(u_id)의 글 모아보기
     @RequestMapping(value = "usermain")
-    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal, String u_id) {
+//    public String goUserMain(Model model, Blog_Criteria blog_criteria, Principal principal, String u_id) {
+    public String goUserMain(Model model, BlogDTO blogDTO, Blog_Criteria blog_criteria, Principal principal) {
         log.info("goUserMain start...");
 
         //option, sort 담아옴.
         log.info("blog_criteria : " + blog_criteria.toString());
 
-        //넘어온 u_id가 있으면 그 u_id로 검색
-        if (u_id != null) {
-            blog_criteria.setU_id(u_id);
+        try {
+            // isEmpty 에서 nullpointException 발생
+//            if (blog_criteria.getU_id().isEmpty() || blog_criteria.getU_id() == null || blog_criteria.getU_id().equals("")) {
+            if (blog_criteria.getU_id() == null || blog_criteria.getU_id().equals("")) {
+                log.info("blogCriteria is null");
+                return "redirect:/blog/main";
+            }
+        } catch (Exception e) {
+            log.info(e);
+            return "redirect:/blog/main";
         }
+
+        log.info("after Try Catch");
+
+        List<BlogDTO> list = blogService.getBlogList(blog_criteria);
+        log.info("list : " + list.toString());
+
+
         //유저 정보 criteria담아주고 옵션, 정렬조건으로 db정보 가져오기
-        if (principal != null) {
-            blog_criteria.setU_id(principal.getName());
-        }
+//        if (principal != null) {
+//            blog_criteria.setU_id(principal.getName());
+//        }
+
+        model.addAttribute("blog", list);
+
+        //작성자 자기소개글 테이블에서 값 가져오기
+        User_Intro intro =  blogService.getUserIntro(blog_criteria.getU_id());
+        model.addAttribute("user_intro",intro);
+        //작성자 SNS 가져오기
+        User_SNS sns = blogService.getUserSNS(blog_criteria.getU_id());
+        model.addAttribute("user_sns", sns);
+        //유저 정보가져오기(유저 사진 경로 위해)
+        MemberDTO memberDTO = blogService.getUserInfo(blog_criteria.getU_id());
+        model.addAttribute("user_info", memberDTO);
+        log.info("intro" + intro);
+        log.info("user_info : " + memberDTO);
 
         return "blog/blogusermain";
     }
@@ -508,6 +545,9 @@ public class BlogController {
             log.info("blog_img.toString() : " + blog_img.toString());
             //insert시 이미 블로그글이 존재하기에 추가적인 시퀀스 값을 추가안해도 됨.
             blogService.insertImg(blog_img);
+
+            //위 546 에러터지는중. 글 수정시 글만 수정하게 되면 무결성 제약 조건 위배.
+
             Thread.sleep(100);
         }
 
@@ -578,15 +618,20 @@ public class BlogController {
         tags = tags.substring(1);
 
         String[] tagArr = tags.split("#");
-        for(int i=0;i<tagArr.length;i++) {
-            log.info("tagArr["+i+"] : " + tagArr[i]);
+        for (int i = 0; i < tagArr.length; i++) {
+            log.info("tagArr[" + i + "] : " + tagArr[i]);
         }
 
         model.addAttribute("tagArr", tagArr);
 
         return "blog/blogTestPost";
-
     }
+
+    @RequestMapping(value="blogsingleTest")
+    public void blogsingleTest() {
+        log.info("blogsingleTest start...");
+    }
+
 }
 
 

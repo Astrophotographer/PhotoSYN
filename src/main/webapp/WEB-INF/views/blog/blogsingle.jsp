@@ -98,7 +98,6 @@
                                 <a href="#">#${tag}</a>
                             </div>
                         </c:forEach>
-
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
                         <div>
@@ -114,7 +113,7 @@
 
                             <div class="post-share">
                                 <!-- 좋아요 수, 좋아요 하트모양 사진 -->
-                                <span class="count-number-like">2</span>
+                                <span class="count-number-like">${blog.b_LIKE}</span>
                                 <a class="penci-post-like single-like-button"><i class="ti-heart"></i></a>
                             </div>
                         </div>
@@ -132,7 +131,8 @@
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
-                        <h4 class="mb-3"><a href="#" title="" rel="author" class="text-capitalize">${blog.u_ID}</a></h4>
+                        <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author"
+                                            class="text-capitalize">${blog.u_ID}</a></h4>
                         <p>자기소개 : ${user_intro.u_INTRO}</p>
 
                         <a target="_blank" class="author-social" href="#"><i
@@ -262,29 +262,34 @@
 
                 <!-- 댓글 작성 -->
                 <!-- 로그인 한 상태일때만 폼 보이게 만들어주기.. sec:authorize 사용 -->
-                <form class="comment-form mb-5 gray-bg p-5" id="comment-form" action="reply/add" method="post">
-                    <h3 class="mb-4 text-center">Leave a comment</h3>
-                    <div class="row">
-                        <div class="col-lg-12">
+                <sec:authorize access="isAuthenticated()">
+                    <%--                <form class="comment-form mb-5 gray-bg p-5" id="comment-form" action="/reply/add" method="post">--%>
+                    <div class="comment-form mb-5 gray-bg p-5" id="comment-form">
+                        <h3 class="mb-4 text-center">Leave a comment</h3>
+                        <div class="row">
+                            <div class="col-lg-12">
                             <textarea class="form-control mb-3" name="R_REPLY" id="comment" cols="30" rows="5"
                                       placeholder="Comment"></textarea>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <%--                                <input class="form-control" type="hidden" name="U_ID" id="name" value='<sec:authentication property="principal.username"/>'/>--%>
-                                <input class="form-control" type="hidden" name="U_ID" id="name" value='test01'/>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <%--                                <input class="form-control" type="hidden" name="U_ID" id="name" value='<sec:authentication property="principal.username"/>'/>--%>
+                                    <input class="form-control" type="hidden" name="U_ID" id="name"
+                                           value="<sec:authentication property="principal.username"/>"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                        <%-- <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-<%--                                <input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">--%>
-                            </div>
-                        </div>
-                    </div>
 
-                    <input class="btn btn-primary" type="submit" name="submit-contact" id="submit_contact"
-                           value="Submit Message">
-                </form>
+                        <input class="btn btn-primary" type="submit" name="submit-contact" id="submit_contact"
+                               value="Submit Message">
+                    </div>
+                    <%--                </form>--%>
+                </sec:authorize>
                 <!-- 댓글 작성 끝 -->
 
             </div>
@@ -505,14 +510,17 @@
                 str += '<div class="media mb-4">';
                 str += '<img class="d-flex mr-3 rounded-circle" src="../resources/blog/images/user.png" alt="">';
                 str += '<div class="media-body">';
-                str += '<h5 class="mt-0">작성자 : ' + result[i].U_ID + '</h5>';
-                str += '댓글내용 : '+result[i].R_REPLY;
+                // <a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author" class="text-capitalize">${blog.u_ID}</a>
+                str += '<h5 class="mt-0">작성자 : <a href="/blog/usermain?u_id=' + result[i].U_ID + '" title="" rel="author" class="text-capitalize">' + result[i].U_ID + '</a></h5>';
+                str += '댓글내용 : ' + result[i].R_REPLY;
                 str += '</div>';
                 str += '</div>';
 
             }
             replyContainer.html(str);
         }
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
 
         $("#submit_contact").on("click", function () {
             console.log("댓글 등록 버튼 클릭");
@@ -541,12 +549,12 @@
                 data: JSON.stringify(reqData),
                 contentType: "application/json; charset=utf-8",
                 // contentType: "application/json",
-                dataType : "text",
+                dataType: "text",
                 //post 방식 시큐리티 위해 추가
                 //요청을 날리기 전에.. 명령어 beforeSend
-                // beforeSend: function (xhr) {
-                //     xhr.setRequestHeader(header, token);
-                // },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
                 success: function (result, status, xhr) {
                     console.log("ajax 요청 성공!");
                     console.log(result);
@@ -571,7 +579,10 @@
 
     })
 </script>
-    <%--footer--%>
-    <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
-    <%--</body>--%>
-    <%--</html>--%>
+<div>
+    <h1>?????</h1>
+</div>
+<%--footer--%>
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
+<%--</body>--%>
+<%--</html>--%>
