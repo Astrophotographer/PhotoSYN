@@ -1,18 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<!-- swiper슬라이더 메인컨테이너 -->
+<!-- swiper 슬라이더 메인컨테이너 -->
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
-        <!-- div class="swiper-slide" 를 추가하면된다 -->
-        <div class="swiper-slide"><img src="/resources/member/img/profile/profile.png"></div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/user.png">asd</div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/profile.png"></div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/user.png"></div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/profile.png"></div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/user.png"></div>
-        <div class="swiper-slide"><img src="/resources/member/img/profile/profile.png"></div>
+        <div class="swiper-slide">
+            <a href="/gallery/main">
+                <img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png">
+            </a>
+        </div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/5da5082b-b21c-403a-9dae-f0f59175333e_space-g0f976ef1c_1920.png"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/반려동물.jpg"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/2022071101596_0.jpg"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/profile.png"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/user.png"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/profile.png"></div>
     </div>
     <!-- 페이징 버튼 처리 -->
     <%--    <div class="swiper-pagination"></div>--%>
@@ -21,6 +24,10 @@
     <div class="swiper-button-next"></div>
 </div>
 
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    어드민만 확인 가능 <br>
+    <a href="../admin/main">어드민 페이지</a>
+</sec:authorize>
 
 <script>
     const swiper = new Swiper('.swiper-container', {

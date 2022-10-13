@@ -223,6 +223,8 @@ public class MypageController {
         return "redirect:/member/mypage/profileCart";
     }
 
+    /************************************************ 장바구니 END. ************************************************/
+
     // 프로필 구매 판매 내역
     @GetMapping("profileBuySell")
     public void buySell() {
@@ -250,7 +252,6 @@ public class MypageController {
 
         return newAuth;
     }
-
 
 
 }
