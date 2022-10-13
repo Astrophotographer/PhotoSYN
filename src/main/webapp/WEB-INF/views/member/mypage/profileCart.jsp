@@ -23,76 +23,11 @@
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
                     <td>${cartDTO.c_id}</td>
-                    <c:choose>
-                        <c:when test="${cartDTO.c_hName} == null">
-                            <td>${cartDTO.c_lName}</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>${cartDTO.c_hName}</td>
-                        </c:otherwise>
-                    </c:choose>
+                    <td>${cartDTO.c_hName}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cartDTO.c_reg}"/></td>
-                    <c:choose>
-                        <c:when test="${cartDTO.c_hPrice} == null">
-                            <td>${cartDTO.c_lPrice}</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td>${cartDTO.c_hPrice}</td>
-                        </c:otherwise>
-                    </c:choose>
+                    <td>${cartDTO.c_hPrice}</td>
                 </tr>
             </c:forEach>
-
-            <!--
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>1</td>
-                <td>JONES</td>
-                <td>MANAGER</td>
-                <td>1981-04-02</td>
-                <td>2000</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>7788</td>
-                <td>SCOTT</td>
-                <td>ANALYST</td>
-                <td>1987-04-19</td>
-                <td>3000</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>7844</td>
-                <td>TURNER</td>
-                <td>SALESMAN</td>
-                <td>1981-09-08</td>
-                <td>1500</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>7876</td>
-                <td>ADAMS</td>
-                <td>CLERK</td>
-                <td>1987-05-23</td>
-                <td>1000</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>7369</td>
-                <td>SMITH</td>
-                <td>CLERK</td>
-                <td>1980-12-17</td>
-                <td>800</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox" style="width: 20px;"/></td>
-                <td>7839</td>
-                <td>KING</td>
-                <td>PRESIDENT</td>
-                <td>1981-11-17</td>
-                <td>5000</td>
-            </tr>
-            -->
         </table>
         <br/>
         <div style="text-align: right;">

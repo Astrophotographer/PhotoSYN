@@ -2,6 +2,7 @@ package com.member.mapper;
 
 import com.gallery.domain.GalleryDTO;
 import com.member.domain.AuthDTO;
+import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 
@@ -39,7 +40,7 @@ public interface MemberMapper {
     public int updateImg(MemberDTO memberDTO) throws Exception;
 
     // 포인트 충전
-    public int updatePoint(MemberDTO memberDTO) throws Exception;
+    public int updatePoint(MemberDTO memberDTO);
 
     /* 장바구니 담기 */
     public void insertCart(Long g_no);
@@ -50,8 +51,13 @@ public interface MemberMapper {
     /* 장바구니 삭제 */
     public int deleteCart(Long g_no);
 
-
     /* 장바구니 확인 */
     public CartDTO checkCart(CartDTO cartDTO);
+
+    /* 구매 판매내역 */
+    public List<BuyDTO> listBuySell(BuyDTO buyDTO);
+
+    /* 갤러리 구매 (포인트 차감) */
+    public int buyGallery(BuyDTO buyDTO);
 
 }

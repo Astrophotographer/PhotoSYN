@@ -102,7 +102,7 @@
     <update id="updatePoint">
         update user_list
         set u_point = u_point + #{point}
-        where u_id = #{id}
+        where u_nick = #{name}
     </update>
 
     <!-- 장바구니 담기 -->
@@ -149,5 +149,15 @@
           and g_no = #{g_no}
     </select>
 
+    <!-- 구매 판매내역 목록 -->
+    <select id="listBuySell" resultType="com.member.domain.BuyDTO">
+        SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG FROM buy order by O_NO asc
+    </select>
+
+    <!-- 갤러리 구매 -->
+    <insert id="buyGallery">
+        insert into buy(O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG)
+        values (o_no_seq.nextval, #{o_buyer}, #{o_seller}, #{g_no}, #{o_price}, sysdate)
+    </insert>
 
 </mapper>

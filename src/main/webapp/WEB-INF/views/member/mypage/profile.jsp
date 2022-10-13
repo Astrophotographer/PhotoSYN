@@ -35,7 +35,6 @@
             입니다.
 
             <div style="text-align: right; padding: 15px;">${princi.member.point} P</div>
-
             <div style="padding: 15px; display: flex; justify-content: space-between;">
                 <button class="profileBtn2" type="button" style="width: 100px"
                         onclick="window.location.href='/member/mypage/profileModify'">
@@ -45,6 +44,7 @@
                         onclick="window.location.href='/member/mypage/profilePointAdd'">
                     포인트 충전
                 </button>
+
             </div>
         </div>
         <hr>
@@ -59,6 +59,13 @@
         </div>
     </div>
 </div>
+
+<form action="/member/mypage/galleryBuyBtn" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button class="profileBtn2" type="submit" style="width: 100px">
+        구매하기
+    </button>
+</form>
 
 <script>
     var msg1 = '${msg1}';
