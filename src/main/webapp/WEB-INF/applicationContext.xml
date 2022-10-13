@@ -51,7 +51,7 @@
             </props>
         </property>
     </bean>
-
+    <!-- Google Email bean End. -->
 
     <!-- multipart. 다운로드 -->
     <bean id="fileDown" class="com.gallery.util.DownloadView"></bean>

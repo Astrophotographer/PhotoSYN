@@ -115,8 +115,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 목록 */
     @Override
-    public List<CartDTO> listCart(String u_id) {
-        return null;
+    public List<CartDTO> listCart(CartDTO cartDTO) {
+        return memberMapper.listCart(cartDTO);
     }
 
     /* 장바구니 삭제 */

@@ -131,6 +131,9 @@ input[type="file"] {
     border: 0;
 }
 
+.slider {overflow: hidden;max-width: 1180px;margin: 0 auto;}
+.slide_list > li {width: 20%;height: 150px;text-align: center;background: #ddd;}
+
 
 
 

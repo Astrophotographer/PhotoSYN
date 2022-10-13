@@ -43,7 +43,7 @@ public interface MemberService {
     public void insertCart(Long G_NO);
 
     /* 장바구니 목록 */
-    public List<CartDTO> listCart(String u_id);
+    public List<CartDTO> listCart(CartDTO cartDTO);
 
     /* 장바구니 삭제 */
     public int deleteCart(Long g_no);

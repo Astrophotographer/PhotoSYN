@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 @Data
 public class CartDTO {
+    private String c_id;
     private String u_id;        // 아이디
     private Long g_no;
     private String c_hName;     // 고화질 파일명

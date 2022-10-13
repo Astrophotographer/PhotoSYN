@@ -12,24 +12,34 @@
 
         <table class="member">
             <tr>
-                <th><input type="checkbox" name="chk" onclick="checkAll(this)" style="width: 20px;"/></th>
-                <th>상품번호</th>
+                <th style="width: 20px;"><input type="checkbox" name="chk" onclick="checkAll(this)" style="width: 20px;"/></th>
+                <th style="width: 80px;">상품번호</th>
                 <th>사진</th>
-                <th>화질</th>
                 <th>일자</th>
-                <th>개수</th>
                 <th>가격</th>
             </tr>
             <c:set var="tot" value="${0}"/>
-            <c:forEach var="gallery" items="${list}">
+            <c:forEach items="${list}" var="cartDTO">
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
-                    <td>${gallery.G_NO}</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
+                    <td>${cartDTO.c_id}</td>
+                    <c:choose>
+                        <c:when test="${cartDTO.c_hName} == null">
+                            <td>${cartDTO.c_lName}</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>${cartDTO.c_hName}</td>
+                        </c:otherwise>
+                    </c:choose>
+                    <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cartDTO.c_reg}"/></td>
+                    <c:choose>
+                        <c:when test="${cartDTO.c_hPrice} == null">
+                            <td>${cartDTO.c_lPrice}</td>
+                        </c:when>
+                        <c:otherwise>
+                            <td>${cartDTO.c_hPrice}</td>
+                        </c:otherwise>
+                    </c:choose>
                 </tr>
             </c:forEach>
 

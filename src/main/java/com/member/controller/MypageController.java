@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -194,11 +195,9 @@ public class MypageController {
         return "redirect:/member/main";
     }
 
-    // 프로필 장바구니 페이지
-    @GetMapping("profileCart")
-    public void cartPage() {
 
-    }
+    /************************************************ 장바구니 ************************************************/
+
     /* 장바구니 담기 */
     @PostMapping("insertCart")
     public String insertCart(Long G_NO) {
@@ -207,15 +206,22 @@ public class MypageController {
         return "redirect:/member/mypage/profileCart";
     }
 
+    // 장바구니 목록 페이지
+    @GetMapping("profileCart")
+    public String listCart(CartDTO cartDTO, Model model) {
+        List<CartDTO> list = memberService.listCart(cartDTO);
+        model.addAttribute("list", list);
+
+        return "/member/mypage/profileCart";
+    }
+
     /* 장바구니 삭제 */
     @PostMapping("deleteCart")
-    public String cartDelete(Long g_no) {
+    public String deleteCart(Long g_no) {
         memberService.deleteCart(g_no);
 
         return "redirect:/member/mypage/profileCart";
     }
-
-
 
     // 프로필 구매 판매 내역
     @GetMapping("profileBuySell")
@@ -244,6 +250,8 @@ public class MypageController {
 
         return newAuth;
     }
+
+
 
 }
 
