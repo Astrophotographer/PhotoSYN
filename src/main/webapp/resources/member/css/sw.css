@@ -18,6 +18,8 @@
     text-align: center;
     font-size: 18px;
     background: #fff;
+    transition : 1.5s;
+    transform: scale(1.0);
 
     /* Center slide text vertically */
     display: -webkit-box;
@@ -44,4 +46,13 @@
 .swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{
     display : inline-block !important;
     margin: 6px 2px !important;
+}
+
+.imgs {
+    width: 500px;
+    height: 300px;
+}
+.imgs:hover {
+    transition : 3s;
+    transform: scale(1.0);
 }

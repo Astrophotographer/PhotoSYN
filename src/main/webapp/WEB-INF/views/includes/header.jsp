@@ -26,7 +26,7 @@
     <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
     <!-- 스와이프 -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link rel="stylesheet" href="/resources/member/css/sw.css" type="text/css"/>
 </head>
@@ -40,9 +40,9 @@
                 </div>
             </div>
             <div class="col-sm-4 col-md-6 order-1  order-md-2 text-center">
-                <a href="/member/main" class="site-logo">
-                    <img src="/resources/member/bootstrap/main/img/logo_sub-removebg-preview.png" alt="logo"
-                         style="display : block; margin : auto;">
+                <a href="/member/main" class="site-logo"
+                   style="text-decoration: none; text-shadow: 0px 5px 0px #FFB2F5; color: black; font-size: 30px;">
+                    <strong class="textJ"># Photo SYN</strong>
                 </a>
             </div>
             <sec:authorize access="isAnonymous()">
@@ -70,7 +70,7 @@
     <sec:authorize access="isAnonymous()">
         <nav class="main__menu">
             <ul class="nav__menu">
-                <li><a href="/member/main">메인</a></li> <!-- class="menu--active" -->
+                <li><a href="/member/main">메인</a></li>
                 <li><a href="/gallery/main">갤러리</a></li>
                 <li><a href="/blog/main">블로그</a></li>
             </ul>
@@ -79,7 +79,7 @@
     <sec:authorize access="isAuthenticated()">
         <nav class="main__menu">
             <ul class="nav__menu">
-                <li><a href="/member/main">메인</a></li> <!-- class="menu--active" -->
+                <li><a href="/member/main">메인</a></li>
                 <li><a href="/gallery/main">갤러리</a></li>
                 <li><a href="/blog/main">블로그</a></li>
                 <li><a href="/member/mypage/profile">마이페이지</a>
@@ -89,6 +89,17 @@
                         <li><a href="/member/mypage/profileBuySell">구매 · 판매내역</a></li>
                         <li><a href="#">환급신청</a></li>
                     </ul>
+                </li>
+            </ul>
+        </nav>
+    </sec:authorize>
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <nav class="main__menu">
+            <ul class="nav__menu">
+                <li><a href="/member/main">메인</a></li>
+                <li><a href="/gallery/main">갤러리</a></li>
+                <li><a href="/blog/main">블로그</a></li>
+                <li><a href="../admin/main">어드민</a>
                 </li>
             </ul>
         </nav>

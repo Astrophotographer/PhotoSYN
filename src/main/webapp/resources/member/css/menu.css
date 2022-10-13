@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -131,9 +131,12 @@ input[type="file"] {
     border: 0;
 }
 
-.slider {overflow: hidden;max-width: 1180px;margin: 0 auto;}
-.slide_list > li {width: 20%;height: 150px;text-align: center;background: #ddd;}
-
+.textJ {
+    font-family: "Roboto", sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    color: black;
+}
 
 
 
