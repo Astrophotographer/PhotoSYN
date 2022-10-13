@@ -12,7 +12,7 @@ public class GalleryDTO {
     private String U_ID;    // 작성자
     private String G_HNAME; // 고화질 파일명
     private String G_LNAME; // 저화질 파일명
-    private Double G_HPRICE;    // 고화질 가격
+    private int G_HPRICE;    // 고화질 가격
     private Double G_LPRICE;    // 저화질 가격
     private String G_CONTENT;   // 내용(설명)
     private Date G_REG;     // 작성일

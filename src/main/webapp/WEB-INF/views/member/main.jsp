@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/includes/header.jsp" %>
 
-<!-- swiper 슬라이더 메인컨테이너 -->
+<!-- swiper 슬라이더 메인 컨테이너 -->
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
@@ -35,7 +35,7 @@
         //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
         direction: 'horizontal',
         //한번에 보여지는 페이지 숫자
-        slidesPerView: 5,
+        slidesPerView: 4,
         //페이지와 페이지 사이의 간격
         spaceBetween: 30,
         //드레그 기능 true 사용가능 false 사용불가
@@ -73,6 +73,12 @@
         },
 
     });
+
+    var msg = '${success}';
+
+    if (msg === "구매가 완료되었습니다.") {
+        alert("구매가 완료되었습니다.");
+    }
 </script>
 
 <!--

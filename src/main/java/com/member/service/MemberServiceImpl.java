@@ -1,10 +1,9 @@
 package com.member.service;
 
-import java.util.HashMap;
 import java.util.List;
 
-import com.gallery.domain.GalleryDTO;
 import com.member.domain.AuthDTO;
+import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.log4j.Log4j;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @Log4j
@@ -103,7 +101,7 @@ public class MemberServiceImpl implements MemberService {
     
     // 포인트 충전
     @Override
-    public int updatePoint(MemberDTO memberDTO) throws Exception {
+    public int updatePoint(MemberDTO memberDTO) {
         return memberMapper.updatePoint(memberDTO);
     }
     
@@ -123,6 +121,27 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int deleteCart(Long g_no) {
         return memberMapper.deleteCart(g_no);
+    }
+
+    @Override
+    public List<BuyDTO> listBuySell(BuyDTO buyDTO) {
+        return memberMapper.listBuySell(buyDTO);
+    }
+
+    /* 갤러리 구매 (포인트 차감) */
+    @Override
+    public int buyGallery(BuyDTO buyDTO) {
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setPoint(-buyDTO.getO_price());
+        memberDTO.setId(buyDTO.getO_buyer());
+
+        if (memberDTO.getPoint() < 1) {
+
+        }
+        // USER_LIST DB 데이터 업데이트
+        memberMapper.updatePoint(memberDTO);
+
+        return memberMapper.buyGallery(buyDTO);
     }
 
 

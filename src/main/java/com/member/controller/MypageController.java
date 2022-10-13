@@ -1,5 +1,7 @@
 package com.member.controller;
 
+import com.gallery.domain.GalleryDTO;
+import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 import com.member.security.MemberUser;
@@ -165,7 +167,7 @@ public class MypageController {
 
     // 포인트 충전
     @PostMapping("profilePointAddPro")
-    public String pointAdd(Authentication auth, MemberDTO memberDTO, String point) throws Exception {
+    public String pointAdd(Authentication auth, MemberDTO memberDTO, String point) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         memberDTO.setId(user.getMember().getId());
         int pointAdd = Integer.parseInt(point);
@@ -227,8 +229,50 @@ public class MypageController {
 
     // 프로필 구매 판매 내역
     @GetMapping("profileBuySell")
-    public void buySell() {
+    public void buySell(BuyDTO buyDTO, Model model) {
+        List<BuyDTO> list = memberService.listBuySell(buyDTO);
+        model.addAttribute("list", list);
+    }
 
+    // 갤러리 구매 (포인트 차감)
+    @PostMapping("galleryBuyBtn")
+    public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String name = user.getMember().getName();
+        int m = user.getMember().getPoint();
+
+        galleryDTO.setG_HPRICE(10000);
+
+        if (m < galleryDTO.getG_HPRICE()) {
+            rttr.addFlashAttribute("notPoint", "포인트가 부족합니다.");
+
+            return "redirect:/member/mypage/profilePointAdd";
+        } else {
+            m = m - galleryDTO.getG_HPRICE();
+            user.getMember().setPoint(m);
+
+            // Mapper 에 넘겨줄 데이터 buyDTO 에 저장하기.
+//        buyDTO.setO_buyer(name);
+//        buyDTO.setO_seller(galleryDTO.getU_ID());
+//        buyDTO.setO_price(galleryDTO.getG_HPRICE());
+//        buyDTO.setG_no(galleryDTO.getG_NO());
+
+            buyDTO.setO_buyer(name);
+            buyDTO.setO_seller("찬욱");
+            buyDTO.setO_price(10000);
+            buyDTO.setG_no(10L);
+
+            // 구매 내역 저장
+            memberService.buyGallery(buyDTO);
+
+            // 시큐리티 정보 갱신
+            //renewalAuth();
+
+            rttr.addFlashAttribute("success", "구매가 완료되었습니다.");
+            log.info("######################################### :: " + user.getMember());
+
+            return "redirect:/member/main";
+        }
     }
 
     // 시큐리티 정보 갱신
@@ -252,14 +296,6 @@ public class MypageController {
 
         return newAuth;
     }
-
-    @PostMapping("money")
-    public String money() {
-
-
-        return "redirect:/member/gallery/main";
-    }
-
 
 }
 

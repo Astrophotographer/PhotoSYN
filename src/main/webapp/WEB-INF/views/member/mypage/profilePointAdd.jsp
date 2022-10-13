@@ -61,6 +61,11 @@
             alert(msg);
         });
     });
+
+    var msg2 = '${notPoint}';
+    if (msg2 === "포인트가 부족합니다.") {
+        alert("포인트가 부족합니다.");
+    }
 </script>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
