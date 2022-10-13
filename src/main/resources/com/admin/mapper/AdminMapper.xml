@@ -5,5 +5,55 @@
 
 <mapper namespace="com.admin.mapper.AdminMapper">
 
+    <resultMap type="com.member.domain.MemberDTO" id="memberMap">
+        <id property="id" column="u_id"/> <!-- primary key 지정 -->
+        <result property="id" column="u_id"/>
+        <result property="pw" column="u_pw"/>
+        <result property="phone" column="u_phone"/>
+        <result property="name" column="u_nick"/>
+        <result property="reg" column="u_reg"/>
+        <result property="status" column="u_status"/>
+        <result property="pic" column="u_pic"/>
+        <result property="point" column="u_point"/>
+        <result property="membership" column="ms_membership"/>
+        <result property="sns" column="u_sns"/>
+        <result property="snsToken" column="u_snsToken"/>
+        <collection property="authDTOList" resultMap="authMap"></collection>
+    </resultMap>
+    <!-- 권한 테이블 값을 AuthDTO 클래스에 대입하는 것 명확히 정의 -->
+    <resultMap type="com.member.domain.AuthDTO" id="authMap">
+        <result property="id" column="id"/>
+        <result property="auth" column="auth"/>
+    </resultMap>
+
+    <select id="getUserCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM user_list
+    </select>
+
+    <select id="getSalesCount" resultType="_int">
+        SELECT COUNT(*)
+        FROM BUY
+    </select>
+
+    <select id="getRecentGalleryCount" resultType="_int">
+        select count(*)
+        from GALLERY
+        where g_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+    </select>
+    <!--    where g_REG >= to_char(SYSDATE-1,'DD-MM-YY')-->
+
+    <select id="getRecentBlogCount" resultType="_int">
+        select count(*)
+        from blog
+        where b_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+    </select>
+    <!--    where b_REG >= to_char(SYSDATE - 1, 'DD-MM-YY')-->
+
+    <!--    <select id="getMemberDTOList" resultType="com.member.domain.MemberDTO">-->
+    <select id="getMemberDTOList" resultMap="memberMap">
+        select *
+        from user_list
+    </select>
 
 </mapper>

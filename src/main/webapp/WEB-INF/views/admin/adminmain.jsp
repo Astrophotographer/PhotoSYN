@@ -1,15 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pmwkd
-  Date: 2022-10-12
-  Time: 오후 11:15
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
 <head>
-    <title>admin Main Page</title>
+    <meta charset="UTF-8"/>
+<%--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>--%>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PhotoSYN Admin Page</title>
     <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
@@ -30,12 +28,9 @@
     ></script>
     <script src="../resources/admin/public/assets/js/charts-lines.js" defer></script>
     <script src="../resources/admin/public/assets/js/charts-pie.js" defer></script>
-
 </head>
 <body>
-<%--<h1>Admin PAGE</h1>--%>
-<%--<jsp:include page="src/main/webapp/WEB-INF/views/includes/header.jsp"/>--%>
-<%--<jsp:include page="src/main/webapp/WEB-INF/views/includes/footer.jsp"/>--%>
+<h1>야!</h1>
 <div
         class="flex h-screen bg-gray-50 dark:bg-gray-900"
         :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -49,7 +44,7 @@
                     class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
                     href="#"
             >
-                Windmill
+                PhotoSYN admin
             </a>
             <ul class="mt-6">
                 <li class="relative px-6 py-3">
@@ -57,6 +52,7 @@
                       class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                       aria-hidden="true"
               ></span>
+                    <!-- 사이드바 옵션들 -->
                     <a
                             class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                             href="index.html"
@@ -847,24 +843,24 @@
                     Dashboard
                 </h2>
                 <!-- CTA -->
-                <a
-                        class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-                        href="https://github.com/estevanmaito/windmill-dashboard"
-                >
-                    <div class="flex items-center">
-                        <svg
-                                class="w-5 h-5 mr-2"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                        >
-                            <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                            ></path>
-                        </svg>
-                        <span>Star this project on GitHub</span>
-                    </div>
-                    <span>View more &RightArrow;</span>
-                </a>
+                <%--                <a--%>
+                <%--                        class="flex items-center justify-between p-4 mb-8 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"--%>
+                <%--                        href="https://github.com/estevanmaito/windmill-dashboard"--%>
+                <%--                >--%>
+                <%--                    <div class="flex items-center">--%>
+                <%--                        <svg--%>
+                <%--                                class="w-5 h-5 mr-2"--%>
+                <%--                                fill="currentColor"--%>
+                <%--                                viewBox="0 0 20 20"--%>
+                <%--                        >--%>
+                <%--                            <path--%>
+                <%--                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"--%>
+                <%--                            ></path>--%>
+                <%--                        </svg>--%>
+                <%--                        <span>Star this project on GitHub</span>--%>
+                <%--                    </div>--%>
+                <%--                    <span>View more &RightArrow;</span>--%>
+                <%--                </a>--%>
                 <!-- Cards -->
                 <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                     <!-- Card -->
@@ -884,12 +880,13 @@
                             <p
                                     class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
                             >
-                                Total clients
+                                Total Users
                             </p>
                             <p
                                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                             >
-                                6389
+                                <%-- 유저 수 뿌려주기 --%>
+                                ${adminMainDTO.userCount}
                             </p>
                         </div>
                     </div>
@@ -912,12 +909,12 @@
                             <p
                                     class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
                             >
-                                Account balance
+                                Sales Count
                             </p>
                             <p
                                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                             >
-                                $ 46,760.89
+                                ${adminMainDTO.salesCount}
                             </p>
                         </div>
                     </div>
@@ -938,12 +935,13 @@
                             <p
                                     class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
                             >
-                                New sales
+                                New Gallery
                             </p>
                             <p
                                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                             >
-                                376
+                                <%-- 오늘 갤러리 등록 수 --%>
+                                ${adminMainDTO.recentGalleryCount}
                             </p>
                         </div>
                     </div>
@@ -966,12 +964,13 @@
                             <p
                                     class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400"
                             >
-                                Pending contacts
+                                New Blog
                             </p>
                             <p
                                     class="text-lg font-semibold text-gray-700 dark:text-gray-200"
                             >
-                                35
+                                <%-- 오늘 블로그 등록 수 --%>
+                                ${adminMainDTO.recentBlogCount}
                             </p>
                         </div>
                     </div>
@@ -985,19 +984,20 @@
                             <tr
                                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                             >
-                                <th class="px-4 py-3">Client</th>
-                                <th class="px-4 py-3">Amount</th>
+                                <th class="px-4 py-3">User</th>
+                                <th class="px-4 py-3">MemberShip</th>
                                 <th class="px-4 py-3">Status</th>
-                                <th class="px-4 py-3">Date</th>
+                                <th class="px-4 py-3">Memeber Since...</th>
                             </tr>
                             </thead>
                             <tbody
                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                             >
+                            <%-- 유저 한명 --%>
+                            <c:forEach items="${memberDTOList}" var="member">
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3">
                                     <div class="flex items-center text-sm">
-                                        <!-- Avatar with inset shadow -->
                                         <div
                                                 class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
                                         >
@@ -1013,9 +1013,54 @@
                                             ></div>
                                         </div>
                                         <div>
-                                            <p class="font-semibold">Hans Burger</p>
+                                            <p class="font-semibold">${member.id}(user ID)</p>
                                             <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                10x Developer
+                                                ${member.name}(user nickname)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    ${member.membership}
+                                </td>
+                                <td class="px-4 py-3 text-xs">
+                        <span
+                                class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
+                        >
+                          ${member.status}
+                        </span>
+                                </td>
+                                <td class="px-4 py-3 text-sm">
+                                    ${member.reg}
+                                </td>
+                            </tr>
+
+                            </c:forEach>
+                            <%-- 유저 한명 끝 --%>
+
+                            <tr class="text-gray-700 dark:text-gray-400">
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center text-sm">
+                                        <!-- Avatar with inset shadow -->
+                                        <%-- User 들... --%>
+                                        <div
+                                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+                                        >
+                                            <img
+                                                    class="object-cover w-full h-full rounded-full"
+                                                    src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                                                    alt=""
+                                                    loading="lazy"
+                                            />
+                                            <div
+                                                    class="absolute inset-0 rounded-full shadow-inner"
+                                                    aria-hidden="true"
+                                            ></div>
+                                        </div>
+                                        <div>
+                                            <p class="font-semibold">Hans Burger(user ID)</p>
+                                            <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                10x Developer(user nickname)
                                             </p>
                                         </div>
                                     </div>
@@ -1365,6 +1410,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <%-- 유저정보 끝 --%>
                     <div
                             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
                     >
@@ -1531,7 +1577,5 @@
         </main>
     </div>
 </div>
-
-
 </body>
 </html>
