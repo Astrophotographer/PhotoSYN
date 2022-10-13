@@ -1,6 +1,9 @@
 package com.member.service;
 
+import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
+
+import java.util.List;
 
 public interface MemberService {
     // 회원가입
@@ -32,5 +35,14 @@ public interface MemberService {
 
     // 포인트 충전
     public int updatePoint(MemberDTO memberDTO) throws Exception;
+
+    /* 장바구니 담기 */
+    public void insertCart(Long G_NO);
+
+    /* 장바구니 목록 */
+    public List<CartDTO> listCart(String u_id);
+
+    /* 장바구니 삭제 */
+    public int deleteCart(Long g_no);
 
 }

@@ -1,8 +1,11 @@
 package com.member.service;
 
 import java.util.HashMap;
+import java.util.List;
 
+import com.gallery.domain.GalleryDTO;
 import com.member.domain.AuthDTO;
+import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,7 +106,24 @@ public class MemberServiceImpl implements MemberService {
     public int updatePoint(MemberDTO memberDTO) throws Exception {
         return memberMapper.updatePoint(memberDTO);
     }
+    
+    /* 장바구니 담기 */
+    @Override
+    public void insertCart(Long G_NO) {
+        memberMapper.insertCart(G_NO);
+    }
 
+    /* 장바구니 목록 */
+    @Override
+    public List<CartDTO> listCart(String u_id) {
+        return null;
+    }
+
+    /* 장바구니 삭제 */
+    @Override
+    public int deleteCart(Long g_no) {
+        return memberMapper.deleteCart(g_no);
+    }
 
 
 }
