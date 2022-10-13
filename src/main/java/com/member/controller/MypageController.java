@@ -19,6 +19,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -77,6 +79,7 @@ public class MypageController {
         }
         // DB 저장
         memberService.updateImg(memberDTO);
+//        renewalAuth();
 
         return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
     }
@@ -96,6 +99,7 @@ public class MypageController {
 
             return "redirect:/member/mypage/profileModify";
         }
+//        renewalAuth();
 
         return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
     }
@@ -104,18 +108,16 @@ public class MypageController {
     @ResponseBody
     @PostMapping("nameCheck")
     public int nameCheck(@RequestParam("name") String name) throws Exception {
-
         return memberService.nameCheck(name);
     }
 
 
-
-    // 비밀번호 변경
     @GetMapping("updatePw")
     public void updatePwPage() {
 
     }
 
+    // 비밀번호 변경
     @PostMapping("updatePwPro")
     public String updatePwPro(Authentication auth,
                               @RequestParam("pw1") String pw1,
@@ -149,6 +151,27 @@ public class MypageController {
             rttr.addFlashAttribute("msg3", "현재 비밀번호가 일치하지 않습니다.");
             return "redirect:/member/mypage/updatePw";
         }
+        renewalAuth();
+
+        return "redirect:/member/mypage/profile";
+    }
+
+    // 포인트 충전 페이지
+    @GetMapping("profilePointAdd")
+    public void pointAddPage() {
+
+    }
+
+    // 포인트 충전
+    @PostMapping("profilePointAddPro")
+    public String pointAdd(Authentication auth, MemberDTO memberDTO, String point) throws Exception {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        memberDTO.setId(user.getMember().getId());
+        int pointAdd = Integer.parseInt(point);
+        memberDTO.setPoint(pointAdd);
+//        user.getMember().setPoint(pointAdd);
+
+        memberService.updatePoint(memberDTO);
         renewalAuth();
 
         return "redirect:/member/mypage/profile";

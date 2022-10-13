@@ -79,7 +79,7 @@ body {
     font-size: 14px;
     font-weight: 500;
     padding: 4px 8px;
-    display: inline-block;
+    display: inline;
     min-height: 28px;
     transition: background-color .24s, box-shadow .24s;
 }
@@ -107,6 +107,8 @@ input[type="file"] {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
+
 
 
 
