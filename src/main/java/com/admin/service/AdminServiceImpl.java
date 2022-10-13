@@ -3,6 +3,7 @@ package com.admin.service;
 import com.admin.domain.AdminMainDTO;
 import com.admin.mapper.AdminMapper;
 import com.member.domain.MemberDTO;
+import com.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private AdminMapper adminMapper;
+
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public void testPrint(String str) {
@@ -48,5 +52,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<MemberDTO> getMemberDTOList() {
         return adminMapper.getMemberDTOList();
+    }
+
+    @Override
+    public MemberDTO getMemberDTO(String u_id) {
+        return memberMapper.getMember(u_id);
+    }
+
+    @Override
+    public int updateMemberShip(MemberDTO memberDTO){
+        return adminMapper.updateMemberShip(memberDTO);
     }
 }

@@ -5,10 +5,11 @@ import com.admin.service.AdminService;
 import com.member.domain.MemberDTO;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,5 +39,30 @@ public class AdminController {
         model.addAttribute("memberDTOList", memberDTOList);
         return "admin/adminmain";
     }
+
+    @RequestMapping(value="userInfo", method = RequestMethod.GET)
+    public String userInfo(Model model, String u_id){
+        log.info("u_id : "+u_id);
+
+        MemberDTO memberDTO = adminService.getMemberDTO(u_id);
+        log.info("memberDTO : "+memberDTO.toString());
+
+        model.addAttribute("memberDTO", memberDTO);
+
+        log.info("userInfo");
+        return "admin/adminusers";
+    }
+
+    @RequestMapping(value="updateMemberShip",method = RequestMethod.POST)
+    public ResponseEntity updateMemberShip(@RequestBody MemberDTO memberDTO){
+        log.info("memberDT22222O : "+memberDTO.toString());
+        // INFO : com.admin.controller.AdminController - memberDT22222O : MemberDTO(id=testid2@testid2, name=null, pic=null, pw=null, phone=null, reg=null, status=0, point=0, membership=2, sns=null, snsToken=null, authDTOList=null)
+        int result = 0;
+        result = adminService.updateMemberShip(memberDTO);
+
+        return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 
 }
