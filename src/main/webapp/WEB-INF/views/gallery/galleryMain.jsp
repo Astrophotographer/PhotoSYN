@@ -68,15 +68,15 @@
                     <div class="bg-cover bg-no-repeat bg-center" style="background-image: url(../resources/gallery/shopy/assets/img/home-banner-01.jpg);">
                         <div class="container">
                             <div class="row min-vh-65 py-12 align-items-center">
-                                <div class="col-md-6 col-lg-5 col-xxl-4 text-center text-md-start">
-                                    <div class="bg-white p-4 p-lg-5">
-                                        <h1 class="fw-300 display-3 mb-2">Light up<br /> the room</h1>
-                                        <p class="fs-lg">Discover our lighting ideas.</p>
-                                        <div class="pt-2">
-                                            <a class="btn btn-dark" href="#">Shop Now</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <%--                                <div class="col-md-6 col-lg-5 col-xxl-4 text-center text-md-start">--%>
+                                <%--                                    <div class="bg-white p-4 p-lg-5">--%>
+                                <%--                                        <h1 class="fw-300 display-3 mb-2">Light up<br /> the room</h1>--%>
+                                <%--                                        <p class="fs-lg">Discover our lighting ideas.</p>--%>
+                                <%--                                        <div class="pt-2">--%>
+                                <%--                                            <a class="btn btn-dark" href="#">Shop Now</a>--%>
+                                <%--                                        </div>--%>
+                                <%--                                    </div>--%>
+                                <%--                                </div>--%>
                             </div>
                         </div>
                     </div>
@@ -177,6 +177,8 @@
         </div>
         <!-- End section -->
         <!-- section -->
+
+        <!-- 움직이는 박스 -->
         <section class="section">
             <div class="container">
                 <div class="row justify-content-center section-heading">
@@ -214,6 +216,7 @@
                               }
                         }'>
                         <div class="swiper-wrapper">
+
                             <!-- Product Card -->
                             <div class="swiper-slide">
                                 <div class="product-card-01 my-1">
@@ -489,159 +492,134 @@
             <div class="container">
                 <div class="row justify-content-center section-heading">
                     <div class="col-lg-6 text-center">
-                        <h3 class="fw-500 h2 m-0">Shop by Department</h3>
+                        <h3 class="fw-500 h2 m-0">Browse our Bestsellers</h3>
                     </div>
                 </div>
                 <div class="swiper-hover-arrow position-relative">
-                    <div class="swiper swiper-container" data-swiper-options='{
-                              "slidesPerView": 2,
-                              "spaceBetween": 30,
-                              "loop": true,
-                              "pagination": {
-                                "el": ".swiper-pagination",
-                                "clickable": true
+                    <div class="swiper swiper-container swiper-initialized swiper-horizontal swiper-pointer-events" data-swiper-options="{
+                              &quot;slidesPerView&quot;: 2,
+                              &quot;spaceBetween&quot;: 24,
+                              &quot;loop&quot;: true,
+                              &quot;pagination&quot;: {
+                                &quot;el&quot;: &quot;.swiper-pagination&quot;,
+                                &quot;clickable&quot;: true
                                 },
-                              "navigation": {
-                                "nextEl": ".swiper-next-03",
-                                "prevEl": ".swiper-prev-03"
+                              &quot;navigation&quot;: {
+                                &quot;nextEl&quot;: &quot;.swiper-next-02&quot;,
+                                &quot;prevEl&quot;: &quot;.swiper-prev-02&quot;
                               },
-                              "autoplay": {
-                                "delay": 3500,
-                                "disableOnInteraction": false
+                              &quot;autoplay&quot;: {
+                                &quot;delay&quot;: 3500,
+                                &quot;disableOnInteraction&quot;: false
                               },
-                              "breakpoints": {
-                                "500": {
-                                  "slidesPerView": 3
+                              &quot;breakpoints&quot;: {
+                                &quot;600&quot;: {
+                                  &quot;slidesPerView&quot;: 3
                                 },
-                                "700": {
-                                  "slidesPerView": 4
+                                &quot;991&quot;: {
+                                  &quot;slidesPerView&quot;: 3
                                 },
-                                "991": {
-                                  "slidesPerView": 5
-                                },
-                                "1200": {
-                                  "slidesPerView": 6
+                                &quot;1200&quot;: {
+                                  &quot;slidesPerView&quot;: 4
                                 }
                               }
-                        }'>
-                        <div class="swiper-wrapper">
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
+                        }">
+                        <div class="swiper-wrapper" id="swiper-wrapper-68b80b9203f3bf19" aria-live="off" style="transition-duration: 0ms; transform: translate3d(-1446.67px, 0px, 0px);"><div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active" role="group" aria-label="3 / 5" style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="2">
+                            <div class="product-card-01 my-1">
+                                <div class="product-media">
+                                    <div class="product-media-hover">
                                         <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-1.jpg" title="" alt="">
+                                            <img src="/resources/gallery/dev/assets/img/product-3.jpg" title="" alt="">
+                                            <img class="hover-image" src="/resources/gallery/dev/assets/img/product-3-hover.jpg" title="" alt="">
                                         </a>
                                     </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
+                                    <div class="product-action">
+                                        <a href="#" class="p-btn">
+                                            <i class="fi-heart"></i>
+                                        </a>
+                                        <a href="#" class="p-btn">
+                                            <i class="fi-repeat"></i>
+                                        </a>
+                                        <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="p-btn">
+                                            <i class="fi-eye"></i>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-2.jpg" title="" alt="">
+                                <div class="product-card-info">
+                                    <div class="rating-star text">
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <h6 class="product-title">
+                                        <a href="#">Fine-knit sweater</a>
+                                    </h6>
+                                    <div class="product-price">
+                                        <span class="text-primary">$28.<small>50</small></span>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
+                                    <div class="product-cart-btn">
+                                        <a class="btn btn-outline-dark">
+                                            Add to Cart
                                         </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-3.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-4.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-5.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-6.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-1.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- catargory Card -->
-                            <div class="swiper-slide">
-                                <div class="catargory-card-01">
-                                    <div class="catargory-media">
-                                        <a href="#">
-                                            <img src="../resources/gallery/shopy/assets/img/catagory-2.jpg" title="" alt="">
-                                        </a>
-                                    </div>
-                                    <div class="catargory-info">
-                                        <h6><a href="#">Bed & Bath</a></h6>
-                                        <span class="fs-sm">85 Products</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-pagination mt-4 d-lg-none position-relative"></div>
-                    </div>
-                    <div class="swiper-arrow-style-02 swiper-next swiper-next-03"><i class="bi bi-chevron-right"></i> </div>
-                    <div class="swiper-arrow-style-02 swiper-prev swiper-prev-03"><i class="bi bi-chevron-left"></i></div>
+
+                            <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" role="group" aria-label="4 / 5" style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="3">
+                            <div class="product-card-01 my-1">
+                                <div class="product-media">
+                                    <div class="product-media-hover">
+                                        <a href="#">
+                                            <c:forEach var="i" begin="1" end="6" step="1">
+                                                <img src="/resources/gallery/dev/assets/img/product-${i}.jpg" title="" alt="">
+                                                <img class="hover-image" src="/resources/gallery/dev/assets/img/product-${i}-hover.jpg" title="" alt="">
+                                            </c:forEach>
+                                        </a>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="p-btn">
+                                            <i class="fi-heart"></i>
+                                        </a>
+                                        <a href="#" class="p-btn">
+                                            <i class="fi-repeat"></i>
+                                        </a>
+                                        <a data-bs-toggle="modal" data-bs-target="#px-quick-view" href="javascript:void(0)" class="p-btn">
+                                            <i class="fi-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="product-card-info">
+                                    <div class="rating-star text">
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star-fill active"></i>
+                                        <i class="bi bi-star"></i>
+                                    </div>
+                                    <h6 class="product-title">
+                                        <a href="#">Fine-knit sweater</a>
+                                    </h6>
+                                    <div class="product-price">
+                                        <span class="text-primary">$28.<small>50</small></span>
+                                        <del class="fs-sm text-muted">$38.<small>50</small></del>
+                                    </div>
+                                    <div class="product-cart-btn">
+                                        <a class="btn btn-outline-dark">
+                                            Add to Cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="swiper-pagination mt-4 d-lg-none position-relative swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 3" aria-current="true"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 5"></span></div>
+                        <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+                    <div class="swiper-arrow-style-02 swiper-next swiper-next-02" tabindex="0" role="button" aria-label="Next slide" aria-controls="swiper-wrapper-68b80b9203f3bf19"><i class="bi bi-chevron-right"></i> </div>
+                    <div class="swiper-arrow-style-02 swiper-prev swiper-prev-02" tabindex="0" role="button" aria-label="Previous slide" aria-controls="swiper-wrapper-68b80b9203f3bf19"><i class="bi bi-chevron-left"></i></div>
                 </div>
             </div>
         </section>
@@ -712,7 +690,6 @@
                                             <c:forEach var="i" begin="1" end="6" step="1">
                                                 <img src="../resources/gallery/shopy/assets/img/blog-${i}.jpg" title="" alt="">
                                             </c:forEach>
-
                                         </a>
                                     </div>
                                     <div class="p-3 text-center mx-4 mt-n4 bg-white position-relative border border-gray-300">

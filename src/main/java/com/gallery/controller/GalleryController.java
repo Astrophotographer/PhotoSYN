@@ -52,6 +52,8 @@ public class GalleryController {
   //  }
     // 글 등록 처리
    //@PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
+
+
     @PostMapping("upload")
     public String uploadGallery(GalleryDTO galleryDTO, RedirectAttributes rttr) {
         log.info("upload 처리 : " + galleryDTO);
