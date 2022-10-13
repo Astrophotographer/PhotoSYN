@@ -21,17 +21,17 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping(value="main", method = RequestMethod.GET)
-    public String goMain(Model model){
+    @RequestMapping(value = "main", method = RequestMethod.GET)
+    public String goMain(Model model) {
         adminService.testPrint("hehehe");
 
         //유저수, 판매수, 최근 갤러리수, 최근 블로그수
         AdminMainDTO adminMainDTO = adminService.getAdminMainDTO();
-        log.info("adminMainDTO : "+adminMainDTO);
+        log.info("adminMainDTO : " + adminMainDTO);
         //유저 정보 들
         List<MemberDTO> memberDTOList = adminService.getMemberDTOList();
-        for(int i=0;i<memberDTOList.size();i++){
-            log.info("memberDTOList : "+memberDTOList.get(i));
+        for (int i = 0; i < memberDTOList.size(); i++) {
+            log.info("memberDTOList : " + memberDTOList.get(i));
         }
 //        log.info("memberDTOList : "+memberDTOList);
 
@@ -40,12 +40,12 @@ public class AdminController {
         return "admin/adminmain";
     }
 
-    @RequestMapping(value="userInfo", method = RequestMethod.GET)
-    public String userInfo(Model model, String u_id){
-        log.info("u_id : "+u_id);
+    @RequestMapping(value = "userInfo", method = RequestMethod.GET)
+    public String userInfo(Model model, String u_id) {
+        log.info("u_id : " + u_id);
 
         MemberDTO memberDTO = adminService.getMemberDTO(u_id);
-        log.info("memberDTO : "+memberDTO.toString());
+        log.info("memberDTO : " + memberDTO.toString());
 
         model.addAttribute("memberDTO", memberDTO);
 
@@ -53,9 +53,9 @@ public class AdminController {
         return "admin/adminusers";
     }
 
-    @RequestMapping(value="updateMemberShip",method = RequestMethod.POST)
-    public ResponseEntity updateMemberShip(@RequestBody MemberDTO memberDTO){
-        log.info("memberDT22222O : "+memberDTO.toString());
+    @RequestMapping(value = "updateMemberShip", method = RequestMethod.POST)
+    public ResponseEntity<String> updateMemberShip(@RequestBody MemberDTO memberDTO) {
+        log.info("updateMemberShip memberDTO : " + memberDTO.toString());
         // INFO : com.admin.controller.AdminController - memberDT22222O : MemberDTO(id=testid2@testid2, name=null, pic=null, pw=null, phone=null, reg=null, status=0, point=0, membership=2, sns=null, snsToken=null, authDTOList=null)
         int result = 0;
         result = adminService.updateMemberShip(memberDTO);
@@ -63,6 +63,15 @@ public class AdminController {
         return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @RequestMapping(value = "chargePoint", method = RequestMethod.POST)
+    public ResponseEntity<String> chargePoint(@RequestBody MemberDTO memberDTO) {
+        log.info("chargePoint memberDTO : " + memberDTO.toString());
+
+        int result = 1;
+        //memberDTO 안에 id랑 point에 정상적으로 값 넘어옴. DB에 값 넣어주기
+
+        return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 
 }

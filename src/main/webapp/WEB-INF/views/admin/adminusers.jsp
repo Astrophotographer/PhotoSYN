@@ -101,16 +101,15 @@
 
           <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                  Requested Limit
+                  포인트 충전
                 </span>
-            <select
-                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-            >
-              <option>$1,000</option>
-              <option>$5,000</option>
-              <option>$10,000</option>
-              <option>$25,000</option>
+            <select id="chargePoint" class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+              <option value="1000">$1,000</option>
+              <option value="5000">$5,000</option>
+              <option value="10000">$10,000</option>
+              <option value="25000">$25,000</option>
             </select>
+            <button id="chargePointBtn">충전하기</button>
           </label>
 
           <label class="block mt-4 text-sm">
@@ -342,6 +341,8 @@
       console.log(changeMemberShip);
     });
 
+
+
     $("#changeMembershipBtn").on("click",function(){
       console.log('멤버쉽 등급 변경 버튼 클릭');
 
@@ -385,6 +386,48 @@
       //   console.log("버튼 안 : ",changeMemberShip);
       //   //updateMemberShip
       // });
+    })
+
+    // let charge = $('select[name="accountType"]').val();
+
+    $("#chargePointBtn").on("click",function (){
+        console.log("포인트 충전 버튼 클릭");
+        let chargePoint = $("#chargePoint").val();
+        console.log("충전할 포인트 : ",chargePoint);
+
+        let reqData = {
+            id : u_id,
+            point : chargePoint
+        };
+
+        console.log(reqData);
+        console.log("reqData.u_id : ",reqData.id);
+        console.log("reqData.point : ",reqData.point);
+
+        $.ajax({
+            type: "POST",
+            url: "${pageContext.request.contextPath}/admin/chargePoint",
+            data: JSON.stringify(reqData),
+            contentType: "application/json; charset=utf-8",
+            // contentType: "application/json",
+            dataType: "text",
+            //post 방식 시큐리티 위해 추가
+            //요청을 날리기 전에.. 명령어 beforeSend
+            beforeSend: function (xhr) {
+            xhr.setRequestHeader(header, token);
+            },
+            success: function (result, status, xhr) {
+            console.log("ajax 요청 성공!");
+            console.log(result);
+            console.log(status);
+
+            },
+            error: function (e) {
+            console.log("ajax 요청 실패")
+            console.log(e);
+            }
+
+        });
     })
 
   })
