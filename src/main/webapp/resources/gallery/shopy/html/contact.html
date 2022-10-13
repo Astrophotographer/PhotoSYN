@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zxx" class="dark">
+
+<head>
+    @@include('./_head.html', {
+    "path": "../assets",
+    "title": "Shopy – eCommerce Bootstrap 5 Template"
+    })
+</head>
+
+<body>
+    <!-- Skippy & Prload -->
+    @@include('./_skippy.html',{
+    "path": "",
+    })
+    <!-- Edn Skippy & Prload -->
+
+    <!-- All Modal -->
+    @@include('./_common-modal.html',{
+    "path": "",
+    })
+    <!-- Edn All Modal -->
+    <!-- 
+    ========================
+        Wrapper 
+    ========================
+    -->
+    <div class="wrapper">
+        <!-- Header Height -->
+        <div class="header-height-bar"></div>
+        <!--  -->
+        <!-- Header -->
+        @@include('./header/_header01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        "HeaderClass": "navbar-light fixed-top header-height bg-white shadow-sm",
+        })
+        <!-- End Header -->
+        <!-- Main -->
+        <main>
+            <!-- Page Title -->
+            @@include('./_page-heading.html', {
+                "title": "Contact",
+            })
+            <!-- End Page Title -->
+            <!-- Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 my-3 pe-lg-8">
+                            <h3 class="mb-2 h2">Get in Touch</h3>
+                            <p class="fw-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <form class="row g-3 pt-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" id="type" placeholder="Name*">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email*">
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Subject*">
+                                </div>
+                                <div class="col-12">
+                                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" rows="4"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-6 my-3">
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="bg-gray-100 section">
+                <div class="container">
+                    <div class="row g-4">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="text-primary display-5 mb-3">
+                                        <i class="bi bi-telephone"></i>
+                                    </div>
+                                    <div class="">
+                                        <p class="mb-0">+012 345 678 123</p>
+                                        <p>+012 345 678 123</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="text-primary display-5 mb-3">
+                                        <i class="bi bi-printer"></i>
+                                    </div>
+                                    <div class="">
+                                        <p class="mb-0">+012 345 678 123</p>
+                                        <p>+012 345 678 123</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="text-primary display-5 mb-3">
+                                        <i class="bi bi-globe"></i>
+                                    </div>
+                                    <div class="">
+                                        <p class="mb-0"><a class="text-reset" href="#">demo@example.com</a></p>
+                                        <p><a class="text-reset" href="#">demo@example.com</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <div class="text-primary display-5 mb-3">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                    </div>
+                                    <div class="">
+                                        <p class="mb-0">1600 Amphitheatre Parkway</p>
+                                        <p>New York WC1 1BA </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer -->
+        @@include('./footer/_footer01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        })
+        <!-- End Footer -->
+    </div>
+    <!-- 
+    ========================
+       End Wrapper 
+    ========================
+    -->
+    <!-- script start -->
+    @@include('./_scripts.html', {
+    "path": "../assets",
+    })
+    <!-- End script start -->
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+// Header Fixed Effect
+.main-header {
+	transition: ease top 0.35s;
+	&.headroom--unpinned {
+		top: -250px;
+	}
+	&.headroom--pinned {
+		top: 0;
+	}
+}
+
+// Header Scroll Color
+.main-header {
+	&.navbar-light {
+		&.headroom--not-top {
+			background-color: $white;
+		}
+		&.headroom--pinned.headroom--not-top {
+			box-shadow: $box-shadow-sm;
+		}
+	}
+}
+
+// Header Brand
+.navbar-dark {
+	.header-navbar-brand {
+		.logo-dark {
+			display: none;
+			.headroom--not-top & {
+				display: block;
+			}
+		}
+		.logo-light {
+			.headroom--not-top & {
+				display: none;
+			}
+		}
+	}
+}
+
+.navbar-light {
+	.header-navbar-brand {
+		.logo-light {
+			display: none;
+		}
+	}
+}
+
+// Header border
+.header-border-bottom {
+	&.navbar-dark {
+		border-bottom: 1px solid rgba($white, .05);
+	}
+}
+
+// Fixed Header Color
+.navbar-dark {
+	&.headroom--not-top {
+		background-color: $dark;
+	}
+}
+
+
+// Header Toggle
+.main-header {
+	&.header-toggle {
+		&.navbar-light {
+			background-color: $white;
+		}
+		&.navbar-dark {
+			background-color: $dark;
+		}
+	}
+}
+
+.navbar-toggler {
+	border: none;
+}

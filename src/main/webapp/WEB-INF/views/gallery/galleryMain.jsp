@@ -1,8 +1,13 @@
+
 <!doctype html>
 <html lang="zxx" class="dark">
-<c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<%--<link rel = "stylesheet" href="${path}/resources/style.css" />--%>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
+<link rel = "stylesheet" href="${path}/resources/style.css" />
 <link rel="stylesheet" href="/resources/gallery/shopy/assets/css/theme.css"/>
 <script src="../resources/gallery/shopy/assets/js/jquery-3.5.1.min.js"></script>
 <script src="../resources/gallery/shopy/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -14,15 +19,7 @@
 <script src="../resources/gallery/shopy/assets/js/theme-jquery.js"></script>
 <script src="../resources/gallery/shopy/assets/js/theme.js"></script>
 
-
-<!doctype html>
-<html lang="zxx" class="dark">
-
 <head>
-<%--    @@include('./_head.html', {--%>
-<%--    "path": "../assets",--%>
-<%--    "title": "Shopy – eCommerce Bootstrap 5 Template"--%>
-<%--    })--%>
 </head>
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <body>
@@ -108,11 +105,6 @@
                                 <img class="w-100" src="../resources/gallery/shopy/assets/img/shop-banner-3.jpg"
                                      title="" alt="">
                             </div>
-                            <div class="position-absolute top-0 bottom-0 end-0 start-0 d-flex align-items-center justify-content-center hover-opacity-in">
-                                <a class="btn btn-light btn-lg" href="#">
-                                    Furniture <i class="ms-2 bi bi-chevron-right"></i>
-                                </a>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -124,8 +116,8 @@
                                              title="" alt="">
                                     </div>
                                     <div class="position-absolute top-0 bottom-0 end-0 start-0 d-flex align-items-center justify-content-center hover-opacity-in">
-                                        <a class="btn btn-light btn-lg" href="#">
-                                            Furniture <i class="ms-2 bi bi-chevron-right"></i>
+
+
                                         </a>
                                     </div>
                                 </div>
@@ -137,8 +129,8 @@
                                              title="" alt="">
                                     </div>
                                     <div class="position-absolute top-0 bottom-0 end-0 start-0 d-flex align-items-center justify-content-center hover-opacity-in">
-                                        <a class="btn btn-light btn-lg" href="#">
-                                            Furniture <i class="ms-2 bi bi-chevron-right"></i>
+
+
                                         </a>
                                     </div>
                                 </div>
@@ -150,8 +142,7 @@
                                              title="" alt="">
                                     </div>
                                     <div class="position-absolute top-0 bottom-0 end-0 start-0 d-flex align-items-center justify-content-center hover-opacity-in">
-                                        <a class="btn btn-light btn-lg" href="#">
-                                            Furniture <i class="ms-2 bi bi-chevron-right"></i>
+
                                         </a>
                                     </div>
                                 </div>
@@ -163,8 +154,8 @@
                                              title="" alt="">
                                     </div>
                                     <div class="position-absolute top-0 bottom-0 end-0 start-0 d-flex align-items-center justify-content-center hover-opacity-in">
-                                        <a class="btn btn-light btn-lg" href="#">
-                                            Furniture <i class="ms-2 bi bi-chevron-right"></i>
+
+
                                         </a>
                                     </div>
                                 </div>
@@ -185,6 +176,12 @@
                         <h3 class="fw-500 h2 m-0">Browse our Bestsellers</h3>
                     </div>
                 </div>
+
+
+                <div class="upload-active">
+                   <button type="button" onclick="location.href='/gallery/uploadForm'">글작성</button>
+                </div>
+
                 <div class="swiper-hover-arrow position-relative">
                     <div class="swiper swiper-container swiper-initialized swiper-horizontal swiper-pointer-events"
                          data-swiper-options="{
@@ -249,22 +246,8 @@
                                         </div>
                                     </div>
                                     <div class="product-card-info">
-                                        <%--별표--%>
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <%--상품 이름 --%>
-                                        <h6 class="product-title">
-                                            <a href="#">testest1</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
+
+
                                         <div class="product-cart-btn">
                                             <a class="btn btn-outline-dark">
                                                 Add to Cart
@@ -752,7 +735,6 @@
 "path": "../assets",
 })
 
-
 <script>
 
     $(".fi-heart").on("click", function (e) {
@@ -798,5 +780,8 @@
 
 
 </script>
+
+
+<jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
 
 </html>

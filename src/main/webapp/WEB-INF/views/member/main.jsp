@@ -68,7 +68,7 @@
     });
 </script>
 
-<!--
+
 <br/><br/>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <div>
@@ -85,6 +85,5 @@
 </sec:authorize>
 </div>
 <br/><br/>
--->
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>

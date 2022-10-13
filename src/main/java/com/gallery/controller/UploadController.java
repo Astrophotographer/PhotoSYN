@@ -10,11 +10,16 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.ExifSubIFDDirectory;
+import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.MetadataDTO;
 import com.gallery.service.GalleryService;
 import com.gallery.service.MetadataService;
 import com.gallery.service.MetadataServiceImpl;
+import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,24 +37,36 @@ public class UploadController {
 
     @Autowired
     private MetadataService metadataService;
+    @Autowired
+    private GalleryService galleryService;
 
     @GetMapping("uploadForm")
-    public String upload() {
+    public String upload(Authentication auth) {
         log.info("upload form!!!!!!!!!!!!!");
-        return "gallery/uploadForm";
+
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+
+        log.info("#################################### :: " + user);
+        log.info("#################################### :: " + id);
+
+
+
+        return "gallery/imgTest";
     }
 
-    @PostMapping("uploadPro")
-    public void uploadPro(String msg, MultipartHttpServletRequest request) { // msg(text), img(file)
 
+
+    @PostMapping("getMetadata")
+    public ResponseEntity<MetadataDTO> getMetadata(MultipartHttpServletRequest request) { // msg(text), img(file)
+        MetadataDTO metadataDTO = null;
 
         log.info("************ upload pro *************");
-        log.info("************ msg : " + msg);
 
         try {
             // 전송한 파일 정보 꺼내기
-            MultipartFile mf = request.getFile("img");
-            request.getFiles("img");
+            MultipartFile mf = request.getFile("files");
+            //request.getFiles("files");
             log.info("************ original file name : " + mf.getOriginalFilename());
             log.info("************ file size : " + mf.getSize());
             log.info("************ file contentType : " + mf.getContentType());
@@ -75,7 +92,7 @@ public class UploadController {
             // 파일 저장
             File file = new File(imgPath);
             mf.transferTo(file);
-            MetadataDTO metadataDTO = metadataService.checkMetadata(imgPath); // 메타데이터 가져오기 메소드
+            metadataDTO = metadataService.checkMetadata(imgPath); // 메타데이터 가져오기 메소드
 
 //            int MetadataUploadResult = metadataService.insertMetadata(metadataDTO); // 메타데이터 DB에 저장
 //            log.info("------------------------------------------------------------------------------");
@@ -85,9 +102,22 @@ public class UploadController {
             e.printStackTrace();
         }
 
+        return new ResponseEntity<>(metadataDTO, null, HttpStatus.OK);
+
     }
 
+    // 갤러리 최종 저장 요청 처리
+    @PostMapping("uploadPro")
+    public String uploadPro(MetadataDTO metadataDTO, GalleryDTO galleryDTO) {
 
+        // GalleryDB에 저장
+        galleryService.uploadGallery(galleryDTO); // <selectKey>  6
+        metadataDTO.setG_NO(galleryDTO.getG_NO()); // 갤러리 번호 저장  6-1
+        metadataService.insertMetadata(metadataDTO); // 메타데이터 DB에 저장  7
+
+
+        return "redirect:/gallery/main";
+    }
 
 
 

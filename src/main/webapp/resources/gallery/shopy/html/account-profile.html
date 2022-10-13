@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zxx" class="dark">
+
+<head>
+    @@include('./_head.html', {
+    "path": "../assets",
+    "title": "Shopy – eCommerce Bootstrap 5 Template"
+    })
+</head>
+
+<body>
+    <!-- Skippy & Prload -->
+    @@include('./_skippy.html',{
+    "path": "",
+    })
+    <!-- Edn Skippy & Prload -->
+    <!-- All Modal -->
+    @@include('./_common-modal.html',{
+    "path": "",
+    })
+    <!-- Edn All Modal -->
+    <!-- 
+    ========================
+        Wrapper 
+    ========================
+    -->
+    <div class="wrapper">
+        <!-- Header Height -->
+        <div class="header-height-bar"></div>
+        <!--  -->
+        <!-- Header -->
+        @@include('./header/_header01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        "HeaderClass": "navbar-light fixed-top header-height bg-white shadow-sm",
+        })
+        <!-- End Header -->
+        <!-- Main -->
+        <main>
+            <!-- Page Title -->
+            @@include('./_page-heading.html', {
+            "title": "Profile",
+            })
+            <!-- End Page Title -->
+            <!-- Section -->
+            <div class="section">
+                <div class="container">
+                    <div class="row align-items-start">
+                        <div class="col-lg-4 pb-4 pb-lg-0 col-xxl-3  pe-xxl-5">
+                            <div class="bg-white border border-bottom-0">
+                                <ul class="list-unstyled mb-0 theme-link">
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-order.html">
+                                            <i class="bi bi-bag me-2"></i> Order <div class="ms-auto badge-pill badge bg-primary rounded-3">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-wishlist.html">
+                                            <i class="bi bi-heart me-2"></i>Wishlist <div class="ms-auto badge-pill badge bg-primary rounded-3">5</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-tickets.html">
+                                            <i class="bi bi-bookmark me-2"></i>Support Tickets <div class="ms-auto badge-pill badge bg-primary rounded-3">0</div>
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center active p-3" href="account-profile.html">
+                                            <i class="bi bi-person-circle me-2"></i>Profile info
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-address.html">
+                                            <i class="bi bi-map-fill me-2"></i>Addresses
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="account-payment.html">
+                                            <i class="bi bi-credit-card me-2"></i>Payment
+                                        </a>
+                                    </li>
+                                    <li class="border-bottom mb-0">
+                                        <a class="nav-link-style d-flex align-items-center p-3" href="#">
+                                            <i class="bi bi-box-arrow-left me-2"></i>Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-xxl-9">
+                            <form>
+                                <div class="row gy-4">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="account_First_Name">
+                                            First Name *
+                                        </label>
+                                        <input class="form-control" id="account_First_Name" type="text" placeholder="First Name *" value="Nancy" required="">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="account_Last_Name">
+                                            Last Name *
+                                        </label>
+                                        <input class="form-control" id="account_Last_Name" type="text" placeholder="Last Name *" value="Drew" required="">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="account_Email">
+                                            Email Address *
+                                        </label>
+                                        <input class="form-control" id="account_Email" type="email" placeholder="Email Address *" value="user@email.com" required="">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="account_Password">
+                                            Current Password *
+                                        </label>
+                                        <input class="form-control" id="account_Password" type="password" placeholder="Current Password *" required="">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="Account_New_Password">
+                                            New Password *
+                                        </label>
+                                        <input class="form-control" id="Account_New_Password" type="password" placeholder="New Password *" required="">
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <!-- Label -->
+                                        <label class="form-label">Date of Birth</label>
+                                        <!-- Inputs -->
+                                        <div class="row g-3">
+                                            <div class="col-auto">
+                                                <select class="form-select" id="account_Date">
+                                                    <option>10</option>
+                                                    <option>11</option>
+                                                    <option selected="">12</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <select class="form-select" id="account_Month">
+                                                    <option>January</option>
+                                                    <option selected="">February</option>
+                                                    <option>March</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-auto">
+                                                <select class="form-select" id="accountYear">
+                                                    <option>1990</option>
+                                                    <option selected="">1991</option>
+                                                    <option>1992</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-lg-6">
+                                        <label class="form-label">Gender</label>
+                                        <div class="btn-group-toggle" data-bs-toggle="buttons">
+                                            <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined">
+                                            <label class="btn btn-outline-dark" for="danger-outlined">Male</label>
+                                            <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" checked>
+                                            <label class="btn btn-outline-dark" for="success-outlined">Female</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 pt-3">
+                                        <!-- Button -->
+                                        <button class="btn btn-primary" type="submit">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer -->
+        @@include('./footer/_footer01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        })
+        <!-- End Footer -->
+    </div>
+    <!-- 
+    ========================
+       End Wrapper 
+    ========================
+    -->
+    <!-- script start -->
+    @@include('./_scripts.html', {
+    "path": "../assets",
+    })
+    <!-- End script start -->
+</body>
+
+</html>

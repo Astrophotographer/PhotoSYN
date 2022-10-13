@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gallery.domain.GalleryDTO;
 
@@ -53,7 +54,7 @@ public class GalleryController {
     // 글 등록 처리
    //@PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
 
-
+    // 글 등록 폼 처리
     @PostMapping("upload")
     public String uploadGallery(GalleryDTO galleryDTO, RedirectAttributes rttr) {
         log.info("upload 처리 : " + galleryDTO);
@@ -73,8 +74,9 @@ public class GalleryController {
         return "gallery/galleryUpload";
     }
 
+    // 사진만 먼저 저장, 메타데이터 리턴해주는 경로
     @RequestMapping("metadata")
-    public String metadata(GalleryDTO galleryDTO, RedirectAttributes rttr) {
+    public String metadata(GalleryDTO galleryDTO, MultipartHttpServletRequest mpRequest)  {
         log.info("metadata 처리 : " + galleryDTO);
 
 
@@ -127,6 +129,14 @@ public class GalleryController {
             rttr.addFlashAttribute("result", "success");
         }
         return "redirect:/board/list" + cri.getListLink();
+    }
+
+    // test
+    @GetMapping("imgTest")
+    public void imgTest() {
+        log.info("imgTest");
+
+
     }
 
 }

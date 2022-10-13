@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zxx" class="dark">
+
+<head>
+    @@include('./_head.html', {
+    "path": "../assets",
+    "title": "Shopy – eCommerce Bootstrap 5 Template"
+    })
+</head>
+
+<body>
+    <!-- Skippy & Prload -->
+    @@include('./_skippy.html',{
+    "path": "",
+    })
+    <!-- Edn Skippy & Prload -->
+    <!-- All Modal -->
+    @@include('./_common-modal.html',{
+    "path": "",
+    })
+    <!-- Edn All Modal -->
+    <!-- 
+    ========================
+        Wrapper 
+    ========================
+    -->
+    <div class="wrapper">
+        <!-- Header Height -->
+        <div class="header-height-bar"></div>
+        <!--  -->
+        <!-- Header -->
+        @@include('./header/_header01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        "HeaderClass": "navbar-light fixed-top header-height bg-white shadow-sm",
+        })
+        <!-- End Header -->
+        <!-- Main -->
+        <main>
+            <!-- Page Title -->
+            @@include('./_page-heading.html', {
+            "title": "Sing Up",
+            })
+            <!-- End Page Title -->
+            <!-- Section -->
+            <section class="section">
+                <div class="container">
+                    <div class="justify-content-center row">
+                        <div class="col-lg-10 col-xxl-6">
+                            <div class="card">
+                                <div class="card-header bg-transparent py-3">
+                                    <h3 class="h4 mb-0">Register </h3>
+                                </div>
+                                <div class="card-body">
+                                    <form class="">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="name_1" class="form-label">Name<span class="text-danger">*</span></label>
+                                                    <input type="text" id="name_1" class="form-control" placeholder="Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label for="email_1" class="form-label">Email<span class="text-danger">*</span></label>
+                                                    <input type="email" id="email_1" class="form-control" placeholder="E-mail">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label col" for="exampleInputPassword_01">Password<span class="text-danger">*</span></label>
+                                                    <input type="password" class="form-control" id="exampleInputPassword_01" placeholder="*********">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group mb-3">
+                                                    <label class="form-label col" for="exampleInputPassword1">Conform Password<span class="text-danger">*</span></label>
+                                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="*********">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-check mb-4">
+                                            <input class="form-check-input" type="checkbox" value="" id="form2Example3" checked="">
+                                            <label class="form-check-label" for="form2Example3"> By register, I read &amp; accept the terms. </label>
+                                        </div>
+                                        <div class="form-group row align-items-center">
+                                            <div class="col">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Create Account
+                                                </button>
+                                            </div>
+                                            <div class="col-12 col-sm text-sm-end mt-3 mt-sm-0">
+                                                <span class="text-muted">Have an account? <a href="sign-up.html">Login here</a></span>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Section -->
+        </main>
+        <!-- End Main -->
+        <!-- Footer -->
+        @@include('./footer/_footer01.html', {
+        "path": ".",
+        "imgPath": "../assets",
+        })
+        <!-- End Footer -->
+    </div>
+    <!-- 
+    ========================
+       End Wrapper 
+    ========================
+    -->
+    <!-- script start -->
+    @@include('./_scripts.html', {
+    "path": "../assets",
+    })
+    <!-- End script start -->
+</body>
+
+</html>

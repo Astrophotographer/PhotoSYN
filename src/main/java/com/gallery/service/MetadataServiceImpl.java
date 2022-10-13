@@ -31,11 +31,11 @@ public class MetadataServiceImpl implements MetadataService {
 
     @Override
     public MetadataDTO checkMetadata(String imgpath) {
-
-        MetadataService metadataService = new MetadataServiceImpl();
+        log.info(imgpath);
+        //MetadataService metadataService = new MetadataServiceImpl();
         MetadataDTO metadataDTO = new MetadataDTO();
-        String imgPath = imgpath;
-        File file = new File(imgPath);
+        //String imgPath = imgpath;
+        File file = new File(imgpath);
 
         // There are multiple ways to get a Metadata object for a file
 
@@ -52,10 +52,10 @@ public class MetadataServiceImpl implements MetadataService {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
             ExifSubIFDDirectory Directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
             ExifIFD0Directory Directory2 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-
+            log.info("---------------1----------------");
 
             if (Directory != null) {
-
+                log.info("---------------2----------------");
                 Double Aperture = Directory.getDoubleObject(Directory.TAG_FNUMBER);
                 Date date = Directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
 
@@ -66,7 +66,7 @@ public class MetadataServiceImpl implements MetadataService {
                 Double Width = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_WIDTH);
                 Double Height = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_HEIGHT);
                 String LensModel = Directory.getString(Directory.TAG_LENS_MODEL);
-
+                log.info("---------------3----------------");
 
                 String CameraModel = Directory2.getString(Directory2.TAG_MODEL);
 
@@ -85,11 +85,11 @@ public class MetadataServiceImpl implements MetadataService {
 
                 log.info(metadataDTO + "metadataDTO");
 
-                //todo DB에 저장 (미완성)
-                int MetadataUploadResult = galleryMapper.insertMetadata(metadataDTO);
+                //todo DB에 저장 (이거아니고, 나중에 사용자가 저장버튼 누르면 그때 디비에 저장 )
+                //int MetadataUploadResult = galleryMapper.insertMetadata(metadataDTO);
                 log.info("------------------------------------------------------------------------------");
-                log.info("MetadataUploadResult:" + MetadataUploadResult);   //성공시 1 출력
-
+                //log.info("MetadataUploadResult:" + MetadataUploadResult);   //성공시 1 출력
+                log.info("---------------4----------------");
 
                 log.info("Aperture: " + Aperture + "  Date: " + date + "     ISO: " + ISO +
                         " Modle: " + CameraModel   + "     FocalLength: " + FocalLength +  " lens: " + LensModel + "ExposureTime: " + ShutterSpeed2 +
@@ -99,20 +99,21 @@ public class MetadataServiceImpl implements MetadataService {
             log.info(metadata.getDirectories() + "Using ImageMetadataReader");
 
         } catch (ImageProcessingException e) {
-            //print(e);
+            e.printStackTrace();
         } catch (IOException e) {
-            //print(e);
+            e.printStackTrace();
         }
-
+        log.info("---------------5---------------");
 
         try {
             Metadata metadata = JpegMetadataReader.readMetadata(file);
-
+            log.info("---------------6----------------");
             log.info(metadata + "Using JpegMetadataReader");
         } catch (JpegProcessingException e) {
-            //print(e);
+            e.printStackTrace();
+            log.info("---------------7----------------");
         } catch (IOException e) {
-            //print(e);
+            e.printStackTrace();
         }
 
 
@@ -124,11 +125,13 @@ public class MetadataServiceImpl implements MetadataService {
 
             log.info(metadata + "Using JpegMetadataReader for Exif and IPTC only");
         } catch (JpegProcessingException e) {
-            //print(e);
+            log.info("---------------8----------------");
+            e.printStackTrace();
         } catch (IOException e) {
-            //print(e);
+            log.info("---------------9----------------");
+            e.printStackTrace();
         }
-
+        log.info("---------------10----------------");
         return metadataDTO;
     }
 

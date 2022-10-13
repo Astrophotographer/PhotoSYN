@@ -1,0 +1,192 @@
+.navbar-expand {
+    @each $breakpoint in map-keys($grid-breakpoints) {
+        $next: breakpoint-next($breakpoint, $grid-breakpoints);
+        $infix: breakpoint-infix($next, $grid-breakpoints);
+
+        // stylelint-disable-next-line scss/selector-no-union-class-name
+        &#{$infix} {
+            @include media-breakpoint-down($next) {
+                .navbar-collapse {
+                    max-height: 85vh;
+                    overflow-y: auto;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    right: 0;
+                    background: $white;
+                    padding: 5px 15px 15px;
+                }
+                .navbar-nav {
+                    > .nav-item {
+                        &.dropdown {
+                            > .nav-link {
+                                position: relative;
+                                &:after {
+                                    content: "\f282";
+                                    display: inline-block;
+                                    font-family: bootstrap-icons !important;
+                                    font-style: normal;
+                                    font-weight: normal !important;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    vertical-align: -.125em;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                    color: currentColor;
+                                    font-size: 100%;
+                                    margin-left: 7px;
+                                    border: none;
+                                    position: absolute;
+                                    top: 0;
+                                    bottom: 0;
+                                    right: 0;
+                                    height: 10px;
+                                    margin: auto;
+                                }
+                            }
+                        }
+                    }
+                    // Dropdown Menu
+                    .dropdown-menu {
+                        border: 1px solid $gray-100;
+                        box-shadow: none;
+                        // Dropdown Item
+                        .dropdown-item {
+                            padding: 0.4rem 1rem;
+                        }
+                    }
+                }
+            }
+            @include media-breakpoint-up($next) {
+                > .container {
+                    position: relative;
+                }
+                .navbar-nav {
+                    > .nav-item {
+                        &.dropdown {
+                            > .nav-link {
+                                &:after {
+                                    content: "\f282";
+                                    display: inline-block;
+                                    font-family: bootstrap-icons !important;
+                                    font-style: normal;
+                                    font-weight: normal !important;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    vertical-align: -.125em;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                    color: currentColor;
+                                    font-size: 75%;
+                                    margin-left: 7px;
+                                    border: none;
+                                }
+                            }
+                        }
+                        &:hover {
+                            > .dropdown-menu {
+                                opacity: 1;
+                                pointer-events: auto;
+                            }
+                        }
+                    }
+
+                    .px-mega-dropdown {
+                        position: static;
+                    }
+
+                    // Dropdown Menu
+                    .dropdown-menu {
+                        display: block;
+                        opacity: 0;
+                        pointer-events: none;
+                        transition: ease all 0.35s;
+                        margin: 0;
+                        left: 50%;
+                        transform: translate(-50%, 0);
+                        box-shadow: $box-shadow-lg;
+                        border-top: 2px solid $primary;
+                        &.start {
+                            left: 0;
+                            transform: translate(0, 0);
+                        }
+                        &.end {
+                            left: auto;
+                            right: 0;
+                            transform: translate(0, 0);
+                        }
+
+                        // Sub Menu
+                        .dropdown {
+                            > .dropdown-item {
+                                position: relative;
+                                padding-right: 18px;
+                                &:after {
+                                    content: "\f285";
+                                    display: inline-block;
+                                    font-family: bootstrap-icons !important;
+                                    font-style: normal;
+                                    font-weight: normal !important;
+                                    font-variant: normal;
+                                    text-transform: none;
+                                    line-height: 1;
+                                    vertical-align: -.125em;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                    color: currentColor;
+                                    font-size: 85%;
+                                    position: absolute;
+                                    top: 0;
+                                    bottom: 0;
+                                    margin: auto;
+                                    right: 10px;
+                                    height: 10px;
+                                }
+                            }
+                            &:hover {
+                                .dropdown-menu-sub {
+                                    opacity: 1;
+                                    pointer-events: auto;
+                                }
+                            }
+                        }
+                        .dropdown-menu-sub {
+                            position: absolute;
+                            top: 0;
+                            left: 100%;
+                            opacity: 0;
+                            pointer-events: none;
+                            transform: translate(0, 0);
+                            &.right {
+                                left: auto;
+                                right: 100%;
+                            }
+                        }
+
+                        // Menu size
+                        &.dropdown-menu-md {
+                            min-width: $px-dropdown-menu-md;
+                        }
+                        &.dropdown-menu-lg {
+                            min-width: $px-dropdown-menu-lg;
+                        }
+                        &.dropdown-menu-xl {
+                            min-width: $px-dropdown-menu-xl;
+                        }
+
+                        &.px-mega-menu {
+                            width: 100%;
+                        }
+
+                        // Dropdown Item
+                        .dropdown-item {
+                            padding: 0.4rem 1rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
