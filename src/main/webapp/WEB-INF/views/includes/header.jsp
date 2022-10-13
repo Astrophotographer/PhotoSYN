@@ -76,7 +76,7 @@
             </ul>
         </nav>
     </sec:authorize>
-    <sec:authorize access="isAuthenticated()">
+    <sec:authorize access="hasRole('ROLE_MEMBER')">
         <nav class="main__menu">
             <ul class="nav__menu">
                 <li><a href="/member/main">메인</a></li>
