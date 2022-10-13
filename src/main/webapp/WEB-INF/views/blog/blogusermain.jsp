@@ -87,11 +87,18 @@
             <div class="sidebar-widget follow mb-5 text-center">
                 <h4 class="text-center widget-title">Follow Me</h4>
                 <div class="follow-socials">
-                    <a href="#"><i class="ti-facebook"></i></a>
-                    <a href="#" ><i class="ti-twitter"></i></a>
-                    <a href="#" ><i class="ti-instagram"></i></a>
-                    <a href="#"><i class="ti-youtube"></i></a>
-                    <a href="#"><i class="ti-pinterest"></i></a>
+                    <c:if test="${user_sns.u_FACEBOOK != null}">
+                        <a href="${user_sns.u_FACEBOOK}"><i class="ti-facebook"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_TWITTER != null}">
+                        <a href="${user_sns.u_TWITTER}"><i class="ti-twitter"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_INSTAGRAM != null}">
+                        <a href="${user_sns.u_INSTAGRAM}"><i class="ti-instagram"></i></a>
+                    </c:if>
+                    <c:if test="${user_sns.u_YOUTUBE != null}">
+                        <a href="${user_sns.u_YOUTUBE}"><i class="ti-youtube"></i></a>
+                    </c:if>
                 </div>
             </div>
         </div>
