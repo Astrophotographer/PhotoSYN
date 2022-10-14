@@ -2,6 +2,8 @@ package com.admin.controller;
 
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
+import com.admin.domain.Admin_Criteria;
+import com.admin.domain.Admin_PageDTO;
 import com.admin.service.AdminService;
 import com.member.domain.MemberDTO;
 import lombok.extern.log4j.Log4j;
@@ -42,10 +44,14 @@ public class AdminController {
     }
 
     @RequestMapping(value="user",method = RequestMethod.GET)
-    public String users(Model model){
+    public String users(Model model, Admin_Criteria cri){
         log.info("user Start...");
 
-        model.addAttribute("memberDTOList", adminService.getMemberDTOList());
+        //페이징 처리 이전
+//        model.addAttribute("memberDTOList", adminService.getMemberDTOList());
+        //페이징 처리 이후
+        model.addAttribute("memberDTOList", adminService.getMemberDTOList_WithPaging(cri));
+        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getUserTotalCount(cri)));
 
         return "admin/adminalluser";
     }

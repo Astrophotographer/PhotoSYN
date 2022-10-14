@@ -583,6 +583,7 @@
     <h1>?????</h1>
 </div>
 <%--footer--%>
+<!-- footer -->
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
 <%--</body>--%>
 <%--</html>--%>

@@ -65,7 +65,7 @@
           <!-- 사이드바 옵션들 -->
           <a
                   class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                  href="index.html"
+                  href="/admin/main"
           >
             <svg
                     class="w-5 h-5"
