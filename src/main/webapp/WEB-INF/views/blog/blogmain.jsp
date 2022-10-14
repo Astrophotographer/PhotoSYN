@@ -37,14 +37,14 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <div>
     <h1>TEST BLOG MAIN</h1>
-<%--    <table>--%>
-<%--        <c:forEach var="board" items="${list}">--%>
-<%--            <tr>--%>
-<%--                <td>U_ID : ${board.u_ID}</td>--%>
-<%--                <td>REG : ${board.b_REG}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
+    <%--    <table>--%>
+    <%--        <c:forEach var="board" items="${list}">--%>
+    <%--            <tr>--%>
+    <%--                <td>U_ID : ${board.u_ID}</td>--%>
+    <%--                <td>REG : ${board.b_REG}</td>--%>
+    <%--            </tr>--%>
+    <%--        </c:forEach>--%>
+    <%--    </table>--%>
 </div>
 
 
@@ -169,10 +169,10 @@
             <button type="submit" data-service="readcount">조회순</button>
 
 
-<%--            <a href="#" onclick="optionIs('latest')">최신순</a>--%>
-<%--            <a href="#" onclick="optionIs('oldest')">오래된순</a>--%>
-<%--            <a href="#" onclick="optionIs('like')">좋아요순</a>--%>
-<%--            <a href="#" onclick="optionIs('readcount')">조회순</a>--%>
+            <%--            <a href="#" onclick="optionIs('latest')">최신순</a>--%>
+            <%--            <a href="#" onclick="optionIs('oldest')">오래된순</a>--%>
+            <%--            <a href="#" onclick="optionIs('like')">좋아요순</a>--%>
+            <%--            <a href="#" onclick="optionIs('readcount')">조회순</a>--%>
         </form>
     </div>
 </div>
@@ -313,28 +313,28 @@
         window.location.href = "/blog/write";
     }
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         console.log('ready...');
 
         let formObj = $("#mainsortForm");
         let optionElement = document.getElementById("optionSort");
         console.log("optionElement", optionElement);
 
-        $("button").on("click", function(e){
+        $("button").on("click", function (e) {
             e.preventDefault();
             let service_data = $(this).data("service");
             console.log(service_data);
 
-            if (service_data == "latest"){
+            if (service_data == "latest") {
                 optionElement.value = "latest";
                 formObj.submit();
-            } else if (service_data == "oldest"){
+            } else if (service_data == "oldest") {
                 optionElement.value = "oldest";
                 formObj.submit();
-            } else if (service_data == "like"){
+            } else if (service_data == "like") {
                 optionElement.value = "like";
                 formObj.submit();
-            } else if(service_data == "readcount"){
+            } else if (service_data == "readcount") {
                 optionElement.value = "readcount";
                 formObj.submit();
             }
@@ -345,7 +345,6 @@
     function optionIs(option) {
         console.log("optionIs Start...");
         console.log("option is : " + option);
-
 
 
         <%--$.ajax({--%>
