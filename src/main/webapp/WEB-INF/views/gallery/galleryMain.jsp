@@ -257,6 +257,43 @@
                                 </div>
                             </div>
 
+
+
+
+                            <!--  페이지 번호 Pagination  -->
+                            <div class="row float-right">
+                                <div class="col-sm-12 col-md-7">
+                                    <ul class="pagination">
+                                        <c:if test="${pager.prev}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pager.startPage-1}" tabindex="-1">Previous</a>
+                                            </li>
+                                        </c:if>
+                                        <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" >
+                                            <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+                                                <a class="page-link" href="${num}">${num}</a>
+                                            </li>
+                                        </c:forEach>
+                                        <c:if test="${pager.next}">
+                                            <li class="page-item">
+                                                <a class="page-link" href="${pager.endPage+1}">Next</a>
+                                            </li>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+                            <form id="pagingForm" action="/gallery/main">
+                                <input type="hidden" name="pageNum" value="${pager.cri.pageNum}" />
+                                <input type="hidden" name="listQty" value="${pager.cri.listQty}" />
+                                <input type="hidden" name="sel" value="${pager.cri.sel}" />
+                                <input type="hidden" name="keyword" value="${pager.cri.keyword}" />
+                            </form>
+                            <!-- ㅍㅔ이징처리 끝 -->
+
+
                             2번
                             <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next" role="group"
                                  aria-label="4 / 5" style="width: 265.333px; margin-right: 24px;"
@@ -417,261 +454,262 @@
                                 </div>
                             </div>
 
-                            <!-- Product Card -->
-                            <div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 5"
-                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="2">
-                                <div class="product-card-01 my-1">
-                                    <div class="product-media">
-                                        <div class="product-media-hover">
-                                            <a href="#">
-                                                <img src="../assets/img/product-3.jpg" title="" alt="">
-                                                <img class="hover-image" src="../assets/img/product-3-hover.jpg"
-                                                     title="" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-heart"></i>
-                                            </a>
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-repeat"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                               href="javascript:void(0)" class="p-btn">
-                                                <i class="fi-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-info">
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <h6 class="product-title">
-                                            <a href="#">Name Test6</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
-                                        <div class="product-cart-btn">
-                                            <a class="btn btn-outline-dark">
-                                                Add to Cart
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product Card -->
-                            <div class="swiper-slide swiper-slide-next" role="group" aria-label="4 / 5"
-                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="3">
-                                <div class="product-card-01 my-1">
-                                    <div class="product-media">
-                                        <div class="product-media-hover">
-                                            <a href="#">
-                                                <img src="/resources/gallery/dev/assets/img/product-4.jpg" title=""
-                                                     alt="">
-                                                <img class="hover-image"
-                                                     src="/resources/gallery/dev/assets/img/product-4-hover.jpg"
-                                                     title="" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-heart"></i>
-                                            </a>
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-repeat"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                               href="javascript:void(0)" class="p-btn">
-                                                <i class="fi-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-info">
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <h6 class="product-title">
-                                            <a href="#">Name Test7</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
-                                        <div class="product-cart-btn">
-                                            <a class="btn btn-outline-dark">
-                                                Add to Cart
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Product Card -->
-                            <div class="swiper-slide" role="group" aria-label="5 / 5"
-                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="4">
-                                <div class="product-card-01 my-1">
-                                    <div class="product-media">
-                                        <div class="product-lable">
-                                            <span class="bg-danger text-white">Hot</span>
-                                        </div>
-                                        <div class="product-media-hover">
-                                            <a href="#">
-                                                <img src="/resources/gallery/dev/assets/img/product-5.jpg" title=""
-                                                     alt="">
-                                                <img class="hover-image"
-                                                     src="/resources/gallery/dev/assets/img/product-5-hover.jpg"
-                                                     title="" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-heart"></i>
-                                            </a>
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-repeat"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                               href="javascript:void(0)" class="p-btn">
-                                                <i class="fi-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-info">
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <h6 class="product-title">
-                                            <a href="#">Name Test8</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
-                                        <div class="product-cart-btn">
-                                            <a class="btn btn-outline-dark">
-                                                Add to Cart
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide swiper-slide-duplicate" role="group" aria-label="1 / 5"
-                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="0">
-                                <div class="product-card-01 my-1">
-                                    <div class="product-media">
-                                        <div class="product-lable">
-                                            <span class="bg-danger text-white">Hot</span>
-                                        </div>
-                                        <div class="product-media-hover">
-                                            <a href="#">
-                                                <img src="/resources/gallery/dev/assets/img/product-1.jpg" title=""
-                                                     alt="">
-                                                <img class="hover-image"
-                                                     src="/resources/gallery/dev/assets/img/product-1-hover.jpg"
-                                                     title="" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-heart"></i>
-                                            </a>
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-repeat"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                               href="javascript:void(0)" class="p-btn">
-                                                <i class="fi-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-info">
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <h6 class="product-title">
-                                            <a href="#">Name Test9</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
-                                        <div class="product-cart-btn">
-                                            <a class="btn btn-outline-dark">
-                                                Add to Cart
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                            <!-- Product Card -->--%>
+<%--                            <div class="swiper-slide swiper-slide-active" role="group" aria-label="3 / 5"--%>
+<%--                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="2">--%>
+<%--                                <div class="product-card-01 my-1">--%>
+<%--                                    <div class="product-media">--%>
+<%--                                        <div class="product-media-hover">--%>
+<%--                                            <a href="#">--%>
+<%--                                                <img src="../assets/img/product-3.jpg" title="" alt="">--%>
+<%--                                                <img class="hover-image" src="../assets/img/product-3-hover.jpg"--%>
+<%--                                                     title="" alt="">--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-action">--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-heart"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-repeat"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"--%>
+<%--                                               href="javascript:void(0)" class="p-btn">--%>
+<%--                                                <i class="fi-eye"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product-card-info">--%>
+<%--                                        <div class="rating-star text">--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star"></i>--%>
+<%--                                        </div>--%>
+<%--                                        <h6 class="product-title">--%>
+<%--                                            <a href="#">Name Test6</a>--%>
+<%--                                        </h6>--%>
+<%--                                        <div class="product-price">--%>
+<%--                                            <span class="text-primary">$28.<small>50</small></span>--%>
+<%--                                            <del class="fs-sm text-muted">$38.<small>50</small></del>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-cart-btn">--%>
+<%--                                            <a class="btn btn-outline-dark">--%>
+<%--                                                Add to Cart--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <!-- Product Card -->--%>
+<%--                            <div class="swiper-slide swiper-slide-next" role="group" aria-label="4 / 5"--%>
+<%--                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="3">--%>
+<%--                                <div class="product-card-01 my-1">--%>
+<%--                                    <div class="product-media">--%>
+<%--                                        <div class="product-media-hover">--%>
+<%--                                            <a href="#">--%>
+<%--                                                <img src="/resources/gallery/dev/assets/img/product-4.jpg" title=""--%>
+<%--                                                     alt="">--%>
+<%--                                                <img class="hover-image"--%>
+<%--                                                     src="/resources/gallery/dev/assets/img/product-4-hover.jpg"--%>
+<%--                                                     title="" alt="">--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-action">--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-heart"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-repeat"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"--%>
+<%--                                               href="javascript:void(0)" class="p-btn">--%>
+<%--                                                <i class="fi-eye"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product-card-info">--%>
+<%--                                        <div class="rating-star text">--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star"></i>--%>
+<%--                                        </div>--%>
+<%--                                        <h6 class="product-title">--%>
+<%--                                            <a href="#">Name Test7</a>--%>
+<%--                                        </h6>--%>
+<%--                                        <div class="product-price">--%>
+<%--                                            <span class="text-primary">$28.<small>50</small></span>--%>
+<%--                                            <del class="fs-sm text-muted">$38.<small>50</small></del>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-cart-btn">--%>
+<%--                                            <a class="btn btn-outline-dark">--%>
+<%--                                                Add to Cart--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <!-- Product Card -->--%>
+<%--                            <div class="swiper-slide" role="group" aria-label="5 / 5"--%>
+<%--                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="4">--%>
+<%--                                <div class="product-card-01 my-1">--%>
+<%--                                    <div class="product-media">--%>
+<%--                                        <div class="product-lable">--%>
+<%--                                            <span class="bg-danger text-white">Hot</span>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-media-hover">--%>
+<%--                                            <a href="#">--%>
+<%--                                                <img src="/resources/gallery/dev/assets/img/product-5.jpg" title=""--%>
+<%--                                                     alt="">--%>
+<%--                                                <img class="hover-image"--%>
+<%--                                                     src="/resources/gallery/dev/assets/img/product-5-hover.jpg"--%>
+<%--                                                     title="" alt="">--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-action">--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-heart"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-repeat"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"--%>
+<%--                                               href="javascript:void(0)" class="p-btn">--%>
+<%--                                                <i class="fi-eye"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product-card-info">--%>
+<%--                                        <div class="rating-star text">--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star"></i>--%>
+<%--                                        </div>--%>
+<%--                                        <h6 class="product-title">--%>
+<%--                                            <a href="#">Name Test8</a>--%>
+<%--                                        </h6>--%>
+<%--                                        <div class="product-price">--%>
+<%--                                            <span class="text-primary">$28.<small>50</small></span>--%>
+<%--                                            <del class="fs-sm text-muted">$38.<small>50</small></del>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-cart-btn">--%>
+<%--                                            <a class="btn btn-outline-dark">--%>
+<%--                                                Add to Cart--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="swiper-slide swiper-slide-duplicate" role="group" aria-label="1 / 5"--%>
+<%--                                 style="width: 265.333px; margin-right: 24px;" data-swiper-slide-index="0">--%>
+<%--                                <div class="product-card-01 my-1">--%>
+<%--                                    <div class="product-media">--%>
+<%--                                        <div class="product-lable">--%>
+<%--                                            <span class="bg-danger text-white">Hot</span>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-media-hover">--%>
+<%--                                            <a href="#">--%>
+<%--                                                <img src="/resources/gallery/dev/assets/img/product-1.jpg" title=""--%>
+<%--                                                     alt="">--%>
+<%--                                                <img class="hover-image"--%>
+<%--                                                     src="/resources/gallery/dev/assets/img/product-1-hover.jpg"--%>
+<%--                                                     title="" alt="">--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-action">--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-heart"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-repeat"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"--%>
+<%--                                               href="javascript:void(0)" class="p-btn">--%>
+<%--                                                <i class="fi-eye"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product-card-info">--%>
+<%--                                        <div class="rating-star text">--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star"></i>--%>
+<%--                                        </div>--%>
+<%--                                        <h6 class="product-title">--%>
+<%--                                            <a href="#">Name Test9</a>--%>
+<%--                                        </h6>--%>
+<%--                                        <div class="product-price">--%>
+<%--                                            <span class="text-primary">$28.<small>50</small></span>--%>
+<%--                                            <del class="fs-sm text-muted">$38.<small>50</small></del>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-cart-btn">--%>
+<%--                                            <a class="btn btn-outline-dark">--%>
+<%--                                                Add to Cart--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                            <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" role="group"
-                                 aria-label="2 / 5" style="width: 265.333px; margin-right: 24px;"
-                                 data-swiper-slide-index="1">
-                                <div class="product-card-01 my-1">
-                                    <div class="product-media">
-                                        <div class="product-media-hover">
-                                            <a href="#">
-                                                <img src="/resources/gallery/dev/assets/img/product-2.jpg" title=""
-                                                     alt="">
-                                                <img class="hover-image"
-                                                     src="/resources/gallery/dev/assets/img/product-2-hover.jpg"
-                                                     title="" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-heart"></i>
-                                            </a>
-                                            <a href="#" class="p-btn">
-                                                <i class="fi-repeat"></i>
-                                            </a>
-                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"
-                                               href="javascript:void(0)" class="p-btn">
-                                                <i class="fi-eye"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-card-info">
-                                        <div class="rating-star text">
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star-fill active"></i>
-                                            <i class="bi bi-star"></i>
-                                        </div>
-                                        <h6 class="product-title">
-                                            <a href="#">Test10</a>
-                                        </h6>
-                                        <div class="product-price">
-                                            <span class="text-primary">$28.<small>50</small></span>
-                                            <del class="fs-sm text-muted">$38.<small>50</small></del>
-                                        </div>
-                                        <div class="product-cart-btn">
-                                            <a class="btn btn-outline-dark">
-                                                Add to Cart
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<%--                            <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-prev" role="group"--%>
+<%--                                 aria-label="2 / 5" style="width: 265.333px; margin-right: 24px;"--%>
+<%--                                 data-swiper-slide-index="1">--%>
+<%--                                <div class="product-card-01 my-1">--%>
+<%--                                    <div class="product-media">--%>
+<%--                                        <div class="product-media-hover">--%>
+<%--                                            <a href="#">--%>
+<%--                                                <img src="/resources/gallery/dev/assets/img/product-2.jpg" title=""--%>
+<%--                                                     alt="">--%>
+<%--                                                <img class="hover-image"--%>
+<%--                                                     src="/resources/gallery/dev/assets/img/product-2-hover.jpg"--%>
+<%--                                                     title="" alt="">--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-action">--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-heart"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a href="#" class="p-btn">--%>
+<%--                                                <i class="fi-repeat"></i>--%>
+<%--                                            </a>--%>
+<%--                                            <a data-bs-toggle="modal" data-bs-target="#px-quick-view"--%>
+<%--                                               href="javascript:void(0)" class="p-btn">--%>
+<%--                                                <i class="fi-eye"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="product-card-info">--%>
+<%--                                        <div class="rating-star text">--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star-fill active"></i>--%>
+<%--                                            <i class="bi bi-star"></i>--%>
+<%--                                        </div>--%>
+<%--                                        <h6 class="product-title">--%>
+<%--                                            <a href="#">Test10</a>--%>
+<%--                                        </h6>--%>
+<%--                                        <div class="product-price">--%>
+<%--                                            <span class="text-primary">$28.<small>50</small></span>--%>
+<%--                                            <del class="fs-sm text-muted">$38.<small>50</small></del>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="product-cart-btn">--%>
+<%--                                            <a class="btn btn-outline-dark">--%>
+<%--                                                Add to Cart--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+
                         <div class="swiper-pagination mt-4 d-lg-none position-relative swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
                             <span class="swiper-pagination-bullet" tabindex="0" role="button"
                                   aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0"
