@@ -19,13 +19,12 @@ public class MetadataDTO {
     private Double M_ISO;   // 감도
     private Double M_FLENGTH; // 초점거리  FocalLength
     private Double M_SHUTTERSPEED; //셔터스피드   ExposureTime
-
-
+    private String M_HNAME; // 사진 저장된 이름 임시저장할 변수 추가
+    private String M_CONTENT; // 저장된 설명 임시로 저장할 변수 추가
 
     private Date M_REG; // 사진 촬영일 DateTimeOriginal
 
-    public static void setM_DATE(Date date) {
-    }
+
 
 
 }

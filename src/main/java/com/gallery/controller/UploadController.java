@@ -15,6 +15,7 @@ import com.gallery.domain.MetadataDTO;
 import com.gallery.service.GalleryService;
 import com.gallery.service.MetadataService;
 import com.gallery.service.MetadataServiceImpl;
+import com.member.domain.MemberDTO;
 import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -93,7 +94,7 @@ public class UploadController {
             File file = new File(imgPath);
             mf.transferTo(file);
             metadataDTO = metadataService.checkMetadata(imgPath); // 메타데이터 가져오기 메소드
-
+            metadataDTO.setM_HNAME(newFileName); // 서버에 저장한 파일명 저장
 //            int MetadataUploadResult = metadataService.insertMetadata(metadataDTO); // 메타데이터 DB에 저장
 //            log.info("------------------------------------------------------------------------------");
 //            log.info("MetadataUploadResult:" + MetadataUploadResult);   //성공시 1 출력
@@ -108,10 +109,18 @@ public class UploadController {
 
     // 갤러리 최종 저장 요청 처리
     @PostMapping("uploadPro")
-    public String uploadPro(MetadataDTO metadataDTO, GalleryDTO galleryDTO) {
+    public String uploadPro(MetadataDTO metadataDTO, GalleryDTO galleryDTO, MemberDTO memberDTO, Authentication auth) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+        galleryDTO.setU_ID(id);
+        galleryDTO.setG_HNAME(metadataDTO.getM_HNAME());
+        galleryDTO.setG_CONTENT(metadataDTO.getM_CONTENT());
+
 
         // GalleryDB에 저장
+
         galleryService.uploadGallery(galleryDTO); // <selectKey>  6
+        log.info("***************** galleryDTO gno : " + galleryDTO.getG_NO());
         metadataDTO.setG_NO(galleryDTO.getG_NO()); // 갤러리 번호 저장  6-1
         metadataService.insertMetadata(metadataDTO); // 메타데이터 DB에 저장  7
 

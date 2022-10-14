@@ -12,17 +12,16 @@
     </insert>
 
     <insert id="uploadGallery">
+        <selectKey keyProperty="G_NO" resultType="long" order="BEFORE">
+            select gallery_seq.nextval from dual
+        </selectKey>
         insert into Gallery (G_NO, MT_NAME, U_ID, G_HNAME, G_LNAME, G_HPRICE, G_LPRICE, G_CONTENT, G_REG, G_EDIT, G_STATUS, G_SALES, G_LIKE, G_READCOUNT, G_TAG1, G_TYPE)
-        VALUES (gallery_seq.nextval, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, #{G_HPRICE}, #{G_LPRICE}, #{G_CONTENT}, sysdate, sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
+        VALUES (#{G_NO}, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, #{G_HPRICE}, #{G_LPRICE}, #{G_CONTENT}, sysdate, sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
     </insert>
 
     <insert id="insertMetadata">
-
-<!--            <selectKey keyProperty="G_NO" order="BEFORE" resultType="long">-->
-<!--                select gallery_seq.nextval from dual-->
-<!--            </selectKey>-->
         insert into Metadata (G_NO, M_IMGLENS, M_IMGCAMERA, M_IMGHQLY, M_IMGLQLY, M_APERTURE, M_ISO, M_FLENGTH, M_SHUTTERSPEED)
-        VALUES  (metadata_seq.nextval, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
+        VALUES  (#{G_NO}, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
     </insert>
 
 
@@ -30,6 +29,18 @@
 
 
 
+
+    <select id="getMaxReadCountGallery" resultType="com.gallery.domain.GalleryDTO">
+    select * from gallery where g_readCount = (select max(G_READCOUNT) from gallery)
+    </select>
+
+    <select id="getMaxLikeGallery" resultType="com.gallery.domain.GalleryDTO">
+    select * from gallery where g_like = (select max(G_LIKE) from gallery)
+    </select>
+
+    <select id="getMaxSalesGallery" resultType="com.gallery.domain.GalleryDTO">
+    select * from gallery where g_sales = (select max(G_SALES) from gallery)
+    </select>
 
 
     <select id="getTempImg" resultType="com.gallery.domain.Gallery_Img_Temp">
@@ -41,51 +52,84 @@
 
 
 
-    <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
-        select * from gallery where G_STATUS = 1
-        <if test='u_id != null'>
-            where U_ID = #{u_id}
-        </if>
-        <choose>
-        <!-- 최신보기(reg) desc - 최신순, asc - 오래된순 -->
-        <when test='option eq "reg".toString()'>
-            order by G_REG
-            <if test='sort eq "desc".toString()'>
-                desc
-            </if>
-            <if test='sort eq "asc".toString()'>
-                asc
-            </if>
-        </when>
-            <!-- 좋아요(like) desc - 좋아요 많은순, asc - 좋아요 적은순 -->
-            <!--            <when test='option equals("like")'>-->
-            <!--                order by B_LIKE-->
-            <!--                <if test='sort equals("desc")'>-->
-            <!--                    desc-->
-            <!--                </if>-->
-            <!--                <if test='sort equals("asc")'>-->
-            <!--                    asc-->
-            <!--                </if>-->
-            <!--            </when>-->
-            <!-- 조회순(readcount desc - 조회 많은순, asc - 조회 적은순 -->
-            <when test='option=="readcount"'>
-            order by G_READCOUNT
-            <if test='sort=="desc"'>
-                desc
-            </if>
-            <if test='sort=="asc"'>
-                asc
-            </if>
-        </when>
-        <!-- 옵션이 없는 경우 -->
-        <otherwise>
-            order by G_REG desc
-        </otherwise>
-        </choose>
+    <sql id="search">
+        <trim prefix="(" suffix=") and " prefixOverrides="or">
+            <foreach item="sel" collection="selArr">
+                <trim prefix="or">
+                    <choose>
+                        <when test="sel == 'T'.toString()">
+                            title like '%'||#{keyword}||'%'
+                        </when>
+                        <when test="sel == 'C'.toString()">
+                            content like '%'||#{keyword}||'%'
+                        </when>
+                        <when test="sel == 'W'.toString()">
+                            writer like '%'||#{keyword}||'%'
+                        </when>
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
 
+    <select id="getListWithPaging" resultType="com.gallery.domain.GalleryDTO">
+        <![CDATA[
+		select g_no, title, writer, reg
+		from
+			(select /*+ INDEX_DESC(springBoard pk_springBoard) */
+		 	rownum r, g_no, title, writer, reg
+		 	from gallery
+		 	where
+		]]>
 
+        <include refid="search"></include>
+
+        <![CDATA[
+		 	rownum <= #{pageNum} * #{listQty} )
+		 where r > (#{pageNum} - 1) * #{listQty}
+		]]>
+    </select>
+
+    <!-- 전체 갤러리 글 수  -->
+    <select id="getTotal" resultType="int">
+        <![CDATA[
+        select count(*) from
+            (select rownum r, A.* from (
+                select * from gallery g
+                where ]]>
+                    <if test="keyword != null">
+                        (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%') and
+                    </if>
+        <![CDATA[
+                    g_no > 0
+                order by G_REG desc) A
+            where rownum <= #{pageNum} * #{listQty}
+            order by G_REG desc) B
+
+        where r > (#{pageNum} - 1) * #{listQty}
+        ]]>
 
     </select>
+    <!-- 갤러리 메인에 보여줄거 다 가져오기 -->
+    <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
+        <![CDATA[
+        select B.* from
+            (select rownum r, A.* from (
+                select * from gallery g
+                where ]]>
+        <if test="keyword != null">
+            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%') and
+        </if>
+        <![CDATA[
+                    g_no > 0
+                order by G_REG desc) A
+            where rownum <= #{pageNum} * #{listQty}
+            order by G_REG desc) B
+
+        where r > (#{pageNum} - 1) * #{listQty}
+        ]]>
+    </select>
+
 
     <select id="getGallerySingle" resultType="com.gallery.domain.GalleryDTO">
         select * from gallery where g_no = #{G_NO}

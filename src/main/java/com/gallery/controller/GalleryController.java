@@ -1,5 +1,6 @@
 package com.gallery.controller;
 
+import com.blog.domain.BlogDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.gallery.domain.Gallery_PageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,10 @@ import com.gallery.service.GalleryService;
 
 import lombok.extern.log4j.Log4j;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.*;
+import java.security.Principal;
+import java.util.List;
 
 @Controller
 @RequestMapping("/gallery/*")
@@ -26,31 +30,44 @@ import javax.swing.*;
 public class GalleryController {
 
 
-
     @Autowired
     private GalleryService galleryService;
 
     @RequestMapping(value ="main")
-    public String list(Model model, Gallery_Criteria cri) {
+    public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
         log.info("gallery main!!");
 
-//        // model로 list jsp에 뿌려줄 글 목록 전달
-        model.addAttribute("main", galleryService.getGalleryList(cri));
-        log.info("************ cri : " + cri);
+        if (principal != null) {
+            log.info(principal.getName());
+            cri.setU_id(principal.getName());
+        } else {
+            log.info("principal is null");
+        }
 //
         int total = galleryService.getTotal(cri); // 게시글 개수 가져오기
         log.info("******************* total : " + total);
         model.addAttribute("pager", new Gallery_PageDTO(cri, total));
+        List<GalleryDTO> list = galleryService.getGalleryList(cri);
+        log.info("******************* list : " + list);
+        model.addAttribute("list", list);
+////
+// model로 list jsp에 뿌려줄 글 목록 전달
+//        model.addAttribute("main", galleryService.getGalleryList(cri));
+//        log.info("************ cri : " + cri);
+//
 
         return "gallery/galleryMain";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
     @GetMapping("single")
-    public void gallerySingle(Long G_NO, Model model, @ModelAttribute("cri") Gallery_Criteria cri) {
+    public String gallerySingle(Long G_NO, Model model, @ModelAttribute("cri") Gallery_Criteria cri) {
         log.info("gallerySingle G_NO : " + G_NO);
         model.addAttribute("board", galleryService.getGallerySingle(G_NO));
+
+        return "gallery/gallerySingle";
     }
+
 
     @PreAuthorize("principal.useranme == #board.writer") // 작성자와 로그인한 사람이 같은지 확인
     @PostMapping("modify")
