@@ -4,6 +4,7 @@ import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.mapper.AdminMapper;
+import com.gallery.domain.GalleryDTO;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
@@ -90,5 +91,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int updateUserStatus(MemberDTO memberDTO) {
         return adminMapper.updateUserStatus(memberDTO);
+    }
+
+    @Override
+    public List<GalleryDTO> getGalleryDTOList_WithPaging(Admin_Criteria cri) {
+        return adminMapper.getGalleryDTOList_WithPaging(cri);
+    }
+
+    @Override
+    public int getGalleryTotalCount(Admin_Criteria cri) {
+        return adminMapper.getGalleryTotalCount(cri);
     }
 }

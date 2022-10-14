@@ -86,6 +86,22 @@ public class AdminController {
         return "admin/adminusers";
     }
 
+    @RequestMapping(value="gallery", method = RequestMethod.GET)
+    public String adminGallery(Model model, Admin_Criteria cri){
+        log.info("adminGallery");
+
+        model.addAttribute("galleryDTOList", adminService.getGalleryDTOList_WithPaging(cri));
+        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getGalleryTotalCount(cri)));
+
+        return "admin/admingallery";
+    }
+
+    @RequestMapping(value="blog", method = RequestMethod.GET)
+    public String adminBlog(){
+        log.info("adminBlog");
+        return "admin/adminblog";
+    }
+
 
 
 

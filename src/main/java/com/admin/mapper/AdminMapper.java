@@ -3,6 +3,7 @@ package com.admin.mapper;
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
+import com.gallery.domain.GalleryDTO;
 import com.member.domain.MemberDTO;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface AdminMapper {
     public int updatePoint(MemberDTO memberDTO);
 
     public int updateUserStatus(MemberDTO memberDTO);
+
+    public List<GalleryDTO> getGalleryDTOList_WithPaging(Admin_Criteria cri);
+    public int getGalleryTotalCount(Admin_Criteria cri);
 }
