@@ -238,7 +238,7 @@ public class MypageController {
     @PostMapping("galleryBuyBtn")
     public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr) {
         MemberUser user = (MemberUser) auth.getPrincipal();
-        String name = user.getMember().getName();
+        String id = user.getMember().getId();
         int m = user.getMember().getPoint();
 
         galleryDTO.setG_HPRICE(10000);
@@ -257,7 +257,7 @@ public class MypageController {
 //        buyDTO.setO_price(galleryDTO.getG_HPRICE());
 //        buyDTO.setG_no(galleryDTO.getG_NO());
 
-            buyDTO.setO_buyer(name);
+            buyDTO.setO_buyer(id);
             buyDTO.setO_seller("찬욱");
             buyDTO.setO_price(10000);
             buyDTO.setG_no(10L);
@@ -266,7 +266,7 @@ public class MypageController {
             memberService.buyGallery(buyDTO);
 
             // 시큐리티 정보 갱신
-            //renewalAuth();
+            renewalAuth();
 
             rttr.addFlashAttribute("success", "구매가 완료되었습니다.");
             log.info("######################################### :: " + user.getMember());

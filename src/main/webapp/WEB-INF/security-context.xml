@@ -25,6 +25,8 @@
     <security:http>
 
         <!-- 특정 URI에 접근 제한 설정 -->
+        <security:intercept-url pattern="/blog/*" access="permitAll"/>
+        <security:intercept-url pattern="/gallery/*" access="permitAll"/>
         <security:intercept-url pattern="/member/*" access="permitAll"/>
         <security:intercept-url pattern="/member/mypage/*" access="hasRole('ROLE_MEMBER')"/>
         <security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>

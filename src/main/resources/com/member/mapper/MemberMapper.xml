@@ -102,7 +102,7 @@
     <update id="updatePoint">
         update user_list
         set u_point = u_point + #{point}
-        where u_nick = #{name}
+        where u_id = #{id}
     </update>
 
     <!-- 장바구니 담기 -->
