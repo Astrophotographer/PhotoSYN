@@ -78,9 +78,19 @@ public class GalleryServiceImpl implements GalleryService {
 
 
     @Override
-    public int getTotal(Gallery_Criteria cri) {
-        return galleryMapper.getTotal(cri);
-    }
+    public int getTotal(Gallery_Criteria cri) { return galleryMapper.getTotal(cri); }
+
+    @Override
+    public GalleryDTO getMaxLikeGallery() { return galleryMapper.getMaxLikeGallery(); }
+
+
+    @Override
+    public GalleryDTO getMaxReadCountGallery() { return galleryMapper.getMaxReadCountGallery(); }
+
+    @Override
+
+    public GalleryDTO getMaxSalesGallery() { return galleryMapper.getMaxSakesGallery();}
+
 
 
 }

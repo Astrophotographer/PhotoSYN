@@ -25,6 +25,11 @@ public interface GalleryService {
     public GalleryDTO getGallerySingle(Long G_NO); // 갤러리 하나 정보가져오기
 
     public int getTotal(Gallery_Criteria cri); // 개수 조회
+    public GalleryDTO getMaxLikeGallery();
+    public GalleryDTO getMaxReadCountGallery();
+    public GalleryDTO getMaxSalesGallery();
+
+
 
 
     public int checkGallerySeq(); // 사진 시퀀스 확인

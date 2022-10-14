@@ -37,15 +37,6 @@ public class MetadataServiceImpl implements MetadataService {
         //String imgPath = imgpath;
         File file = new File(imgpath);
 
-        // There are multiple ways to get a Metadata object for a file
-
-        //
-        // SCENARIO 1: UNKNOWN FILE TYPE
-        //
-        // This is the most generic approach.  It will transparently determine the file type and invoke the appropriate
-        // readers.  In most cases, this is the most appropriate usage.  This will handle JPEG, TIFF, GIF, BMP and RAW
-        // (CRW/CR2/NEF/RW2/ORF) files and extract whatever metadata is available and understood.
-        //
 
 
         try {
@@ -72,7 +63,6 @@ public class MetadataServiceImpl implements MetadataService {
 
                 // 값 DTO에 저장
                 metadataDTO.setM_APERTURE(Aperture);
-                metadataDTO.setM_DATE(date);
                 metadataDTO.setM_ISO(ISO);
                 metadataDTO.setM_FLENGTH(FocalLength);
                 metadataDTO.setM_SHUTTERSPEED(ShutterSpeed2);
