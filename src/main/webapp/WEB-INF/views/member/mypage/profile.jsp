@@ -19,22 +19,24 @@
                          style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
                 </c:otherwise>
             </c:choose>
-            ${princi.member.name}님의 회원등급은 ${princi.member.membership}
-            <c:if test="${princi.member.membership} == 0">
+            ${princi.member.name}님의 회원등급은
+            <c:if test="${princi.member.membership == 0}">
                 <b style="color: #a76d27;">브론즈</b>
             </c:if>
-            <c:if test="${princi.member.membership} == 1">
+            <c:if test="${princi.member.membership == 1}">
                 <b style="color: #7b7f7b;">실버</b>
             </c:if>
-            <c:if test="${princi.member.membership} == 2">
+            <c:if test="${princi.member.membership == 2}">
                 <b style="color: #a99a31;">골드</b>
             </c:if>
-            <c:if test="${princi.member.membership} == 3">
+            <c:if test="${princi.member.membership == 3}">
                 <b style="color: #28e3d4;">다이아</b>
             </c:if>
             입니다.
 
-            <div style="text-align: right; padding: 15px;">${princi.member.point} P</div>
+            <div style="text-align: right; padding: 15px;">
+                <fmt:formatNumber value="${princi.member.point}" pattern="#,###,###"/>&nbsp;P
+            </div>
             <div style="padding: 15px; display: flex; justify-content: space-between;">
                 <button class="profileBtn2" type="button" style="width: 100px"
                         onclick="window.location.href='/member/mypage/profileModify'">
@@ -54,7 +56,7 @@
         </div>
         <div style="padding: 15px; display: flex; justify-content: space-between;">
             <img src="" alt="사진"/>
-            <div>0 원</div>
+            <div><fmt:formatNumber pattern="###,###" value="${tot}"/> 원</div>
             <div>0 회</div>
         </div>
     </div>

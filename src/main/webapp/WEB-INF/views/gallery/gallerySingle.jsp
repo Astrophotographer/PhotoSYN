@@ -19,6 +19,12 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
 
+<form action="/member/mypage/galleryBuyBtn" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button class="profileBtn2" type="submit" style="width: 100px">
+        구매하기
+    </button>
+</form>
 
 
 

@@ -5,17 +5,13 @@
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <a href="/gallery/main">
-                <img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png">
-            </a>
-        </div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/5da5082b-b21c-403a-9dae-f0f59175333e_space-g0f976ef1c_1920.png"></div>
+        <div class="swiper-slide"><a href="/gallery/main"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/home_button_startframe__c9vtuy36kju6_large.jpg"></div>
         <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/반려동물.jpg"></div>
         <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/2022071101596_0.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/profile.png"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/user.png"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/profile.png"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/thumb_l_572442AD59D1F0170C27B68AC7F4377A.jpg"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/파티룸%20이미지_low.jpg"></div>
+        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/5da5082b-b21c-403a-9dae-f0f59175333e_space-g0f976ef1c_1920.png"></div>
     </div>
     <!-- 페이징 버튼 처리 -->
     <%--    <div class="swiper-pagination"></div>--%>
@@ -35,9 +31,9 @@
         //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
         direction: 'horizontal',
         //한번에 보여지는 페이지 숫자
-        slidesPerView: 4,
+        slidesPerView: 3,
         //페이지와 페이지 사이의 간격
-        spaceBetween: 30,
+        spaceBetween:20,
         //드레그 기능 true 사용가능 false 사용불가
         debugger: true,
         //마우스 휠기능 true 사용가능 false 사용불가
@@ -81,7 +77,7 @@
     }
 </script>
 
-
+<!--
 <br/><br/>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <div>
@@ -98,5 +94,6 @@
 </sec:authorize>
 </div>
 <br/><br/>
+-->
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
