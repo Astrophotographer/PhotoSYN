@@ -150,4 +150,43 @@
         where u_id = #{id}
     </update>
 
+    <select id="getGalleryDTOList_WithPaging" resultType="com.gallery.domain.GalleryDTO">
+        select G_NO,
+        MT_NAME,
+        U_ID,
+        G_HNAME,
+        G_LNAME,
+        G_HPRICE,
+        G_LPRICE,
+        G_CONTENT,
+        G_REG,
+        G_EDIT,
+        G_SALES,
+        G_LIKE,
+        G_READCOUNT,
+        G_TAG1,
+        G_TYPE
+        from (select rownum r,
+        G_NO,
+        MT_NAME,
+        U_ID,
+        G_HNAME,
+        G_LNAME,
+        G_HPRICE,
+        G_LPRICE,
+        G_CONTENT,
+        G_REG,
+        G_EDIT,
+        G_SALES,
+        G_LIKE,
+        G_READCOUNT,
+        G_TAG1,
+        G_TYPE from GALLERY
+        <include refid="search"></include>
+        <![CDATA[
+             rownum <= #{pageNum}*#{listQty})
+        where r > (#{pageNum}-1)*#{listQty}
+       ]]>
+    </select>
+
 </mapper>
