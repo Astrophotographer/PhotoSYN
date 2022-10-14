@@ -24,8 +24,8 @@
 
 
 <div>
-    <a href="/blog/update?b_no=${blog.b_NO}" class="btn btn-primary">수정하기</a>
-    <a href="/blog/delete?b_no=${blog.b_NO}" class="btn btn-primary">삭제하기</a>
+    <a href="/gallery/update?b_no=${gallery.g_NO}" class="btn btn-primary">수정하기</a>
+    <a href="/gallery/delete?b_no=${gallery.g_NO}" class="btn btn-primary">삭제하기</a>
 </div>
 
 </body>

@@ -31,6 +31,7 @@
 
 
 
+
     <select id="getTempImg" resultType="com.gallery.domain.Gallery_Img_Temp">
         select *
         from gallery_img_temp
@@ -38,8 +39,10 @@
     </select>
 
 
+
+
     <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
-        select * from gallery
+        select * from gallery where G_STATUS = 1
         <if test='u_id != null'>
             where U_ID = #{u_id}
         </if>
@@ -114,6 +117,20 @@
         set g_readcount = g_readcount + 1
         where b_no = #{G_NO}
     </update>
+
+    <update id="updateGallerySales">
+        update gallery
+        set g_sales = g_sales + 1
+        where b_no = #{G_NO}
+    </update>
+
+    <update id="updateGalleryLike">
+        update gallery
+        set g_like = g_like + 1
+        where b_no = #{G_NO}
+    </update>
+
+
 
 
 
