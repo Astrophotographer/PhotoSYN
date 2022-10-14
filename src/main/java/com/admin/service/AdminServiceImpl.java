@@ -2,6 +2,7 @@ package com.admin.service;
 
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
+import com.admin.domain.Admin_Criteria;
 import com.admin.mapper.AdminMapper;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
@@ -54,6 +55,17 @@ public class AdminServiceImpl implements AdminService {
     public List<MemberDTO> getMemberDTOList() {
         return adminMapper.getMemberDTOList();
     }
+
+    @Override
+    public List<MemberDTO> getMemberDTOList_WithPaging(Admin_Criteria cri) {
+        return adminMapper.getMemberDTOList_WithPaging(cri);
+    }
+
+    @Override
+    public int getUserTotalCount(Admin_Criteria cri) {
+        return adminMapper.getUserTotalCount(cri);
+    }
+
 
     @Override
     public MemberDTO getMemberDTO(String u_id) {

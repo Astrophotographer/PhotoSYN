@@ -5,6 +5,22 @@
 
 <mapper namespace="com.admin.mapper.AdminMapper">
 
+    <!-- 검색어(유저닉네임) 있을시 실행 -->
+    <sql id="search">
+        <if test="searchOpt!=null">
+            <trim prefix=" " suffix=" and ">
+                <choose>
+                    <when test="searchOpt == 'I'.toString()">
+                        u_id like '%'||#{searchStr}||'%'
+                    </when>
+                    <when test="searchOpt == 'N'.toString()">
+                        u_nick like '%'||#{searchStr}||'%'
+                    </when>
+                </choose>
+            </trim>
+        </if>
+    </sql>
+
     <resultMap type="com.member.domain.MemberDTO" id="memberMap">
         <id property="id" column="u_id"/> <!-- primary key 지정 -->
         <result property="id" column="u_id"/>
@@ -55,6 +71,41 @@
         select *
         from user_list
         order by u_reg desc
+    </select>
+
+    <select id="getMemberDTOList_WithPaging" resultMap="memberMap">
+        select u_id, u_pw, u_phone, u_nick, u_reg, u_status, u_pic, u_point, ms_membership, u_sns, u_snstoken from
+        (select rownum r, u_id, u_pw, u_phone, u_nick, u_reg, u_status, u_pic, u_point, ms_membership, u_sns, u_snstoken
+        from USER_LIST where
+        <include refid="search"></include>
+        <![CDATA[
+             rownum <= #{pageNum}*#{listQty})
+        where r > (#{pageNum}-1)*#{listQty}
+       ]]>
+        <choose>
+            <when test='sortOption eq "latest".toString()'>
+                order by u_reg desc
+            </when>
+            <when test='sortOption eq "oldest".toString()'>
+                order by u_reg asc
+            </when>
+            <when test='sortOption eq "memberShip".toString()'>
+                order by ms_membership desc, u_reg desc
+            </when>
+            <when test='sortOption eq "status".toString()'>
+                order by u_status desc, u_reg desc
+            </when>
+            <otherwise>
+                order by u_reg desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="getUserTotalCount" resultType="_int">
+        select count(*)
+        from user_list
+        <include refid="search"></include>
+        <trim suffixOverrides="and"></trim>
     </select>
 
     <update id="updateMemberShip">

@@ -142,7 +142,6 @@ public class BlogController {
 
 
         return "blog/blogsingle";
-//        return "blog/blogsingleTest";
     }
 
 
@@ -163,7 +162,7 @@ public class BlogController {
     // 블로그 사진 업로드 시 진행 페이지
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.POST)
-    public void imageUpload4(HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
+    public void imageUpload4(Principal principal, HttpServletRequest request, HttpServletResponse response, MultipartHttpServletRequest multiFile, @RequestParam MultipartFile upload, Blog_Img blog_img, Blog_Img_Temp blog_img_temp) throws Exception {
         // 랜덤 문자 생성
         UUID uid = UUID.randomUUID();
 
@@ -210,7 +209,11 @@ public class BlogController {
             printWriter.flush();
 
             //TODO 유저이름 test에서 수정해주기
-            blog_img_temp.setU_ID("test");
+
+            String user_id = "test";
+            if(principal!=null)
+                user_id = principal.getName();
+            blog_img_temp.setU_ID(user_id);
             blog_img_temp.setBIT_NAME(uid + "_" + fileName);
             blog_img_temp.setBIT_UUID(uid.toString());
             blog_img_temp.setBIT_ORIGINNAME(fileName);
@@ -290,7 +293,7 @@ public class BlogController {
     //글 작성후 들어오는 페이지
 //    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "checkmainimg", method = RequestMethod.POST)
-    public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model) {
+    public String checkmainimg(BlogDTO blogDTO, Blog_Img blog_img, Model model, Principal principal) {
         try {
             log.info("checkmainimg start...");
 
@@ -298,6 +301,14 @@ public class BlogController {
             log.info(blogDTO.toString());
             blogService.insertBlog(blogDTO);
             int blog_seq = blogService.checkBlogSeq();
+
+            String user_id = "test";
+            if (principal != null) {
+                user_id = principal.getName();
+            }
+
+            log.info("====================================================");
+            log.info("checkmainimg user_id : " + user_id);
 
             //태그값 넣어주기 --> service에서 처리
 //            log.info("TAGS: " + blogDTO.getB_TAG1());
@@ -314,7 +325,7 @@ public class BlogController {
 //        blogService.getTempImg("test");
 
             //이름들로 db 저장된 사진들 가져와서 출력 후 select 해서 이미지 고르게하기
-            blogService.getTempImg("test").forEach(img -> log.info("foreach사용 " + img.toString() + "\nimg 타입 :" + img.getClass().getName()));
+            blogService.getTempImg(user_id).forEach(img -> log.info("foreach사용 " + img.toString() + "\nimg 타입 :" + img.getClass().getName()));
             //img 타입 ㅣ com.blog.domain.Blog_Img_Temp
 
             //람다로는 안되나?
@@ -322,7 +333,7 @@ public class BlogController {
 //                blog_img.setBI_UUID(img.getBI_UUID());
 //            });
 
-            List<Blog_Img_Temp> list = blogService.getTempImg("test");
+            List<Blog_Img_Temp> list = blogService.getTempImg(user_id);
             List<Blog_Img> list2 = new ArrayList<Blog_Img>();
 
             //현재 있는 temp에 담긴 테이블 값들 뷰에 뿌려주기
@@ -367,6 +378,10 @@ public class BlogController {
         if (principal != null) {
             user_id = principal.getName();
         }
+
+        log.info("====================================================");
+        log.info("finishSubmit user_id : " + user_id);
+
         blogService.updateImg(user_id, UUID);
 
 
@@ -389,6 +404,7 @@ public class BlogController {
 
         //사진 이미지 찾지 못하는 경우 예외처리로 빈 이미지 파일을 설정한다.
         if (imgFile.isFile()) {
+            log.info("********************* imgFle.isFile()*********************");
             byte[] buf = new byte[1024];
             int readByte = 0;
             int length = 0;
@@ -568,6 +584,8 @@ public class BlogController {
         if (principal != null) {
             user_id = principal.getName();
         }
+        log.info("====================================================");
+        log.info("updateMainImg user_id : " + user_id);
 
 
         //실제 테이블에 있는 이미지들도 메인 값 0으로 설정
