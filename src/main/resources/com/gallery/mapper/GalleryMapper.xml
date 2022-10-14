@@ -66,7 +66,7 @@
             <!--            </when>-->
             <!-- 조회순(readcount desc - 조회 많은순, asc - 조회 적은순 -->
             <when test='option=="readcount"'>
-            order by B_READCOUNT
+            order by G_READCOUNT
             <if test='sort=="desc"'>
                 desc
             </if>
@@ -76,7 +76,7 @@
         </when>
         <!-- 옵션이 없는 경우 -->
         <otherwise>
-            order by B_REG desc
+            order by G_REG desc
         </otherwise>
         </choose>
 
