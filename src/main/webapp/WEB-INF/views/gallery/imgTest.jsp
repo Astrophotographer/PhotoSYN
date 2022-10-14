@@ -18,35 +18,50 @@
 <body>
 <h1>imgTest</h1>
 
+<sec:authorize access="isAnonymous()">
+    <h1>로그인 하세요</h1>
+</sec:authorize>
+
+
 <sec:authorize access="isAuthenticated()">
+
+
     <h1>로그인됨</h1>
     <p>principal : <sec:authentication property="principal"/></p>
     <p>MemberDTO : <sec:authentication property="principal.member"/></p>
     <p>사용자 이름 : <sec:authentication property="principal.member.name"/></p>
     <p>사용자 아이디 : <sec:authentication property="principal.username"/></p>
     <p>사용자 권한 리스트 : <sec:authentication property="principal.member.authDTOList"/></p>
+
+
+
+<!-- 메타데이터 뿌려주고 저장할 폼 영역 -->
+<form action="/gallery/uploadPro" method="post">
+    <div class="form-group">
+        <div class="form-group">
+
+            <!-- 파일 올리는 버튼, 파일명 띄울거  -->
+            파일명 <input type="file" name="imgFile" id="imgFile">
+            <input type="text" name="orgName" id="orgName" readonly>
+            <input type="hidden" name="${_csrf.parameterName}" value="<sec:authentication property="principal.username"/>">
+
+            작성자 : <input type="text" name="U_ID" value='<sec:authentication property="principal.username"/>' readonly="readonly" placeholder='<sec:authentication property="principal.username"/>'>
+
+
+            카메라 <input type="text" name="M_IMGCAMERA" id="M_IMGCAMERA" >
+            렌즈 <input type="text" name="M_IMGLENS" id="M_IMGLENS" >
+            조리개 <input type="number" name="M_APERTURE" id="M_APERTURE" >
+            감도 <input type="number" name="M_ISO" id="M_ISO" >
+            초점거리 <input type="number" name="M_FLENGTH" id="M_FLENGTH" >
+            셔터스피드 <input type="number" name="M_SHUTTERSPEED" id="M_SHUTTERSPEED" >
+
+            <input type="submit" value="저장">
+
+
+        </div>
+    </div>
+</form>
 </sec:authorize>
-<sec:authorize access="isAnonymous()">
-    <h1>로그인 안됨</h1>
-</sec:authorize>
-
-
-    <!-- 파일 올리는 버튼, 파일명 띄울거  -->
-    파일명 <input type="file" name="imgFile" id="imgFile">
-    <input type="text" name="orgName" id="orgName" readonly>
-
-    <!-- 메타데이터 뿌려주고 저장할 폼 영역 -->
-    <form action="/gallery/uploadPro" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-       카메라 <input type="text" name="M_IMGCAMERA" id="M_IMGCAMERA" >
-       렌즈 <input type="text" name="M_IMGLENS" id="M_IMGLENS" >
-       조리개 <input type="number" name="M_APERTURE" id="M_APERTURE" >
-       감도 <input type="number" name="M_ISO" id="M_ISO" >
-        초점거리 <input type="number" name="M_FLENGTH" id="M_FLENGTH" >
-        셔터스피드 <input type="number" name="M_SHUTTERSPEED" id="M_SHUTTERSPEED" >
-
-        <input type="submit" value="저장">
-    </form>
 
 <script>
     var token = $("meta[name='_csrf']").attr("content");
