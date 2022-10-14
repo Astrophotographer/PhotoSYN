@@ -8,13 +8,13 @@
     <!-- 검색어(유저닉네임) 있을시 실행 -->
     <sql id="search">
         <if test="searchOpt!=null">
-            <trim prefix=" " suffix=" and ">
+            <trim prefix=" " suffix=" ">
                 <choose>
                     <when test="searchOpt == 'I'.toString()">
-                        u_id like '%'||#{searchStr}||'%'
+                        u_id like '%'||#{searchStr}||'%' and
                     </when>
                     <when test="searchOpt == 'N'.toString()">
-                        u_nick like '%'||#{searchStr}||'%'
+                        u_nick like '%'||#{searchStr}||'%' and
                     </when>
                 </choose>
             </trim>
@@ -104,8 +104,9 @@
     <select id="getUserTotalCount" resultType="_int">
         select count(*)
         from user_list
-        <include refid="search"></include>
-        <trim suffixOverrides="and"></trim>
+        <trim prefix=" where" suffixOverrides="and">
+            <include refid="search"></include>
+        </trim>
     </select>
 
     <update id="updateMemberShip">

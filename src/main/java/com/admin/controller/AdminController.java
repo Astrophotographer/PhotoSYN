@@ -25,7 +25,7 @@ public class AdminController {
     private AdminService adminService;
 
     @RequestMapping(value = "main", method = RequestMethod.GET)
-    public String goMain(Model model) {
+    public String goMain(Model model, Admin_Criteria cri) {
         adminService.testPrint("hehehe");
 
         //유저수, 판매수, 최근 갤러리수, 최근 블로그수
@@ -38,8 +38,19 @@ public class AdminController {
         }
 //        log.info("memberDTOList : "+memberDTOList);
 
+        //1페이지
+        cri.setPageNum(1);
+        //20명
+        cri.setListQty(20);
+
+        log.info("+++++++++++++++++++++++++++++++++++++");
+        log.info("cri : "+cri.toString());
+
+        //상단 카드들에 들어갈 정보
         model.addAttribute("adminMainDTO", adminMainDTO);
-        model.addAttribute("memberDTOList", memberDTOList);
+        //유저 들~
+//        model.addAttribute("memberDTOList", memberDTOList);
+        model.addAttribute("memberDTOList", adminService.getMemberDTOList_WithPaging(cri));
         return "admin/adminmain";
     }
 
@@ -50,6 +61,8 @@ public class AdminController {
         //페이징 처리 이전
 //        model.addAttribute("memberDTOList", adminService.getMemberDTOList());
         //페이징 처리 이후
+
+
         model.addAttribute("memberDTOList", adminService.getMemberDTOList_WithPaging(cri));
         model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getUserTotalCount(cri)));
 

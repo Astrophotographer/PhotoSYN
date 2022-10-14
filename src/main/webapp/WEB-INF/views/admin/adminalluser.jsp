@@ -138,7 +138,8 @@
                       </li>
                         </c:if>
                         <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" step="1">
-                            <a href="/admin/user?pageNum=${num}&listQty=10" class=" ${pager.cri.pageNum==num?"px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple":"px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"}">${num}</a>
+                            <a href="/admin/user?pageNum=${num}&listQty=10"
+                               class=" ${pager.cri.pageNum==num?"px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple":"px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"}">${num}</a>
                         </c:forEach>
                         <c:if test="${pager.next}">
                       <li>
@@ -163,6 +164,20 @@
                   </nav>
                 </span>
             </div>
+            <form action="/admin/user?pageNum=1&listQty=10" method="get">
+                <select name="searchOpt">
+                    <option value="I">ID로검색</option>
+                    <option value="N">닉네임으로검색</option>
+                </select>
+                <input
+                        class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                        type="text"
+                        placeholder="Search for projects"
+                        name="searchStr"
+                        aria-label="Search"
+                />
+                <input type="submit" value="검색">
+            </form>
         </div>
 
 
