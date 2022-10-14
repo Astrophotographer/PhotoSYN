@@ -123,16 +123,24 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.deleteCart(g_no);
     }
 
+    /* 마이페이지 구매 판매내역 */
     @Override
-    public List<BuyDTO> listBuySell(BuyDTO buyDTO) {
-        return memberMapper.listBuySell(buyDTO);
+    public List<BuyDTO> listBuy(BuyDTO buyDTO) {
+        return memberMapper.listBuy(buyDTO);
     }
+
+    /* 총 합계금액 */
+    @Override
+    public int sum(BuyDTO buyDTO) {
+        return memberMapper.sum(buyDTO);
+    }
+
 
     /* 갤러리 구매 (포인트 차감) */
     @Override
     public int buyGallery(BuyDTO buyDTO) {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setPoint(-buyDTO.getO_price());
+        memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
 
         // USER_LIST DB 데이터 업데이트

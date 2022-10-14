@@ -39,8 +39,17 @@ public class MypageController {
     private BCryptPasswordEncoder encoder;
 
     @GetMapping("profile")
-    public String profile(Model model, Authentication auth) {
-        log.info(((MemberUser) auth.getPrincipal()).getMember().getPic());
+    public String profile(Model model, Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO) {
+        galleryDTO.setG_SALES(10);
+        galleryDTO.setG_HPRICE(1000);
+
+        buyDTO.setO_seller("찬욱");
+        buyDTO.setO_price(1000);
+
+        long quantity = galleryDTO.getG_SALES();
+        int result = memberService.sum(buyDTO);
+
+        model.addAttribute("tot", result * quantity);  // 합계금액
 
         return "/member/mypage/profile";
     }
@@ -227,10 +236,26 @@ public class MypageController {
 
     /************************************************ 장바구니 END. ************************************************/
 
-    // 프로필 구매 판매 내역
-    @GetMapping("profileBuySell")
-    public void buySell(BuyDTO buyDTO, Model model) {
-        List<BuyDTO> list = memberService.listBuySell(buyDTO);
+    // 마이페이지 구매내역
+    @GetMapping("profileBuy")
+    public void buy(BuyDTO buyDTO, Model model) {
+        List<BuyDTO> list = memberService.listBuy(buyDTO);
+        model.addAttribute("list", list);
+    }
+
+    // 마이페이지 판매내역
+    @GetMapping("profileSell")
+    public void sell(BuyDTO buyDTO, GalleryDTO galleryDTO, Model model) {
+        List<BuyDTO> list = memberService.listBuy(buyDTO);
+
+        galleryDTO.setG_SALES(10);
+        galleryDTO.setG_HPRICE(1000);
+        
+        long quantity = galleryDTO.getG_SALES();
+        long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
+
+        model.addAttribute("quantity", quantity); // 판매수량
+        model.addAttribute("tot", result);        // 합계금액
         model.addAttribute("list", list);
     }
 
@@ -252,7 +277,7 @@ public class MypageController {
             user.getMember().setPoint(m);
 
             // Mapper 에 넘겨줄 데이터 buyDTO 에 저장하기.
-//        buyDTO.setO_buyer(name);
+//        buyDTO.setO_buyer(id);
 //        buyDTO.setO_seller(galleryDTO.getU_ID());
 //        buyDTO.setO_price(galleryDTO.getG_HPRICE());
 //        buyDTO.setG_no(galleryDTO.getG_NO());

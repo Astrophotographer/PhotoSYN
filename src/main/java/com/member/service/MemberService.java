@@ -47,8 +47,11 @@ public interface MemberService {
     /* 장바구니 삭제 */
     public int deleteCart(Long g_no);
 
-    /* 구매 판매내역*/
-    public List<BuyDTO> listBuySell(BuyDTO buyDTO);
+    /* 마이페이지 구매 판매내역 */
+    public List<BuyDTO> listBuy(BuyDTO buyDTO);
+
+    /* 총 합계금액 */
+    public int sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO);

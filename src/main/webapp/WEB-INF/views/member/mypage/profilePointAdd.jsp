@@ -10,6 +10,7 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <input type="hidden" name="point" id="point"/>
             <div>
+                충전 금액 선택 :
                 <select id="money" name="money">
                     <option value="5000">5,000P</option>
                     <option value="7000">7,000P</option>
@@ -21,6 +22,7 @@
                     <option value="1000000">1,000,000P</option>
                 </select>
             </div>
+            <br/>
             <button class="profileBtn2" type="button" id="check_module" style="width: 80px">결제하기</button>
         </form>
     </div>

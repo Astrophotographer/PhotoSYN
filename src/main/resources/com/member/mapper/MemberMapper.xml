@@ -133,14 +133,6 @@
         where g_no = #{g_no}
     </delete>
 
-    <!-- 장바구니 목록
-    <select id="getCart" resultType="com.member.domain.CartDTO">
-        select a.u_id, a.g_no, a.m_imgQly, b.g_lname, b.hprice, b.lprice
-        from user_cart a
-                 left outer join gallery b on a.g_no = b.g_no
-        where u_id = #{u_id}
-    </select>
-    -->
     <!-- 장바구니 확인 -->
     <select id="checkCart" resultType="com.member.domain.CartDTO">
         select *
@@ -149,9 +141,14 @@
           and g_no = #{g_no}
     </select>
 
-    <!-- 구매 판매내역 목록 -->
-    <select id="listBuySell" resultType="com.member.domain.BuyDTO">
+    <!-- 마이페이지 구매 판매내역 -->
+    <select id="listBuy" resultType="com.member.domain.BuyDTO">
         SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG FROM buy order by O_NO asc
+    </select>
+
+    <!-- 마이페이지 총 금액 -->
+    <select id="sum" resultType="Integer">
+        select sum(O_PRICE) from BUY where O_SELLER = #{o_seller}
     </select>
 
     <!-- 갤러리 구매 -->
