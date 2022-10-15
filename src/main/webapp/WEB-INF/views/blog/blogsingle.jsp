@@ -126,7 +126,7 @@
                         <!-- 유저 이미지 사진 -->
                         <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
                              width="100" height="100">
-                        이미지 주소 : ${user_info.u_PIC}
+                        이미지 주소 : ${user_info.pic}
                     </div>
 
                     <div class="author-content pl-4">
@@ -579,9 +579,7 @@
 
     })
 </script>
-<div>
-    <h1>?????</h1>
-</div>
+
 <%--footer--%>
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
