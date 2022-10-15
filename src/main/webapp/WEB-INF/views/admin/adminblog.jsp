@@ -27,6 +27,7 @@
                         <th class="px-4 py-3">메인태그/서브태그</th>
                         <th class="px-4 py-3">글 상태</th>
                         <th class="px-4 py-3">작성일/수정일</th>
+                        <th class="px-4 py-3">숨김 처리</th>
                     </tr>
                     </thead>
                     <tbody
@@ -61,7 +62,7 @@
                                 </div>
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                ${blog.MT_NAME}/${blog.b_TAG1}
+                                #${blog.MT_NAME}/${blog.b_TAG1}
                             </td>
                             <td class="px-4 py-3 text-xs">
                                 <c:if test="${blog.b_STATUS==0}">
@@ -88,6 +89,26 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                     ${blog.b_REG}/${blog.b_EDIT eq null ? '-' : blog.b_EDIT}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                <div class="mt-4 text-sm">
+                                    <div class="mt-2">
+                                        <label
+                                                class="inline-flex items-center text-gray-600 dark:text-gray-400"
+                                        >
+                                            <select id="changeStatus"
+                                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                                                <option value="0">정상 노출</option>
+                                                <option value="1">신고로 인한 자동 숨김</option>
+                                                <option value="2">유저 요청 숨김(유저 삭제)</option>
+                                                <option value="3">관리자 요청 숨김(관리자 삭제)</option>
+                                            </select>
+                                        </label>
+
+                                        <br>
+                                        <button id="changeStatusBtn">글 수정</button>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
 
@@ -158,6 +179,13 @@
 </main>
 </div>
 </div>
+
+<script src="../resources/blog/plugins/jquery/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function (){
+
+    })
+</script>
 </body>
 </html>
 
