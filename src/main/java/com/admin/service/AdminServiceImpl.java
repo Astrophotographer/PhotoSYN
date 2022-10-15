@@ -5,6 +5,8 @@ import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.mapper.AdminMapper;
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.Gallery_Criteria;
+import com.gallery.mapper.GalleryMapper;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
@@ -22,6 +24,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private MemberMapper memberMapper;
+
+    @Autowired
+    private GalleryMapper galleryMapper;
 
     @Override
     public void testPrint(String str) {
@@ -94,12 +99,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<GalleryDTO> getGalleryDTOList_WithPaging(Admin_Criteria cri) {
-        return adminMapper.getGalleryDTOList_WithPaging(cri);
+    public List<GalleryDTO> getGalleryDTOList_WithPaging(Gallery_Criteria cri) {
+//        return adminMapper.getGalleryDTOList_WithPaging(cri);
+        return galleryMapper.getGalleryList(cri);
     }
 
     @Override
-    public int getGalleryTotalCount(Admin_Criteria cri) {
-        return adminMapper.getGalleryTotalCount(cri);
+    public int getGalleryTotalCount(Gallery_Criteria cri) {
+        return galleryMapper.getTotal(cri);
     }
 }

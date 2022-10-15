@@ -44,7 +44,9 @@
     </select>
 
     <select id="getBlogList" resultType="com.blog.domain.BlogDTO" parameterType="com.blog.domain.Blog_Criteria">
-        select * from blog
+        select b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status, b_tag1, b_reportcount from
+        (select rownum r, b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status, b_tag1, b_reportcount
+        from blog where
         <!-- 옵션 수정 전 -->
         <!--        <trim>-->
         <!--            <if test="option_reg != null and (option_reg eq 'latest'.toString())">-->
@@ -64,8 +66,12 @@
         <!-- <if test="@com.blog.domain.Blog_Criteria@isNotEmpty(u_id)">-->
         <!--<if test="@com.blog.domain.Blog_Criteria@isNotNull(U_ID)">-->
         <if test='u_id != null'>
-            where U_ID = #{u_id}
+            U_ID = #{u_id} and
         </if>
+        <![CDATA[
+        rownum <= #{pageNum}*#{listQty})
+        where r > (#{pageNum}-1)*#{listQty}
+            ]]>
         <choose>
             <when test='option eq "latest".toString()'>
                 order by B_REG desc
@@ -84,44 +90,10 @@
             </otherwise>
         </choose>
 
+    </select>
 
-        <!-- 수정전 쿼리문 -->
-        <!--        <choose>-->
-        <!--            &lt;!&ndash; 최신보기(reg) desc - 최신순, asc - 오래된순 &ndash;&gt;-->
-        <!--            <when test='option eq "reg".toString()'>-->
-        <!--                order by B_REG-->
-        <!--                <if test='sort eq "desc".toString()'>-->
-        <!--                    desc-->
-        <!--                </if>-->
-        <!--                <if test='sort eq "asc".toString()'>-->
-        <!--                    asc-->
-        <!--                </if>-->
-        <!--            </when>-->
-        <!--            &lt;!&ndash; 좋아요(like) desc - 좋아요 많은순, asc - 좋아요 적은순 &ndash;&gt;-->
-        <!--&lt;!&ndash;            <when test='option equals("like")'>&ndash;&gt;-->
-        <!--&lt;!&ndash;                order by B_LIKE&ndash;&gt;-->
-        <!--&lt;!&ndash;                <if test='sort equals("desc")'>&ndash;&gt;-->
-        <!--&lt;!&ndash;                    desc&ndash;&gt;-->
-        <!--&lt;!&ndash;                </if>&ndash;&gt;-->
-        <!--&lt;!&ndash;                <if test='sort equals("asc")'>&ndash;&gt;-->
-        <!--&lt;!&ndash;                    asc&ndash;&gt;-->
-        <!--&lt;!&ndash;                </if>&ndash;&gt;-->
-        <!--&lt;!&ndash;            </when>&ndash;&gt;-->
-        <!--            &lt;!&ndash; 조회순(readcount desc - 조회 많은순, asc - 조회 적은순 &ndash;&gt;-->
-        <!--            <when test='option=="readcount"'>-->
-        <!--                order by B_READCOUNT-->
-        <!--                <if test='sort=="desc"'>-->
-        <!--                    desc-->
-        <!--                </if>-->
-        <!--                <if test='sort=="asc"'>-->
-        <!--                    asc-->
-        <!--                </if>-->
-        <!--            </when>-->
-        <!--            &lt;!&ndash; 옵션이 없는 경우 &ndash;&gt;-->
-        <!--            <otherwise>-->
-        <!--                order by B_REG desc-->
-        <!--            </otherwise>-->
-        <!--        </choose>-->
+    <select id="getBlogTotal" resultType="_int">
+        select count(*) from blog
     </select>
 
     <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">

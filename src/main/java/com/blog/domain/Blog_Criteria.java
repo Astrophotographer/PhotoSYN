@@ -19,12 +19,21 @@ public class Blog_Criteria {
     // 최신순, 오래된순, 좋아요순, 조회순
     private String option;  //latest, oldest, like, readcount
 
+    //검색 옵션 및 검색어
+    private String searchOpt;   //검색옵션 : ID, MainTag, Subject, SubTag
+    private String searchStr;   //검색어
+
+    //검색옵션들 배열로 저장
+    public String[] getSearchOptArr(){
+        return searchOpt == null ? new String[] {} : searchOpt.split("");
+    }
+
     //한 페이지당 게시판글 10개 불러오기
     private int pageNum;
     private int listQty;
 
     public Blog_Criteria() {
-        this(1, 10);
+        this(1, 20);
     }
 
     public Blog_Criteria(int pageNum, int listQty) {

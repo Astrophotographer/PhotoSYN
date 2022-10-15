@@ -1,12 +1,11 @@
-package com.admin.domain;
+package com.blog.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Admin_PageDTO {
-    //페이지 번호등 페이지 처리시 필요한 정보 담아주는 곳
+public class Blog_PageDTO {
 
     private int startPage;  //시작 페이지 번호
     private int endPage;    //끝 페이지 번호
@@ -14,13 +13,12 @@ public class Admin_PageDTO {
     // 페이지 번호 앞으로, 뒤로가기
     private boolean prev, next;
 
-    //전체 인원 및 글(블로그, 갤러리, 유저)수
+    //전체 블로그 글 수
     private int total;
 
-    //페이지 번호 pageNum, 페이지당 보여줄 글의 개수 listQty
-    private Admin_Criteria cri;
+    private Blog_Criteria cri;
 
-    public Admin_PageDTO(Admin_Criteria cri, int total){
+    public Blog_PageDTO(Blog_Criteria cri, int total){
         this.cri = cri;
         this.total = total;
 
@@ -44,7 +42,5 @@ public class Admin_PageDTO {
 
         //endpage가 realend보다 작을경우 다음페이지로 갈수 있는 next가 활성화가 되어야 하므로 true를 돌려줌
         this.next = this.endPage < realEnd;
-
     }
-
 }

@@ -30,6 +30,9 @@ public interface AdminMapper {
 
     public int updateUserStatus(MemberDTO memberDTO);
 
+    //하위 2개는 galleryMapper에서 가져옴.
     public List<GalleryDTO> getGalleryDTOList_WithPaging(Admin_Criteria cri);
     public int getGalleryTotalCount(Admin_Criteria cri);
+    //
+
 }

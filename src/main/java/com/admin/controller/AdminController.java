@@ -5,6 +5,8 @@ import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.domain.Admin_PageDTO;
 import com.admin.service.AdminService;
+import com.gallery.domain.Gallery_Criteria;
+import com.gallery.domain.Gallery_PageDTO;
 import com.member.domain.MemberDTO;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,12 +88,19 @@ public class AdminController {
         return "admin/adminusers";
     }
 
+
+    //TODO 1015 구현시키기.
     @RequestMapping(value="gallery", method = RequestMethod.GET)
-    public String adminGallery(Model model, Admin_Criteria cri){
+    public String adminGallery(Model model, Gallery_Criteria cri){
         log.info("adminGallery");
 
         model.addAttribute("galleryDTOList", adminService.getGalleryDTOList_WithPaging(cri));
-        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getGalleryTotalCount(cri)));
+//        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getGalleryTotalCount(cri)));
+        Gallery_PageDTO dto = new Gallery_PageDTO(cri, adminService.getGalleryTotalCount(cri));
+        log.info("dto : "+dto.toString());
+        //dto 값...
+        //dto : Gallery_PageDTO(startPage=1, endPage=1, prev=false, next=false, total=10, cri=Gallery_Criteria(u_id=null, option=null, sort=null, pageNum=1, listQty=10, keyword=null))
+//        model.addAttribute("pager",dto);
 
         return "admin/admingallery";
     }
@@ -99,6 +108,9 @@ public class AdminController {
     @RequestMapping(value="blog", method = RequestMethod.GET)
     public String adminBlog(){
         log.info("adminBlog");
+
+
+
         return "admin/adminblog";
     }
 

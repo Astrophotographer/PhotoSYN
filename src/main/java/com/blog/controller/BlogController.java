@@ -1,9 +1,6 @@
 package com.blog.controller;
 
-import com.blog.domain.BlogDTO;
-import com.blog.domain.Blog_Criteria;
-import com.blog.domain.Blog_Img;
-import com.blog.domain.Blog_Img_Temp;
+import com.blog.domain.*;
 import com.blog.service.BlogService;
 import com.member.domain.MemberDTO;
 import com.member.domain.User_Intro;
@@ -88,6 +85,7 @@ public class BlogController {
         log.info("blog_criteria : " + blog_criteria.toString());
 
         model.addAttribute("list", blogService.getBlogList(blog_criteria));
+        model.addAttribute("pager",new Blog_PageDTO(blog_criteria,blogService.getBlogTotal(blog_criteria)));
 
         return "blog/blogmain";
     }
@@ -111,6 +109,9 @@ public class BlogController {
         List<BlogDTO> list = blogService.getBlogList(blog_criteria);
 
         model.addAttribute("list", list);
+
+        //페이지 가져오기
+        model.addAttribute("pager",new Blog_PageDTO(blog_criteria,blogService.getBlogTotal(blog_criteria)));
 
         return "blog/blogmain";
     }

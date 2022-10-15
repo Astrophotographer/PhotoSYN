@@ -30,6 +30,8 @@ public interface BlogMapper {
 
     public List<BlogDTO> getBlogList(Blog_Criteria blog_criteria);
 
+    public int getBlogTotal(Blog_Criteria blog_criteria);
+
     public BlogDTO getBlogSingle(Long B_NO);
 
     public List checkMainImg();

@@ -37,14 +37,14 @@
 <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 <div>
     <h1>TEST BLOG MAIN</h1>
-<%--    <table>--%>
-<%--        <c:forEach var="board" items="${list}">--%>
-<%--            <tr>--%>
-<%--                <td>U_ID : ${board.u_ID}</td>--%>
-<%--                <td>REG : ${board.b_REG}</td>--%>
-<%--            </tr>--%>
-<%--        </c:forEach>--%>
-<%--    </table>--%>
+    <%--    <table>--%>
+    <%--        <c:forEach var="board" items="${list}">--%>
+    <%--            <tr>--%>
+    <%--                <td>U_ID : ${board.u_ID}</td>--%>
+    <%--                <td>REG : ${board.b_REG}</td>--%>
+    <%--            </tr>--%>
+    <%--        </c:forEach>--%>
+    <%--    </table>--%>
 </div>
 
 
@@ -163,16 +163,18 @@
         <form id="mainsortForm" action="main" method="post">
             <input type="hidden" name="option" id="optionSort" value="latest">
 
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
             <button type="submit" data-service="latest">최신순</button>
             <button type="submit" data-service="oldest">오래된순</button>
             <button type="submit" data-service="like">좋아요순</button>
             <button type="submit" data-service="readcount">조회순</button>
 
 
-<%--            <a href="#" onclick="optionIs('latest')">최신순</a>--%>
-<%--            <a href="#" onclick="optionIs('oldest')">오래된순</a>--%>
-<%--            <a href="#" onclick="optionIs('like')">좋아요순</a>--%>
-<%--            <a href="#" onclick="optionIs('readcount')">조회순</a>--%>
+            <%--            <a href="#" onclick="optionIs('latest')">최신순</a>--%>
+            <%--            <a href="#" onclick="optionIs('oldest')">오래된순</a>--%>
+            <%--            <a href="#" onclick="optionIs('like')">좋아요순</a>--%>
+            <%--            <a href="#" onclick="optionIs('readcount')">조회순</a>--%>
         </form>
     </div>
 </div>
@@ -220,6 +222,19 @@
                         </div>
                         <!-- 글 한개 -->
                     </c:forEach>
+
+                    <!-- 페이징처리 -->
+                    <c:if test="${pager.prev}">
+                        <a href="/blog/main?pageNum=${pager.startPage-1}"> Before </a>
+                    </c:if>
+                    <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" step="1">
+                        <a href="/blog/main?pageNum=${num}">${num}</a>
+                    </c:forEach>
+                    <c:if test="${pager.next}">
+                        <a href="/blog/main?pageNum=${pager.endPage+1}"> Next </a>
+                    </c:if>
+
+
                 </div>
             </div>
 
@@ -313,28 +328,28 @@
         window.location.href = "/blog/write";
     }
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         console.log('ready...');
 
         let formObj = $("#mainsortForm");
         let optionElement = document.getElementById("optionSort");
         console.log("optionElement", optionElement);
 
-        $("button").on("click", function(e){
+        $("button").on("click", function (e) {
             e.preventDefault();
             let service_data = $(this).data("service");
             console.log(service_data);
 
-            if (service_data == "latest"){
+            if (service_data == "latest") {
                 optionElement.value = "latest";
                 formObj.submit();
-            } else if (service_data == "oldest"){
+            } else if (service_data == "oldest") {
                 optionElement.value = "oldest";
                 formObj.submit();
-            } else if (service_data == "like"){
+            } else if (service_data == "like") {
                 optionElement.value = "like";
                 formObj.submit();
-            } else if(service_data == "readcount"){
+            } else if (service_data == "readcount") {
                 optionElement.value = "readcount";
                 formObj.submit();
             }
@@ -345,7 +360,6 @@
     function optionIs(option) {
         console.log("optionIs Start...");
         console.log("option is : " + option);
-
 
 
         <%--$.ajax({--%>
