@@ -1,8 +1,14 @@
 package com.blog.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+//@Data
+@Setter
+@Getter
+@ToString
 public class Blog_Criteria {
 //    private String option_reg;  // 등록일  latest/ oldest
 //    private String option_like; // 좋아요  popular/ unpopular
@@ -20,7 +26,7 @@ public class Blog_Criteria {
     private String option;  //latest, oldest, like, readcount
 
     //검색 옵션 및 검색어
-    private String searchOpt;   //검색옵션 : ID, MainTag, Subject, SubTag
+    private String searchOpt;   //검색옵션 : ID(I), MainTag(M), Subject(S), SubTag(T)
     private String searchStr;   //검색어
 
     //검색옵션들 배열로 저장

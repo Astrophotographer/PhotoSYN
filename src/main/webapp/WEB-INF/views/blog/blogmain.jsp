@@ -225,13 +225,13 @@
 
                     <!-- 페이징처리 -->
                     <c:if test="${pager.prev}">
-                        <a href="/blog/main?pageNum=${pager.startPage-1}"> Before </a>
+                        <a href="/blog/main?pageNum=${pager.startPage-1}&listQty=20"> Before </a>
                     </c:if>
                     <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" step="1">
-                        <a href="/blog/main?pageNum=${num}">${num}</a>
+                        <a href="/blog/main?pageNum=${num}&listQty=20">${num}</a>
                     </c:forEach>
                     <c:if test="${pager.next}">
-                        <a href="/blog/main?pageNum=${pager.endPage+1}"> Next </a>
+                        <a href="/blog/main?pageNum=${pager.endPage+1}&listQty=20"> Next </a>
                     </c:if>
 
 

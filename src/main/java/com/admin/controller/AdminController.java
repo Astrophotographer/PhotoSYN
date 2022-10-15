@@ -5,6 +5,8 @@ import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.domain.Admin_PageDTO;
 import com.admin.service.AdminService;
+import com.blog.domain.Blog_Criteria;
+import com.blog.domain.Blog_PageDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.gallery.domain.Gallery_PageDTO;
 import com.member.domain.MemberDTO;
@@ -106,9 +108,13 @@ public class AdminController {
     }
 
     @RequestMapping(value="blog", method = RequestMethod.GET)
-    public String adminBlog(){
+    public String adminBlog(Model model, Blog_Criteria cri){
         log.info("adminBlog");
 
+        model.addAttribute("blogDTOList", adminService.getBlogDTOList_WithPaging(cri));
+
+        log.info("1111111111111111111111111111111111111111111111");
+        model.addAttribute("pager",new Blog_PageDTO(cri, adminService.getBlogTotalCount(cri)));
 
 
         return "admin/adminblog";

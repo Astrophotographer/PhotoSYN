@@ -5,6 +5,29 @@
 
 <mapper namespace="com.blog.mapper.BlogMapper">
 
+    <!--검색시-->
+    <sql id="search">
+        <trim prefix="( " suffix=" )and " prefixOverrides="or">
+            <if test="searchOpt != null">
+                <foreach collection="searchOptArr" item="arrOpt">
+                    <trim prefix="or">
+                        <choose>
+                            <when test="arrOpt == 'I'.toString()">
+                                u_id like '%'||#{searchStr}||'%'
+                            </when>
+                            <when test="arrOpt == 'S'.toString()">
+                                b_subject like '%'||#{searchStr}||'%'
+                            </when>
+                            <when test="arrOpt == 'T'.toString()">
+                                mt_name like '%'||#{searchStr}||'%' or b_tag1 like '%'||#{searchStr}||'%'
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </if>
+        </trim>
+    </sql>
+
     <insert id="insertTempImg">
         insert into blog_img_temp
         values (#{U_ID}, #{BIT_NAME}, #{BIT_UUID}, #{BIT_ORIGINNAME})
@@ -44,8 +67,10 @@
     </select>
 
     <select id="getBlogList" resultType="com.blog.domain.BlogDTO" parameterType="com.blog.domain.Blog_Criteria">
-        select b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status, b_tag1, b_reportcount from
-        (select rownum r, b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status, b_tag1, b_reportcount
+        select b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status, b_tag1,
+        b_reportcount from
+        (select rownum r, b_no, u_id, mt_name, b_subject, b_content, b_like, b_readcount, b_reg, b_edit, b_status,
+        b_tag1, b_reportcount
         from blog where
         <!-- 옵션 수정 전 -->
         <!--        <trim>-->
@@ -68,6 +93,7 @@
         <if test='u_id != null'>
             U_ID = #{u_id} and
         </if>
+        <include refid="search"></include>
         <![CDATA[
         rownum <= #{pageNum}*#{listQty})
         where r > (#{pageNum}-1)*#{listQty}
@@ -93,7 +119,8 @@
     </select>
 
     <select id="getBlogTotal" resultType="_int">
-        select count(*) from blog
+        select count(*)
+        from blog
     </select>
 
     <select id="getBlogSingle" resultType="com.blog.domain.BlogDTO">
@@ -197,7 +224,7 @@
         <result property="auth" column="auth"/>
     </resultMap>
 
-<!--    <select id="getUserInfo" resultType="com.member.domain.MemberDTO">-->
+    <!--    <select id="getUserInfo" resultType="com.member.domain.MemberDTO">-->
     <select id="getUserInfo" resultMap="memberMap">
         select *
         from user_list

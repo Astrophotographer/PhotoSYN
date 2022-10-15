@@ -3,6 +3,8 @@ package com.admin.service;
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
+import com.blog.domain.BlogDTO;
+import com.blog.domain.Blog_Criteria;
 import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.member.domain.MemberDTO;
@@ -33,6 +35,11 @@ public interface AdminService {
 
     public List<GalleryDTO> getGalleryDTOList_WithPaging(Gallery_Criteria cri);
     public int getGalleryTotalCount(Gallery_Criteria cri);
+
+    //blog
+    public List<BlogDTO> getBlogDTOList_WithPaging(Blog_Criteria cri);
+
+    public int getBlogTotalCount(Blog_Criteria cri);
 
 
 }

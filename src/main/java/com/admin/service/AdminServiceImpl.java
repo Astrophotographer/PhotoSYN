@@ -4,6 +4,9 @@ import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.mapper.AdminMapper;
+import com.blog.domain.BlogDTO;
+import com.blog.domain.Blog_Criteria;
+import com.blog.mapper.BlogMapper;
 import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.gallery.mapper.GalleryMapper;
@@ -27,6 +30,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Autowired
     private GalleryMapper galleryMapper;
+
+    @Autowired
+    private BlogMapper blogMapper;
 
     @Override
     public void testPrint(String str) {
@@ -107,5 +113,15 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int getGalleryTotalCount(Gallery_Criteria cri) {
         return galleryMapper.getTotal(cri);
+    }
+
+    @Override
+    public List<BlogDTO> getBlogDTOList_WithPaging(Blog_Criteria cri) {
+        return blogMapper.getBlogList(cri);
+    }
+
+    @Override
+    public int getBlogTotalCount(Blog_Criteria cri) {
+        return blogMapper.getBlogTotal(cri);
     }
 }
