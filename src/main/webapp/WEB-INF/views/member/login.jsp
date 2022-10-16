@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Photo SYN</title>
     <link rel="stylesheet" href="/resources/member/css/style.css" type="text/css">
     <script src="/resources/member/css/jquery-3.6.1.min.js"></script>
 </head>

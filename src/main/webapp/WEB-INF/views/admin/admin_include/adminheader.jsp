@@ -757,7 +757,7 @@
             >
               <img
                       class="object-cover w-8 h-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
+                      src="/resources/member/img/profile/profile.png"
                       alt=""
                       aria-hidden="true"
               />
@@ -836,7 +836,11 @@
                               d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
                       ></path>
                     </svg>
-                    <span>Log out</span>
+                    <form action="/logout" method="POST">
+                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                      <button type="submit">로그아웃</button>
+                    </form>
+<%--                    <span>Log out</span>--%>
                   </a>
                 </li>
               </ul>

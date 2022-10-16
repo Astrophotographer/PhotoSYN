@@ -140,7 +140,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int buyGallery(BuyDTO buyDTO) {
         MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setPoint((-buyDTO.getO_price()));
+        memberDTO.setPoint(-buyDTO.getO_price());
         memberDTO.setId(buyDTO.getO_buyer());
 
         // USER_LIST DB 데이터 업데이트

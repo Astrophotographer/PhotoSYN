@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>home</title>
+    <title>Photo SYN</title>
     <meta charset="UTF-8">
     <meta name="description" content="Boto Photo Studio HTML Template">
     <meta name="keywords" content="photo, html">
@@ -111,7 +111,7 @@
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch">+</div>
         <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="검색어를 입력해 주세요.">
+            <input type="text" id="search-input" placeholder="#태그를 입력해 주세요.">
         </form>
     </div>
 </div>

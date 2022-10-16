@@ -30,7 +30,7 @@ import java.util.UUID;
 @RequestMapping("/member/mypage/*")
 @Log4j
 public class MypageController {
-
+    private static final String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/profile";
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -40,7 +40,7 @@ public class MypageController {
 
     @GetMapping("profile")
     public String profile(Model model, Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO) {
-        galleryDTO.setG_SALES(10);
+        galleryDTO.setG_SALES(1);
         galleryDTO.setG_HPRICE(1000);
 
         buyDTO.setO_seller("찬욱");
@@ -54,6 +54,12 @@ public class MypageController {
         return "/member/mypage/profile";
     }
 
+    /****************************************** 프로필 사진 수정 ******************************************/
+    @GetMapping("testUpload")
+    public void modifyPagee() {
+
+    }
+
     // 프로필 수정 페이지
     @GetMapping("profileModify")
     public void modifyPage() {
@@ -62,36 +68,38 @@ public class MypageController {
 
     // 프로필 이미지 수정
     @RequestMapping(value = "profileImgModify", method = RequestMethod.POST)
-    public String profileImgModify(@RequestParam("uploadFile") MultipartFile file, Model model) throws Exception {
-        /****************************************** 프로필 사진 수정 ******************************************/
+    public String profileImgModify(@RequestParam("uploadFile") MultipartFile file, Authentication auth) throws Exception {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String pic = user.getMember().getPic();
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         String savedFileName = "";
         MemberDTO memberDTO = memberService.getMember(id);
-        // 1. 파일 저장 경로 설정 : 실제 서비스되는 위치 (프로젝트 외부에 저장)
-        String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/profile/";
-        // 2. 원본 파일 이름 알아오기
+
         String originalFileName = file.getOriginalFilename();
-        // 3. 파일 이름 중복되지 않게 이름 변경(서버에 저장할 이름) UUID 사용
         UUID uuid = UUID.randomUUID();
         savedFileName = uuid.toString() + "_" + originalFileName;
         memberDTO.setPic(savedFileName);
-        // 4. 파일 생성
-        File file1 = new File(uploadPath + savedFileName);
+
         try {
-            if (memberDTO.getPic() != null) {
-                log.info("##################################################### 진입");
-                File file2 = new File(uploadPath + memberDTO.getPic());
+            // 이미 프로필 사진이 있을 경우
+            if (pic != null) {
+                // 경로에 있는 유저 프로필 사진 가져와서
+                File file2 = new File(uploadPath + pic);
+                // 원래 파일 삭제
                 file2.delete();
                 log.info("##################################################### 나가기");
             }
+            File file1 = new File(uploadPath + savedFileName);
             // 5. 서버로 전송
             file.transferTo(file1);
+            log.info("###################################### 확인11111");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        log.info("###################################### 확인22222");
         // DB 저장
         memberService.updateImg(memberDTO);
-//        renewalAuth();
+        renewalAuth();
 
         return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
     }
@@ -111,7 +119,7 @@ public class MypageController {
 
             return "redirect:/member/mypage/profileModify";
         }
-//        renewalAuth();
+        renewalAuth();
 
         return renewalAuth() ? "redirect:/member/mypage/profile" : "redirect:/member/mypage/profile";
     }
@@ -248,9 +256,9 @@ public class MypageController {
     public void sell(BuyDTO buyDTO, GalleryDTO galleryDTO, Model model) {
         List<BuyDTO> list = memberService.listBuy(buyDTO);
 
-        galleryDTO.setG_SALES(10);
+        galleryDTO.setG_SALES(1);
         galleryDTO.setG_HPRICE(1000);
-        
+
         long quantity = galleryDTO.getG_SALES();
         long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
 
@@ -294,14 +302,13 @@ public class MypageController {
             renewalAuth();
 
             rttr.addFlashAttribute("success", "구매가 완료되었습니다.");
-            log.info("######################################### :: " + user.getMember());
 
-            return "redirect:/member/main";
+            return "redirect:/member/mypage/profile";
         }
     }
 
     // 시큐리티 정보 갱신
-    private boolean renewalAuth() {
+    public boolean renewalAuth() {
         // 기존 정보 꺼내기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         MemberUser userAccount = (MemberUser) authentication.getPrincipal(); // principal만 꺼내서다음
@@ -313,7 +320,7 @@ public class MypageController {
     }
 
     // 기존 권한과 사용자 id를 받아서,  new principal로 인증과 토큰 갱신해주는 메서드
-    protected Authentication createNewAuthentication(Authentication currentAuth, String username) {
+    public Authentication createNewAuthentication(Authentication currentAuth, String username) {
         UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB가서 새로운 정보로 가져와 pricipal 새로만들기
         // 새로운 principal로 시큐리티 인증 권한(토큰) 생성
         UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());

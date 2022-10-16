@@ -5,6 +5,7 @@ import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
 import com.admin.domain.Admin_PageDTO;
 import com.admin.service.AdminService;
+import com.member.controller.MypageController;
 import com.member.domain.MemberDTO;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    MypageController mypageController;
 
     @RequestMapping(value = "main", method = RequestMethod.GET)
     public String goMain(Model model) {
@@ -76,7 +79,10 @@ public class AdminController {
 
 
 
-
+   /*
+    * 시큐리티 갱신 메서드
+    * mypageController.renewalAuth();
+    * */
 
 
 
@@ -86,6 +92,8 @@ public class AdminController {
         // INFO : com.admin.controller.AdminController - memberDT22222O : MemberDTO(id=testid2@testid2, name=null, pic=null, pw=null, phone=null, reg=null, status=0, point=0, membership=2, sns=null, snsToken=null, authDTOList=null)
         int result = 0;
         result = adminService.updateMemberShip(memberDTO);
+
+        mypageController.renewalAuth();
 
         return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
@@ -98,6 +106,8 @@ public class AdminController {
         //memberDTO 안에 id랑 point에 정상적으로 값 넘어옴. DB에 값 넣어주기
         result = adminService.updatePoint(memberDTO);
 
+        mypageController.renewalAuth();
+
         return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -108,8 +118,14 @@ public class AdminController {
         int result = 0;
         //memberDTO 안에 id랑 status 정상적으로 값 넘어옴. DB에 값 넣어주기
         result = adminService.updateUserStatus(memberDTO);
+
+        mypageController.renewalAuth();
+
         return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
+
 
 
 }

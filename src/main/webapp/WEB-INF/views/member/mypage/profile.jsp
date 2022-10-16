@@ -10,7 +10,7 @@
             <c:choose>
                 <c:when test="${princi.member.pic == null}">
                     <br/>
-                    <img src="/resources/member/bootstrap/main/img/user.png" alt="profile_img"
+                    <img src="/resources/member/bootstrap/main/img/user.png" alt="사진"
                          style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
                 </c:when>
                 <c:otherwise>
@@ -50,18 +50,23 @@
             </div>
         </div>
         <hr>
-        <div style="padding: 15px; display: flex; justify-content: space-between;">베스트 사진
-            <div>총 판매금액</div>
-            <div>누적 다운로드 수</div>
+        <div class="parent">
+            <div class="first">베스트 사진</div>
+            <div class="second">총 판매금액</div>
+            <div class="third">누적 다운로드 수</div>
         </div>
-        <div style="padding: 15px; display: flex; justify-content: space-between;">
-            <img src="" alt="사진"/>
-            <div><fmt:formatNumber pattern="###,###" value="${tot}"/> 원</div>
-            <div>0 회</div>
+        <div class="parent">
+            <div class="first">
+                <img src="/resources/member/img/profile/home_button_startframe__c9vtuy36kju6_large.jpg" alt="사진"
+                     style="width: 400px; height: 250px;"/>
+            </div>
+            <div class="second"><fmt:formatNumber pattern="###,###" value="${tot}"/> 원</div>
+            <div class="third">0 회</div>
         </div>
     </div>
 </div>
 
+<!-- TEST BUTTON -->
 <form action="/member/mypage/galleryBuyBtn" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <button class="profileBtn2" type="submit" style="width: 100px">
@@ -73,6 +78,11 @@
     var msg1 = '${msg1}';
     if (msg1 === "비밀번호 변경이 완료되었습니다.") {
         alert("비밀번호 변경이 완료되었습니다.");
+    }
+
+    var msg = '${success}';
+    if (msg === "구매가 완료되었습니다.") {
+        alert("구매가 완료되었습니다.\r잔여 포인트 : [" + ${princi.member.point} + " P]");
     }
 </script>
 

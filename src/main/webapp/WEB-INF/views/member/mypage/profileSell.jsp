@@ -38,6 +38,7 @@
                 <c:set var="sum" value="${sum + (buyDTO.o_price * quantity)}"/>
             </c:forEach>
         </table>
+        <br/>
         총 합계 : <fmt:formatNumber pattern="###,###" value="${sum}" />원
     </div>
 </div>

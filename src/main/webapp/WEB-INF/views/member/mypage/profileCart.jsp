@@ -6,7 +6,7 @@
         <div style="font-size: 50px; font-weight: 800;">장바구니</div>
         <hr>
         <div style="display: flex; justify-content: space-between;">
-            <button type="button" class="profileBtn2" onclick="window.location.href='/member/mypage/deleteCart'">삭제</button>
+            <button type="button" class="profileBtn2" id="btnDelete">삭제</button>
         </div>
         <br/>
 
@@ -45,6 +45,12 @@
             checkbox.checked = checkAll.checked;
         })
     }
+
+    $("#btnDelete").click(function () {
+        if (confirm("장바구니를 비우시겠습니까?")) {
+            location.href = "/member/mypage/deleteCart";
+        }
+    });
 </script>
 
 
