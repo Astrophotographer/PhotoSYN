@@ -27,7 +27,8 @@
                         <th class="px-4 py-3">메인태그/서브태그</th>
                         <th class="px-4 py-3">글 상태</th>
                         <th class="px-4 py-3">작성일/수정일</th>
-                        <th class="px-4 py-3">숨김 처리</th>
+<%--                        <th class="px-4 py-3">숨김 처리</th>--%>
+                        <th class="px-4 py-3">전체 체크<input id="checkAll" type="checkbox" name="checkAll"></th>
                     </tr>
                     </thead>
                     <tbody
@@ -90,25 +91,28 @@
                             <td class="px-4 py-3 text-sm">
                                     ${blog.b_REG}/${blog.b_EDIT eq null ? '-' : blog.b_EDIT}
                             </td>
-                            <td class="px-4 py-3 text-sm">
-                                <div class="mt-4 text-sm">
-                                    <div class="mt-2">
-                                        <label
-                                                class="inline-flex items-center text-gray-600 dark:text-gray-400"
-                                        >
-                                            <select id="changeStatus"
-                                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
-                                                <option value="0">정상 노출</option>
-                                                <option value="1">신고로 인한 자동 숨김</option>
-                                                <option value="2">유저 요청 숨김(유저 삭제)</option>
-                                                <option value="3">관리자 요청 숨김(관리자 삭제)</option>
-                                            </select>
-                                        </label>
+<%--                            <td class="px-4 py-3 text-sm">--%>
+<%--                                <div class="mt-4 text-sm">--%>
+<%--                                    <div class="mt-2">--%>
+<%--                                        <label--%>
+<%--                                                class="inline-flex items-center text-gray-600 dark:text-gray-400"--%>
+<%--                                        >--%>
+<%--                                            <select id="changeStatus"--%>
+<%--                                                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">--%>
+<%--                                                <option value="0">정상 노출</option>--%>
+<%--                                                <option value="1">신고로 인한 자동 숨김</option>--%>
+<%--                                                <option value="2">유저 요청 숨김(유저 삭제)</option>--%>
+<%--                                                <option value="3">관리자 요청 숨김(관리자 삭제)</option>--%>
+<%--                                            </select>--%>
+<%--                                        </label>--%>
 
-                                        <br>
-                                        <button id="changeStatusBtn">글 수정</button>
-                                    </div>
-                                </div>
+<%--                                        <br>--%>
+<%--                                        <button id="changeStatusBtn">글 수정</button>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </td>--%>
+                            <td class="px-4 py-3 text-sm">
+                                <input name="checkOne" type="checkbox" value="${blog.b_NO}">
                             </td>
                         </tr>
 
@@ -117,6 +121,9 @@
 
                     </tbody>
                 </table>
+                <input type="button" value="선택삭제(관리자 삭제)" onclick="deleteValue();"/>
+                <br>
+                <input type="button" value="정상노출(숨김 해제)" onclick="showValue();"/>
             </div>
             <%-- 유저정보 끝 --%>
 
@@ -181,10 +188,168 @@
 </div>
 
 <script src="../resources/blog/plugins/jquery/jquery.js"></script>
+
 <script type="text/javascript">
-    $(document).ready(function (){
+
+    let token = $("meta[name='_csrf']").attr("content");
+    let header = $("meta[name='_csrf_header']").attr("content");
+
+    $(document).ready(function () {
+
+        let chkObj = document.getElementById("checkAll");
+        let rowCnt = chkObj.length;
+
+
+        console.log('chkObj : ', chkObj);
+        console.log('rowCnt : ', rowCnt);
+
+        $("input[name='checkAll']").click(function () {
+            console.log('checkAll click');
+            let chk_listArr = $("input[name='checkOne']");
+            for (let i = 0; i < chk_listArr.length; i++) {
+                chk_listArr[i].checked = this.checked;
+            }
+        });
+
+        $("input[name='checkOne']").click(function () {
+            console.log('checkOne click');
+
+            if ($("input[name='checkOne']:checked").length == rowCnt) {
+                $("input[name='checkAll']")[0].chcked = true;
+            } else {
+                $("input[name='checkAll']")[0].checked = false;
+            }
+
+        });
+
+        function deleteValue() {
+            let chk_listArr = $("input[name='checkOne']:checked");
+            let chk_list = "";
+            for (let i = 0; i < chk_listArr.length; i++) {
+                chk_list += chk_listArr[i].value + ",";
+            }
+            console.log('chk_list : ', chk_list);
+            if (chk_list == "") {
+                alert("삭제할 블로그를 선택해주세요.");
+                return;
+            }
+            if (confirm("선택한 블로그를 삭제하시겠습니까?")) {
+                // location.href="/admin/blog/delete?b_NO="+chk_list;
+            }
+        }
 
     })
+
+    function deleteValue() {
+
+        let chk_listArr = new Array();
+        // let chk_listArr = $("input[name='checkOne']:checked");
+        let chk_list = $("input[name='checkOne']");
+
+        for (let i = 0; i < chk_list.length; i++) {
+            // chk_list += chk_listArr[i].value + ",";
+            if(chk_list[i].checked){
+                chk_listArr.push(chk_list[i].value);
+            }
+            // chk_listArr.push(chk_list[i].value);
+        }
+        console.log('chk_listArr : ', chk_listArr);
+        if (chk_listArr.length == 0) {
+            alert("삭제할 블로그를 선택해주세요.");
+            return;
+        }
+
+        console.log(typeof chk_list);   //String --> Object 로 변경됨.
+        console.log(Array.isArray(chk_list)); //false 배열이 아닌 object이기 때문
+
+        console.log(typeof chk_listArr);            // object
+        console.log(Array.isArray(chk_listArr));    // true
+
+        let reqData = {
+            chk_listArr : chk_listArr
+        };
+
+        if (confirm("선택한 블로그를 삭제하시겠습니까?")) {
+            // location.href="/admin/blog/delete?b_NO="+chk_list;
+            $.ajax({
+                url: "/admin/blog/hide",
+                type: "post",
+                // data : JSON.stringify(chk_listArr),
+                data : {chk_listArr : chk_listArr},
+                dataType: "text",
+                // contentType: "application/json; charset=utf-8",
+                // contentType: "charset=utf-8",
+                // traditional: true,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success : function (data) {
+                    console.log(data);
+                    alert("삭제되었습니다.");
+                    location.reload();
+                },
+                error : function (data) {
+                    console.log(data);
+                    alert("삭제에 실패하였습니다.");
+                }
+            })
+        }
+    }
+    function showValue() {
+
+        let chk_listArr = new Array();
+        // let chk_listArr = $("input[name='checkOne']:checked");
+        let chk_list = $("input[name='checkOne']");
+
+        for (let i = 0; i < chk_list.length; i++) {
+            // chk_list += chk_listArr[i].value + ",";
+            if(chk_list[i].checked){
+                chk_listArr.push(chk_list[i].value);
+            }
+            // chk_listArr.push(chk_list[i].value);
+        }
+        console.log('chk_listArr : ', chk_listArr);
+        if (chk_listArr.length == 0) {
+            alert("복원할 블로그를 선택해주세요.");
+            return;
+        }
+
+        console.log(typeof chk_list);   //String --> Object 로 변경됨.
+        console.log(Array.isArray(chk_list)); //false 배열이 아닌 object이기 때문
+
+        console.log(typeof chk_listArr);            // object
+        console.log(Array.isArray(chk_listArr));    // true
+
+        let reqData = {
+            chk_listArr : chk_listArr
+        };
+
+        if (confirm("선택한 블로그를 복원하시겠습니까?")) {
+            // location.href="/admin/blog/delete?b_NO="+chk_list;
+            $.ajax({
+                url: "/admin/blog/show",
+                type: "post",
+                // data : JSON.stringify(chk_listArr),
+                data : {chk_listArr : chk_listArr},
+                dataType: "text",
+                // contentType: "application/json; charset=utf-8",
+                // contentType: "charset=utf-8",
+                // traditional: true,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success : function (data) {
+                    console.log(data);
+                    alert("복원되었습니다.");
+                    location.reload();
+                },
+                error : function (data) {
+                    console.log(data);
+                    alert("복원에 실패하였습니다.");
+                }
+            })
+        }
+    }
 </script>
 </body>
 </html>

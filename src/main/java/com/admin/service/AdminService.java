@@ -41,5 +41,9 @@ public interface AdminService {
 
     public int getBlogTotalCount(Blog_Criteria cri);
 
+    public int hideBlog(List<Integer> b_noList);
+
+    public int showBlog(List<Integer> b_noList);
+
 
 }

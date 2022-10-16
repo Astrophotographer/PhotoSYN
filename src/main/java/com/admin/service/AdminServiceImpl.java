@@ -124,4 +124,29 @@ public class AdminServiceImpl implements AdminService {
     public int getBlogTotalCount(Blog_Criteria cri) {
         return blogMapper.getBlogTotal(cri);
     }
+
+    @Override
+    public int hideBlog(List<Integer> b_noList) {
+        // admin mapper에서 구현?
+        int result = 0;
+
+        for(int i=0; i< b_noList.size();i++){
+            log.info("b_noList.get(i) : "+b_noList.get(i));
+            result += adminMapper.hideBlog(b_noList.get(i));
+        }
+
+        return result;
+    }
+
+    @Override
+    public int showBlog(List<Integer> b_noList) {
+
+        int result = 0;
+
+        for(int i=0; i< b_noList.size();i++){
+            log.info("b_noList.get(i) : "+b_noList.get(i));
+            result += adminMapper.showBlog(b_noList.get(i));
+        }
+        return result;
+    }
 }

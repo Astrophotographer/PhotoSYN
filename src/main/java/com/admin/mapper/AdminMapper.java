@@ -35,4 +35,8 @@ public interface AdminMapper {
     public int getGalleryTotalCount(Admin_Criteria cri);
     //
 
+//    public int hideBlog(List<Integer> b_noList);
+    public int hideBlog(int b_no);
+
+    public int showBlog(int b_no);
 }
