@@ -18,7 +18,7 @@ public class Gallery_Criteria {
     private int pageNum; 	// 페이지 번호
     private int listQty;	// 한페이지에 보여줄 게시물 개수
 
-    //private String sel; 	//
+    private String sel; 	//
     private String keyword; // 검색 키워드
 
     public Gallery_Criteria() {

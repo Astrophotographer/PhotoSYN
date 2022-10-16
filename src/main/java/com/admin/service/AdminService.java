@@ -41,9 +41,15 @@ public interface AdminService {
 
     public int getBlogTotalCount(Blog_Criteria cri);
 
+    //blog 삭제(숨김)및 복원(노출)
     public int hideBlog(List<Integer> b_noList);
 
     public int showBlog(List<Integer> b_noList);
+
+    //gallery 삭제(숨김) 및 복원(노출)
+    public int hideGallery(List<Integer> g_noList);
+
+    public int showGallery(List<Integer> g_noList);
 
 
 }

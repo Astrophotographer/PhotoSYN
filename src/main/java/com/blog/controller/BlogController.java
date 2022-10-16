@@ -147,7 +147,7 @@ public class BlogController {
 
 
     // 블로그 글 작성 페이지
-//    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "write", method = RequestMethod.GET)
     public String writeBoard(Model model) {
         log.info("writeBoard start...");

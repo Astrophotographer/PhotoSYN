@@ -186,6 +186,29 @@ public class AdminController {
         return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @RequestMapping(value="gallery/hide", method=RequestMethod.POST)
+    public ResponseEntity<String> hideGallery(@RequestParam(value="chk_listArr[]", required=false) List<Integer> chk_list) {
+        log.info("hideGallery");
+        int result = 0;
+
+        result = adminService.hideGallery(chk_list);
+
+        log.info("gallery/hide result : " + result);
+
+        return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @RequestMapping(value="gallery/show", method=RequestMethod.POST)
+    public ResponseEntity<String> showGallery(@RequestParam(value="chk_listArr[]", required=false) List<Integer> chk_list) {
+        log.info("hideGallery");
+        int result = 0;
+
+        result = adminService.showGallery(chk_list);
+
+        log.info("gallery/show result : " + result);
+
+        return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 
 

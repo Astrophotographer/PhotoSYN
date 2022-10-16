@@ -204,4 +204,12 @@
         update blog set B_STATUS = 0 where B_NO = #{b_no}
     </update>
 
+    <update id="hideGallery">
+        update gallery set G_STATUS = 3 where G_NO = #{g_no}
+    </update>
+
+    <update id="showGallery">
+        update gallery set G_STATUS = 0 where G_NO = #{g_no}
+    </update>
+
 </mapper>

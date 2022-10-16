@@ -39,4 +39,8 @@ public interface AdminMapper {
     public int hideBlog(int b_no);
 
     public int showBlog(int b_no);
+
+    public int hideGallery(int g_no);
+
+    public int showGallery(int g_no);
 }
