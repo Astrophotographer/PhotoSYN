@@ -31,15 +31,15 @@
 
 
     <select id="getMaxReadCountGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_readCount = (select max(G_READCOUNT) from gallery)
+    select * from gallery where g_readCount = (select max(G_READCOUNT) from gallery) and ROWNUM = 1 order by g_reg desc
     </select>
 
     <select id="getMaxLikeGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_like = (select max(G_LIKE) from gallery)
+    select * from gallery where g_like = (select max(G_LIKE) from gallery) and ROWNUM = 1 order by g_reg desc
     </select>
 
     <select id="getMaxSalesGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_sales = (select max(G_SALES) from gallery)
+    select * from gallery where g_sales = (select max(G_SALES) from gallery) and ROWNUM = 1 order by g_reg desc
     </select>
 
 
@@ -103,7 +103,7 @@
         <![CDATA[
                     g_no > 0
                 order by G_REG desc) A
-            where rownum <= #{pageNum} * #{listQty}
+            where rownum <= #{pageNum} * #{listQty} and g_status < 2
             order by G_REG desc) B
 
         where r > (#{pageNum} - 1) * #{listQty}
@@ -123,7 +123,7 @@
         <![CDATA[
                     g_no > 0
                 order by G_REG desc) A
-            where rownum <= #{pageNum} * #{listQty}
+            where rownum <= #{pageNum} * #{listQty} and g_status < 2
             order by G_REG desc) B
 
         where r > (#{pageNum} - 1) * #{listQty}
@@ -140,11 +140,7 @@
         from dual
     </select>
 
-    <update id="hideGallery">
-        update gallery
-        set g_status = 2
-        where g_no = #{G_NO}
-    </update>
+
 
     <update id="updateGallery">
         update Gallery
@@ -174,7 +170,11 @@
         where b_no = #{G_NO}
     </update>
 
-
+    <update id="hideGallery">
+        update gallery
+        set g_status = 2
+        where g_no = #{G_NO}
+    </update>
 
 
 

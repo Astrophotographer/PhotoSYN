@@ -49,7 +49,11 @@ public class GalleryServiceImpl implements GalleryService {
 
 
     @Override
-    public GalleryDTO getGallerySingle(Long G_NO) {return galleryMapper.getGallerySingle(G_NO);}
+    public GalleryDTO getGallerySingle(Long G_NO) {
+        // 갤러리 가져오면서 조회수 증가시키기
+        galleryMapper.updateGalleryReadCount(G_NO);
+        return galleryMapper.getGallerySingle(G_NO);
+    }
 
 
     @Override

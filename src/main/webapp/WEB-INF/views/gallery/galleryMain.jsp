@@ -180,42 +180,59 @@
                     <button type="button" onclick="location.href='/gallery/uploadForm'">글작성</button>
                 </div>
 
-                <div class="swiper-hover-arrow position-relative">
-                    <div class="swiper swiper-container swiper-initialized swiper-horizontal swiper-pointer-events"
-                         data-swiper-options="{
-                              &quot;slidesPerView&quot;: 2,
-                              &quot;spaceBetween&quot;: 24,
-                              &quot;loop&quot;: true,
-                              &quot;pagination&quot;: {
-                                &quot;el&quot;: &quot;.swiper-pagination&quot;,
-                                &quot;clickable&quot;: true
-                                },
-                              &quot;navigation&quot;: {
-                                &quot;nextEl&quot;: &quot;.swiper-next-02&quot;,
-                                &quot;prevEl&quot;: &quot;.swiper-prev-02&quot;
-                              },
-                              &quot;autoplay&quot;: {
-                                &quot;delay&quot;: 3500,
-                                &quot;disableOnInteraction&quot;: false
-                              },
-                              &quot;breakpoints&quot;: {
-                                &quot;600&quot;: {
-                                  &quot;slidesPerView&quot;: 3
-                                },
-                                &quot;991&quot;: {
-                                  &quot;slidesPerView&quot;: 3
-                                },
-                                &quot;1200&quot;: {
-                                  &quot;slidesPerView&quot;: 4
-                                }
-                              }
-                        }">
+<%--                <div class="swiper-hover-arrow position-relative">--%>
+<%--                    <div class="swiper swiper-container swiper-initialized swiper-horizontal swiper-pointer-events"--%>
+<%--                         data-swiper-options="{--%>
+<%--                              &quot;slidesPerView&quot;: 2,--%>
+<%--                              &quot;spaceBetween&quot;: 24,--%>
+<%--                              &quot;loop&quot;: true,--%>
+<%--                              &quot;pagination&quot;: {--%>
+<%--                                &quot;el&quot;: &quot;.swiper-pagination&quot;,--%>
+<%--                                &quot;clickable&quot;: true--%>
+<%--                                },--%>
+<%--                              &quot;navigation&quot;: {--%>
+<%--                                &quot;nextEl&quot;: &quot;.swiper-next-02&quot;,--%>
+<%--                                &quot;prevEl&quot;: &quot;.swiper-prev-02&quot;--%>
+<%--                              },--%>
+<%--                              &quot;autoplay&quot;: {--%>
+<%--                                &quot;delay&quot;: 3500,--%>
+<%--                                &quot;disableOnInteraction&quot;: false--%>
+<%--                              },--%>
+<%--                              &quot;breakpoints&quot;: {--%>
+<%--                                &quot;600&quot;: {--%>
+<%--                                  &quot;slidesPerView&quot;: 3--%>
+<%--                                },--%>
+<%--                                &quot;991&quot;: {--%>
+<%--                                  &quot;slidesPerView&quot;: 3--%>
+<%--                                },--%>
+<%--                                &quot;1200&quot;: {--%>
+<%--                                  &quot;slidesPerView&quot;: 4--%>
+<%--                                }--%>
+<%--                              }--%>
+<%--                        }">--%>
+                <c:forEach var="i" begin="1" end="8" step="1">
+                    <div class="col-lg-3 col-md-6">
+                        <article class="post-grid mb-5">
+                            <a class="post-thumb mb-4 d-block" href="../resources/blog/blog-single.html">
+                                <img src="../resources/blog/images/news/f1.jpg" alt="" class="img-fluid w-100">
+                            </a>
+                            <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out
+                                    value="${i}"/> (메인태그 <-- 카테고리개념)</span>
+                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">The best place
+                                to explore to enjoy(블로그 제목)</a></h3>
+
+                            <span class="text-muted letter-spacing text-uppercase font-sm">June 15, 2019(블로그 수정 >> 작성 시간)</span>
+
+                        </article>
+                    </div>
+                    <!-- 글 한개 -->
+                </c:forEach>
 
 <!-- 사진사진사진 -->
                         <%--사진 뿌려주기 --%>
-                    <c:forEach var="gallery" items="${list}" >
-                        <h3> ${gallery}</h3>
-                        <div class="swiper-wrapper" id="swiper-wrapper-68b80b9203f3bf19" aria-live="off"
+                        <c:forEach var="gallery" items="${list}" >
+                         <h3> ${gallery}</h3>
+                            <div class="swiper-wrapper" id="swiper-wrapper-68b80b9203f3bf19" aria-live="off"
                              style="transition-duration: 0ms; transform: translate3d(-1446.67px, 0px, 0px);">
 <%--                                <c:forEach var="i" begin="1" end="5" step="1">--%>
                                 <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-active"
@@ -226,7 +243,7 @@
                                         <div class="product-media">
                                             <div class="product-media-hover">
                                                 <a href="#">
-                                                    <img src="/resources/gallery/images/${gallery.G_HNAME}">
+                                                    <img src="/resources/gallery/images/${gallery.g_HNAME}">
 <%--                                                    <img class="hover-image"--%>
 <%--                                                         src="/resources/gallery/dev/assets/img/product-4-hover.jpg"--%>
 <%--                                                         title="" alt="">--%>

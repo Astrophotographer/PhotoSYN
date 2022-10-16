@@ -22,7 +22,7 @@ public class GalleryDTO {
     private long G_SALES;    // 판매량
     private int G_LIKE;     // 좋아요
     private long G_READCOUNT;   // 조회수
-    private String[] G_TAG1; // 태그 목록
+    private String G_TAG1; // 태그 목록
     private String G_TYPE; // 사진 포맷(jpg, raw)
 
     // 파일 한개 첨부 - 처리를 위한 변수

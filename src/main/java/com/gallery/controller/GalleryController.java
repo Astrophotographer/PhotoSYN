@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.gallery.domain.GalleryDTO;
@@ -35,7 +32,7 @@ public class GalleryController {
 
     @RequestMapping(value ="main")
     public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
-        log.info("gallery main!!");
+        log.info("gallery main2!!");
 
         if (principal != null) {
             log.info(principal.getName());
@@ -56,13 +53,19 @@ public class GalleryController {
 //        log.info("************ cri : " + cri);
 //
 
-        return "gallery/galleryMain";
+        return "gallery/galleryMain2";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
     @GetMapping("single")
-    public String gallerySingle(Long G_NO, Model model, @ModelAttribute("cri") Gallery_Criteria cri) {
+    public String gallerySingle(Model model, @RequestParam("G_NO") Long G_NO) {
         log.info("gallerySingle G_NO : " + G_NO);
+
+        GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
+        String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
+        log.info("tagsARR : " + tagsARR.toString());
+
+
         model.addAttribute("board", galleryService.getGallerySingle(G_NO));
 
         return "gallery/gallerySingle";
