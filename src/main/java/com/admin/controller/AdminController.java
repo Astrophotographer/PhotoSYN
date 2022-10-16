@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -48,7 +49,7 @@ public class AdminController {
         cri.setListQty(20);
 
         log.info("+++++++++++++++++++++++++++++++++++++");
-        log.info("cri : "+cri.toString());
+        log.info("cri : " + cri.toString());
 
         //상단 카드들에 들어갈 정보
         model.addAttribute("adminMainDTO", adminMainDTO);
@@ -58,8 +59,8 @@ public class AdminController {
         return "admin/adminmain";
     }
 
-    @RequestMapping(value="user",method = RequestMethod.GET)
-    public String users(Model model, Admin_Criteria cri){
+    @RequestMapping(value = "user", method = RequestMethod.GET)
+    public String users(Model model, Admin_Criteria cri) {
         log.info("user Start...");
 
         //페이징 처리 이전
@@ -68,7 +69,7 @@ public class AdminController {
 
 
         model.addAttribute("memberDTOList", adminService.getMemberDTOList_WithPaging(cri));
-        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getUserTotalCount(cri)));
+        model.addAttribute("pager", new Admin_PageDTO(cri, adminService.getUserTotalCount(cri)));
 
         return "admin/adminalluser";
     }
@@ -92,14 +93,14 @@ public class AdminController {
 
 
     //TODO 1015 구현시키기.
-    @RequestMapping(value="gallery", method = RequestMethod.GET)
-    public String adminGallery(Model model, Gallery_Criteria cri){
+    @RequestMapping(value = "gallery", method = RequestMethod.GET)
+    public String adminGallery(Model model, Gallery_Criteria cri) {
         log.info("adminGallery");
 
         model.addAttribute("galleryDTOList", adminService.getGalleryDTOList_WithPaging(cri));
 //        model.addAttribute("pager",new Admin_PageDTO(cri, adminService.getGalleryTotalCount(cri)));
         Gallery_PageDTO dto = new Gallery_PageDTO(cri, adminService.getGalleryTotalCount(cri));
-        log.info("dto : "+dto.toString());
+        log.info("dto : " + dto.toString());
         //dto 값...
         //dto : Gallery_PageDTO(startPage=1, endPage=1, prev=false, next=false, total=10, cri=Gallery_Criteria(u_id=null, option=null, sort=null, pageNum=1, listQty=10, keyword=null))
 //        model.addAttribute("pager",dto);
@@ -107,24 +108,18 @@ public class AdminController {
         return "admin/admingallery";
     }
 
-    @RequestMapping(value="blog", method = RequestMethod.GET)
-    public String adminBlog(Model model, Blog_Criteria cri){
+    @RequestMapping(value = "blog", method = RequestMethod.GET)
+    public String adminBlog(Model model, Blog_Criteria cri) {
         log.info("adminBlog");
 
         model.addAttribute("blogDTOList", adminService.getBlogDTOList_WithPaging(cri));
 
         log.info("1111111111111111111111111111111111111111111111");
-        model.addAttribute("pager",new Blog_PageDTO(cri, adminService.getBlogTotalCount(cri)));
+        model.addAttribute("pager", new Blog_PageDTO(cri, adminService.getBlogTotalCount(cri)));
 
 
         return "admin/adminblog";
     }
-
-
-
-
-
-
 
 
     @RequestMapping(value = "updateMemberShip", method = RequestMethod.POST)
@@ -157,6 +152,22 @@ public class AdminController {
         result = adminService.updateUserStatus(memberDTO);
         return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @RequestMapping(value = "blog/hide", method = RequestMethod.POST)
+    public ResponseEntity<String> hideBlog(@RequestParam(value = "chk_listArr[]", required = false) List<Integer> chk_list) {
+        log.info("hideBlog");
+
+        for(int i=0; i<chk_list.size(); i++) {
+            log.info("chk_list : " + chk_list.get(i));
+            //숨김처리 진행하기
+        }
+
+        int result = 1;
+        //result = adminService.hideBlog(chk_list);
+        return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
 
 
 }
