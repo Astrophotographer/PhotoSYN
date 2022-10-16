@@ -149,4 +149,29 @@ public class AdminServiceImpl implements AdminService {
         }
         return result;
     }
+
+    @Override
+    public int hideGallery(List<Integer> g_noList) {
+
+        int result = 0;
+
+        for(int i=0; i< g_noList.size();i++){
+            log.info("g_noList.get(i) : "+g_noList.get(i));
+            result += adminMapper.hideGallery(g_noList.get(i));
+        }
+
+        return result;
+    }
+
+    @Override
+    public int showGallery(List<Integer> g_noList) {
+
+        int result = 0;
+
+        for(int i=0; i< g_noList.size();i++){
+            log.info("g_noList.get(i) : "+g_noList.get(i));
+            result += adminMapper.showGallery(g_noList.get(i));
+        }
+        return result;
+    }
 }
