@@ -53,7 +53,7 @@ public class GalleryController {
 //        log.info("************ cri : " + cri);
 //
 
-        return "gallery/galleryMain2";
+        return "gallery/galleryMain";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
