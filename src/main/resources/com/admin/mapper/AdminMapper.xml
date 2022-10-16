@@ -189,4 +189,19 @@
        ]]>
     </select>
 
+<!--    <update id="hideBlog">-->
+<!--        <foreach collection="b_noList" item="arr">-->
+<!--            update blog-->
+<!--            set B_STATUS = 3 where B_NO = #{arr}-->
+<!--        </foreach>-->
+<!--    </update>-->
+
+    <update id="hideBlog">
+        update blog set B_STATUS = 3 where B_NO = #{b_no}
+    </update>
+
+    <update id="showBlog">
+        update blog set B_STATUS = 0 where B_NO = #{b_no}
+    </update>
+
 </mapper>

@@ -156,15 +156,34 @@ public class AdminController {
     @RequestMapping(value = "blog/hide", method = RequestMethod.POST)
     public ResponseEntity<String> hideBlog(@RequestParam(value = "chk_listArr[]", required = false) List<Integer> chk_list) {
         log.info("hideBlog");
+        int result = 0;
 
         for(int i=0; i<chk_list.size(); i++) {
             log.info("chk_list : " + chk_list.get(i));
             //숨김처리 진행하기
+//            result = adminService.hideBlog(chk_list.get(i));
         }
 
-        int result = 1;
+        //방법1
+        //for문으로 한번씩 진행 --> sql 여러번 접속
+
+        //방법2 --> 이걸로 하기
+        // 배열로 던져줘서 한번에 처리
+        result = adminService.hideBlog(chk_list);
+
         //result = adminService.hideBlog(chk_list);
-        return result == 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+        return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @RequestMapping(value = "blog/show", method = RequestMethod.POST)
+    public ResponseEntity<String> showBlog(@RequestParam(value = "chk_listArr[]", required = false) List<Integer> chk_list) {
+        log.info("hideBlog");
+        int result = 0;
+
+        result = adminService.showBlog(chk_list);
+
+        //result = adminService.hideBlog(chk_list);
+        return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 
