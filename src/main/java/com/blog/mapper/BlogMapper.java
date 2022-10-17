@@ -1,9 +1,6 @@
 package com.blog.mapper;
 
-import com.blog.domain.BlogDTO;
-import com.blog.domain.Blog_Criteria;
-import com.blog.domain.Blog_Img;
-import com.blog.domain.Blog_Img_Temp;
+import com.blog.domain.*;
 import com.gallery.domain.MaintagDTO;
 import com.member.domain.MemberDTO;
 import com.member.domain.User_Intro;
@@ -61,5 +58,7 @@ public interface BlogMapper {
     public MemberDTO getUserInfo(String u_id);
 
     public int upsertTag(List<String> tags);
+
+    public int getBlogLike(Blog_Like blog_like);
 
 }
