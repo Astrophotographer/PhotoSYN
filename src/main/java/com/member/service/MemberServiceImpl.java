@@ -2,6 +2,8 @@ package com.member.service;
 
 import java.util.List;
 
+import com.gallery.domain.GalleryDTO;
+import com.gallery.mapper.GalleryMapper;
 import com.member.domain.AuthDTO;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
@@ -18,6 +20,8 @@ import lombok.extern.log4j.Log4j;
 public class MemberServiceImpl implements MemberService {
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private GalleryMapper galleryMapper;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -104,7 +108,18 @@ public class MemberServiceImpl implements MemberService {
     public int updatePoint(MemberDTO memberDTO) {
         return memberMapper.updatePoint(memberDTO);
     }
-    
+
+    /* 갤러리 목록 */
+    @Override
+    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id) {
+        return memberMapper.galleryList(galleryDTO, id);
+    }
+
+    @Override
+    public int updateGalleryStatus(GalleryDTO galleryDTO) {
+        return memberMapper.updateGalleryStatus(galleryDTO);
+    }
+
     /* 장바구니 담기 */
     @Override
     public void insertCart(Long G_NO) {
@@ -145,6 +160,8 @@ public class MemberServiceImpl implements MemberService {
 
         // USER_LIST DB 데이터 업데이트
         memberMapper.updatePoint(memberDTO);
+        // 다운로드 수 증가
+        galleryMapper.updateGallerySales(buyDTO.getG_no());
 
         return memberMapper.buyGallery(buyDTO);
     }

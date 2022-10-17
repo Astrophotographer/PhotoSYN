@@ -42,6 +42,12 @@ public interface MemberMapper {
     // 포인트 충전
     public int updatePoint(MemberDTO memberDTO);
 
+    /* 갤러리 목록 */
+    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
+
+    /* 갤러리 상태값 변경 */
+    public int updateGalleryStatus(GalleryDTO galleryDTO);
+
     /* 장바구니 담기 */
     public void insertCart(Long g_no);
 
