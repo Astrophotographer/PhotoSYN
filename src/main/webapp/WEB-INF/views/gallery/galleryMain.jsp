@@ -464,7 +464,7 @@
                                     <div class="product-card-01 my-1">
                                         <div class="product-media">
                                             <div class="product-media-hover">
-                                                <a href="/gallery/gallerySingle?g_no=${gallery.g_NO}">
+                                                <a href="/gallery/gallerySingle?G_NO=${gallery.g_NO}">
 
                                                     <img src="/resources/gallery/images/${gallery.g_HNAME}"
                                                          width="120px" height="80px"/>
@@ -490,7 +490,7 @@
                                                 <a href="#">Fine-knit sweater</a>
                                             </h6>
 
-                                            <div class="product-cart-btn">
+                                            <div class="product-cart-btn" data-gno="${gallery.g_NO}">
                                                 <a class="btn btn-outline-dark">
                                                     Add to Cart2
                                                 </a>
@@ -879,7 +879,7 @@
 <script>
 
     $(".fi-heart").on("click", function (e) {
-        let gnoVal = '${gallery.G_NO}';
+        let gnoVal = '${gallery.g_NO}';
         console.log("gnoVal: " + gnoVal);
         $.ajax({
             type: "GET",
@@ -902,15 +902,23 @@
     })
 
     $(".product-cart-btn").on("click", function (e) {
-        let gnoVal = '${gallery.G_NO}';
+        let gnoVal = $(this).data('gno');    // '${gallery.G_NO}'
         console.log("gnoVal: " + gnoVal);
+
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
         $.ajax({
             type: "POST",
-            url: "/member/mypage/insertCart" + gnoVal + ".json",
-            data: {gno: gnoVal},
+            url: "/member/mypage/insertCart",
+            data: {G_NO: gnoVal},
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);   // 헤드의 csrf meta태그를 읽어 CSRF 토큰 함께 전송
+            },
             success: function (result) {
                 console.log(result);
-                console.log("장바구니 담기 성공");
+                if(result == 'success'){
+                    console.log("장바구니 담기 성공");
+                }
             },
             error: function (e) {
                 console.log(e);

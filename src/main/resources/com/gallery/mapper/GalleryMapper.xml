@@ -155,19 +155,19 @@
     <update id="updateGalleryReadCount">
         update gallery
         set g_readcount = g_readcount + 1
-        where b_no = #{G_NO}
+        where g_no = #{G_NO}
     </update>
 
     <update id="updateGallerySales">
         update gallery
         set g_sales = g_sales + 1
-        where b_no = #{G_NO}
+        where g_no = #{G_NO}
     </update>
 
     <update id="updateGalleryLike">
         update gallery
         set g_like = g_like + 1
-        where b_no = #{G_NO}
+        where g_no = #{G_NO}
     </update>
 
     <update id="hideGallery">
