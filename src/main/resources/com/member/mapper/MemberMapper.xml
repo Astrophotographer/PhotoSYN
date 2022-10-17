@@ -107,17 +107,15 @@
 
     <!-- 장바구니 담기 -->
     <insert id="insertCart">
-        insert into USER_CART(C_ID, C_HPRICE, C_LPRICE, C_HNAME, C_LNAME, C_REG, G_NO, U_ID)
+        insert into USER_CART(C_ID, C_HPRICE, C_HNAME, C_REG, G_NO, U_ID)
         select C_ID_SEQ.nextval,
                G_HPRICE,
-               G_LPRICE,
                G_HNAME,
-               G_LNAME,
                sysdate,
                G_NO,
                U_ID
         from GALLERY
-        where G_NO = #{G_NO};
+        where G_NO = #{G_NO}
     </insert>
 
     <!-- 장바구니 목록 -->

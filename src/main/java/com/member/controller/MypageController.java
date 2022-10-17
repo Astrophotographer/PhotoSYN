@@ -210,11 +210,14 @@ public class MypageController {
     /************************************************ 장바구니 ************************************************/
 
     /* 장바구니 담기 */
+    @ResponseBody
     @PostMapping("insertCart")
-    public String insertCart(Long G_NO) {
+    public String insertCart(@RequestParam("G_NO") Long G_NO) {
         memberService.insertCart(G_NO);
 
-        return "redirect:/member/mypage/profileCart";
+        log.info("###################GNO" + G_NO);
+
+        return "success";
     }
 
     // 장바구니 목록 페이지

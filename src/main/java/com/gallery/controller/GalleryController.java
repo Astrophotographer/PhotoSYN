@@ -63,7 +63,7 @@ public class GalleryController {
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
-    @RequestMapping(value = "single", method = RequestMethod.GET)
+    @RequestMapping(value = "gallerySingle", method = RequestMethod.GET)
     public String gallerySingle(Model model, @RequestParam("G_NO") Long G_NO) {
         log.info("gallerySingle G_NO : " + G_NO);
 
