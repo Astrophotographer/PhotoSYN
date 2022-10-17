@@ -21,6 +21,7 @@ public class MetadataDTO {
     private Double M_SHUTTERSPEED; //셔터스피드   ExposureTime
     private String M_HNAME; // 사진 저장된 이름 임시저장할 변수 추가
     private String M_CONTENT; // 저장된 설명 임시로 저장할 변수 추가
+    private String M_TYPE; // 저장된 타입을 임시로 저장할 변수 추가
 
     private Date M_REG; // 사진 촬영일 DateTimeOriginal
 

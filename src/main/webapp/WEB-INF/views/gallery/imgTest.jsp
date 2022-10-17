@@ -17,84 +17,60 @@
 </head>
 <body>
 <h1>imgTest</h1>
-<sec:authorize access="isAnonymous()">
-    <h1>로그인 안됨</h1>
-</sec:authorize>
-<sec:authorize access="isAuthenticated()">
+<style>
+    /* The Modal (background) */
+    .searchModal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 10; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
 
+    /* Modal Content/Box */
+    .search-modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%; /* Could be more or less, depending on screen size */
+    }
+</style>
 
+<div id="modal" class="searchModal">
+    <div class="search-modal-content">
+        <div class="page-header">
+            <h1>MODAL</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Modal창 테스트입니다.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="closeModal();">
+            <span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+            </span>
+        </div>
+    </div>
+</div>
 
-
-
-<!-- 파일 올리는 버튼, 파일명 띄울거  -->
-파일명 <input type="file" name="imgFile" id="imgFile">
-<input type="text" name="orgName" id="orgName" readonly>
-
-<!-- 메타데이터 뿌려주고 저장할 폼 영역 -->
-<form action="/gallery/uploadPro" method="post">
-    console.log("orgName : " + ${orgName});
-    <img alt="" src="../resources/gallery/images/${orgName}" class="avatar avatar-100 photo"
-         width="100" height="100">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    카메라 <input type="text" name="M_IMGCAMERA" id="M_IMGCAMERA" >
-    렌즈 <input type="text" name="M_IMGLENS" id="M_IMGLENS" >
-    조리개 <input type="number" step="0.01" name="M_APERTURE" id="M_APERTURE" >
-    감도 <input type="number" name="M_ISO" id="M_ISO" >
-    초점거리 <input type="number" step="0.01" name="M_FLENGTH" id="M_FLENGTH" >
-    셔터스피드 <input type="number" step="0.0001" name="M_SHUTTERSPEED" id="M_SHUTTERSPEED" >
-
-    설명 <textarea class="form-control" style="height:10%; width:10%;" maxlength='100' id="M_CONTENT" name = "M_CONTENT">
-
-</textarea>
-    <input type="hidden" name="M_HNAME" id="M_HNAME" >
-    <input type="submit" value="저장">
-</form>
-</sec:authorize>
 <script>
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ready(function (){
-        $("#imgFile").on('change', function(){
-            console.log("change");
-            console.log(this.files[0]);
-            var form = $("#imgFile")[0].files[0];
-            var formData = new FormData();
-            formData.append("files", form);
-            console.log(form);
-            console.log(formData);
-            // ajax로 파일 업로드하고 메타데이터 받아와 화면에 뿌리기
-            $.ajax({
-                url: "/gallery/getMetadata.json",
-                type: "POST",
-                enctype: "multipart/form-data",
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                beforeSend : function(xhr){
-                    xhr.setRequestHeader(header, token);
-                },
-                success: function(result){
-                    console.log("success");
-                    console.log(result);
-                    //$("#orgName").val(result.orgName);
-                    // 폼태그에 가져온 메타데이터 정보 작성해주기
-                    $("#M_IMGCAMERA").val(result.m_IMGCAMERA);
-                    $("#M_IMGLENS").val(result.m_IMGLENS);
-                    $("#M_APERTURE").val(result.m_APERTURE);
-                    $("#M_ISO").val(result.m_ISO);
-                    $("#M_FLENGTH").val(result.m_FLENGTH);
-                    $("#M_SHUTTERSPEED").val(result.m_SHUTTERSPEED);
-                    $("#M_HNAME").val(result.m_HNAME);
-                    $("#M_CONTENT").val(result.m_CONTENT);
-                },
-                error: function(e){
-                    console.log("error.........");
-                    console.log(e);
-                }
-            });
-        });
+    jQuery(document).ready(function () {
+        $("#modal").show();
     });
+    function closeModal() {
+        $('.searchModal').hide();
+    };
 </script>
 
 </body>

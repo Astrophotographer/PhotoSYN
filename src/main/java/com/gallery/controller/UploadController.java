@@ -35,6 +35,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/gallery/*")
 @Log4j
 public class UploadController {
+    String type = null;  // 메타데이터 타입추가를 위한 변수 선언 (메서드가 달라서 이곳에 선언)
 
     @Autowired
     private MetadataService metadataService;
@@ -53,7 +54,7 @@ public class UploadController {
 
 
 
-        return "gallery/imgTest";
+        return "gallery/uploadForm";
     }
 
 
@@ -61,6 +62,8 @@ public class UploadController {
     @PostMapping("getMetadata")
     public ResponseEntity<MetadataDTO> getMetadata(MultipartHttpServletRequest request) { // msg(text), img(file)
         MetadataDTO metadataDTO = null;
+
+
 
         log.info("************ upload pro *************");
 
@@ -82,6 +85,8 @@ public class UploadController {
             // 업로드한 파일 확장자만 가져오기
             String orgName = mf.getOriginalFilename();
             String ext = orgName.substring(orgName.lastIndexOf("."));
+            type = ext;
+
             log.info("************ ext : " + ext);
             // 저장할 파일명
             String newFileName = uuid + ext;
@@ -115,6 +120,8 @@ public class UploadController {
         galleryDTO.setU_ID(id);
         galleryDTO.setG_HNAME(metadataDTO.getM_HNAME());
         galleryDTO.setG_CONTENT(metadataDTO.getM_CONTENT());
+
+        galleryDTO.setG_TYPE(type);
 
 
         // GalleryDB에 저장
