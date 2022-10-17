@@ -58,12 +58,12 @@ public class GalleryController {
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
     @GetMapping("single")
-    public String gallerySingle(Model model, @RequestParam("G_NO") Long G_NO) {
+    public String gallerySingle(Model model, @RequestParam("g_no") Long G_NO) {
         log.info("gallerySingle G_NO : " + G_NO);
 
         GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
-        String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
-        log.info("tagsARR : " + tagsARR.toString());
+        //String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
+        //log.info("tagsARR : " + tagsARR.toString());
 
 
         model.addAttribute("board", galleryService.getGallerySingle(G_NO));

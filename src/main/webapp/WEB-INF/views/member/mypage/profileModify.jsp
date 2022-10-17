@@ -6,32 +6,20 @@
         <div style="font-size: 50px; font-weight: 800;">프로필 수정</div>
         <hr>
         <sec:authentication property="principal" var="princi"/>
-        <form action="/member/mypage/profileImgModify" method="post" id="imgForm" name="imgForm"
+        <form action="/member/mypage/profileModify?_csrf=${_csrf.token}" method="post" id="imgForm" name="imgForm"
               enctype="multipart/form-data">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <c:choose>
-                <c:when test="${princi.member.pic == null}">
-                    <br/>
-                    <div class="select_img">
-                        <img src="/resources/member/bootstrap/main/img/user.png" alt="profile_img"
-                             style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <br/>
-                    <div class="select_img">
-                        <img src="/resources/member/img/profile/${princi.member.pic}" alt="profile_img"
-                             style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
-                    </div>
-                </c:otherwise>
-            </c:choose>
+
+            <br/>
+            <div class="select_img">
+                <img src="/resources/member/img/${princi.member.pic}" alt="프로필 사진"
+                     style="width: 100px; height: 100px; border-radius: 50%; margin: 10px;"/>
+            </div>
+
             <div style="padding: 15px;">
                 <label class="profileBtn2" for="uploadFile">업로드</label>
                 <input type="file" id="uploadFile" name="uploadFile">
             </div>
-        </form>
-        <form action="/member/mypage/profileInfoModify" method="post" id="infoForm" name="infoForm">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div style="padding: 15px;">
                 <div>
                     <strong><label for="id">아이디</label></strong>
@@ -88,13 +76,21 @@
         alert("비밀번호를 다시 확인해 주세요.");
     }
 
+
+
     $('#name').blur(function () {
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
+
         if ($('#name').val() != '') {
             $.ajax({
                 url     : '/member/mypage/nameCheck',
                 type    : 'post',
                 data    : 'name=' + $('#name').val(),
                 dataType: 'json',
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader(header, token);	// 헤드의 csrf meta태그를 읽어 CSRF 토큰 함께 전송
+                },
                 success : function (result) {
                     if (result == '1') {
                         $("#nameCk").text('중복된 닉네임입니다.');

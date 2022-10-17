@@ -70,8 +70,6 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public boolean updateMetadata(Gallery_Img_Temp gallery_img_temp) {return galleryMapper.updateMetadata(gallery_img_temp);}
 
-
-
     @Override
     public boolean deleteGallery(long G_NO) {
         return galleryMapper.deleteGallery(G_NO);

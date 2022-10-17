@@ -464,7 +464,7 @@
                                     <div class="product-card-01 my-1">
                                         <div class="product-media">
                                             <div class="product-media-hover">
-                                                <a href="/gallery/gallerySingle?g_no=${gallery.g_NO}">
+                                                <a href="/gallery/single?g_no=${gallery.g_NO}">
                                                     <img src="/resources/gallery/images/${gallery.g_HNAME}"
                                                          width="120px" height="80px"/>
 

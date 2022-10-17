@@ -35,9 +35,9 @@ public interface GalleryMapper {
     // U
     public boolean updateGallery(GalleryDTO galleryDTO);  // 사진 수정  // 1성공 . 0실패
     public boolean updateMetadata(Gallery_Img_Temp gallery_img_temp); // 메타데이터용 이미지 수정
-    public int updateGalleryReadCount(Long b_no);   // 갤러리 조회수 증가
-    public int updateGallerySales(Long b_no);  // 갤러리 판매수 증가
-    public int updateGalleryLike(Long b_no);  // 갤러리 좋아요 증가
+    public int updateGalleryReadCount(Long g_no);   // 갤러리 조회수 증가
+    public int updateGallerySales(Long g_no);  // 갤러리 판매수 증가
+    public int updateGalleryLike(Long g_no);  // 갤러리 좋아요 증가
 
 
 
