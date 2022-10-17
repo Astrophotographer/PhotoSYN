@@ -1,9 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!-- header 복붙 -->
 <%@ include file="../includes/header.jsp" %>
+
 
 <form action="/member/mypage/galleryBuyBtn" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -24,15 +27,15 @@
         <div class="mr-3 ml-3 mb-4">
             <div class="form-group row">
                 <label>Bno</label>
-                <input type="text" class="form-control" name="bno" value="${gallery.G_NO}" readonly="readonly"/>
+                <input type="text" class="form-control" name="bno" value="${gallery.g_NO}" readonly="readonly"/>
             </div>
             <div class="form-group row">
                 <label>Content</label>
-                <textarea class="form-control" rows="3" name="content" readonly="readonly">${gallery.G_CONTENT}</textarea>
+                <textarea class="form-control" rows="3" name="content" readonly="readonly">${gallery.g_CONTENT}</textarea>
             </div>
             <div class="form-group row">
                 <label>Writer</label>
-                <input type="text" class="form-control" name="writer" value="${gallery.U_ID}" readonly="readonly"/>
+                <input type="text" class="form-control" name="writer" value="${gallery.u_ID}" readonly="readonly"/>
             </div>
         </div>
         <div class="mr-1 ml-1">
@@ -40,8 +43,8 @@
             <button class="btn btn-info" data-service="list" >List</button>
         </div>
 
-        <form id="btnForm" action="/board/modify" method="get">
-            <input type="hidden" name="bno" value="${gallery.g_no}" id="bno" />
+        <form id="btnForm" action="#" method="get">
+            <input type="hidden" name="gno" value="${gallery.g_NO}" id="gno" />
             <input type="hidden" name="pageNum" value="${cri.pageNum}"  />
             <input type="hidden" name="listQty" value="${cri.listQty}"  />
             <input type="hidden" name="sel" value="${cri.sel}"  />

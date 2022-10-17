@@ -22,8 +22,8 @@
             <c:forEach items="${list}" var="cartDTO">
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
-                    <td>${cartDTO.c_id}</td>
-                    <td>${cartDTO.c_hName}</td>
+                    <td>${cartDTO.g_no}</td>
+                    <td><img src="/resources/gallery/images/${cartDTO.c_hName}" width="200"></td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cartDTO.c_reg}"/></td>
                     <td>${cartDTO.c_hPrice}</td>
                 </tr>

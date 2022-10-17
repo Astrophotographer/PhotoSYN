@@ -464,7 +464,11 @@
                                     <div class="product-card-01 my-1">
                                         <div class="product-media">
                                             <div class="product-media-hover">
+
                                                 <a href="/gallery/single?g_no=${gallery.g_NO}">
+
+
+
                                                     <img src="/resources/gallery/images/${gallery.g_HNAME}"
                                                          width="120px" height="80px"/>
 
@@ -489,7 +493,7 @@
                                                 <a href="#">Fine-knit sweater</a>
                                             </h6>
 
-                                            <div class="product-cart-btn">
+                                            <div class="product-cart-btn" data-gno="${gallery.g_NO}">
                                                 <a class="btn btn-outline-dark">
                                                     Add to Cart2
                                                 </a>
@@ -807,8 +811,32 @@
                             class="bi bi-chevron-left"></i></div>
                 </div>
             </div>
+
+
         </section>
 
+</div>
+
+<div id="modal" class="searchModal">
+    <div class="search-modal-content">
+        <div class="page-header">
+            <h1>MODAL</h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>Modal창 테스트입니다.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onClick="closeModal();">
+            <span class="pop_bt modalCloseBtn" style="font-size: 13pt;">
+            </span>
+        </div>
+    </div>
 </div>
 <!--
 ========================
@@ -818,25 +846,25 @@
 </body>
 <!-- script start -->
 <!-- Theme JS -->
-<script src="../resources/gallery/shopy/assets/js/jquery-3.5.1.min.js"></script>
+<script src="/resources/gallery/shopy/assets/js/jquery-3.5.1.min.js"></script>
 
-<!--bootstrap-->
-<script src="../resources/gallery/shopy/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!--bootstrap 오류터짐-->
+<script src="/resources/gallery/shopy/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- headroom JS -->
-<script src="../resources/gallery/shopy/assets/vendor/headroom/headroom.min.js"></script>
+<script src="/resources/gallery/shopy/assets/vendor/headroom/headroom.min.js"></script>
 
-<!-- swiper JS -->
-<script src="../resources/gallery/shopy/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<!-- swiper JS 오류터짐-->
+<script src="/resources/gallery/shopy/assets/vendor/swiper/swiper-bundle.min.js"></script>
 
-<!-- purecounter JS -->
-<script src="../resources/gallery/shopy/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<!-- purecounter JS  오류터짐 -->
+<script src="/resources/gallery/shopy/assets/vendor/purecounter/purecounter_vanilla.js"></script>
 
 <!-- isotope JS -->
-<script src="../resources/gallery/shopy/assets/vendor/isotope/isotope.pkgd.min.js"></script>
+<script src="/resources/gallery/shopy/assets/vendor/isotope/isotope.pkgd.min.js"></script>
 
 <!-- magnific JS -->
-<script src="../resources/gallery/shopy/assets/vendor/magnific/jquery.magnific-popup.min.js"></script>
+<script src="/resources/gallery/shopy/assets/vendor/magnific/jquery.magnific-popup.min.js"></script>
 
 
 <!-- working form -->
@@ -854,7 +882,7 @@
 <script>
 
     $(".fi-heart").on("click", function (e) {
-        let gnoVal = '${gallery.G_NO}';
+        let gnoVal = '${gallery.g_NO}';
         console.log("gnoVal: " + gnoVal);
         $.ajax({
             type: "GET",
@@ -877,15 +905,23 @@
     })
 
     $(".product-cart-btn").on("click", function (e) {
-        let gnoVal = '${gallery.G_NO}';
+        let gnoVal = $(this).data('gno');    // '${gallery.G_NO}'
         console.log("gnoVal: " + gnoVal);
+
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
         $.ajax({
-            type: "GET",
-            url: "${pageContext.request.contextPath}/member/mypage/profileCart" + gnoVal + ".json",
-            data: {gno: gnoVal},
+            type: "POST",
+            url: "/member/mypage/insertCart",
+            data: {G_NO: gnoVal},
+            beforeSend: function(xhr){
+                xhr.setRequestHeader(header, token);   // 헤드의 csrf meta태그를 읽어 CSRF 토큰 함께 전송
+            },
             success: function (result) {
                 console.log(result);
-                console.log("장바구니 담기 성공");
+                if(result == 'success'){
+                    console.log("장바구니 담기 성공");
+                }
             },
             error: function (e) {
                 console.log(e);
@@ -893,6 +929,28 @@
             }
         })
     })
+    // $(function(){
+    //
+    //     $("product-media-hover").click(function(){
+    //         $(".modal").fadeIn();
+    //     });
+    //
+    //     $(".modal_content").click(function(){
+    //         $(".modal").fadeOut();
+    //     });
+    //
+    // });
+
+
+    // $(function() {
+    //     $("product-media-hover").click(function () {
+    //         $("#modal").show();
+    //     });
+    //
+    //     function closeModal() {
+    //         $('.searchModal').hide();
+    //     };
+    // });
 
 
 </script>

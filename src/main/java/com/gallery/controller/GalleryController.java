@@ -30,6 +30,12 @@ public class GalleryController {
     @Autowired
     private GalleryService galleryService;
 
+
+    @RequestMapping(value = "test")
+    public String test (){
+        // 걍 화면 테스트용
+        return "gallery/imgTest";
+    }
     @RequestMapping(value ="main")
     public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
         log.info("gallery main2!!");
@@ -57,8 +63,13 @@ public class GalleryController {
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
+
     @GetMapping("single")
     public String gallerySingle(Model model, @RequestParam("g_no") Long G_NO) {
+
+    @RequestMapping(value = "gallerySingle", method = RequestMethod.GET)
+    public String gallerySingle(Model model, @RequestParam("G_NO") Long G_NO) {
+
         log.info("gallerySingle G_NO : " + G_NO);
 
         GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
@@ -66,13 +77,13 @@ public class GalleryController {
         //log.info("tagsARR : " + tagsARR.toString());
 
 
-        model.addAttribute("board", galleryService.getGallerySingle(G_NO));
+        model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
 
         return "gallery/gallerySingle";
     }
 
 
-    @PreAuthorize("principal.useranme == #board.writer") // 작성자와 로그인한 사람이 같은지 확인
+    @PreAuthorize("principal.useranme == #galleryDTO.U_ID") // 작성자와 로그인한 사람이 같은지 확인
     @PostMapping("modify")
     public String modify(GalleryDTO galleryDTO, Gallery_Criteria cri, RedirectAttributes rttr) {
         // 수정처리
