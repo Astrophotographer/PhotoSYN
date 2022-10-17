@@ -9,6 +9,7 @@ import com.member.security.MemberUserDetailsService;
 import com.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.UUID;
 
@@ -262,9 +264,7 @@ public class MypageController {
         long quantity = galleryDTO.getG_SALES();
         long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
 
-        model
-
-                .addAttribute("quantity", quantity); // 판매수량
+        model.addAttribute("quantity", quantity); // 판매수량
         model.addAttribute("tot", result);        // 합계금액
         model.addAttribute("list", list);
     }
@@ -308,6 +308,29 @@ public class MypageController {
             return "redirect:/member/mypage/profile";
         }
     }
+
+    /************************************************ 글 관리 ************************************************/
+    /* 마이페이지 갤러리 관리 페이지 */
+    @GetMapping("profileGallery")
+    public void galleryListPage(Authentication auth, MemberDTO memberDTO, GalleryDTO galleryDTO, Model model) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        memberDTO.setId(user.getMember().getId());
+        String id = memberDTO.getId();
+
+        List<GalleryDTO> list = memberService.galleryList(galleryDTO, id);
+        model.addAttribute("list", list);
+    }
+
+    /* 마이페이지 갤러리 관리 상태 변경 */
+    @PostMapping("profileGalleryStatus")
+    public String galleryStatus(GalleryDTO galleryDTO) {
+        memberService.updateGalleryStatus(galleryDTO);
+
+        return "redirect:/member/mypage/profileGallery";
+    }
+
+    /* 블로그 관리 */
+
 
     /************************************************ 시큐리티 정보 갱신 ************************************************/
     public boolean renewalAuth() {
