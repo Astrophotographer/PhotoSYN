@@ -27,9 +27,6 @@
 
 
 
-
-
-
     <select id="getMaxReadCountGallery" resultType="com.gallery.domain.GalleryDTO">
     select * from gallery where g_readCount = (select max(G_READCOUNT) from gallery) and ROWNUM = 1 order by g_reg desc
     </select>

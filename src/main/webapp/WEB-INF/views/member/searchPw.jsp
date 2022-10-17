@@ -25,7 +25,7 @@
         </div>
     </form>
     <div class="caption">
-        <a href="/member/signup" style="text-decoration: none; color: white">회원가입</a>
+        <a href="/member/signup" style="text-decoration: none; color: #696969">회원가입</a>
     </div>
 </section>
 

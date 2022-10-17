@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap');
+
 @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -138,6 +139,33 @@ input[type="file"] {
     color: black;
 }
 
+.parent {
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+}
+
+.first {
+    text-align: center;
+    flex: 1;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.second {
+    text-align: center;
+    flex: 1;
+    margin: 0px 5%;
+    width: 30%;
+    box-sizing: border-box;
+}
+
+.third {
+    text-align: center;
+    flex: 1;
+    width: 30%;
+    box-sizing: border-box;
+}
 
 
 

@@ -58,7 +58,7 @@
         <sec:authorize access="isAuthenticated()">
             <div class="col-sm-4 col-md-3 order-3 order-sm-3">
                 <div class="header__switches">
-                    <form action="/logout" method="POST">
+                    <form action="/logout?_csrf=${_csrf.token}" method="POST">
                         <a href="#" class="search-switch"><i class="fa fa-search"></i></a>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <button type="submit" style="border: 0; outline: 0; background-color:transparent;">로그아웃</button>
