@@ -142,24 +142,25 @@ public class UploadController {
 
 
 //    // 다운 요청 처리
-//    @GetMapping("download")
-//    public ModelAndView down(int fileNum) {
-//        // 다운시킬 파일 준비
-//
-//        File f = null;
-//        if(fileNum == 1) {
-//            f = new File("c:\\gangsa\\design.png");
-//        }else if(fileNum == 2) {
-//            f = new File("c:\\gangsa\\beach.jpg");
-//        }
-//
-//        // 생성자 매개변수
-//        // String viewName 		: view 이름 -> xml 지정한 DownloadView 빈의 id값
-//        // String modelName		: 파라미터명 지정 (이름)
-//        // Object modelObject	: 데이터 (다운시킬 파일)
-//        ModelAndView mv = new ModelAndView("fileDown", "downloadFile", f);
-//        return mv;
-//    }
+    @GetMapping("download")
+    public ModelAndView down(int fileNum) {
+        // 다운시킬 파일 준비
+
+        File f = null;
+        if(fileNum == 1) {
+            f = new File("c:\\gangsa\\design.png");
+        }else if(fileNum == 2) {
+            f = new File("c:\\gangsa\\beach.jpg");
+        }
+
+        // 생성자 매개변수
+        // String viewName 		: view 이름 -> xml 지정한 DownloadView 빈의 id값
+        // String modelName		: 파라미터명 지정 (이름)
+        // Object modelObject	: 데이터 (다운시킬 파일)
+        ModelAndView mv = new ModelAndView("fileDown", "downloadFile", f);
+        //혹시 dispatcher에 BeanNameViewResolver 설정안해준 에러?
+        return mv;
+    }
 //
 
 
