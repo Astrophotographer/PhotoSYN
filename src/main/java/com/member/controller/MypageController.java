@@ -1,6 +1,8 @@
 package com.member.controller;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MetadataDTO;
+import com.gallery.service.GalleryService;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
@@ -23,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Member;
@@ -36,6 +39,8 @@ public class MypageController {
     private static final String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/";
     @Autowired
     private MemberService memberService;
+    @Autowired
+    private GalleryService galleryService;
     @Autowired
     private MemberUserDetailsService memberUserDetailsService;
     @Autowired
@@ -83,11 +88,11 @@ public class MypageController {
                 log.info("*************************** mf :  " + mf.isEmpty()); // 보낸 이미지 파일 없다 -> 사용자가 수정안함 == true
 
                 // 새로 수정하는 이미지파일이 있을 경우
-                if(!mf.isEmpty()){ // 이미지보냄 == !false == true == if문 실행 == 파일 새로 저장 db에도 수정
-                                    // 이미지 안보냄 == !true == false == if문 실행안함 == 파일 수정안하면 저장,db수정도 안함
+                if (!mf.isEmpty()) { // 이미지보냄 == !false == true == if문 실행 == 파일 새로 저장 db에도 수정
+                    // 이미지 안보냄 == !true == false == if문 실행안함 == 파일 수정안하면 저장,db수정도 안함
 
                     // 기존 파일 지우기 (미등록 : user.png 지우면 안됨. 등록한적있다 : 기존 이미지 파일 지우기 )
-                    if(!pic.equals("user.png")){
+                    if (!pic.equals("user.png")) {
                         // 경로에 있는 유저 프로필 사진 가져와서
                         File file2 = new File(uploadPath + pic);
                         // 원래 파일 삭제
@@ -229,22 +234,29 @@ public class MypageController {
 
     // 장바구니 목록 페이지
     @GetMapping("profileCart")
-    public String listCart(CartDTO cartDTO, Model model) {
+    public String listCart(CartDTO cartDTO, Model model, Long G_NO) {
         List<CartDTO> list = memberService.listCart(cartDTO);
         model.addAttribute("list", list);
+
+        model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
 
         return "/member/mypage/profileCart";
     }
 
     /* 장바구니 삭제 */
-    @PostMapping("deleteCart")
-    public String deleteCart(Long g_no) {
-        memberService.deleteCart(g_no);
+    @RequestMapping(value = "deleteCart", method = RequestMethod.POST)
+    public String deleteCart(HttpServletRequest request) {
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+
+        for (int i = 0; i < size; i++) {
+            memberService.deleteCart(ajaxMsg[i]);
+        }
 
         return "redirect:/member/mypage/profileCart";
     }
 
-    /************************************************ 장바구니 END. ************************************************/
+    /************************************************ END. ************************************************/
 
     // 마이페이지 구매내역
     @GetMapping("profileBuy")
@@ -271,10 +283,12 @@ public class MypageController {
 
     // 갤러리 구매 (포인트 차감)
     @PostMapping("galleryBuyBtn")
-    public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr) {
+    public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr, HttpServletRequest request) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
         int m = user.getMember().getPoint();
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
 
         galleryDTO.setG_HPRICE(10000);
 
@@ -299,17 +313,20 @@ public class MypageController {
 
             // 구매 내역 저장
             memberService.buyGallery(buyDTO);
+            
+            // 구매 후, 장바구니 내역 삭제
+            for (int i = 0; i < size; i++) {
+                memberService.deleteCart(ajaxMsg[i]);
+            }
 
             // 시큐리티 정보 갱신
             renewalAuth();
-
-            rttr.addFlashAttribute("success", "구매가 완료되었습니다.");
 
             return "redirect:/member/mypage/profile";
         }
     }
 
-    /************************************************ 글 관리 ************************************************/
+    /************************************************ 마이페이지 글 관리 ************************************************/
     /* 마이페이지 갤러리 관리 페이지 */
     @GetMapping("profileGallery")
     public void galleryListPage(Authentication auth, MemberDTO memberDTO, GalleryDTO galleryDTO, Model model) {
@@ -321,10 +338,28 @@ public class MypageController {
         model.addAttribute("list", list);
     }
 
-    /* 마이페이지 갤러리 관리 상태 변경 */
-    @GetMapping("profileGalleryStatus")
-    public String galleryStatus(GalleryDTO galleryDTO) {
-        memberService.updateGalleryStatus(galleryDTO);
+    /* 마이페이지 갤러리 관리 상태 변경 (숨김처리) */
+    @RequestMapping(value = "profileGalleryStatus1", method = RequestMethod.POST)
+    public String galleryStatus1(HttpServletRequest request) {
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+
+        for (int i = 0; i < size; i++) {
+            memberService.updateGalleryStatus1(ajaxMsg[i]);
+        }
+
+        return "redirect:/member/mypage/profileGallery";
+    }
+
+    /* 마이페이지 갤러리 관리 상태 변경 (판매중) */
+    @RequestMapping(value = "profileGalleryStatus2", method = RequestMethod.POST)
+    public String galleryStatus2(HttpServletRequest request) {
+        String[] ajaxMsg = request.getParameterValues("valueArr");
+        int size = ajaxMsg.length;
+
+        for (int i = 0; i < size; i++) {
+            memberService.updateGalleryStatus2(ajaxMsg[i]);
+        }
 
         return "redirect:/member/mypage/profileGallery";
     }

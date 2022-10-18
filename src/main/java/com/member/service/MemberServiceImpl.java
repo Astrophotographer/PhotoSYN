@@ -114,10 +114,17 @@ public class MemberServiceImpl implements MemberService {
     public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id) {
         return memberMapper.galleryList(galleryDTO, id);
     }
-
+    
+    /* 갤러리 상태값 변경 (숨김처리) */
     @Override
-    public int updateGalleryStatus(GalleryDTO galleryDTO) {
-        return memberMapper.updateGalleryStatus(galleryDTO);
+    public int updateGalleryStatus1(String G_NO) {
+        return memberMapper.updateGalleryStatus1(G_NO);
+    }
+
+    /* 갤러리 상태값 변경 (판매중) */
+    @Override
+    public int updateGalleryStatus2(String G_NO) {
+        return memberMapper.updateGalleryStatus2(G_NO);
     }
 
     /* 장바구니 담기 */
@@ -134,7 +141,7 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 삭제 */
     @Override
-    public int deleteCart(Long g_no) {
+    public int deleteCart(String g_no) {
         return memberMapper.deleteCart(g_no);
     }
 

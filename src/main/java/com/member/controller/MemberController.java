@@ -60,7 +60,7 @@ public class MemberController {
     }
 
     @GetMapping("login")
-    public void loginPage(String error, String logout, Model model) {
+    public void loginPage(String error, String logout, Model model, HttpServletRequest request) {
         log.info("error :: " + error);
         log.info("logout :: " + logout);
 
@@ -70,6 +70,9 @@ public class MemberController {
         if (logout != null) {
             model.addAttribute("logout", "Logout!!");
         }
+
+        String referrer = request.getHeader("Referer");
+        request.getSession().setAttribute("prevPage", referrer);
     }
     
     // 아이디 중복확인

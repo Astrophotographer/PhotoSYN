@@ -54,23 +54,10 @@
     </div>
 </div>
 
-<!--
-<form action="/member/mypage/galleryBuyBtn" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <button class="profileBtn2" type="submit" style="width: 100px">
-        구매하기
-    </button>
-</form>
--->
-
 <script>
     var msg1 = '${msg1}';
     if (msg1 === "비밀번호 변경이 완료되었습니다.") {
         alert("비밀번호 변경이 완료되었습니다.");
-    }
-    var msg2 = '${success}';
-    if (msg2 === "구매가 완료되었습니다.") {
-        alert("구매가 완료되었습니다.");
     }
 </script>
 

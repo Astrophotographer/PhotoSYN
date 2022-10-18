@@ -5,13 +5,27 @@
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
-        <div class="swiper-slide"><a href="/gallery/main"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/home_button_startframe__c9vtuy36kju6_large.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/반려동물.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/2022071101596_0.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/thumb_l_572442AD59D1F0170C27B68AC7F4377A.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/파티룸%20이미지_low.jpg"></div>
-        <div class="swiper-slide"><img class="imgs" src="/resources/member/img/profile/5da5082b-b21c-403a-9dae-f0f59175333e_space-g0f976ef1c_1920.png"></div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
+        <div class="swiper-slide">
+            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+        </div>
     </div>
     <!-- 페이징 버튼 처리 -->
     <%--    <div class="swiper-pagination"></div>--%>
@@ -77,21 +91,5 @@
     }
 </script>
 
-<br/><br/>
-<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-<div>
-<sec:authorize access="isAuthenticated()">
-    <h1>로그인됨</h1>
-    <p>principal : <sec:authentication property="principal"/></p>
-    <p>MemberDTO : <sec:authentication property="principal.member"/></p>
-    <p>사용자 이름 : <sec:authentication property="principal.member.name"/></p>
-    <p>사용자 아이디 : <sec:authentication property="principal.username"/></p>
-    <p>사용자 권한 리스트 : <sec:authentication property="principal.member.authDTOList"/></p>
-</sec:authorize>
-<sec:authorize access="isAnonymous()">
-    <h1>로그인 안됨</h1>
-</sec:authorize>
-</div>
-<br/><br/>
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
