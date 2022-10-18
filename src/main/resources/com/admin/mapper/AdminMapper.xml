@@ -189,27 +189,49 @@
        ]]>
     </select>
 
-<!--    <update id="hideBlog">-->
-<!--        <foreach collection="b_noList" item="arr">-->
-<!--            update blog-->
-<!--            set B_STATUS = 3 where B_NO = #{arr}-->
-<!--        </foreach>-->
-<!--    </update>-->
+    <!--    <update id="hideBlog">-->
+    <!--        <foreach collection="b_noList" item="arr">-->
+    <!--            update blog-->
+    <!--            set B_STATUS = 3 where B_NO = #{arr}-->
+    <!--        </foreach>-->
+    <!--    </update>-->
 
     <update id="hideBlog">
-        update blog set B_STATUS = 3 where B_NO = #{b_no}
+        update blog
+        set B_STATUS = 3
+        where B_NO = #{b_no}
     </update>
 
     <update id="showBlog">
-        update blog set B_STATUS = 0 where B_NO = #{b_no}
+        update blog
+        set B_STATUS = 0
+        where B_NO = #{b_no}
     </update>
 
     <update id="hideGallery">
-        update gallery set G_STATUS = 3 where G_NO = #{g_no}
+        update gallery
+        set G_STATUS = 3
+        where G_NO = #{g_no}
     </update>
 
     <update id="showGallery">
-        update gallery set G_STATUS = 0 where G_NO = #{g_no}
+        update gallery
+        set G_STATUS = 0
+        where G_NO = #{g_no}
+    </update>
+
+    <insert id="insertTag">
+        insert into MAINTAG
+        values (#{newTag}, #{tagImgName})
+    </insert>
+
+    <update id="updateTag">
+        update MAINTAG
+        set MT_NAME = #{updateTag}
+        <if test="tagImgName != null">
+            , MT_IMG = #{tagImgName}
+        </if>
+        where MT_NAME = #{originTag}
     </update>
 
 </mapper>

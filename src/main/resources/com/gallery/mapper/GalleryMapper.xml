@@ -15,28 +15,42 @@
         <selectKey keyProperty="G_NO" resultType="long" order="BEFORE">
             select gallery_seq.nextval from dual
         </selectKey>
+
         insert into Gallery (G_NO, MT_NAME, U_ID, G_HNAME, G_LNAME, G_HPRICE, G_LPRICE, G_CONTENT, G_REG, G_EDIT, G_STATUS, G_SALES, G_LIKE, G_READCOUNT, G_TAG1, G_TYPE)
         VALUES (#{G_NO}, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, 1000, #{G_LPRICE}, #{G_CONTENT}, sysdate, sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
+
     </insert>
 
     <insert id="insertMetadata">
-        insert into Metadata (G_NO, M_IMGLENS, M_IMGCAMERA, M_IMGHQLY, M_IMGLQLY, M_APERTURE, M_ISO, M_FLENGTH, M_SHUTTERSPEED)
-        VALUES  (#{G_NO}, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO}, #{M_FLENGTH}, #{M_SHUTTERSPEED})
+        insert into Metadata (G_NO, M_IMGLENS, M_IMGCAMERA, M_IMGHQLY, M_IMGLQLY, M_APERTURE, M_ISO, M_FLENGTH,
+                              M_SHUTTERSPEED)
+        VALUES (#{G_NO}, #{M_IMGLENS}, #{M_IMGCAMERA}, #{M_IMGHQLY}, #{M_IMGLQLY}, #{M_APERTURE}, #{M_ISO},
+                #{M_FLENGTH}, #{M_SHUTTERSPEED})
     </insert>
 
 
-
-
     <select id="getMaxReadCountGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_readCount = (select max(G_READCOUNT) from gallery) and ROWNUM = 1 order by g_reg desc
+        select *
+        from gallery
+        where g_readCount = (select max(G_READCOUNT) from gallery)
+          and ROWNUM = 1
+        order by g_reg desc
     </select>
 
     <select id="getMaxLikeGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_like = (select max(G_LIKE) from gallery) and ROWNUM = 1 order by g_reg desc
+        select *
+        from gallery
+        where g_like = (select max(G_LIKE) from gallery)
+          and ROWNUM = 1
+        order by g_reg desc
     </select>
 
     <select id="getMaxSalesGallery" resultType="com.gallery.domain.GalleryDTO">
-    select * from gallery where g_sales = (select max(G_SALES) from gallery) and ROWNUM = 1 order by g_reg desc
+        select *
+        from gallery
+        where g_sales = (select max(G_SALES) from gallery)
+          and ROWNUM = 1
+        order by g_reg desc
     </select>
 
 
@@ -45,8 +59,6 @@
         from gallery_img_temp
         where U_ID = #{user_id}
     </select>
-
-
 
 
     <sql id="search">
@@ -94,9 +106,10 @@
             (select rownum r, A.* from (
                 select * from gallery g
                 where ]]>
-                    <if test="keyword != null">
-                        (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%') and
-                    </if>
+        <if test="keyword != null">
+            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%')
+            and
+        </if>
         <![CDATA[
                     g_no > 0
                 order by G_REG desc) A
@@ -115,7 +128,8 @@
                 select * from gallery g
                 where ]]>
         <if test="keyword != null">
-            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%') and
+            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%')
+            and
         </if>
         <![CDATA[
                     g_no > 0
@@ -129,7 +143,9 @@
 
 
     <select id="getGallerySingle" resultType="com.gallery.domain.GalleryDTO">
-        select * from gallery where g_no = #{G_NO}
+        select *
+        from gallery
+        where g_no = #{G_NO}
     </select>
 
     <select id="getMetadataSingle" resultType="com.gallery.domain.MetadataDTO">
@@ -142,14 +158,12 @@
     </select>
 
 
-
     <update id="updateGallery">
         update Gallery
-        set
-            g_content = #{G_CONTENT},
-            g_tag1 = #{g_TAG1},
-            g_edit = sysdate
-        g_status = #{G_STATUS}
+        set g_content = #{G_CONTENT},
+            g_tag1    = #{g_TAG1},
+            g_edit    = sysdate,
+            g_status  = #{G_STATUS}
         where g_no = #{G_NO}
     </update>
 
@@ -176,6 +190,13 @@
         set g_status = 2
         where g_no = #{G_NO}
     </update>
+
+
+    <!-- 메인태그 가져오기 -->
+    <select id="getMainTag" resultType="com.gallery.domain.MaintagDTO">
+        select *
+        from MAINTAG
+    </select>
 
     <update id="buyGallery">
         update gallery

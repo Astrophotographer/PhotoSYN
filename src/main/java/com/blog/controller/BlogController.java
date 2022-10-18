@@ -179,6 +179,23 @@ public class BlogController {
 
         model.addAttribute("tagArr", tagsARR);
 
+        //수정하기, 삭제하기 버튼 활성화 위해
+//        String checkUserId= Objects.requireNonNull(principal).getName();
+        //java.lang.NullPointerException
+        //	java.base/java.util.Objects.requireNonNull(Objects.java:222) 생성.
+
+
+        try {
+            String checkUserId = principal.getName();
+            model.addAttribute("loginUser", checkUserId);
+
+            log.info("=======================================================");
+            log.info(Objects.requireNonNull(principal).getName());
+        }catch (NullPointerException nullPointerException){
+            log.info(nullPointerException.getMessage());
+            log.info("비회원 상태입니다.");
+        }
+
 
         return "blog/blogsingle";
     }
