@@ -45,7 +45,7 @@
                             onclick="window.location.href='/member/mypage/updatePw'">
                         비밀번호 변경
                     </button>
-                    <button class="profileBtn2" type="button" style="width: 70px; margin: 0px 0px 0px 115px;"
+                    <button class="profileBtn2" type="button" style="width: 80px; margin: 0px 0px 0px 115px;"
                             onclick="window.location.href='/member/mypage/profileDelete'">
                         회원탈퇴
                     </button>
