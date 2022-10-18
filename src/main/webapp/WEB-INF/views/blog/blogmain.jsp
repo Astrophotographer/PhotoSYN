@@ -59,23 +59,29 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="slider-item">
-                    <div class="slider-item-content">
-                        <div class="post-thumb mb-4">
-                            <a href="blog-single.html">
-                                <img src="../resources/blog/images/slider/slider2.jpg" alt="" class="img-fluid">
-                            </a>
+                <c:set var="i" value="1"/>
+                <c:forEach begin="${i}" var="board" end="5" items="${list}">
+                    <c:if test="${board.b_STATUS == 0}">
+                        <div class="slider-item">
+                            <div class="slider-item-content">
+                                <div class="post-thumb mb-4">
+                                    <a href="/blog/single?b_no=${board.b_NO}">
+                                        <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="slider-post-content">
+                                    <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing"><c:out
+                                            value="${board.MT_NAME}"/></span>
+                                    <h3 class="post-title mt-1"><a href="/blog/single?b_no=${board.b_NO}"><c:out
+                                            value="${board.b_SUBJECT}"/></a></h3>
+                                    <span class=" text-muted  text-capitalize"><c:out
+                                            value="${board.b_REG}"/></span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="slider-post-content">
-                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">Travel</span>
-                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">Trip to
-                                California</a></h3>
-                            <span class=" text-muted  text-capitalize">September 15, 2019</span>
-                        </div>
-                    </div>
-                </div>
-
+                        <c:set var="i" value="${i+1}"/>
+                    </c:if>
+                </c:forEach>
                 <div class="slider-item">
                     <div class="slider-item-content">
                         <div class="post-thumb mb-4">
