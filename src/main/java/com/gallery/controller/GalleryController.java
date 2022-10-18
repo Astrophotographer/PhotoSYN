@@ -59,7 +59,7 @@ public class GalleryController {
 //        log.info("************ cri : " + cri);
 //
 
-        return "gallery/galleryMain";
+        return "gallery/galleryMain3";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
@@ -68,13 +68,13 @@ public class GalleryController {
         log.info("gallerySingle G_NO : " + G_NO);
 
         GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
-        String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
-        log.info("tagsARR : " + tagsARR.toString());
+        //String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
+        //log.info("tagsARR : " + tagsARR.toString());
 
 
         model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
-
-        return "gallery/gallerySingle";
+        model.addAttribute("metadata", galleryService.getMetadataSingle(G_NO));
+        return "gallery/gallerySingle2";
     }
 
 

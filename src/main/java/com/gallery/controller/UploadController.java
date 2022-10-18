@@ -42,6 +42,7 @@ public class UploadController {
     @Autowired
     private GalleryService galleryService;
 
+
     @GetMapping("uploadForm")
     public String upload(Authentication auth) {
         log.info("upload form!!!!!!!!!!!!!");
@@ -137,30 +138,30 @@ public class UploadController {
 
 
 
+    // 다운 요청 처리
+    @GetMapping("download")
+    public ModelAndView down(String filename) {
+        // 다운시킬 파일 준비
 
+      File f = null;
 
-
-
-//    // 다운 요청 처리
-//    @GetMapping("download")
-//    public ModelAndView down(int fileNum) {
-//        // 다운시킬 파일 준비
-//
-//        File f = null;
+        f = new File("/resources/gallery/images/"+filename);
+      log.info(f);
 //        if(fileNum == 1) {
 //            f = new File("c:\\gangsa\\design.png");
 //        }else if(fileNum == 2) {
 //            f = new File("c:\\gangsa\\beach.jpg");
 //        }
-//
-//        // 생성자 매개변수
-//        // String viewName 		: view 이름 -> xml 지정한 DownloadView 빈의 id값
-//        // String modelName		: 파라미터명 지정 (이름)
-//        // Object modelObject	: 데이터 (다운시킬 파일)
-//        ModelAndView mv = new ModelAndView("fileDown", "downloadFile", f);
-//        return mv;
-//    }
-//
+
+
+        // 생성자 매개변수
+        // String viewName 		: view 이름 -> xml 지정한 DownloadView 빈의 id값
+        // String modelName		: 파라미터명 지정 (이름)
+        // Object modelObject	: 데이터 (다운시킬 파일)
+        ModelAndView mv = new ModelAndView("fileDown", "downloadFile", f);
+        return mv;
+    }
+
 
 
 
