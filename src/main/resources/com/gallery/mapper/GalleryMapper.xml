@@ -177,6 +177,12 @@
         where g_no = #{G_NO}
     </update>
 
+    <update id="buyGallery">
+        update gallery
+        set g_status = 1
+        where g_no = #{G_NO}
+    </update>
+
 
 
 

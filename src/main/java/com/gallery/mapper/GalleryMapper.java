@@ -24,7 +24,7 @@ public interface GalleryMapper {
 
 
     public GalleryDTO getGallerySingle(Long G_NO); // 갤러리 하나 정보가져오기
-    public MetadataDTO getMetadataSingle(Long g_no); // 갤러리 메터데이터 정보 하나 가져오기
+    public MetadataDTO getMetadataSingle(long G_NO); // 갤러리 메터데이터 정보 하나 가져오기
     public int getTotal(Gallery_Criteria cri); // 개수 조회
 
 
@@ -36,11 +36,10 @@ public interface GalleryMapper {
     // U
     public boolean updateGallery(GalleryDTO galleryDTO);  // 사진 수정  // 1성공 . 0실패
     public boolean updateMetadata(Gallery_Img_Temp gallery_img_temp); // 메타데이터용 이미지 수정
-    public int updateGalleryReadCount(Long g_no);   // 갤러리 조회수 증가
-    public int updateGallerySales(Long g_no);  // 갤러리 판매수 증가
-    public int updateGalleryLike(Long g_no);  // 갤러리 좋아요 증가
-
-
+    public int updateGalleryReadCount(long G_NO);   // 갤러리 조회수 증가
+    public int updateGallerySales(long G_NO);  // 갤러리 판매수 증가
+    public int updateGalleryLike(long G_NO);  // 갤러리 좋아요 증가
+    public boolean buyGallery(long G_NO); // 사진 구매 // G_STATUS  1로 변경
 
     // D
     public boolean deleteGallery(long G_NO); // 사진 삭제 + 메타데이터도 함께 날리기

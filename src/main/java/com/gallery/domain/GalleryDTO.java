@@ -18,7 +18,7 @@ public class GalleryDTO {
     private String G_CONTENT;   // 내용(설명)
     private Date G_REG;     // 작성일
     private Date G_EDIT;       // 수정일
-    private int G_STATUS;       // 상태  1: 판매중(보여짐), 2: 판매중지(숨김)
+    private int G_STATUS;       // 상태  0: 올려진상태 (보여짐) 1: 구매가된거(보여짐), 2: 판매중지(숨김)
     private long G_SALES;    // 판매량
     private int G_LIKE;     // 좋아요
     private long G_READCOUNT;   // 조회수

@@ -165,6 +165,7 @@ public class MemberServiceImpl implements MemberService {
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
 
+
         // USER_LIST DB 데이터 업데이트
         memberMapper.updatePoint(memberDTO);
         // 다운로드 수 증가
