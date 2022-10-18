@@ -261,18 +261,18 @@ public class MypageController {
 
     // 마이페이지 판매내역
     @GetMapping("profileSell")
-    public void sell(Authentication auth, GalleryDTO galleryDTO, Model model) {
+    public void sell(Authentication auth, GalleryDTO galleryDTO, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
-
-        List<BuyDTO> list = memberService.listBuy(id);
 
         long quantity = galleryDTO.getG_SALES();
         long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
 
-        model.addAttribute("quantity", quantity); // 판매수량
-        model.addAttribute("tot", result);        // 합계금액
-        model.addAttribute("list", list);
+        int total = memberService.getGalleryCount(memberCriteria);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
+
+        model.addAttribute("tot", result);
     }
 
     // 갤러리 구매 (포인트 차감)
@@ -299,7 +299,6 @@ public class MypageController {
             // 구매 내역 저장
             for (int i = 0; i < size; i++) {
                 buyDTO.setG_no(Long.parseLong(ajaxMsg[i]));
-                log.info("########################################### DTO :: " + buyDTO);
                 galleryService.buyGallery(galleryDTO.getG_NO());
                 memberService.buyGallery(buyDTO, id);
             }

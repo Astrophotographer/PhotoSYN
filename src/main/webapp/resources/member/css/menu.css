@@ -114,7 +114,6 @@ input {
 
 
 input[type="file"]:not(.imgFile){
-
     position: absolute;
     width: 1px;
     height: 1px;
