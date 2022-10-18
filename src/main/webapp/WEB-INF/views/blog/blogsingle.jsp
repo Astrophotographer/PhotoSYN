@@ -135,86 +135,17 @@
                                             class="text-capitalize">${blog.u_ID}</a></h4>
                         <p>자기소개 : ${user_intro.u_INTRO}</p>
 
-                        <a target="_blank" class="author-social" href="#"><i
-                                class="ti-facebook"></i>${user_sns.s_FACEBOOK}</a>
-                        <a target="_blank" class="author-social" href="#"><i
-                                class="ti-twitter"></i>${user_sns.s_TWITTER}</a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-google-plus"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i
-                                class="ti-instagram"></i>${user_sns.s_INSTAGRAM}</a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-pinterest"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i class="ti-tumblr"></i></a>
-                        <a target="_blank" class="author-social" href="#"><i
-                                class="ti-youtube"></i>${user_sns.s_YOUTUBE}</a>
+                        <a target="_blank" class="author-social" href="${user_sns.s_FACEBOOK}"><i
+                                class="ti-facebook"></i></a>
+                        <a target="_blank" class="author-social" href="${user_sns.s_TWITTER}"><i
+                                class="ti-twitter"></i></a>
+                        <a target="_blank" class="author-social" href="${user_sns.s_INSTAGRAM}"><i
+                                class="ti-instagram"></i></a>
+                        <a target="_blank" class="author-social" href="${user_sns.s_YOUTUBE}"><i
+                                class="ti-youtube"></i></a>
                     </div>
                 </div>
 
-                <!-- 다음글 이전글 -->
-                <%--                <nav class="post-pagination clearfix border-top border-bottom py-4">--%>
-                <%--                    <div class="prev-post">--%>
-                <%--                        <a href="../resources/blog/blog-single.html">--%>
-                <%--                            <span class="text-uppercase font-sm letter-spacing">Next</span>--%>
-                <%--                            <h4 class="mt-3"> Intel’s new smart glasses actually look good</h4>--%>
-                <%--                        </a>--%>
-                <%--                    </div>--%>
-                <%--                    <div class="next-post">--%>
-                <%--                        <a href="../resources/blog/blog-single.html">--%>
-                <%--                            <span class="text-uppercase font-sm letter-spacing">Previous</span>--%>
-                <%--                            <h4 class="mt-3">Free Two-Hour Delivery From Whole Foods</h4>--%>
-                <%--                        </a>--%>
-                <%--                    </div>--%>
-                <%--                </nav>--%>
-
-                <!-- 추천글. 관련 좋아할만한 글 -->
-                <%--                <div class="related-posts-block mt-5">--%>
-                <%--                    <h3 class="news-title mb-4 text-center">--%>
-                <%--                        You May Also Like--%>
-                <%--                    </h3>--%>
-                <%--                    <div class="row">--%>
-                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
-                <%--                            <div class="post-block-wrapper mb-4 mb-lg-0">--%>
-                <%--                                <a href="blog-single.html">--%>
-                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-1.jpg"--%>
-                <%--                                         alt="post-thumbnail"/>--%>
-                <%--                                </a>--%>
-                <%--                                <div class="post-content mt-3">--%>
-                <%--                                    <h5>--%>
-                <%--                                        <a href="../resources/blog/blog-single.html">Intel’s new smart glasses actually--%>
-                <%--                                            look good</a>--%>
-                <%--                                    </h5>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </div>--%>
-                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
-                <%--                            <div class="post-block-wrapper mb-4 mb-lg-0">--%>
-                <%--                                <a href="../resources/blog/blog-single.html">--%>
-                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-2.jpg"--%>
-                <%--                                         alt="post-thumbnail"/>--%>
-                <%--                                </a>--%>
-                <%--                                <div class="post-content mt-3">--%>
-                <%--                                    <h5>--%>
-                <%--                                        <a href="../resources/blog/blog-single.html">Free Two-Hour Delivery From Whole--%>
-                <%--                                            Foods</a>--%>
-                <%--                                    </h5>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </div>--%>
-                <%--                        <div class="col-lg-4 col-md-4 col-sm-6">--%>
-                <%--                            <div class="post-block-wrapper">--%>
-                <%--                                <a href="../resources/blog/blog-single.html">--%>
-                <%--                                    <img class="img-fluid" src="../resources/blog/images/fashion/img-3.jpg"--%>
-                <%--                                         alt="post-thumbnail"/>--%>
-                <%--                                </a>--%>
-                <%--                                <div class="post-content mt-3">--%>
-                <%--                                    <h5>--%>
-                <%--                                        <a href="../resources/blog/blog-single.html">Snow and Freezing Rain in Paris--%>
-                <%--                                            Forces the</a>--%>
-                <%--                                    </h5>--%>
-                <%--                                </div>--%>
-                <%--                            </div>--%>
-                <%--                        </div>--%>
-                <%--                    </div>--%>
-                <%--                </div>--%>
 
                 <!-- 댓글 -->
                 <div class="comment-area my-5">

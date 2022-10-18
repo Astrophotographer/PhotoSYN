@@ -118,8 +118,46 @@ public class BlogController {
 
     //블로그 글 한개 보기
     @RequestMapping(value = "single", method = RequestMethod.GET)
-    public String goSingle(Model model, @RequestParam("b_no") Long b_no) {
+    public String goSingle(Model model, @RequestParam("b_no") Long b_no, Principal principal, Blog_Criteria blog_criteria, Blog_Like blog_like) {
         log.info("goSingle Start...");
+
+        if(principal != null) {
+            log.info(principal.getName());
+//            blog_criteria.setU_id(principal.getName());
+            blog_like.setU_id(principal.getName());
+        } else {
+            log.info("principal is null");
+        }
+        blog_like.setB_no(b_no);
+
+        log.info("-------------------------------------------------------");
+        log.info(blog_like.toString());
+        log.info("-------------------------------------------------------");
+
+        //아이디가 있는 경우 + 좋아요 세팅 시작.
+//        INFO : com.blog.controller.BlogController - testid2@testid2
+//        INFO : com.blog.controller.BlogController - -------------------------------------------------------
+//        INFO : com.blog.controller.BlogController - Blog_Like(b_no=262, u_id=testid2@testid2)
+//        INFO : com.blog.controller.BlogController - -------------------------------------------------------
+
+        //cnt > 0 && principal != null 이면 내가(회원) 좋아요 누른 상태
+        //cnt = 0 && principal != null 이면 내가 좋아요 누르지 않은 상태
+        //cnt 상관없음 && principal == null 이면 비회원 상태에서 좋아요 수만 출력
+
+        int likeCnt = blogService.getBlogLike(blog_like);
+
+        if(likeCnt>0 && principal != null) {
+            log.info("좋아요 누른 상태");
+            model.addAttribute("like", "like");
+        } else if(likeCnt==0 && principal != null) {
+            log.info("좋아요 누르지 않은 상태");
+            model.addAttribute("like", "unlike");
+        }else{
+            //어차피 좋아요 수는 blog에 담겨있음.
+            //좋아요 안누른 처리와 같게 진행.
+            log.info("비회원 상태");
+            model.addAttribute("like", "unlike");
+        }
 
         BlogDTO blogDTO = blogService.getBlogSingle(b_no);
         String[] tagsARR = blogDTO.getB_TAG1().substring(1).split("#");

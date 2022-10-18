@@ -1,5 +1,6 @@
 package com.member.service;
 
+import com.gallery.domain.GalleryDTO;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberDTO;
@@ -37,6 +38,12 @@ public interface MemberService {
 
     // 포인트 충전
     public int updatePoint(MemberDTO memberDTO);
+
+    /* 갤러리 목록 */
+    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
+
+    /* 갤러리 상태값 변경 */
+    public int updateGalleryStatus(GalleryDTO galleryDTO);
 
     /* 장바구니 담기 */
     public void insertCart(Long G_NO);

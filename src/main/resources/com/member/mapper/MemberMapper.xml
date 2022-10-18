@@ -105,6 +105,20 @@
         where u_id = #{id}
     </update>
 
+    <!-- 갤러리 목록 -->
+    <select id="galleryList" resultType="com.gallery.domain.GalleryDTO">
+        select G_NO, G_HNAME, U_ID, G_REG, G_HPRICE, G_STATUS
+        from GALLERY
+        order by G_NO asc
+    </select>
+
+    <!-- 갤러리 상태값 변경 -->
+    <update id="updateGalleryStatus">
+        update GALLERY
+        set G_STATUS = 2
+        where G_NO = #{G_NO}
+    </update>
+
     <!-- 장바구니 담기 -->
     <insert id="insertCart">
         insert into USER_CART(C_ID, C_HPRICE, C_HNAME, C_REG, G_NO, U_ID)
@@ -141,12 +155,16 @@
 
     <!-- 마이페이지 구매 판매내역 -->
     <select id="listBuy" resultType="com.member.domain.BuyDTO">
-        SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG FROM buy order by O_NO asc
+        SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG
+        FROM buy
+        order by O_NO asc
     </select>
 
     <!-- 마이페이지 총 금액 -->
     <select id="sum" resultType="Integer">
-        select sum(O_PRICE) from BUY where O_SELLER = #{o_seller}
+        select sum(O_PRICE)
+        from BUY
+        where O_SELLER = #{o_seller}
     </select>
 
     <!-- 갤러리 구매 -->
@@ -154,5 +172,6 @@
         insert into buy(O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG)
         values (o_no_seq.nextval, #{o_buyer}, #{o_seller}, #{g_no}, #{o_price}, sysdate)
     </insert>
+
 
 </mapper>
