@@ -259,5 +259,13 @@
     <!--                INSERT (U_ID, T_ID, IT_COUNT) VALUES ('TEST01', T.T_ID, 1);-->
     <!--    </update>-->
 
+    <select id="getBlogLike" resultType="_int">
+        select count(*) from LIKE_BLOG
+        where b_no = #{b_no}
+        <if test="u_id != null">
+            and u_id = #{u_id}
+        </if>
+    </select>
+
 </mapper>
 

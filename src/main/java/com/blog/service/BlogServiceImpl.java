@@ -1,9 +1,6 @@
 package com.blog.service;
 
-import com.blog.domain.BlogDTO;
-import com.blog.domain.Blog_Criteria;
-import com.blog.domain.Blog_Img;
-import com.blog.domain.Blog_Img_Temp;
+import com.blog.domain.*;
 import com.blog.mapper.BlogMapper;
 import com.gallery.domain.MaintagDTO;
 import com.member.domain.MemberDTO;
@@ -200,6 +197,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public MemberDTO getUserInfo(String u_id) {
         return blogMapper.getUserInfo(u_id);
+    }
+
+    public int getBlogLike(Blog_Like blog_like){
+        return blogMapper.getBlogLike(blog_like);
     }
 }
 
