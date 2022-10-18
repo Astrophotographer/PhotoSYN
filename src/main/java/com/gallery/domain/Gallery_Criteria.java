@@ -22,7 +22,7 @@ public class Gallery_Criteria {
     private String keyword; // 검색 키워드
 
     public Gallery_Criteria() {
-        this(1, 10);
+        this(1, 9);
     }
 
     public Gallery_Criteria(int pageNum, int listQty) {

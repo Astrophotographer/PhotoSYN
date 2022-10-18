@@ -44,7 +44,7 @@ public class MetadataServiceImpl implements MetadataService {
 
             ExifSubIFDDirectory Directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
             ExifIFD0Directory Directory2 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-
+            ExifSubIFDDescriptor descriptor = new ExifSubIFDDescriptor(Directory);
 
             if (Directory != null) {
 

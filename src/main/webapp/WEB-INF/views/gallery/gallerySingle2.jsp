@@ -21,7 +21,7 @@
         <input type="text" class="form-control" name="writer" value="${gallery.u_ID}" readonly="readonly"/>
         </br></br>
 
-        <img src="/resources/gallery/images/${gallery.g_HNAME}" width="1500px" align="center" />
+        <img src="/resources/gallery/images/${gallery.g_HNAME}" width="1000px" align="center" />
         </br></br>
 
 
@@ -58,6 +58,12 @@
 
 
     <div style="text-align: center;">
+
+<%--            <c:when test="${gallery.g_STATUS==0}%%">--%>
+<%--                --%>
+<%--                --%>
+<%--            </c:when>--%>
+
         <button class="profileBtn2" type="button" style="width: 80px;">구매하기</button>
         <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드</button>
 

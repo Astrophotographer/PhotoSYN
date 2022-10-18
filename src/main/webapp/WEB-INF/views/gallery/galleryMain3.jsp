@@ -50,10 +50,8 @@
             <div class="list_detail">
 
                 <a href="/gallery/gallerySingle?G_NO=${gallery.g_NO}">
-
                     <img src="/resources/gallery/images/${gallery.g_HNAME}"
-                         width="220px" />
-
+                         width="220px" height="150"/>
                 </a>
 
                 <div class="btn btn-dark product-cart-btn" data-gno="${gallery.g_NO}">
@@ -65,17 +63,15 @@
             </div>
 
         </c:forEach>
-
-
-
-
     </div>
-    <!--  페이지 번호 Pagination  -->
-    <div class="row float-right">
-        <div class="col-sm-12 col-md-7">
-            <ul class="pagination">
+
+
+<%--    <!--  페이지 번호 Pagination  -->--%>
+    <div>
+        <div>
+            <ul>
                 <c:if test="${pager.prev}">
-                    <li class="page-item">
+                    <li>
                         <a class="page-link" href="${pager.startPage-1}"
                            tabindex="-1">Previous</a>
                     </li>
@@ -101,12 +97,8 @@
         <input type="hidden" name="sel" value="${pager.cri.sel}"/>
         <input type="hidden" name="keyword" value="${pager.cri.keyword}"/>
     </form>
-    <!-- ㅍㅔ이징처리 끝 -->
-    <!-- 하단 리스트 번호 -->
-<%--    <div class="paging_start">--%>
-<%--        <div>1 2 3 4 5 </div>--%>
-<%--    </div>--%>
 </div>
+
 
 <br /><br /><br />
 

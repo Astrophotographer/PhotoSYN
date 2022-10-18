@@ -65,6 +65,7 @@
                 <textarea class="form-control" name="M_CONTENT" id="M_CONTENT" rows="3"></textarea>
             </div>
             <div>
+            <input type="hidden" name="M_HNAME" id="M_HNAME" >
             <input type="checkbox" name="agreements" onClick="agreeCheck(this.form)"> [필수] 본인이 찍은 사진만 올릴 수 있습니다.
             </div>
             <input type="submit"  name="checkButton" value="등록하기" disabled/>
