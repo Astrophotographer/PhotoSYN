@@ -32,7 +32,7 @@
             </tr>
             <c:forEach items="${list}" var="galleryDTO">
                 <tr>
-                    <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
+                    <td><input type="checkbox" name="chk" style="width: 20px;" value="${galleryDTO.g_NO}"/></td>
                     <td>${galleryDTO.g_NO}</td>
                     <td><img src="/resources/gallery/images/${galleryDTO.g_HNAME}" width="100"></td>
                     <td>${galleryDTO.u_ID}</td>

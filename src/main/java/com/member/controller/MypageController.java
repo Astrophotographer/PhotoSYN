@@ -322,7 +322,7 @@ public class MypageController {
     }
 
     /* 마이페이지 갤러리 관리 상태 변경 */
-    @PostMapping("profileGalleryStatus")
+    @GetMapping("profileGalleryStatus")
     public String galleryStatus(GalleryDTO galleryDTO) {
         memberService.updateGalleryStatus(galleryDTO);
 
