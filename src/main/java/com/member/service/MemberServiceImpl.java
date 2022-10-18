@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.gallery.domain.GalleryDTO;
 import com.gallery.mapper.GalleryMapper;
-import com.member.domain.AuthDTO;
-import com.member.domain.BuyDTO;
-import com.member.domain.CartDTO;
-import com.member.domain.MemberDTO;
+import com.member.domain.*;
 import com.member.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -165,7 +162,6 @@ public class MemberServiceImpl implements MemberService {
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
 
-
         // USER_LIST DB 데이터 업데이트
         memberMapper.updatePoint(memberDTO);
         // 다운로드 수 증가
@@ -173,6 +169,18 @@ public class MemberServiceImpl implements MemberService {
 
         return memberMapper.buyGallery(buyDTO);
     }
+
+    /************************************************ 페이징 처리 ******************************************************/
+    @Override
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id) {
+        memberCriteria.setId(id);
+        return memberMapper.getListWithPaging(memberCriteria);
+    }
+    @Override
+    public int getGalleryCount(MemberCriteria memberCriteria) {
+        return memberMapper.getGalleryCount(memberCriteria);
+    }
+
 
 
 }

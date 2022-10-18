@@ -169,7 +169,7 @@
         where O_SELLER = #{o_seller}
     </select>
 
-    <!-- 마이페이지 구매 판매내역 -->
+    <!-- 마이페이지 구매 판매내역 뿌려주기 -->
     <select id="listBuy" resultType="com.member.domain.BuyDTO">
         select o.*, g.G_HNAME
         from BUY o,
@@ -191,5 +191,24 @@
         where G_NO = #{g_no}
     </insert>
 
+    <!-- ******************************************* 페이징 처리 ******************************************* -->
+
+    <select id="getListWithPaging" resultType="com.member.domain.BuyDTO">
+        select a.*
+        from (select rownum r, o.*, g.G_HNAME
+              from BUY o,
+                   GALLERY g
+              where o.G_NO = g.G_NO(+)
+                and o.o_buyer = #{id}
+        <![CDATA[
+                and rownum <= #{pageNum} * #{listQty}) a
+        where r > (#{pageNum} - 1) * #{listQty}
+        ]]>
+    </select>
+
+    <select id="getGalleryCount" resultType="int">
+        select count(*)
+        from buy
+    </select>
 
 </mapper>

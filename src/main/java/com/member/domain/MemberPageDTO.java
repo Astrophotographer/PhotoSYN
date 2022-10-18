@@ -19,9 +19,9 @@ public class MemberPageDTO {
     private int total;
 
     // 페이지 번호 pageNum, 페이지당 보여줄 글의 개수 listQty
-    private Admin_Criteria cri;
+    private MemberCriteria cri;
 
-    public MemberPageDTO(Admin_Criteria cri, int total) {
+    public MemberPageDTO(MemberCriteria cri, int total) {
         this.cri = cri;
         this.total = total;
 

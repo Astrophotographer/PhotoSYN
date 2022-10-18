@@ -46,6 +46,28 @@
     </div>
 </div>
 
+<div class="row float-right">
+    <div class="col-sm-12 col-md-7">
+        <ul class="pagination">
+            <c:if test="${pager.prev}">
+                <li class="page-item">
+                    <a class="page-link" href="${pager.startPage-1}" tabindex="-1">Prev</a>
+                </li>
+            </c:if>
+            <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
+                <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+                    <a class="page-link" href="/member/mypage/profileBuy?pageNum=${num}">${num}</a>
+                </li>
+            </c:forEach>
+            <c:if test="${pager.next}">
+                <li class="page-item">
+                    <a class="page-link" href="${pager.endPage + 1}">Next</a>
+                </li>
+            </c:if>
+        </ul>
+    </div>
+</div>
+
 <script>
     function checkAll(checkAll) {
         let checkboxes = document.getElementsByName("chk");
