@@ -6,7 +6,7 @@
         <div style="font-size: 50px; font-weight: 800;">구매 · 판매내역</div>
         <hr>
         <div style="display: flex; justify-content: space-between;">
-            <h3>구매내역</h5>
+            <h3>구매내역</h3>
             <select onchange="if(this.value) location.href=(this.value);">
                 <option value="/member/mypage/profileBuy">구매내역</option>
                 <option value="/member/mypage/profileSell">판매내역</option>
@@ -55,6 +55,8 @@
             checkbox.checked = checkAll.checked;
         })
     }
+
+
 </script>
 
 

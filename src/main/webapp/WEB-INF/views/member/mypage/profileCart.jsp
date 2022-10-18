@@ -24,7 +24,7 @@
                     <td><input name="RowCheck" type="checkbox" style="width: 20px;" value="${cartDTO.g_no}"/></td>
                     <td>${cartDTO.g_no}</td>
                     <td>
-                        <input type="text" value="${cartDTO.c_hName}"/>
+                        <input type="hidden" value="${cartDTO.c_hName}"/>
                         <img src="/resources/gallery/images/${cartDTO.c_hName}" width="200">
                     </td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cartDTO.c_reg}"/></td>
