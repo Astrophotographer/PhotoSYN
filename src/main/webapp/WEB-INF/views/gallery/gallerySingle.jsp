@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
@@ -8,12 +8,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-<form action="/member/mypage/galleryBuyBtn" method="post">
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    <button class="profileBtn2" type="submit" style="width: 100px">
-        구매하기
-    </button>
-</form>
+
 
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Board Read</h1><br />
@@ -97,6 +92,13 @@
         width: 100%;
     }
 </style>
+
+<form action="/member/mypage/galleryBuyBtn" method="post">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <button class="profileBtn2" type="submit" style="width: 100px">
+        구매하기
+    </button>
+</form>
 
 
 <script type="text/javascript">

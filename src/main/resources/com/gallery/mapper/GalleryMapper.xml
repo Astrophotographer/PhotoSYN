@@ -132,6 +132,10 @@
         select * from gallery where g_no = #{G_NO}
     </select>
 
+    <select id="getMetadataSingle" resultType="com.gallery.domain.MetadataDTO">
+        select * from metadata where g_no = #{G_NO}
+    </select>
+
     <select id="checkGallerySeq" resultType="_int">
         select gallery_seq.currval
         from dual

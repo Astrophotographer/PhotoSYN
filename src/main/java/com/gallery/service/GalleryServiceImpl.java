@@ -1,10 +1,7 @@
 package com.gallery.service;
 
 import com.blog.domain.Blog_Img_Temp;
-import com.gallery.domain.GalleryDTO;
-import com.gallery.domain.Gallery_Criteria;
-import com.gallery.domain.Gallery_Img_Temp;
-import com.gallery.domain.MaintagDTO;
+import com.gallery.domain.*;
 import com.gallery.mapper.GalleryMapper;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +50,13 @@ public class GalleryServiceImpl implements GalleryService {
         // 갤러리 가져오면서 조회수 증가시키기
         galleryMapper.updateGalleryReadCount(G_NO);
         return galleryMapper.getGallerySingle(G_NO);
+    }
+
+    @Override
+    public MetadataDTO getMetadataSingle(Long G_NO) {
+
+        return galleryMapper.getMetadataSingle(G_NO);
+
     }
 
 

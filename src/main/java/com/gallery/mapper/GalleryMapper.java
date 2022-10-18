@@ -24,6 +24,7 @@ public interface GalleryMapper {
 
 
     public GalleryDTO getGallerySingle(Long G_NO); // 갤러리 하나 정보가져오기
+    public MetadataDTO getMetadataSingle(Long g_no); // 갤러리 메터데이터 정보 하나 가져오기
     public int getTotal(Gallery_Criteria cri); // 개수 조회
 
 
@@ -44,6 +45,7 @@ public interface GalleryMapper {
     // D
     public boolean deleteGallery(long G_NO); // 사진 삭제 + 메타데이터도 함께 날리기
     public boolean hideGallery(long G_NO); // 사진 숨기기 // G_STATUS  2로 변경
+
 
 
 }
