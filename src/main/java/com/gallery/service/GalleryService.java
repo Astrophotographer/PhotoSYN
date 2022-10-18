@@ -37,6 +37,7 @@ public interface GalleryService {
 // 수정 관련 메서드
     public boolean updateGallery(GalleryDTO galleryDTO);  // 사진 수정  // 1성공 . 0실패
     public boolean updateMetadata(Gallery_Img_Temp gallery_img_temp); // @@@@@메타데이터용 이미지 수정
+    public boolean buyGallery(long G_NO); // 사진 구매남기기 // G_STATUS  1로 변경
 
 //   삭제 관련 메서드
     public boolean deleteGallery(long G_NO); // 사진 삭제 + 메타데이터도 함께 날리기
