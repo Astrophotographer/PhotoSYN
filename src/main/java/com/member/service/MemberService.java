@@ -3,6 +3,7 @@ package com.member.service;
 import com.gallery.domain.GalleryDTO;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
+import com.member.domain.MemberCriteria;
 import com.member.domain.MemberDTO;
 
 
@@ -65,5 +66,10 @@ public interface MemberService {
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO, String id);
+
+    /************************************************ 페이징 처리 ******************************************************/
+
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id);
+    public int getGalleryCount(MemberCriteria memberCriteria);
 
 }

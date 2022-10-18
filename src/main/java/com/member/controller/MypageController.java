@@ -2,9 +2,7 @@ package com.member.controller;
 
 import com.gallery.domain.GalleryDTO;
 import com.gallery.service.GalleryService;
-import com.member.domain.BuyDTO;
-import com.member.domain.CartDTO;
-import com.member.domain.MemberDTO;
+import com.member.domain.*;
 import com.member.security.MemberUser;
 import com.member.security.MemberUserDetailsService;
 import com.member.service.MemberService;
@@ -227,12 +225,9 @@ public class MypageController {
 
     // 장바구니 목록 페이지
     @GetMapping("profileCart")
-    public String listCart(CartDTO cartDTO, Model model, Long G_NO) {
+    public String listCart(CartDTO cartDTO, Model model) {
         List<CartDTO> list = memberService.listCart(cartDTO);
         model.addAttribute("list", list);
-
-        model.addAttribute("metadata", galleryService.getMetadataSingle(G_NO));
-        model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
 
         return "/member/mypage/profileCart";
     }
@@ -254,12 +249,14 @@ public class MypageController {
 
     // 마이페이지 구매내역
     @GetMapping("profileBuy")
-    public void buy(Authentication auth, Model model) {
+    public void buy(Authentication auth, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
 
-        List<BuyDTO> list = memberService.listBuy(id);
-        model.addAttribute("list", list);
+        int total = memberService.getGalleryCount(memberCriteria);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
+
     }
 
     // 마이페이지 판매내역
@@ -303,6 +300,7 @@ public class MypageController {
             for (int i = 0; i < size; i++) {
                 buyDTO.setG_no(Long.parseLong(ajaxMsg[i]));
                 log.info("########################################### DTO :: " + buyDTO);
+                galleryService.buyGallery(galleryDTO.getG_NO());
                 memberService.buyGallery(buyDTO, id);
             }
 

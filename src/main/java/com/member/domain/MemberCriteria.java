@@ -13,7 +13,7 @@ public class MemberCriteria {
     // 오래된순, 최근순, 등급순, 회원상태(0: 활동중, 1: 휴면상태, 2: 정상탈퇴, 3: 강제탈퇴)
     // oldest, latest, memberShip, status
     private String sortOption;
-
+    private String id;
 
     //페이징 처리...
     private int pageNum;    // 페이지 번호
