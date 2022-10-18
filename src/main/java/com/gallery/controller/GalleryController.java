@@ -90,13 +90,14 @@ public class GalleryController {
     }
 
 
-    @PostMapping("delete")
-    public String delete(Long G_NO, String writer, Gallery_Criteria cri, RedirectAttributes rttr) {
+    @RequestMapping("hide")
+    public String hide(Long G_NO, Gallery_Criteria cri, RedirectAttributes rttr) {
         // 삭제 처리
-        if(galleryService.deleteGallery(G_NO)) {
-            log.info("*********** 삭제 성공!!!!!!! ************");
+        if(galleryService.hideGallery(G_NO)){
+            log.info("***********숨김처리 성공!!!!!! ************");
             rttr.addFlashAttribute("result", "success");
         }
+
         return "redirect:/gallery/main" + cri.getListLink();
     }
 

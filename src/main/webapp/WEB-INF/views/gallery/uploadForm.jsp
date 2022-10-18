@@ -28,7 +28,7 @@
         <div class="mb-3">
             <br />
         </div>
-        <form action="/gallery/uploadPro" method="post">
+        <form action="/gallery/uploadPro" method="post" name="inputForm" onsubmit="return checkField();">
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             <div class="mb-3">
                 <div>
@@ -38,39 +38,44 @@
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">카메라</label>
-                <input type="text" class="form-control" name="M_IMGCAMERA" id="M_IMGCAMERA">
+                <input type="text" class="form-control" name="M_IMGCAMERA" id="M_IMGCAMERA" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">렌즈</label>
-                <input type="text" class="form-control" name="M_IMGLENS" id="M_IMGLENS">
+                <input type="text" class="form-control" name="M_IMGLENS" id="M_IMGLENS" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">조리개</label>
-                <input type="text" class="form-control" step="0.01" name="M_APERTURE" id="M_APERTURE">
+                <input type="text" class="form-control" step="0.01" name="M_APERTURE" id="M_APERTURE" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">감도</label>
-                <input type="text" class="form-control" name="M_ISO" id="M_ISO">
+                <input type="text" class="form-control" name="M_ISO" id="M_ISO" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">초점거리</label>
-                <input type="text" class="form-control" step="0.01" name="M_FLENGTH" id="M_FLENGTH">
+                <input type="text" class="form-control" step="0.01" name="M_FLENGTH" id="M_FLENGTH" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">셔터스피드</label>
-                <input type="text" class="form-control" step="0.0001" name="M_SHUTTERSPEED" id="M_SHUTTERSPEED">
+                <input type="text" class="form-control" step="0.0001" name="M_SHUTTERSPEED" id="M_SHUTTERSPEED" placeholder="직접 입력하셔도 됩니다.">
             </div>
             <div class="mb-3">
                 <label for="imgFile" class="form-label">설명</label>
                 <textarea class="form-control" name="M_CONTENT" id="M_CONTENT" rows="3"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div>
+            <input type="checkbox" name="agreements" onClick="agreeCheck(this.form)"> [필수] 본인이 찍은 사진만 올릴 수 있습니다.
+            </div>
+            <input type="submit"  name="checkButton" value="등록하기" disabled/>
+            <input type="button" value="뒤로가기" onclick="history.go(-1)"/>
         </form>
 
     </div>
     <br /><br />
 
 </sec:authorize>
+
 
 
 
@@ -120,11 +125,27 @@
             });
         });
     });
-</script>
+    // 필수박스 눌러야 등록가능
+    function agreeCheck(frm){
+        if(frm.checkButton.disabled==true){ frm.checkButton.disabled=false; }
+        else{ frm.checkButton.disabled=true; }
 
+    }
+
+    function checkField(){
+
+        let inputs = document.inputForm;
+        if(!inputs.imgFile.value){ alert("사진이 없습니다."); return false; }
+        if(!inputs.M_CONTENT.value){ alert("설명이 없습니다."); return false; }
+
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
         integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-</script>
+
+
+
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
