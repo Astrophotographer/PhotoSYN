@@ -29,7 +29,7 @@
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
                     <td>${buyDTO.o_no}</td>
-                    <td>${buyDTO.g_no}</td>
+                    <td>${buyDTO.g_hName}</td>
                     <td>${buyDTO.o_seller}</td>
                     <td>${buyDTO.o_price}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${buyDTO.o_reg}"/></td>

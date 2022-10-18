@@ -1,7 +1,6 @@
 package com.member.controller;
 
 import com.gallery.domain.GalleryDTO;
-import com.gallery.domain.MetadataDTO;
 import com.gallery.service.GalleryService;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
@@ -11,7 +10,6 @@ import com.member.security.MemberUserDetailsService;
 import com.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -28,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,7 +72,6 @@ public class MypageController {
                                    @RequestParam("pw") String pw, MemberDTO memberDTO, RedirectAttributes rttr, Authentication auth) throws Exception {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String pic = user.getMember().getPic(); // 기존사진
-        log.info("****************************** pic : " + pic);
         String password = user.getMember().getPw();
 
         if (encoder.matches(pw, password)) {
@@ -127,7 +123,6 @@ public class MypageController {
 
             return "redirect:/member/mypage/profileModify";
         }
-        log.info("###################################################" + user.getMember());
 
         return "redirect:/member/mypage/profile";
     }
@@ -227,8 +222,6 @@ public class MypageController {
     public String insertCart(@RequestParam("G_NO") Long G_NO) {
         memberService.insertCart(G_NO);
 
-        log.info("###################GNO" + G_NO);
-
         return "success";
     }
 
@@ -238,6 +231,7 @@ public class MypageController {
         List<CartDTO> list = memberService.listCart(cartDTO);
         model.addAttribute("list", list);
 
+        model.addAttribute("metadata", galleryService.getMetadataSingle(G_NO));
         model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
 
         return "/member/mypage/profileCart";
@@ -260,18 +254,21 @@ public class MypageController {
 
     // 마이페이지 구매내역
     @GetMapping("profileBuy")
-    public void buy(BuyDTO buyDTO, Model model) {
-        List<BuyDTO> list = memberService.listBuy(buyDTO);
+    public void buy(Authentication auth, Model model) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+
+        List<BuyDTO> list = memberService.listBuy(id);
         model.addAttribute("list", list);
     }
 
     // 마이페이지 판매내역
     @GetMapping("profileSell")
-    public void sell(BuyDTO buyDTO, GalleryDTO galleryDTO, Model model) {
-        List<BuyDTO> list = memberService.listBuy(buyDTO);
+    public void sell(Authentication auth, GalleryDTO galleryDTO, Model model) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
 
-        galleryDTO.setG_SALES(1);
-        galleryDTO.setG_HPRICE(1000);
+        List<BuyDTO> list = memberService.listBuy(id);
 
         long quantity = galleryDTO.getG_SALES();
         long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
@@ -287,10 +284,9 @@ public class MypageController {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
         int m = user.getMember().getPoint();
+
         String[] ajaxMsg = request.getParameterValues("valueArr");
         int size = ajaxMsg.length;
-
-        galleryDTO.setG_HPRICE(10000);
 
         if (m < galleryDTO.getG_HPRICE()) {
             rttr.addFlashAttribute("notPoint", "포인트가 부족합니다.");
@@ -300,20 +296,16 @@ public class MypageController {
             m = m - galleryDTO.getG_HPRICE();
             user.getMember().setPoint(m);
 
-            // Mapper 에 넘겨줄 데이터 buyDTO 에 저장하기.
-//        buyDTO.setO_buyer(id);
-//        buyDTO.setO_seller(galleryDTO.getU_ID());
-//        buyDTO.setO_price(galleryDTO.getG_HPRICE());
-//        buyDTO.setG_no(galleryDTO.getG_NO());
-
             buyDTO.setO_buyer(id);
-            buyDTO.setO_seller("찬욱");
-            buyDTO.setO_price(10000);
-            buyDTO.setG_no(10L);
+            buyDTO.setG_no(galleryDTO.getG_NO());
 
             // 구매 내역 저장
-            memberService.buyGallery(buyDTO);
-            
+            for (int i = 0; i < size; i++) {
+                buyDTO.setG_no(Long.parseLong(ajaxMsg[i]));
+                log.info("########################################### DTO :: " + buyDTO);
+                memberService.buyGallery(buyDTO, id);
+            }
+
             // 구매 후, 장바구니 내역 삭제
             for (int i = 0; i < size; i++) {
                 memberService.deleteCart(ajaxMsg[i]);
@@ -329,12 +321,12 @@ public class MypageController {
     /************************************************ 마이페이지 글 관리 ************************************************/
     /* 마이페이지 갤러리 관리 페이지 */
     @GetMapping("profileGallery")
-    public void galleryListPage(Authentication auth, MemberDTO memberDTO, GalleryDTO galleryDTO, Model model) {
+    public void galleryListPage(Authentication auth, MemberDTO memberDTO, Model model) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         memberDTO.setId(user.getMember().getId());
         String id = memberDTO.getId();
 
-        List<GalleryDTO> list = memberService.galleryList(galleryDTO, id);
+        List<GalleryDTO> list = memberService.galleryList(id);
         model.addAttribute("list", list);
     }
 

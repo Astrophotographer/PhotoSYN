@@ -23,17 +23,23 @@
                 <th>판매자</th>
                 <th>가격</th>
                 <th>구매일자</th>
+                <th>다운받기</th>
             </tr>
             <c:set var="tot" value="${0}"/>
             <c:forEach items="${list}" var="buyDTO">
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
                     <td>${buyDTO.o_no}</td>
-                    <td>${buyDTO.g_no}</td>
+                    <td>${buyDTO.g_hName}</td>
                     <td>${buyDTO.o_buyer}</td>
                     <td>${buyDTO.o_seller}</td>
                     <td>${buyDTO.o_price}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${buyDTO.o_reg}"/></td>
+                    <td>
+                        <button class="profileBtn2" style="width: 80px" onclick="window.location='/gallery/download?fileName=${cartDTO.c_hName}'">
+                            다운로드
+                        </button>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

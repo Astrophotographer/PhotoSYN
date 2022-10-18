@@ -109,6 +109,7 @@
     <select id="galleryList" resultType="com.gallery.domain.GalleryDTO">
         select G_NO, G_HNAME, U_ID, G_REG, G_HPRICE, G_STATUS
         from GALLERY
+        where U_ID = #{id}
         order by G_NO asc
     </select>
 
@@ -161,13 +162,6 @@
           and g_no = #{g_no}
     </select>
 
-    <!-- 마이페이지 구매 판매내역 -->
-    <select id="listBuy" resultType="com.member.domain.BuyDTO">
-        SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG
-        FROM buy
-        ORDER BY O_NO ASC
-    </select>
-
     <!-- 마이페이지 총 금액 -->
     <select id="sum" resultType="Integer">
         select sum(O_PRICE)
@@ -175,10 +169,26 @@
         where O_SELLER = #{o_seller}
     </select>
 
+    <!-- 마이페이지 구매 판매내역 -->
+    <select id="listBuy" resultType="com.member.domain.BuyDTO">
+        select o.*, g.G_HNAME
+        from BUY o,
+             GALLERY g
+        where o.G_NO = g.G_NO(+)
+          and o.O_BUYER = #{id}
+    </select>
+
     <!-- 갤러리 구매 -->
     <insert id="buyGallery">
         insert into buy(O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG)
-        values (o_no_seq.nextval, #{o_buyer}, #{o_seller}, #{g_no}, #{o_price}, sysdate)
+        select o_no_seq.nextval,
+               #{o_buyer},
+               U_ID,
+               G_NO,
+               G_HPRICE,
+               sysdate
+        from GALLERY
+        where G_NO = #{g_no}
     </insert>
 
 

@@ -71,8 +71,8 @@ public class MemberController {
             model.addAttribute("logout", "Logout!!");
         }
 
-        String referrer = request.getHeader("Referer");
-        request.getSession().setAttribute("prevPage", referrer);
+//        String referrer = request.getHeader("Referer");
+//        request.getSession().setAttribute("prevPage", referrer);
     }
     
     // 아이디 중복확인

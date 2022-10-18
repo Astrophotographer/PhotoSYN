@@ -40,7 +40,7 @@ public interface MemberService {
     public int updatePoint(MemberDTO memberDTO);
 
     /* 갤러리 목록 */
-    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
+    public List<GalleryDTO> galleryList(String id);
 
     /* 갤러리 상태값 변경 (숨김처리) */
     public int updateGalleryStatus1(String G_NO);
@@ -58,12 +58,12 @@ public interface MemberService {
     public int deleteCart(String g_no);
 
     /* 마이페이지 구매 판매내역 */
-    public List<BuyDTO> listBuy(BuyDTO buyDTO);
+    public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
     public int sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
-    public int buyGallery(BuyDTO buyDTO);
+    public int buyGallery(BuyDTO buyDTO, String id);
 
 }

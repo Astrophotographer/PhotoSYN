@@ -43,7 +43,7 @@ public interface MemberMapper {
     public int updatePoint(MemberDTO memberDTO);
 
     /* 갤러리 목록 */
-    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
+    public List<GalleryDTO> galleryList(String id);
 
     /* 갤러리 상태값 변경 (숨김처리) */
     public int updateGalleryStatus1(String G_NO);
@@ -64,7 +64,7 @@ public interface MemberMapper {
     public CartDTO checkCart(CartDTO cartDTO);
 
     /* 마이페이지 구매 판매내역 */
-    public List<BuyDTO> listBuy(BuyDTO buyDTO);
+    public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
     public int sum(BuyDTO buyDTO);

@@ -111,8 +111,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 갤러리 목록 */
     @Override
-    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id) {
-        return memberMapper.galleryList(galleryDTO, id);
+    public List<GalleryDTO> galleryList(String id) {
+        return memberMapper.galleryList(id);
     }
     
     /* 갤러리 상태값 변경 (숨김처리) */
@@ -147,8 +147,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 마이페이지 구매 판매내역 */
     @Override
-    public List<BuyDTO> listBuy(BuyDTO buyDTO) {
-        return memberMapper.listBuy(buyDTO);
+    public List<BuyDTO> listBuy(String id) {
+        return memberMapper.listBuy(id);
     }
 
     /* 총 합계금액 */
@@ -160,7 +160,7 @@ public class MemberServiceImpl implements MemberService {
 
     /* 갤러리 구매 (포인트 차감) */
     @Override
-    public int buyGallery(BuyDTO buyDTO) {
+    public int buyGallery(BuyDTO buyDTO, String id) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
