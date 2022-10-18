@@ -15,10 +15,10 @@
         <selectKey keyProperty="G_NO" resultType="long" order="BEFORE">
             select gallery_seq.nextval from dual
         </selectKey>
-        insert into Gallery (G_NO, MT_NAME, U_ID, G_HNAME, G_LNAME, G_HPRICE, G_LPRICE, G_CONTENT, G_REG, G_EDIT,
-        G_STATUS, G_SALES, G_LIKE, G_READCOUNT, G_TAG1, G_TYPE)
-        VALUES (#{G_NO}, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, #{G_HPRICE}, #{G_LPRICE}, #{G_CONTENT}, sysdate,
-        sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
+
+        insert into Gallery (G_NO, MT_NAME, U_ID, G_HNAME, G_LNAME, G_HPRICE, G_LPRICE, G_CONTENT, G_REG, G_EDIT, G_STATUS, G_SALES, G_LIKE, G_READCOUNT, G_TAG1, G_TYPE)
+        VALUES (#{G_NO}, #{MT_NAME}, #{U_ID}, #{G_HNAME}, #{G_LNAME}, 1000, #{G_LPRICE}, #{G_CONTENT}, sysdate, sysdate, #{G_STATUS}, #{G_SALES}, #{G_LIKE}, #{G_READCOUNT}, #{G_TAG1}, #{G_TYPE})
+
     </insert>
 
     <insert id="insertMetadata">
@@ -148,6 +148,10 @@
         where g_no = #{G_NO}
     </select>
 
+    <select id="getMetadataSingle" resultType="com.gallery.domain.MetadataDTO">
+        select * from metadata where g_no = #{G_NO}
+    </select>
+
     <select id="checkGallerySeq" resultType="_int">
         select gallery_seq.currval
         from dual
@@ -187,11 +191,20 @@
         where g_no = #{G_NO}
     </update>
 
+
     <!-- 메인태그 가져오기 -->
     <select id="getMainTag" resultType="com.gallery.domain.MaintagDTO">
         select *
         from MAINTAG
     </select>
+
+    <update id="buyGallery">
+        update gallery
+        set g_status = 1
+        where g_no = #{G_NO}
+    </update>
+
+
 
 
 </mapper>

@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.gallery.domain.GalleryDTO;
 import com.gallery.mapper.GalleryMapper;
-import com.member.domain.AuthDTO;
-import com.member.domain.BuyDTO;
-import com.member.domain.CartDTO;
-import com.member.domain.MemberDTO;
+import com.member.domain.*;
 import com.member.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -111,13 +108,20 @@ public class MemberServiceImpl implements MemberService {
 
     /* 갤러리 목록 */
     @Override
-    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id) {
-        return memberMapper.galleryList(galleryDTO, id);
+    public List<GalleryDTO> galleryList(String id) {
+        return memberMapper.galleryList(id);
+    }
+    
+    /* 갤러리 상태값 변경 (숨김처리) */
+    @Override
+    public int updateGalleryStatus1(String G_NO) {
+        return memberMapper.updateGalleryStatus1(G_NO);
     }
 
+    /* 갤러리 상태값 변경 (판매중) */
     @Override
-    public int updateGalleryStatus(GalleryDTO galleryDTO) {
-        return memberMapper.updateGalleryStatus(galleryDTO);
+    public int updateGalleryStatus2(String G_NO) {
+        return memberMapper.updateGalleryStatus2(G_NO);
     }
 
     /* 장바구니 담기 */
@@ -134,14 +138,14 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 삭제 */
     @Override
-    public int deleteCart(Long g_no) {
+    public int deleteCart(String g_no) {
         return memberMapper.deleteCart(g_no);
     }
 
     /* 마이페이지 구매 판매내역 */
     @Override
-    public List<BuyDTO> listBuy(BuyDTO buyDTO) {
-        return memberMapper.listBuy(buyDTO);
+    public List<BuyDTO> listBuy(String id) {
+        return memberMapper.listBuy(id);
     }
 
     /* 총 합계금액 */
@@ -153,7 +157,7 @@ public class MemberServiceImpl implements MemberService {
 
     /* 갤러리 구매 (포인트 차감) */
     @Override
-    public int buyGallery(BuyDTO buyDTO) {
+    public int buyGallery(BuyDTO buyDTO, String id) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
@@ -165,6 +169,18 @@ public class MemberServiceImpl implements MemberService {
 
         return memberMapper.buyGallery(buyDTO);
     }
+
+    /************************************************ 페이징 처리 ******************************************************/
+    @Override
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id) {
+        memberCriteria.setId(id);
+        return memberMapper.getListWithPaging(memberCriteria);
+    }
+    @Override
+    public int getGalleryCount(MemberCriteria memberCriteria) {
+        return memberMapper.getGalleryCount(memberCriteria);
+    }
+
 
 
 }

@@ -54,8 +54,10 @@
     <!-- Google Email bean End. -->
 
     <!-- multipart. 다운로드 -->
+
 <!--    <bean id="fileDown" class="com.gallery.util.DownloadView"/>-->
     <bean id="fileDown" class="com.upload.util.DownloadView"/>
+
 
     <!-- 파일 업로드 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

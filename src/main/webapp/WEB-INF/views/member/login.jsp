@@ -9,8 +9,8 @@
 <body>
 <section class="login-form">
     <h1><a href="/member/main" style="text-decoration: none; color: white;">Photo SYN</a></h1>
-    <h2 style="color: white"><c:out value="${error}"/></h2>
-    <h2 style="color: white"><c:out value="${logout}"/></h2>
+    <h2 style="color: white">${error}</h2>
+    <h2 style="color: white">${logout}</h2>
 
     <form action="/login" method="POST" onsubmit="return checkpw()">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

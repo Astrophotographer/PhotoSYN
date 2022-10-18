@@ -12,4 +12,5 @@ public class BuyDTO {
     private Long g_no;
     private int o_price;
     private Timestamp o_reg;
+    private String g_hName;
 }

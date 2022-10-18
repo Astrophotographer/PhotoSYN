@@ -39,6 +39,7 @@ public class GalleryController {
     @RequestMapping(value ="main")
     public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
         log.info("gallery main2!!");
+        log.info("cri : " + cri);
 
         if (principal != null) {
             log.info(principal.getName());
@@ -59,7 +60,7 @@ public class GalleryController {
 //        log.info("************ cri : " + cri);
 //
 
-        return "gallery/galleryMain";
+        return "gallery/galleryMain3";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
@@ -68,13 +69,13 @@ public class GalleryController {
         log.info("gallerySingle G_NO : " + G_NO);
 
         GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
-        String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
-        log.info("tagsARR : " + tagsARR.toString());
+        //String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
+        //log.info("tagsARR : " + tagsARR.toString());
 
 
         model.addAttribute("gallery", galleryService.getGallerySingle(G_NO));
-
-        return "gallery/gallerySingle";
+        model.addAttribute("metadata", galleryService.getMetadataSingle(G_NO));
+        return "gallery/gallerySingle2";
     }
 
 
@@ -90,13 +91,14 @@ public class GalleryController {
     }
 
 
-    @PostMapping("delete")
-    public String delete(Long G_NO, String writer, Gallery_Criteria cri, RedirectAttributes rttr) {
+    @RequestMapping("hide")
+    public String hide(Long G_NO, Gallery_Criteria cri, RedirectAttributes rttr) {
         // 삭제 처리
-        if(galleryService.deleteGallery(G_NO)) {
-            log.info("*********** 삭제 성공!!!!!!! ************");
+        if(galleryService.hideGallery(G_NO)){
+            log.info("***********숨김처리 성공!!!!!! ************");
             rttr.addFlashAttribute("result", "success");
         }
+
         return "redirect:/gallery/main" + cri.getListLink();
     }
 

@@ -41,12 +41,13 @@ public class MetadataServiceImpl implements MetadataService {
 
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
+
             ExifSubIFDDirectory Directory = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
             ExifIFD0Directory Directory2 = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-            log.info("---------------1----------------");
+            ExifSubIFDDescriptor descriptor = new ExifSubIFDDescriptor(Directory);
 
             if (Directory != null) {
-                log.info("---------------2----------------");
+
                 Double Aperture = Directory.getDoubleObject(Directory.TAG_FNUMBER);
                 Date date = Directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
 
@@ -57,7 +58,7 @@ public class MetadataServiceImpl implements MetadataService {
                 Double Width = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_WIDTH);
                 Double Height = Directory.getDoubleObject(Directory.TAG_EXIF_IMAGE_HEIGHT);
                 String LensModel = Directory.getString(Directory.TAG_LENS_MODEL);
-                log.info("---------------3----------------");
+
 
                 String CameraModel = Directory2.getString(Directory2.TAG_MODEL);
 
@@ -77,9 +78,9 @@ public class MetadataServiceImpl implements MetadataService {
 
                 //todo DB에 저장 (이거아니고, 나중에 사용자가 저장버튼 누르면 그때 디비에 저장 )
                 //int MetadataUploadResult = galleryMapper.insertMetadata(metadataDTO);
-                log.info("------------------------------------------------------------------------------");
+
                 //log.info("MetadataUploadResult:" + MetadataUploadResult);   //성공시 1 출력
-                log.info("---------------4----------------");
+
 
                 log.info("Aperture: " + Aperture + "  Date: " + date + "     ISO: " + ISO +
                         " Modle: " + CameraModel   + "     FocalLength: " + FocalLength +  " lens: " + LensModel + "ExposureTime: " + ShutterSpeed2 +

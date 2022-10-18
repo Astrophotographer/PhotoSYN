@@ -465,7 +465,7 @@
                                         <div class="product-media">
                                             <div class="product-media-hover">
 
-                                                <a href="/gallery/single?g_no=${gallery.g_NO}">
+                                                <a href="/gallery/gallerySingle?G_NO=${gallery.g_NO}">
 
 
 

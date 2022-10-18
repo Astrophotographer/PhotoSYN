@@ -1,9 +1,6 @@
 package com.gallery.service;
 
-import com.gallery.domain.GalleryDTO;
-import com.gallery.domain.Gallery_Criteria;
-import com.gallery.domain.Gallery_Img_Temp;
-import com.gallery.domain.MaintagDTO;
+import com.gallery.domain.*;
 
 
 import java.util.List;
@@ -23,7 +20,7 @@ public interface GalleryService {
 
 
     public GalleryDTO getGallerySingle(Long G_NO); // 갤러리 하나 정보가져오기
-
+    public MetadataDTO getMetadataSingle(Long G_NO); // 갤러리 하나 메타데이터 정보 가져오기
     public int getTotal(Gallery_Criteria cri); // 개수 조회
     public GalleryDTO getMaxLikeGallery();
     public GalleryDTO getMaxReadCountGallery();
@@ -40,6 +37,7 @@ public interface GalleryService {
 // 수정 관련 메서드
     public boolean updateGallery(GalleryDTO galleryDTO);  // 사진 수정  // 1성공 . 0실패
     public boolean updateMetadata(Gallery_Img_Temp gallery_img_temp); // @@@@@메타데이터용 이미지 수정
+    public boolean buyGallery(long G_NO); // 사진 구매남기기 // G_STATUS  1로 변경
 
 //   삭제 관련 메서드
     public boolean deleteGallery(long G_NO); // 사진 삭제 + 메타데이터도 함께 날리기

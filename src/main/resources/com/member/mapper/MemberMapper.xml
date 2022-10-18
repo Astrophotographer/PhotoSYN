@@ -109,13 +109,21 @@
     <select id="galleryList" resultType="com.gallery.domain.GalleryDTO">
         select G_NO, G_HNAME, U_ID, G_REG, G_HPRICE, G_STATUS
         from GALLERY
+        where U_ID = #{id}
         order by G_NO asc
     </select>
 
-    <!-- 갤러리 상태값 변경 -->
-    <update id="updateGalleryStatus">
+    <!-- 갤러리 상태값 변경 (숨김처리) -->
+    <update id="updateGalleryStatus1">
         update GALLERY
         set G_STATUS = 2
+        where G_NO = #{G_NO}
+    </update>
+
+    <!-- 갤러리 상태값 변경 (판매중) -->
+    <update id="updateGalleryStatus2">
+        update GALLERY
+        set G_STATUS = 0
         where G_NO = #{G_NO}
     </update>
 
@@ -136,6 +144,7 @@
     <select id="listCart" resultType="com.member.domain.CartDTO">
         SELECT C_ID, C_HPRICE, C_LPRICE, C_HNAME, C_LNAME, C_REG, G_NO
         FROM USER_CART
+        ORDER BY C_ID ASC
     </select>
 
     <!-- 장바구니 삭제 -->
@@ -153,13 +162,6 @@
           and g_no = #{g_no}
     </select>
 
-    <!-- 마이페이지 구매 판매내역 -->
-    <select id="listBuy" resultType="com.member.domain.BuyDTO">
-        SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG
-        FROM buy
-        order by O_NO asc
-    </select>
-
     <!-- 마이페이지 총 금액 -->
     <select id="sum" resultType="Integer">
         select sum(O_PRICE)
@@ -167,11 +169,47 @@
         where O_SELLER = #{o_seller}
     </select>
 
+    <!-- 마이페이지 구매 판매내역 뿌려주기 -->
+    <select id="listBuy" resultType="com.member.domain.BuyDTO">
+        select o.*, g.G_HNAME
+        from BUY o,
+             GALLERY g
+        where o.G_NO = g.G_NO(+)
+          and o.O_BUYER = #{id}
+    </select>
+
     <!-- 갤러리 구매 -->
     <insert id="buyGallery">
         insert into buy(O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG)
-        values (o_no_seq.nextval, #{o_buyer}, #{o_seller}, #{g_no}, #{o_price}, sysdate)
+        select o_no_seq.nextval,
+               #{o_buyer},
+               U_ID,
+               G_NO,
+               G_HPRICE,
+               sysdate
+        from GALLERY
+        where G_NO = #{g_no}
     </insert>
 
+    <!-- ******************************************* 페이징 처리 ******************************************* -->
+
+    <select id="getListWithPaging" resultType="com.member.domain.BuyDTO">
+        select a.*
+        from (select rownum r, o.*, g.G_HNAME
+              from BUY o,
+                   GALLERY g
+              where o.G_NO = g.G_NO(+)
+                and o.o_buyer = #{id}
+        <![CDATA[
+                and rownum <= #{pageNum} * #{listQty}) a
+        where r > (#{pageNum} - 1) * #{listQty}
+        order by a.O_REG ASC
+        ]]>
+    </select>
+
+    <select id="getGalleryCount" resultType="int">
+        select count(*)
+        from buy
+    </select>
 
 </mapper>

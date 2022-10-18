@@ -1,10 +1,7 @@
 package com.member.mapper;
 
 import com.gallery.domain.GalleryDTO;
-import com.member.domain.AuthDTO;
-import com.member.domain.BuyDTO;
-import com.member.domain.CartDTO;
-import com.member.domain.MemberDTO;
+import com.member.domain.*;
 
 import java.util.List;
 
@@ -43,10 +40,13 @@ public interface MemberMapper {
     public int updatePoint(MemberDTO memberDTO);
 
     /* 갤러리 목록 */
-    public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
+    public List<GalleryDTO> galleryList(String id);
 
-    /* 갤러리 상태값 변경 */
-    public int updateGalleryStatus(GalleryDTO galleryDTO);
+    /* 갤러리 상태값 변경 (숨김처리) */
+    public int updateGalleryStatus1(String G_NO);
+
+    /* 갤러리 상태값 변경 (판매중) */
+    public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
     public void insertCart(Long g_no);
@@ -55,18 +55,23 @@ public interface MemberMapper {
     public List<CartDTO> listCart(CartDTO cartDTO);
 
     /* 장바구니 삭제 */
-    public int deleteCart(Long g_no);
+    public int deleteCart(String g_no);
 
     /* 장바구니 확인 */
     public CartDTO checkCart(CartDTO cartDTO);
 
     /* 마이페이지 구매 판매내역 */
-    public List<BuyDTO> listBuy(BuyDTO buyDTO);
+    public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
     public int sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO);
+
+    /************************************************ 페이징 처리 ******************************************************/
+
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria);
+    public int getGalleryCount(MemberCriteria memberCriteria);
 
 }
