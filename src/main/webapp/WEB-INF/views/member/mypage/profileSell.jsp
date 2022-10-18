@@ -16,29 +16,44 @@
 
         <table class="member">
             <tr>
-                <th style="width: 20px;"><input type="checkbox" name="chk" onclick="checkAll(this)" style="width: 20px;"/></th>
                 <th style="width: 80px;">번호</th>
                 <th>사진</th>
                 <th>판매자</th>
                 <th>가격</th>
                 <th>판매일자</th>
-                <th>합계금액</th>
             </tr>
-            <c:set var="sum" value="0"/>
             <c:forEach items="${list}" var="buyDTO">
                 <tr>
-                    <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
                     <td>${buyDTO.o_no}</td>
                     <td>${buyDTO.g_hName}</td>
                     <td>${buyDTO.o_seller}</td>
                     <td>${buyDTO.o_price}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${buyDTO.o_reg}"/></td>
-                    <td>${buyDTO.o_price * quantity}</td>
                 </tr>
-                <c:set var="sum" value="${sum + (buyDTO.o_price * quantity)}"/>
             </c:forEach>
         </table>
-        총 합계 : <fmt:formatNumber pattern="###,###" value="${sum}" />원
+    </div>
+</div>
+
+<div class="row float-right">
+    <div class="col-sm-12 col-md-7">
+        <ul class="pagination">
+            <c:if test="${pager.prev}">
+                <li class="page-item">
+                    <a class="page-link" href="${pager.startPage-1}" tabindex="-1">Prev</a>
+                </li>
+            </c:if>
+            <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
+                <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+                    <a class="page-link" href="/member/mypage/profileSell?pageNum=${num}">${num}</a>
+                </li>
+            </c:forEach>
+            <c:if test="${pager.next}">
+                <li class="page-item">
+                    <a class="page-link" href="${pager.endPage + 1}">Next</a>
+                </li>
+            </c:if>
+        </ul>
     </div>
 </div>
 

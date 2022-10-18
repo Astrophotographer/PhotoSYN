@@ -203,6 +203,7 @@
         <![CDATA[
                 and rownum <= #{pageNum} * #{listQty}) a
         where r > (#{pageNum} - 1) * #{listQty}
+        order by a.O_REG ASC
         ]]>
     </select>
 

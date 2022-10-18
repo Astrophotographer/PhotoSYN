@@ -6,25 +6,25 @@
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
         <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/profile/99128B3E5AD978AF20.png"></a>
+            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
         </div>
     </div>
     <!-- 페이징 버튼 처리 -->
