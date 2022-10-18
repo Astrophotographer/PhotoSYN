@@ -116,9 +116,8 @@
     <update id="updateGalleryStatus">
         update GALLERY
         set G_STATUS = 2
-        where G_NO = #{g_no};
+        where G_NO = #{G_NO}
     </update>
-
 
     <!-- 장바구니 담기 -->
     <insert id="insertCart">
