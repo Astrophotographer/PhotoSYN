@@ -42,8 +42,11 @@ public interface MemberService {
     /* 갤러리 목록 */
     public List<GalleryDTO> galleryList(GalleryDTO galleryDTO, String id);
 
-    /* 갤러리 상태값 변경 */
-    public int updateGalleryStatus(GalleryDTO galleryDTO);
+    /* 갤러리 상태값 변경 (숨김처리) */
+    public int updateGalleryStatus1(String G_NO);
+
+    /* 갤러리 상태값 변경 (판매중) */
+    public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
     public void insertCart(Long G_NO);
@@ -52,7 +55,7 @@ public interface MemberService {
     public List<CartDTO> listCart(CartDTO cartDTO);
 
     /* 장바구니 삭제 */
-    public int deleteCart(Long g_no);
+    public int deleteCart(String g_no);
 
     /* 마이페이지 구매 판매내역 */
     public List<BuyDTO> listBuy(BuyDTO buyDTO);

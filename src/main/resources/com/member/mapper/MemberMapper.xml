@@ -112,10 +112,17 @@
         order by G_NO asc
     </select>
 
-    <!-- 갤러리 상태값 변경 -->
-    <update id="updateGalleryStatus">
+    <!-- 갤러리 상태값 변경 (숨김처리) -->
+    <update id="updateGalleryStatus1">
         update GALLERY
         set G_STATUS = 2
+        where G_NO = #{G_NO}
+    </update>
+
+    <!-- 갤러리 상태값 변경 (판매중) -->
+    <update id="updateGalleryStatus2">
+        update GALLERY
+        set G_STATUS = 0
         where G_NO = #{G_NO}
     </update>
 
@@ -136,6 +143,7 @@
     <select id="listCart" resultType="com.member.domain.CartDTO">
         SELECT C_ID, C_HPRICE, C_LPRICE, C_HNAME, C_LNAME, C_REG, G_NO
         FROM USER_CART
+        ORDER BY C_ID ASC
     </select>
 
     <!-- 장바구니 삭제 -->
@@ -157,7 +165,7 @@
     <select id="listBuy" resultType="com.member.domain.BuyDTO">
         SELECT O_NO, O_BUYER, O_SELLER, G_NO, O_PRICE, O_REG
         FROM buy
-        order by O_NO asc
+        ORDER BY O_NO ASC
     </select>
 
     <!-- 마이페이지 총 금액 -->
