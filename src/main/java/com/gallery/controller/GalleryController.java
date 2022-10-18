@@ -39,6 +39,7 @@ public class GalleryController {
     @RequestMapping(value ="main")
     public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
         log.info("gallery main2!!");
+        log.info("cri : " + cri);
 
         if (principal != null) {
             log.info(principal.getName());

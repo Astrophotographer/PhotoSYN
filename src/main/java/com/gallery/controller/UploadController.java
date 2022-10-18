@@ -64,8 +64,6 @@ public class UploadController {
     public ResponseEntity<MetadataDTO> getMetadata(MultipartHttpServletRequest request) { // msg(text), img(file)
         MetadataDTO metadataDTO = null;
 
-
-
         log.info("************ upload pro *************");
 
         try {
