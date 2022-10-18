@@ -112,7 +112,9 @@ input {
     color: #999;
 }
 
-input[type="file"]:not(.imgFile) {
+
+input[type="file"]:not(.imgFile){
+
     position: absolute;
     width: 1px;
     height: 1px;
