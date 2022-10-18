@@ -3,20 +3,26 @@ package com.admin.service;
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
+import com.admin.domain.Admin_UpsertTagDTO;
 import com.admin.mapper.AdminMapper;
 import com.blog.domain.BlogDTO;
 import com.blog.domain.Blog_Criteria;
 import com.blog.mapper.BlogMapper;
 import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.Gallery_Criteria;
+import com.gallery.domain.MaintagDTO;
 import com.gallery.mapper.GalleryMapper;
 import com.member.domain.MemberDTO;
 import com.member.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Log4j
@@ -172,6 +178,83 @@ public class AdminServiceImpl implements AdminService {
             log.info("g_noList.get(i) : "+g_noList.get(i));
             result += adminMapper.showGallery(g_noList.get(i));
         }
+        return result;
+    }
+
+    @Override
+    public List<MaintagDTO> getMainTagDTOList() {
+        return galleryMapper.getMainTag();
+    }
+
+    @Override
+    public int tagUpsert(Admin_UpsertTagDTO admin_upsertTagDTO, MultipartHttpServletRequest request) {
+
+        int result = 0;
+
+        try{
+            MultipartFile file = request.getFile("tagImg");
+            if(file.getSize()>0) {
+                log.info(file);
+                log.info("file.getname : " + file.getName());
+                log.info("file.getOriginalFilename : " + file.getOriginalFilename());
+                log.info("file.getSize : " + file.getSize());
+                log.info("file.getContentType : " + file.getContentType());
+                log.info("file.getBytes : " + file.getBytes());
+
+                //파일 저장 경로
+                String uploadImgPath = request.getRealPath("/resources/mainTagImgSaveFolder");
+
+                String uuid = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
+                String saveImgName = uuid + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+
+                log.info("saveImgName : "+saveImgName);
+
+                //이미지 저장할 전체 경로
+                String saveImgPath = uploadImgPath + "\\" + saveImgName;
+
+                File copyFile = new File(saveImgPath);
+
+                file.transferTo(copyFile);
+                //저장 완료
+
+
+                //새로운 태그 추가+파일저장
+                if(admin_upsertTagDTO.getNewTag() != null && !(admin_upsertTagDTO.getNewTag().isEmpty())){
+                    //new Tag
+                    log.info("newTag (if) : "+admin_upsertTagDTO.getNewTag());
+                    admin_upsertTagDTO.setTagImgName(saveImgName);
+
+                    //여기에는 newTag랑 이미지 경로 담겨있음
+                    result = adminMapper.insertTag(admin_upsertTagDTO);
+
+
+                }else if((admin_upsertTagDTO.getOriginTag() != null && !(admin_upsertTagDTO.getOriginTag().isEmpty())) && (admin_upsertTagDTO.getUpdateTag() != null && !(admin_upsertTagDTO.getUpdateTag().isEmpty()))){
+                    //기존 태그 수정 + 파일 저장
+                    log.info("orignTag (if) : "+admin_upsertTagDTO.getOriginTag());
+                    log.info("updateTag (if) : "+admin_upsertTagDTO.getUpdateTag());
+
+                    admin_upsertTagDTO.setTagImgName(saveImgName);
+
+                    //여기에는 newTag없고, 기존태그, 수정할태그, 파일 경로 담겨있음
+                    result = adminMapper.updateTag(admin_upsertTagDTO);
+                }
+
+            }else{
+                //파일 업로드 없음. 태그명만 수정하기
+                log.info("file is null");
+
+                //여기에는 기존태그, 수정할 태그만 들어있음
+                result = adminMapper.updateTag(admin_upsertTagDTO);
+            }
+
+        }catch (NullPointerException nullPointerException){
+            log.info("nullPointerException : "+nullPointerException);
+        }catch (Exception e){
+            log.info("file : "+e.getMessage());
+        }
+
+        log.info("=======================================================");
+        log.info(admin_upsertTagDTO.toString());
         return result;
     }
 }

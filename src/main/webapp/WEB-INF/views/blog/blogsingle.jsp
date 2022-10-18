@@ -100,10 +100,12 @@
                         </c:forEach>
                         <!-- 수정, 삭제하기 버튼 -->
                         <%-- 조건 달아주기. 작성자와 로그인 유저가 같을 경우 --%>
+                        <c:if test="${blog.u_ID == loginUser}">
                         <div>
                             <a href="/blog/update?b_no=${blog.b_NO}" class="btn btn-primary">수정하기</a>
                             <a href="/blog/delete?b_no=${blog.b_NO}" class="btn btn-primary">삭제하기</a>
                         </div>
+                        </c:if>
 
 
                         <div class="tags-share-box center-box d-flex text-center justify-content-between border-top border-bottom py-3">
