@@ -284,4 +284,17 @@
         from dual
     </select>
 
+    <select id="testPlz" resultType="com.admin.domain.Admin_MemberShip">
+        select A.u_id, sinceDate, galleryCount, sellerCount from (
+        <![CDATA[
+        select u_id, SYSDATE-U_REG sinceDate from USER_LIST where u_reg < SYSDATE ) A
+        ]]>
+        left outer join
+        (select u_id, count(u_id) galleryCount from gallery group by u_id) B
+        on (A.u_id = B.u_id)
+        left outer join
+        (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C
+        on (A.u_id = C.o_seller)
+    </select>
+
 </mapper>

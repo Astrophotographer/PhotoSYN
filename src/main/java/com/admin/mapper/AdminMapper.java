@@ -53,4 +53,8 @@ public interface AdminMapper {
 
 //    public List<Admin_MemberShip> getUserMemberList(List<String> u_id);
     public List<Admin_MemberShip> getUserMemberList(String u_id);
+
+
+    //test
+    public List<Admin_MemberShip> testPlz();
 }

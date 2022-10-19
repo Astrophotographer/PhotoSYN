@@ -44,6 +44,15 @@ public class Adminscheduler {
 //        }
 //    }
 
+    @Scheduled(cron="0 0/1 * * * *")
+    public void testPrint() throws Exception{
+        log.info("===========================================");
+        log.info("testPrint");
+
+        List<Admin_MemberShip> list = adminMapper.testPlz();
+        log.info("list : "+list);
+    }
+
     //매 5분마다 작동 --> 정상 작동
     @Scheduled(cron="0 0/5 * * * *")
     public void test5min() throws Exception{
