@@ -58,9 +58,9 @@
     <div style="text-align: center;">
 
 
-        <button class="btn btn-dark product-buy-btn" onclick="orderValue();" style="width: 100px;">구매하기</button>
-        <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드
-        </button>
+<%--        <button class="btn btn-dark product-buy-btn" onclick="orderValue();" style="width: 100px;">구매하기</button>--%>
+<%--        <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드--%>
+<%--        </button>--%>
         <c:if test="${gallery.u_ID == loginId}">
             <button class="profileBtn2" type="button" onclick="window.location='/gallery/hide?G_NO=${gallery.g_NO}'">
                 숨기기
