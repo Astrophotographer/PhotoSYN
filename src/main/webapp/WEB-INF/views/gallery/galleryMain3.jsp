@@ -72,7 +72,7 @@
                         <a class="page-link" href="${pager.startPage-1}" tabindex="-1">Prev</a>
                     </li>
                 </c:if>
-                <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
+                <c:forEach var="num" begin="${pager.startPage}" end="3">
                     <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
                         <a class="page-link" href="/gallery/main?pageNum=${num}">${num}</a>
                     </li>
