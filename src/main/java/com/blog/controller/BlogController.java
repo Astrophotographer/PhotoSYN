@@ -32,7 +32,7 @@ public class BlogController {
 
     //C:\\Users\\tjoeun\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
     //"C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";
-    static String imgServerPath = "C:\\Users\\tjoeun\\IdeaProjects\\PhotoSYN\\src\\main\\resources\\saveImgckImage/";
+    static String imgServerPath = "C:\\Users\\tjoeun\\IdeaProjects\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
 
     //TODO 1001 : 블로그 페이징처리
     //글 가져오기 조건. 페이징X, ajax로 요청
