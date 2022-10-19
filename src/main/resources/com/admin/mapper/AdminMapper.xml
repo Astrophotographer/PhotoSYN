@@ -246,46 +246,56 @@
     </select>
 
     <!-- 원본 -->
-<!--    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">-->
-<!--        select A.u_id, sinceDate, galleryCount, sellerCount from (-->
-<!--        <![CDATA[-->
-<!--        select u_id, SYSDATE-U_REG sinceDate from USER_LIST where u_reg < SYSDATE ) A-->
-<!--        ]]>-->
-<!--        left outer join-->
-<!--        (select u_id, count(u_id) galleryCount from gallery group by u_id) B-->
-<!--        on (A.u_id = B.u_id)-->
-<!--        left outer join-->
-<!--        (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C-->
-<!--        on (A.u_id = C.o_seller)-->
-<!--    </select>-->
+    <!--    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">-->
+    <!--        select A.u_id, sinceDate, galleryCount, sellerCount from (-->
+    <!--        <![CDATA[-->
+    <!--        select u_id, SYSDATE-U_REG sinceDate from USER_LIST where u_reg < SYSDATE ) A-->
+    <!--        ]]>-->
+    <!--        left outer join-->
+    <!--        (select u_id, count(u_id) galleryCount from gallery group by u_id) B-->
+    <!--        on (A.u_id = B.u_id)-->
+    <!--        left outer join-->
+    <!--        (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C-->
+    <!--        on (A.u_id = C.o_seller)-->
+    <!--    </select>-->
     <!-- 수정본 -->
     <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">
-        select A.u_id, A.u_status, sinceDate, galleryCount, sellerCount from
+        select A.u_id, A.u_status, sinceDate, galleryCount, sellerCount
+        from
          <![CDATA[
-             (select u_id, SYSDATE-U_REG sinceDate, U_STATUS from USER_LIST where u_reg < SYSDATE ) A,
+             (select u_id, SYSDATE - U_REG sinceDate, U_STATUS from USER_LIST where u_reg < SYSDATE) A,
         ]]>
         (select u_id, count(u_id) galleryCount from gallery group by u_id) B,
-        (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C
+             (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C
         where a.u_id = b.u_id(+)
-        and a.u_id = c.o_seller(+)
+          and a.u_id = c.o_seller(+)
     </select>
 
     <select id="getMemberShipInfo" resultType="com.admin.domain.Admin_MemberShipInfo">
-        select * from MEMBERSHIP order by  MS_MEMBERSHIP desc
+        select *
+        from MEMBERSHIP
+        order by MS_MEMBERSHIP desc
     </select>
 
-<!--    admin_memberShip : Admin_MemberShip(u_id=DUMMY134, u_status=0, sinceDate=5.380358796296297, galleryCount=0, sellerCount=0)-->
+    <!--    admin_memberShip : Admin_MemberShip(u_id=DUMMY134, u_status=0, sinceDate=5.380358796296297, galleryCount=0, sellerCount=0)-->
+
+    <!--    <update id="updateUserMemberShip" parameterType="java.util.List">-->
+    <!--        BEGIN-->
+    <!--            <foreach collection="list" item="item" separator="">-->
+    <!--                update USER_LIST set MS_MEMBERSHIP = #{item.u_status} where U_ID = #{item.u_id}-->
+    <!--            </foreach>-->
+    <!--        END;-->
+    <!--    </update>-->
 
     <update id="updateUserMemberShip" parameterType="java.util.List">
-        BEGIN
-            <foreach collection="list" item="item" separator=";">
-                update USER_LIST set U_STATUS = #{item.u_status} where U_ID = #{item.u_id}
-            </foreach>
-        end;
+        <foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+            update USER_LIST set MS_MEMBERSHIP = #{item.u_status}
+            <where>u_id = #{item.u_id}</where>
+        </foreach>
     </update>
 
-<!--    <update id="updateUserMemberShip" parameterType="java.util.List">-->
-<!--        <foreach collection="list" item="item" open="Insert All"-->
-<!--    </update>-->
+    <!--    <update id="updateUserMemberShip" parameterType="java.util.List">-->
+    <!--        <foreach collection="list" item="item" open="Insert All"-->
+    <!--    </update>-->
 
 </mapper>

@@ -80,6 +80,7 @@ public class Adminscheduler {
 
         }
 
+//        log.info(list.size());
         int result = adminMapper.updateUserMemberShip(list);
 
         log.info("===========================================");
