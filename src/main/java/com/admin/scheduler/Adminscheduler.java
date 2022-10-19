@@ -83,10 +83,14 @@ public class Adminscheduler {
 
 //        log.info(list.size());
         int result = adminMapper.updateUserMemberShip(list);
-
         log.info("===========================================");
         log.info("result : "+result);
 
+
+        //daily 삭제
+        int delresult = adminMapper.deleteDailyCountTag();
+        log.info("===========================================");
+        log.info("delresult : "+delresult);
 
     }
 

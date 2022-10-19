@@ -61,4 +61,6 @@ public interface AdminMapper {
     public List<Admin_MemberShipInfo> getMemberShipInfo();
 
     public int updateUserMemberShip(List<Admin_MemberShip> admin_memberShip);
+
+    public int deleteDailyCountTag();
 }
