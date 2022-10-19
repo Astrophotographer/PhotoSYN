@@ -5,27 +5,32 @@
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+<%--        <div class="swiper-slide">--%>
+<%--            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>--%>
+<%--        </div>--%>
+        <c:forEach items="${maintagDTO}" var="tags">
+                    <div class="swiper-slide">
+                        <a href="#"><img class="imgs" src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}"></a>
+                    </div>
+        </c:forEach>
     </div>
     <!-- 페이징 버튼 처리 -->
     <%--    <div class="swiper-pagination"></div>--%>

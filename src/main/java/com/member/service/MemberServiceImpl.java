@@ -3,6 +3,7 @@ package com.member.service;
 import java.util.List;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MaintagDTO;
 import com.gallery.mapper.GalleryMapper;
 import com.member.domain.*;
 import com.member.mapper.MemberMapper;
@@ -180,6 +181,10 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.getGalleryCount(memberCriteria);
     }
 
+    @Override
+    public List<MaintagDTO> getMainTagDTO() {
+        return memberMapper.getMainTagDTO();
+    }
 
 
 }

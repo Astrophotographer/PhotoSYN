@@ -1,6 +1,7 @@
 package com.member.service;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.BuyDTO;
 import com.member.domain.CartDTO;
 import com.member.domain.MemberCriteria;
@@ -71,5 +72,8 @@ public interface MemberService {
 
     public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria);
     public int getGalleryCount(MemberCriteria memberCriteria);
+
+    //메인태그 가져와서 메인에 뿌려주기 구현
+    public List<MaintagDTO> getMainTagDTO();
 
 }

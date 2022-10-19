@@ -1,5 +1,6 @@
 package com.member.controller;
 
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.MemberDTO;
 import com.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -21,6 +22,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,8 +37,13 @@ public class MemberController {
     private BCryptPasswordEncoder encoder;
 
     @GetMapping("main")
-    public void mainPage() {
+    public String mainPage(Model model) {
+        List<MaintagDTO> maintagDTO = memberService.getMainTagDTO();
+        log.info("mainPage");
 
+        model.addAttribute("maintagDTO", maintagDTO);
+
+        return "/member/main";
     }
 
     @GetMapping("signup")
