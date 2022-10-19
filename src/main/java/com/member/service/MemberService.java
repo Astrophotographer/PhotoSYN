@@ -50,7 +50,7 @@ public interface MemberService {
     public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
-    public void insertCart(Long G_NO);
+    public void insertCart(CartDTO cartDTO);
 
     /* 장바구니 목록 */
     public List<CartDTO> listCart(CartDTO cartDTO);

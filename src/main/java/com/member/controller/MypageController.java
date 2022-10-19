@@ -213,10 +213,15 @@ public class MypageController {
     /************************************************ 장바구니 ************************************************/
 
     /* 장바구니 담기 */
-    @ResponseBody
     @PostMapping("insertCart")
-    public String insertCart(@RequestParam("G_NO") Long G_NO) {
-        memberService.insertCart(G_NO);
+    public String insertCart(@RequestParam("G_NO") Long G_NO, CartDTO cartDTO, GalleryDTO galleryDTO, Authentication auth) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+
+        cartDTO.setU_id(id);
+        cartDTO.setG_no(G_NO);
+
+        memberService.insertCart(cartDTO);
 
         return "success";
     }
@@ -225,9 +230,9 @@ public class MypageController {
     @GetMapping("profileCart")
     public String listCart(Authentication auth, CartDTO cartDTO, Model model) {
         MemberUser user = (MemberUser) auth.getPrincipal();
+        cartDTO.setU_id(user.getMember().getId());
 
         List<CartDTO> list = memberService.listCart(cartDTO);
-        cartDTO.setU_id(user.getMember().getId());
         model.addAttribute("list", list);
 
         return "/member/mypage/profileCart";
