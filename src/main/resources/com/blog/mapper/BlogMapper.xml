@@ -57,8 +57,8 @@
     </delete>
 
     <insert id="insertBlog">
-        insert into BLOG (B_NO, U_ID, MT_NAME, B_SUBJECT, B_CONTENT, B_TAG1)
-        values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT}, #{B_TAG1})
+        insert into BLOG (B_NO, U_ID, MT_NAME, B_SUBJECT, B_CONTENT, B_TAG1, B_STATUS)
+        values (blog_seq.nextval, #{U_ID}, #{MT_NAME}, #{B_SUBJECT}, #{B_CONTENT}, #{B_TAG1}, 0)
     </insert>
 
     <select id="checkBlogSeq" resultType="_int">
