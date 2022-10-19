@@ -55,12 +55,10 @@ public class GalleryController {
         model.addAttribute("pager", new Gallery_PageDTO(cri, total));
         List<GalleryDTO> list = galleryService.getGalleryList(cri);
         log.info("******************* list : " + list);
-        model.addAttribute("list", list);
-////
-// model로 list jsp에 뿌려줄 글 목록 전달
-//        model.addAttribute("main", galleryService.getGalleryList(cri));
-//        log.info("************ cri : " + cri);
-//
+
+        model.addAttribute("list", galleryService.getGalleryList(cri));
+        log.info("************ cri : " + cri);
+
 
         return "gallery/galleryMain3";
     }

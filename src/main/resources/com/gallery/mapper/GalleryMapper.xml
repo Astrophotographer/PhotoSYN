@@ -69,23 +69,6 @@
         </trim>
     </sql>
 
-    <select id="getListWithPaging" resultType="com.gallery.domain.GalleryDTO">
-        <![CDATA[
-		select g_no, title, writer, reg
-		from
-			(select /*+ INDEX_DESC(springBoard pk_springBoard) */
-		 	rownum r, g_no, title, writer, reg
-		 	from gallery
-		 	where
-		]]>
-
-        <include refid="search"></include>
-
-        <![CDATA[
-		 	rownum <= #{pageNum} * #{listQty} )
-		 where r > (#{pageNum} - 1) * #{listQty}
-		]]>
-    </select>
 
     <!-- 전체 갤러리 글 수  -->
     <select id="getTotal" resultType="int">
@@ -118,9 +101,9 @@
             (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%') and
         </if>
         <![CDATA[
-                    g_no > 0
+                    g_no > 0 and g_status < 2
                 order by G_REG desc) A
-            where rownum <= #{pageNum} * #{listQty} and g_status < 2
+            where rownum <= #{pageNum} * #{listQty}
             order by G_REG desc) B
 
         where r > (#{pageNum} - 1) * #{listQty}

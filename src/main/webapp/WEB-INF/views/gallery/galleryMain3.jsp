@@ -64,48 +64,33 @@
         </c:forEach>
     </div>
 
-
-    <!-- Pagination -->
-<%--    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">--%>
-<%--                  <nav aria-label="Table navigation">--%>
-<%--                    <ul class="inline-flex items-center">--%>
-<%--                        <c:if test="${pager.prev}">--%>
-<%--                      <li>--%>
-<%--                          <a href="/admin/gallery?pageNum=${pager.startPage-1}&listQty=10">Before </a>--%>
-
-<%--                      </li>--%>
-<%--                        </c:if>--%>
-<%--                        <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" step="1">--%>
-<%--                            <a href="/admin/gallery?pageNum=${num}&listQty=10"--%>
-<%--                               class=" ${pager.cri.pageNum==num?"px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple":"px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"}">${num}</a>--%>
-<%--                        </c:forEach>--%>
-<%--                        <c:if test="${pager.next}">--%>
-<%--                      <li>--%>
-
-<%--                          <a href="/admin/gallery?pageNum=${pager.endPage+1}&listQty=10">After </a>--%>
-<%--                      </li>--%>
-<%--                        </c:if>--%>
-<%--                    </ul>--%>
-<%--                  </nav>--%>
-<%--                </span>--%>
-
-
-<%--    <form id="pagingForm" action="/gallery/main">--%>
-<%--        <input type="hidden" name="pageNum" value="${pager.cri.pageNum}"/>--%>
-<%--        <input type="hidden" name="listQty" value="${pager.cri.listQty}"/>--%>
-<%--        <input type="hidden" name="sel" value="${pager.cri.sel}"/>--%>
-<%--        <input type="hidden" name="keyword" value="${pager.cri.keyword}"/>--%>
-<%--    </form>--%>
-</div>
-
+    <div class="row float-right">
+        <div class="col-sm-12 col-md-7">
+            <ul class="pagination">
+                <c:if test="${pager.prev}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pager.startPage-1}" tabindex="-1">Prev</a>
+                    </li>
+                </c:if>
+                <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
+                    <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
+                        <a class="page-link" href="/member/mypage/profileBuy?pageNum=${num}">${num}</a>
+                    </li>
+                </c:forEach>
+                <c:if test="${pager.next}">
+                    <li class="page-item">
+                        <a class="page-link" href="${pager.endPage + 1}">Next</a>
+                    </li>
+                </c:if>
+            </ul>
+        </div>
+    </div>
 
 <br/><br/><br/>
 
 
 <script>
     $(document).ready(function(){
-
-
         // 카트 추가 이벤트 처리
         $(".product-cart-btn").on("click", function (e) {
             let gnoVal = $(this).data('gno');

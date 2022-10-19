@@ -29,6 +29,7 @@ public class Gallery_Criteria {
         this.pageNum = pageNum;
         this.listQty = listQty;
     }
+
     // 검색 조건을 배열로 만들어 한번에 처리하기 위한 메서드 추가
     //public String[] getSelArr() {
         //return sel == null ? new String[] {} : sel.split("");
