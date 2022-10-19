@@ -92,6 +92,18 @@
                                 value="3"
                                 <c:if test="${adminMemberDTO.ms_membership==3}">checked</c:if>
                         />
+                        <span class="ml-2">플레티넘</span>
+                    </label>
+                    <label
+                            class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400"
+                    >
+                        <input
+                                type="radio"
+                                class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                                name="accountType"
+                                value="3"
+                                <c:if test="${adminMemberDTO.ms_membership==4}">checked</c:if>
+                        />
                         <span class="ml-2">다이아</span>
                     </label>
                     <br>

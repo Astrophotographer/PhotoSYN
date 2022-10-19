@@ -234,4 +234,10 @@
         where MT_NAME = #{originTag}
     </update>
 
+    <!-- 스케쥴러 실행 -->
+    <delete id="deleteBlogTempImg">
+        delete
+        from BLOG_IMG_TEMP
+    </delete>
+
 </mapper>

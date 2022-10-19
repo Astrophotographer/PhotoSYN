@@ -48,4 +48,7 @@ public interface AdminMapper {
     public int updateTag(Admin_UpsertTagDTO admin_upsertTagDTO);
 
     public int insertTag(Admin_UpsertTagDTO admin_upsertTagDTO);
+
+    //스케쥴러 실행
+    public int deleteBlogTempImg();
 }
