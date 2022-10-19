@@ -74,7 +74,7 @@
                 </c:if>
                 <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
                     <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
-                        <a class="page-link" href="/member/mypage/profileBuy?pageNum=${num}">${num}</a>
+                        <a class="page-link" href="/gallery/main?pageNum=${num}">${num}</a>
                     </li>
                 </c:forEach>
                 <c:if test="${pager.next}">
