@@ -45,7 +45,8 @@ public class Adminscheduler {
 //        }
 //    }
 
-    @Scheduled(cron = "0 0/1 * * * *")
+    //3시 정각 맴버쉽 시작
+    @Scheduled(cron = "0 0 3 * * *")
     public void testPrint() throws Exception {
         log.info("===========================================");
         log.info("testPrint");
