@@ -31,9 +31,12 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Override
     public List<GalleryDTO> getGalleryList(Gallery_Criteria cri) {
-
-
         return galleryMapper.getGalleryList(cri);
+    }
+
+    @Override
+    public List<GalleryDTO> getListWithPaging(Gallery_Criteria cri) {
+        return galleryMapper.getListWithPaging(cri);
     }
 
 

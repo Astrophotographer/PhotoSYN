@@ -21,7 +21,7 @@
         <input type="text" class="form-control" name="writer" value="${gallery.u_ID}" readonly="readonly"/>
         </br></br>
 
-        <img src="/resources/gallery/images/${gallery.g_HNAME}" width="1000px" align="center" />
+        <img src="/resources/gallery/images/${gallery.g_HNAME}" width="1000px" align="center"/>
         </br></br>
 
 
@@ -47,67 +47,66 @@
         <input type="text" class="form-control" name="writer" value="${metadata.m_SHUTTERSPEED}" readonly="readonly"/>
 
 
-
-
-        <input type="hidden" name="pageNum" value="${cri.pageNum}" />
-        <input type="hidden" name="listQty" value="${cri.listQty}" />
-        <input type="hidden" name="sel" value="${cri.sel}" />
-        <input type="hidden" name="keyword" value="${cri.keyword}" />
-<%--  메타데이터 필드 추가 --%>
+        <input type="hidden" name="pageNum" value="${cri.pageNum}"/>
+        <input type="hidden" name="listQty" value="${cri.listQty}"/>
+        <input type="hidden" name="sel" value="${cri.sel}"/>
+        <input type="hidden" name="keyword" value="${cri.keyword}"/>
+        <%--  메타데이터 필드 추가 --%>
     </div>
 
 
     <div style="text-align: center;">
 
 
-
-
-
-
-
-        <button class="btn btn-dark product-buy-btn" data-gno="${gallery.g_NO}" style="width: 100px;">구매하기</button>
-        <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드</button>
-     <c:if test="${gallery.u_ID == loginId}">
-        <button class="profileBtn2" type="button" onclick="window.location='/gallery/hide?G_NO=${gallery.g_NO}'">숨기기</button>
-     </c:if>
+        <button class="btn btn-dark product-buy-btn" onclick="orderValue();" style="width: 100px;">구매하기</button>
+        <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드
+        </button>
+        <c:if test="${gallery.u_ID == loginId}">
+            <button class="profileBtn2" type="button" onclick="window.location='/gallery/hide?G_NO=${gallery.g_NO}'">
+                숨기기
+            </button>
+        </c:if>
     </div>
 </div>
-<!-- 버튼에 따른 이벤트 처리 스크립트 추가  -->
+<!-- 버튼에 따른 이벤트 처리 스크립트 추가 -->
 <script>
-    $(document).ready(function(){
 
-        $(".product-buy-btn").on("click", function (e){
+    function orderValue() {
         let gnoVal = $(this).data('gno');
         console.log("gnoVal: " + gnoVal);
-
         var header = $("meta[name='_csrf_header']").attr("content");
         var token = $("meta[name='_csrf']").attr("content");
         var chk = confirm("구매하시겠습니까?");
-            if (chk == true){
-                console.log("******true********")
-                $.ajax({
-                    url        : "/member/mypage/galleryBuyBtn",
-                    type       : 'POST',
-                    traditional: true,
-                    data       : {G_NO, gnoVal},
-                    beforeSend : function (xhr) {
-                        xhr.setRequestHeader(header, token);
-                    },
-                    success    : function (result) {
-                        if (result = 1) {
-                            alert("구매 완료");
 
-                        } else {
-                            alert("구매 실패");
-                        }
+        if (chk == true) {
+            console.log("******2********")
+            $.ajax({
+                url: "/member/mypage/galleryBuyBtn",
+                type: 'POST',
+                traditional: true,
+                data: {G_NO: gnoVal},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result == 1) {
+                        alert("구매 완료");
+                        location.replace("profileCart");
+
+                    } else {
+                        alert("구매 실패");
                     }
-                });
-            } else {
-                console.log("******false********")
+                }
+            });
+        } else {
+
                 alert("구매 취소");
-            }
-        });
-    });
+        }
+
+    }
+
+
     // $(document).ready(function(){
     //     let formObj = $("#modifyForm");	// form 태그 가져오기
     //     $("button").on("click", function(e){
