@@ -19,7 +19,7 @@ public class Gallery_PageDTO { // 페이지 번호등 페이징 처리시 필요
         this.total = total;
 
         // 한페이지에 페이지번호 10개 띄우는 기준으로 계산
-        this.endPage = (int)(Math.ceil(cri.getPageNum() / 9 )) * 10;
+        this.endPage = (int)(Math.ceil(cri.getPageNum() / 12 )) * 10;
         this.startPage = this.endPage - 9;
 
         int realEnd = (int)(Math.ceil((total * 1.0) / cri.getListQty())); // 전체 페이지수

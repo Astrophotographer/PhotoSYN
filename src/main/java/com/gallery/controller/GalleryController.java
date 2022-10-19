@@ -3,8 +3,10 @@ package com.gallery.controller;
 import com.blog.domain.BlogDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.gallery.domain.Gallery_PageDTO;
+import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -65,9 +67,11 @@ public class GalleryController {
 
     @PreAuthorize("isAuthenticated()") // 로그인한 사용자만 접근 가능하게
     @RequestMapping(value = "gallerySingle", method = RequestMethod.GET)
-    public String gallerySingle(Model model, @RequestParam("G_NO") Long G_NO) {
+    public String gallerySingle(Authentication auth, Model model, @RequestParam("G_NO") Long G_NO) {
         log.info("gallerySingle G_NO : " + G_NO);
-
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+        model.addAttribute("loginId", id);
         GalleryDTO galleryDTO = galleryService.getGallerySingle(G_NO);
         //String[] tagsARR = galleryDTO.getG_TAG1().substring(1).split("#");
         //log.info("tagsARR : " + tagsARR.toString());

@@ -59,107 +59,95 @@
 
     <div style="text-align: center;">
 
-<%--            <c:when test="${gallery.g_STATUS==0}%%">--%>
-<%--                --%>
-<%--                --%>
-<%--            </c:when>--%>
 
-        <button class="profileBtn2" type="button" style="width: 80px;">구매하기</button>
+
+
+
+
+
+        <button class="btn btn-dark product-buy-btn" data-gno="${gallery.g_NO}" style="width: 100px;">구매하기</button>
         <button class="profileBtn2" onclick="window.location='/gallery/download?fileName=${gallery.g_HNAME}'">다운로드</button>
-
+     <c:if test="${gallery.u_ID == loginId}">
         <button class="profileBtn2" type="button" onclick="window.location='/gallery/hide?G_NO=${gallery.g_NO}'">숨기기</button>
-
+     </c:if>
     </div>
 </div>
 <!-- 버튼에 따른 이벤트 처리 스크립트 추가  -->
-<script type="text/javascript">
+<script>
     $(document).ready(function(){
-        let formObj = $("#modifyForm");	// form 태그 가져오기
-        $("button").on("click", function(e){
-            e.preventDefault(); 	// 기본 동작 취소 (submit의 이동기능 취소)
-            //console.log(e);
-            let service = $(this).data("service");
-            //console.log(service);
-            if(service == 'hide'){
-                formObj.attr("action", "/gallery/hide");
-            }else if(service == 'list'){
-                //formObj.attr("action", "/board/list");
-                //self.location = "/board/list";
-                //return;
 
-                // 폼태그의 action과 method 속성을 변경
-                formObj.attr("action", "/gallery/list").attr("method", "get");
-                // list로 이동할때는 폼태그안에 있는 데이터 전부 보낼필요가 없으니
-                // pageNum과 listQty 히든태그를 복사해놓고
-                // 내용물 전부 삭제하고
-                // 복사해둔 pageNum, listQty 태그만 다시 추가해서
-                // 이동시킴 (form submit날려서 이동)
-                let pageNumTag = $("input[name='pageNum']").clone();
-                let listQtyTag = $("input[name='listQty']").clone();
-                let selTag = $("input[name='sel']").clone();
-                let keywordTag = $("input[name='keyword']").clone();
-                formObj.empty();
-                formObj.append(pageNumTag);
-                formObj.append(listQtyTag);
-                formObj.append(selTag);
-                formObj.append(keywordTag);
-            }
+        $(".product-buy-btn").on("click", function (e){
+        let gnoVal = $(this).data('gno');
+        console.log("gnoVal: " + gnoVal);
 
-            // js로 폼의 submit 버튼 누른 효과와 동일
-            formObj.submit();
-
-        });
-
-
-
-    });
-    function  HideConfirm(){
-
-    }
-
-    function orderValue() {
-        var url = "galleryBuyBtn";
-        var valueArr = new Array();
-        var list = $("input[name='RowCheck']");
-
-        for (var i = 0; i < list.length; i++) {
-            // 선택되어 있으면 배열에 값을 저장함
-            if (list[i].checked) {
-                valueArr.push(list[i].value);
-            }
-        }
-        if (valueArr.length == 0) {
-            alert("선택된 상품이 없습니다.");
-        } else {
-            var header = $("meta[name='_csrf_header']").attr("content");
-            var token = $("meta[name='_csrf']").attr("content");
-            var chk = confirm("구매하시겠습니까?");
-
-            if (chk == true) {
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
+        var chk = confirm("구매하시겠습니까?");
+            if (chk == true){
+                console.log("******true********")
                 $.ajax({
-                    url        : url,
+                    url        : "/member/mypage/galleryBuyBtn",
                     type       : 'POST',
                     traditional: true,
-                    data       : {
-                        valueArr: valueArr
-                    },
+                    data       : {G_NO, gnoVal},
                     beforeSend : function (xhr) {
                         xhr.setRequestHeader(header, token);
                     },
-                    success    : function (jdata) {
-                        if (jdata = 1) {
+                    success    : function (result) {
+                        if (result = 1) {
                             alert("구매 완료");
-                            location.replace("profileCart");
+
                         } else {
                             alert("구매 실패");
                         }
                     }
                 });
             } else {
+                console.log("******false********")
                 alert("구매 취소");
             }
-        }
-    }
-</script>
+        });
+    });
+    // $(document).ready(function(){
+    //     let formObj = $("#modifyForm");	// form 태그 가져오기
+    //     $("button").on("click", function(e){
+    //         e.preventDefault(); 	// 기본 동작 취소 (submit의 이동기능 취소)
+    //         //console.log(e);
+    //         let service = $(this).data("service");
+    //         //console.log(service);
+    //         if(service == 'hide'){
+    //             formObj.attr("action", "/gallery/hide");
+    //         }else if(service == 'list'){
+    //             //formObj.attr("action", "/board/list");
+    //             //self.location = "/board/list";
+    //             //return;
+    //
+    //             // 폼태그의 action과 method 속성을 변경
+    //             formObj.attr("action", "/gallery/list").attr("method", "get");
+    //             // list로 이동할때는 폼태그안에 있는 데이터 전부 보낼필요가 없으니
+    //             // pageNum과 listQty 히든태그를 복사해놓고
+    //             // 내용물 전부 삭제하고
+    //             // 복사해둔 pageNum, listQty 태그만 다시 추가해서
+    //             // 이동시킴 (form submit날려서 이동)
+    //             let pageNumTag = $("input[name='pageNum']").clone();
+    //             let listQtyTag = $("input[name='listQty']").clone();
+    //             let selTag = $("input[name='sel']").clone();
+    //             let keywordTag = $("input[name='keyword']").clone();
+    //             formObj.empty();
+    //             formObj.append(pageNumTag);
+    //             formObj.append(listQtyTag);
+    //             formObj.append(selTag);
+    //             formObj.append(keywordTag);
+    //         }
+    //
+    //         // js로 폼의 submit 버튼 누른 효과와 동일
+    //         formObj.submit();
+    //
+    //     });
+    //
+    //
+    //
+    // });
+
 </script>
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
