@@ -126,8 +126,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 담기 */
     @Override
-    public void insertCart(Long G_NO) {
-        memberMapper.insertCart(G_NO);
+    public void insertCart(CartDTO cartDTO) {
+        memberMapper.insertCart(cartDTO);
     }
 
     /* 장바구니 목록 */

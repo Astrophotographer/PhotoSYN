@@ -135,9 +135,9 @@
                G_HNAME,
                sysdate,
                G_NO,
-               U_ID
+               #{u_id}
         from GALLERY
-        where G_NO = #{G_NO}
+        where G_NO = #{g_no}
     </insert>
 
     <!-- 장바구니 목록 -->

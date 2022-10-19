@@ -49,7 +49,7 @@ public interface MemberMapper {
     public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
-    public void insertCart(Long g_no);
+    public void insertCart(CartDTO cartDTO);
 
     /* 장바구니 목록 */
     public List<CartDTO> listCart(CartDTO cartDTO);
