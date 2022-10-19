@@ -43,16 +43,14 @@ public class MypageController {
 
     @GetMapping("profile")
     public String profile(Model model, Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO) {
-        galleryDTO.setG_SALES(1);
-        galleryDTO.setG_HPRICE(1000);
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        log.info("########################################## :: " + buyDTO);
 
-        buyDTO.setO_seller("찬욱");
-        buyDTO.setO_price(1000);
-
-        long quantity = galleryDTO.getG_SALES();
+        buyDTO.setId(user.getMember().getId());
         int result = memberService.sum(buyDTO);
-
-        model.addAttribute("tot", result * quantity);  // 합계금액
+        model.addAttribute("tot", result);
+        log.info("########################################## :: " + buyDTO);
+        log.info("########################################## :: " + result);
 
         return "/member/mypage/profile";
     }
@@ -225,8 +223,11 @@ public class MypageController {
 
     // 장바구니 목록 페이지
     @GetMapping("profileCart")
-    public String listCart(CartDTO cartDTO, Model model) {
+    public String listCart(Authentication auth, CartDTO cartDTO, Model model) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+
         List<CartDTO> list = memberService.listCart(cartDTO);
+        cartDTO.setU_id(user.getMember().getId());
         model.addAttribute("list", list);
 
         return "/member/mypage/profileCart";
@@ -252,11 +253,11 @@ public class MypageController {
     public void buy(Authentication auth, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
-
         int total = memberService.getGalleryCount(memberCriteria);
-        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
-        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
 
+        memberCriteria.setId(id);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
 
     // 마이페이지 판매내역
@@ -264,15 +265,11 @@ public class MypageController {
     public void sell(Authentication auth, GalleryDTO galleryDTO, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
-
-        long quantity = galleryDTO.getG_SALES();
-        long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
-
         int total = memberService.getGalleryCount(memberCriteria);
-        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
-        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
 
-        model.addAttribute("tot", result);
+        memberCriteria.setId(id);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
 
     // 갤러리 구매 (포인트 차감)
@@ -360,7 +357,7 @@ public class MypageController {
     public boolean renewalAuth() {
         // 기존 정보 꺼내기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MemberUser userAccount = (MemberUser) authentication.getPrincipal(); // principal만 꺼내서다음
+        MemberUser userAccount = (MemberUser) authentication.getPrincipal(); // principal만 꺼내서 담기
 
         // 현재 Authentication로 사용자 인증 후, 새 Authentication 정보를 SecurityContextHolder에 세팅
         SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, userAccount.getUsername()));
@@ -370,7 +367,7 @@ public class MypageController {
 
     /* 기존 권한과 사용자 id를 받아서,  new principal로 인증과 토큰 갱신해주는 메서드 */
     public Authentication createNewAuthentication(Authentication currentAuth, String username) {
-        UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB가서 새로운 정보로 가져와 pricipal 새로만들기
+        UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB 가서 새로운 정보로 가져와 pricipal 새로 만들기
         // 새로운 principal로 시큐리티 인증 권한(토큰) 생성
         UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
         newAuth.setDetails(currentAuth.getDetails()); // 현재 정보 추가

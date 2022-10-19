@@ -37,8 +37,6 @@ public class MetadataServiceImpl implements MetadataService {
         //String imgPath = imgpath;
         File file = new File(imgpath);
 
-
-
         try {
             Metadata metadata = ImageMetadataReader.readMetadata(file);
 

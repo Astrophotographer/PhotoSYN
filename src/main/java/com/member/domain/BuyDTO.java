@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 
 @Data
 public class BuyDTO {
+    private String id;
     private Long o_no;
     private String o_buyer;
     private String o_seller;

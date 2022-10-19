@@ -64,7 +64,7 @@ public interface MemberMapper {
     public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
-    public int sum(BuyDTO buyDTO);
+    public Integer sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO);

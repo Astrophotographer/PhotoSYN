@@ -143,7 +143,7 @@
     <!-- 장바구니 목록 -->
     <select id="listCart" resultType="com.member.domain.CartDTO">
         SELECT C_ID, C_HPRICE, C_LPRICE, C_HNAME, C_LNAME, C_REG, G_NO
-        FROM USER_CART
+        FROM USER_CART WHERE U_ID = #{u_id}
         ORDER BY C_ID ASC
     </select>
 
@@ -166,7 +166,7 @@
     <select id="sum" resultType="Integer">
         select sum(O_PRICE)
         from BUY
-        where O_SELLER = #{o_seller}
+        where O_SELLER = #{id}
     </select>
 
     <!-- 마이페이지 구매 판매내역 뿌려주기 -->
