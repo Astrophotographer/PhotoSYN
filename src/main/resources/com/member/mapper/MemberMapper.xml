@@ -212,4 +212,8 @@
         from buy
     </select>
 
+    <select id="getMainTagDTO" resultType="com.gallery.domain.MaintagDTO">
+        select * from MAINTAG order by MT_NAME desc
+    </select>
+
 </mapper>

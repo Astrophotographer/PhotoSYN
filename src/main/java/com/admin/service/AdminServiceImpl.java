@@ -201,8 +201,10 @@ public class AdminServiceImpl implements AdminService {
                 log.info("file.getContentType : " + file.getContentType());
                 log.info("file.getBytes : " + file.getBytes());
 
+                //C:\\Users\\pmwkd\\IdeaProjects\\PhotoSYN\\src\\main\\webapp\\resources\\mainTagImgSaveFolder
                 //파일 저장 경로
-                String uploadImgPath = request.getRealPath("/resources/mainTagImgSaveFolder");
+//                String uploadImgPath = request.getRealPath("/resources/mainTagImgSaveFolder");
+                String uploadImgPath = "C:\\Users\\pmwkd\\IdeaProjects\\PhotoSYN\\src\\main\\webapp\\resources\\mainTagImgSaveFolder";
 
                 String uuid = UUID.randomUUID().toString().replaceAll("-", "").toUpperCase();
                 String saveImgName = uuid + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));

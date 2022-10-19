@@ -1,6 +1,7 @@
 package com.member.mapper;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.*;
 
 import java.util.List;
@@ -73,5 +74,7 @@ public interface MemberMapper {
 
     public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria);
     public int getGalleryCount(MemberCriteria memberCriteria);
+
+    public List<MaintagDTO> getMainTagDTO();
 
 }
