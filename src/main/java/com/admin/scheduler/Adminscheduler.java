@@ -20,32 +20,8 @@ public class Adminscheduler {
     @Autowired
     private AdminMapper adminMapper;
 
-    //매일 정각?
-//    @Scheduled(cron = "0 0 0 * * *")
-//    @Scheduled(cron="0 0/1 * * * *")
-//    public void testPrint() throws  Exception{
-//        log.info("===========================================");
-//        log.info("testPrint");
-//        log.info(new Date() + "실행!");
-//
-//        //모든 유저 아이디 들고와서
-////        List<Admin_MemberShip> member_With_uid = adminMapper.getUserList();
-//        List<String> u_id = adminMapper.getUserList();
-//        List<Admin_MemberShip> admin_memberShipList = null;
-//
-//        for(int i=0;i<u_id.size();i++){
-//            log.info("u_id : "+u_id.get(i));
-//            admin_memberShipList = adminMapper.getUserMemberList(u_id.get(i));
-//
-//        }
-//
-//        //유저 멤버쉽 비교를 위해 데이터들 가져옴.
-//        for(int i=0; i<admin_memberShipList.size();i++){
-//            log.info("admin_memberShipList : "+admin_memberShipList.get(i));
-//        }
-//    }
 
-    //3시 정각 맴버쉽 시작
+    //3시 정각 맴버쉽 시작+데일리카운트태그 초기화+블로그임시사진저장소 삭제
     @Scheduled(cron = "0 0 3 * * *")
     public void testPrint() throws Exception {
         log.info("===========================================");
@@ -92,6 +68,16 @@ public class Adminscheduler {
         log.info("===========================================");
         log.info("delresult : "+delresult);
 
+        //tempBlogImg 삭제
+        Date date = new Date();
+
+        log.info("===========================================");
+        log.info("deleteBlogTempImg");
+        log.info(date + "실행!");
+
+        int deleteBlogTempImgresult = adminMapper.deleteBlogTempImg();
+        log.info(date + " 에 진행.\n삭제 결과 : " + deleteBlogTempImgresult);
+
     }
 
     //매 5분마다 작동 --> 정상 작동
@@ -101,21 +87,6 @@ public class Adminscheduler {
         log.info("test5min");
         log.info(new Date() + "실행!");
     }
-
-    @Scheduled(cron = "0 0 3 * * *")    //매일 3시
-    public void deleteBlogTempImg() throws Exception {
-        Date date = new Date();
-
-        log.info("===========================================");
-        log.info("deleteBlogTempImg");
-        log.info(date + "실행!");
-
-        int result = adminMapper.deleteBlogTempImg();
-
-        log.info(date + " 에 진행.\n삭제 결과 : " + result);
-
-    }
-
 
     //1초마다 실행 테스트용
 //    @Scheduled(fixedDelay = 1000)
