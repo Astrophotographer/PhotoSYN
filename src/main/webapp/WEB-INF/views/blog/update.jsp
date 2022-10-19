@@ -124,17 +124,18 @@
         $("button").on("click", function (e) {
             e.preventDefault();
             let type = $(this).data("service");
-            let url = "/blog/update.do?b_no=${blog.b_NO}";
+            let url = "/blog/update.do?_csrf=${_csrf.token}&b_no=${blog.b_NO}";
             let method = "post";
 
             if (type === "update") {
-                url = "/blog/update.do?b_no=${blog.b_NO}";
+                url = "/blog/update.do?_csrf=${_csrf.token}&b_no=${blog.b_NO}";
                 method = "post";
                 console.log("수정");
                 formObject.attr("action", url).attr("method", method).submit();
             } else if (type === "delete") {
                 url = "/blog/delete";
-                method = "delete";
+                // method = "delete";
+                method = "get";
                 formObject.attr("action", url).attr("method", method).submit();
             } else if (type === "goMain") {
                 url = "/blog/main";
@@ -151,6 +152,10 @@
     });
 
     function confirmUpdateDeleteImage(delName, uid, originName) {
+
+        let token = $("meta[name='_csrf']").attr("content");
+        let header = $("meta[name='_csrf_header']").attr("content");
+
         console.log("confirmUpdateDeleteImage.delName :" + delName + " uid : " + uid + " originName : " + originName);
         if (confirm("이미지를 삭제하시겠습니까?(DB및 서버에서 삭제 진행). 이미지태그 삭제는..")) {
             (() => {
@@ -165,6 +170,9 @@
                         "bi_name": delName,
                         "uid": uid,
                         "originName": originName
+                    },
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
                     },
                     success: function (data) {
                         console.log(data);
