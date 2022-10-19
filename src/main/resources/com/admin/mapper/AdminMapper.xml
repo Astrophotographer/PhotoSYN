@@ -298,4 +298,9 @@
     <!--        <foreach collection="list" item="item" open="Insert All"-->
     <!--    </update>-->
 
+    <update id="deleteDailyCountTag">
+        update TAGLIST
+        set T_DAYCOUNT = 0
+    </update>
+
 </mapper>
