@@ -3,7 +3,7 @@
 
 
 <style>
-    .main_title{
+    .main_title {
         margin: 1rem auto;
         text-align: center;
     }
@@ -25,10 +25,9 @@
         margin-bottom: 5px;
     }
 
-    .paging_start{
+    .paging_start {
         text-align: center;
     }
-
 
 
 </style>
@@ -38,7 +37,7 @@
     <!-- 상단 제목 -->
     <div class="main_title">
 
-        <div align="right" >
+        <div align="right">
             <button type="button" onclick="location.href='/gallery/uploadForm'">글 작성</button>
         </div>
     </div>
@@ -66,43 +65,41 @@
     </div>
 
 
-<%--    <!--  페이지 번호 Pagination  -->--%>
-    <div>
-        <div>
-            <ul>
-                <c:if test="${pager.prev}">
-                    <li>
-                        <a class="page-link" href="${pager.startPage-1}"
-                           tabindex="-1">Previous</a>
-                    </li>
-                </c:if>
-                <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}">
-                    <li class="page-item ${pager.cri.pageNum == num ? "active":""}">
-                        <a class="page-link" href="/gallery/main?page=${num}">${num}</a>
-                    </li>
-                </c:forEach>
-                <c:if test="${pager.next}">
-                    <li class="page-item">
-                        <a class="page-link" href="${pager.endPage+1}">Next</a>
-                    </li>
-                </c:if>
-            </ul>
-        </div>
-    </div>
+    <!-- Pagination -->
+<%--    <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">--%>
+<%--                  <nav aria-label="Table navigation">--%>
+<%--                    <ul class="inline-flex items-center">--%>
+<%--                        <c:if test="${pager.prev}">--%>
+<%--                      <li>--%>
+<%--                          <a href="/admin/gallery?pageNum=${pager.startPage-1}&listQty=10">Before </a>--%>
+
+<%--                      </li>--%>
+<%--                        </c:if>--%>
+<%--                        <c:forEach var="num" begin="${pager.startPage}" end="${pager.endPage}" step="1">--%>
+<%--                            <a href="/admin/gallery?pageNum=${num}&listQty=10"--%>
+<%--                               class=" ${pager.cri.pageNum==num?"px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple":"px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"}">${num}</a>--%>
+<%--                        </c:forEach>--%>
+<%--                        <c:if test="${pager.next}">--%>
+<%--                      <li>--%>
+
+<%--                          <a href="/admin/gallery?pageNum=${pager.endPage+1}&listQty=10">After </a>--%>
+<%--                      </li>--%>
+<%--                        </c:if>--%>
+<%--                    </ul>--%>
+<%--                  </nav>--%>
+<%--                </span>--%>
 
 
-    <form id="pagingForm" action="/gallery/main">
-        <input type="hidden" name="pageNum" value="${pager.cri.pageNum}"/>
-        <input type="hidden" name="listQty" value="${pager.cri.listQty}"/>
-        <input type="hidden" name="sel" value="${pager.cri.sel}"/>
-        <input type="hidden" name="keyword" value="${pager.cri.keyword}"/>
-    </form>
+<%--    <form id="pagingForm" action="/gallery/main">--%>
+<%--        <input type="hidden" name="pageNum" value="${pager.cri.pageNum}"/>--%>
+<%--        <input type="hidden" name="listQty" value="${pager.cri.listQty}"/>--%>
+<%--        <input type="hidden" name="sel" value="${pager.cri.sel}"/>--%>
+<%--        <input type="hidden" name="keyword" value="${pager.cri.keyword}"/>--%>
+<%--    </form>--%>
 </div>
 
 
-<br /><br /><br />
-
-
+<br/><br/><br/>
 
 
 <script>
@@ -111,7 +108,7 @@
 
         // 카트 추가 이벤트 처리
         $(".product-cart-btn").on("click", function (e) {
-            let gnoVal = $(this).data('gno');    // '${gallery.G_NO}'
+            let gnoVal = $(this).data('gno');
             console.log("gnoVal: " + gnoVal);
 
             var header = $("meta[name='_csrf_header']").attr("content");
@@ -137,21 +134,9 @@
         })// 카트 추가 끝
 
 
-
-
     }); // ready 끝
 
 </script>
-
-
-
-
-
-
-
-
-
-
 
 
 <%@ include file="/WEB-INF/views/includes/footer.jsp" %>
