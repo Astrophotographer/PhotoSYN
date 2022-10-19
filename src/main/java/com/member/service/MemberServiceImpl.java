@@ -150,7 +150,7 @@ public class MemberServiceImpl implements MemberService {
 
     /* 총 합계금액 */
     @Override
-    public int sum(BuyDTO buyDTO) {
+    public Integer sum(BuyDTO buyDTO) {
         return memberMapper.sum(buyDTO);
     }
 
@@ -172,8 +172,7 @@ public class MemberServiceImpl implements MemberService {
 
     /************************************************ 페이징 처리 ******************************************************/
     @Override
-    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id) {
-        memberCriteria.setId(id);
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria) {
         return memberMapper.getListWithPaging(memberCriteria);
     }
     @Override

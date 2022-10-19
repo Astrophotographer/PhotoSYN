@@ -62,14 +62,14 @@ public interface MemberService {
     public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
-    public int sum(BuyDTO buyDTO);
+    public Integer sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO, String id);
 
     /************************************************ 페이징 처리 ******************************************************/
 
-    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id);
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria);
     public int getGalleryCount(MemberCriteria memberCriteria);
 
 }

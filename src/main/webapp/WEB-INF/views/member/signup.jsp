@@ -35,7 +35,7 @@
             <span id="nameCk"></span>
         </div>
         <div class="int-area">
-            <input type="text" name="phone" id="phone" autocomplete="off"/>
+            <input type="text" name="phone" id="phone" autocomplete="off" required/>
             <label for="phone">전화번호</label>
         </div>
         <div class="btn-area">

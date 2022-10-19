@@ -109,19 +109,18 @@ public class MemberController {
     public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, ModelMap model, ModelAndView mv,
                                         HttpServletResponse response, MemberDTO memberDTO) throws Exception {
         String id = (String) paramMap.get("id");
-        memberDTO.setId(id); // memberDTO에 값 저장
         String name = (String) paramMap.get("name");
         String password = "";
-        log.info("################## id :: " + memberDTO.getId());
+
+        memberDTO.setId(id);
 
         if (memberDTO.getId().equals(id)) {
             for (int i = 0; i < 12; i++) {
                 password += (char) ((Math.random() * 26) + 97);
             }
-            memberDTO.setPw(encoder.encode(password)); // 임시 비밀번호 암호화
+            memberDTO.setPw(encoder.encode(password));
 
         }
-        log.info("################## pw :: " + memberDTO.getPw());
 
         try {
             MimeMessage msg = mailSender.createMimeMessage();
@@ -137,7 +136,7 @@ public class MemberController {
             System.out.println("MessagingException");
             e.printStackTrace();
         }
-        memberService.updatePw(memberDTO); // DB에 임시 비밀번호 저장
+        memberService.updatePw(memberDTO);
 
         mv.setViewName("/member/login");
         return mv;
