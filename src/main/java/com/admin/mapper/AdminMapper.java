@@ -52,9 +52,13 @@ public interface AdminMapper {
     public List<String> getUserList();
 
 //    public List<Admin_MemberShip> getUserMemberList(List<String> u_id);
-    public List<Admin_MemberShip> getUserMemberList(String u_id);
+//    public List<Admin_MemberShip> getUserMemberList(String u_id);
 
 
     //test
-    public List<Admin_MemberShip> testPlz();
+    public List<Admin_MemberShip> getUserMemberList();
+
+    public List<Admin_MemberShipInfo> getMemberShipInfo();
+
+    public int updateUserMemberShip(List<Admin_MemberShip> admin_memberShip);
 }
