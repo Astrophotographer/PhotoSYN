@@ -240,4 +240,48 @@
         from BLOG_IMG_TEMP
     </delete>
 
+    <select id="getUserList" resultType="string">
+        select u_id
+        from USER_LIST
+    </select>
+
+    <!--    <select id="getUserMemberList" parameterType="java.util.List" resultType="com.admin.domain.Admin_MemberShip">-->
+    <!--        BEGIN-->
+    <!--        <foreach collection="list" item="u_id" separator="">-->
+    <!--            select-->
+    <!--            (select u_id from USER_LIST where U_ID = #{u_id}) as u_id,-->
+    <!--            <![CDATA[-->
+    <!--                (select SYSDATE-U_REG from USER_LIST where u_reg < SYSDATE and u_id=#{u_id})as sinceDate,-->
+    <!--            ]]>-->
+    <!--            (select count(*) from gallery where u_id = #{u_id})as galleryCount,-->
+    <!--            (select count(*) from buy where O_SELLER = #{u_id})as sellerCount-->
+    <!--            from dual-->
+    <!--        </foreach>-->
+    <!--        END;-->
+    <!--    </select>-->
+
+    <!--    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">-->
+    <!--        <selectKey keyProperty="userId" order="BEFORE" resultType="string">-->
+    <!--            select u_id from USER_LIST-->
+    <!--        </selectKey>-->
+    <!--            select-->
+    <!--            (select u_id from USER_LIST where U_ID = #{u_id}) as u_id,-->
+    <!--            <![CDATA[-->
+    <!--                (select SYSDATE-U_REG from USER_LIST where u_reg < SYSDATE and u_id=#{u_id})as sinceDate,-->
+    <!--            ]]>-->
+    <!--            (select count(*) from gallery where u_id = #{u_id})as galleryCount,-->
+    <!--            (select count(*) from buy where O_SELLER = #{u_id})as sellerCount-->
+    <!--            from dual-->
+    <!--    </select>-->
+
+    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">
+        select (select u_id from USER_LIST where U_ID = #{u_id})                                as u_id,
+                        <![CDATA[
+               (select SYSDATE - U_REG from USER_LIST where u_reg < SYSDATE and u_id = #{u_id}) as sinceDate,
+                        ]]>
+                        (select count(*) from gallery where u_id = #{u_id})                              as galleryCount,
+               (select count(*) from buy where O_SELLER = #{u_id})                              as sellerCount
+        from dual
+    </select>
+
 </mapper>

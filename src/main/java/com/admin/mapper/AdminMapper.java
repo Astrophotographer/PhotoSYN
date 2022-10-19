@@ -1,9 +1,6 @@
 package com.admin.mapper;
 
-import com.admin.domain.AdminMainDTO;
-import com.admin.domain.AdminMemberDTO;
-import com.admin.domain.Admin_Criteria;
-import com.admin.domain.Admin_UpsertTagDTO;
+import com.admin.domain.*;
 import com.gallery.domain.GalleryDTO;
 import com.member.domain.MemberDTO;
 
@@ -51,4 +48,9 @@ public interface AdminMapper {
 
     //스케쥴러 실행
     public int deleteBlogTempImg();
+
+    public List<String> getUserList();
+
+//    public List<Admin_MemberShip> getUserMemberList(List<String> u_id);
+    public List<Admin_MemberShip> getUserMemberList(String u_id);
 }
