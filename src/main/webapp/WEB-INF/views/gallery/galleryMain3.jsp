@@ -36,7 +36,7 @@
         border: 1px solid #0f62fe;
         text-align: center;
         vertical-align: top;
-        padding: calc(.375rem - 3px) 60px calc(.375rem - 3px) 12px;
+        padding: 0px 65px 0px 65px;
         background-color: #00000000;
         font-size: 14px;
         letter-spacing: 0.16px;
@@ -74,7 +74,7 @@
                     <img src="/resources/gallery/images/${gallery.g_HNAME}" width="220px" height="150"/>
                 </a>
                 <div data-gno="${gallery.g_NO}">
-                    <button class="cartBtn" type="button">장바구니에 담기</button>
+                    <button class="cartBtn" type="button">장바구니 담기</button>
                 </div>
             </div>
         </c:forEach>
