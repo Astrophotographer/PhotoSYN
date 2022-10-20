@@ -93,9 +93,11 @@ public class MemberController {
 
     // 닉네임 중복확인
     @ResponseBody
-    @PostMapping("nameCheck")
+    @GetMapping("nameCheck")
     public int nameCheck(@RequestParam("name") String name) throws Exception {
-        return memberService.nameCheck(name);
+        int result = memberService.nameCheck(name);
+
+        return result;
     }
 
     // 접근 제한시 보여줄 페이지 경로 매핑

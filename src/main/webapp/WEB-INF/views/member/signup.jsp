@@ -78,7 +78,7 @@
         if ($('#name').val() != '') {
             $.ajax({
                 url     : '/member/nameCheck',
-                type    : 'post',
+                type    : 'GET',
                 data    : 'name=' + $('#name').val(),
                 dataType: 'json',
                 success : function (result) {
