@@ -7,6 +7,9 @@ import lombok.extern.log4j.Log4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Log4j
 public class TestControllerTest extends TestCase {
 
@@ -28,6 +31,19 @@ public class TestControllerTest extends TestCase {
             log.info("nullPointerException : "+nullPointerException);
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testPro() {
+        List<String> list = new ArrayList<>();
+
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        for (int i = 0; i < list.size(); i++){
+            log.info(list.get(i));
         }
     }
 
