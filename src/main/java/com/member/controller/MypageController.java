@@ -46,11 +46,11 @@ public class MypageController {
         MemberUser user = (MemberUser) auth.getPrincipal();
         buyDTO.setId(user.getMember().getId());
 
-        int result = memberService.sum(buyDTO);
-        model.addAttribute("tot", result);
+//        int result = memberService.sum(buyDTO);
+//        model.addAttribute("tot", result);
 
         log.info("########################################## :: " + buyDTO);
-        log.info("########################################## :: " + result);
+//        log.info("########################################## :: " + result);
 
         return "/member/mypage/profile";
     }
