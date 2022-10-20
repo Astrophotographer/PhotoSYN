@@ -128,14 +128,19 @@
                         <!-- 유저 이미지 사진 -->
                         <img alt="" src="../resources/blog/images/author.jpg" class="avatar avatar-100 photo"
                              width="100" height="100">
-                        이미지 주소 : ${user_info.pic}
+<%--                        이미지 주소 : ${user_info.pic}--%>
                     </div>
 
                     <div class="author-content pl-4">
                         <!-- 유저 자기소개 -->
                         <h4 class="mb-3"><a href="/blog/usermain?u_id=${blog.u_ID}" title="" rel="author"
                                             class="text-capitalize">${blog.u_ID}</a></h4>
-                        <p>자기소개 : ${user_intro.u_INTRO}</p>
+                        <c:if test="${user_intro.u_INTRO != null}">
+                            <p>${user_intro.u_INTRO}</p>
+                        </c:if>
+                        <c:if test="${user_intro.u_INTRO == null}">
+                            <p>자기소개가없습니다.</p>
+                        </c:if>
 
                         <a target="_blank" class="author-social" href="${user_sns.s_FACEBOOK}"><i
                                 class="ti-facebook"></i></a>

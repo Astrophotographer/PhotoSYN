@@ -85,6 +85,9 @@ public class BlogServiceImpl implements BlogService {
 
         //blog_criteria = Blog_Criteria(u_id=test, option=null, sort=null)
         System.out.println("blog_criteria = " + blog_criteria.toString());
+
+        //admin단에서도 같은 sql문 사용. 하지만 blog단에서는 정상상태인 글들만 불러와야 함.
+        blog_criteria.setIsBlog(Boolean.TRUE);
         return blogMapper.getBlogList(blog_criteria);
     }
 

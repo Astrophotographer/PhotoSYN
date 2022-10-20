@@ -123,6 +123,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<BlogDTO> getBlogDTOList_WithPaging(Blog_Criteria cri) {
+
+        //blog와 같은 명령어사용해야하는데, admin은 전체를, blog는 정상상태만을 출력해야함.
+        cri.setIsBlog(Boolean.FALSE);
         return blogMapper.getBlogList(cri);
     }
 

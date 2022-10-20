@@ -74,7 +74,11 @@
         from
         (select b_no, u_id, mt_name, b_subject, b_content, b_like,
         b_readcount, b_reg, b_edit, b_status, b_tag1, b_reportcount
-        from blog order by B_REG desc) where
+        from blog
+        <if test="isBlog == true">
+            where b_status = 0
+        </if>
+        order by B_REG desc) where
         <!-- 옵션 수정 전 -->
         <!--        <trim>-->
         <!--            <if test="option_reg != null and (option_reg eq 'latest'.toString())">-->
