@@ -272,7 +272,8 @@
 
     <select id="getDailyTag" resultType="com.blog.domain.DailyTag">
         select t_name as tagName, T_DAYCOUNT as tagCount
-        from (select rownum r, T_NAME, T_DAYCOUNT from taglist order by t_daycount desc)
+        from (select rownum r, T_NAME, T_DAYCOUNT
+              from (select t_name, t_daycount from taglist order by t_daycount desc))
         where r between 1 and 5
     </select>
 </mapper>

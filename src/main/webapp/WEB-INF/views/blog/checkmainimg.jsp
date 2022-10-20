@@ -21,6 +21,8 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
+                    메인으로 사용할 이미지를 골라주세요.
+
                     <div class="row justify-content-center mt-5">
                         <div class="col-lg-12">
                             <div class="row">
