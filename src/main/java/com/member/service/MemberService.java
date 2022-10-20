@@ -51,13 +51,16 @@ public interface MemberService {
     public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
-    public void insertCart(CartDTO cartDTO);
+    public int insertCart(CartDTO cartDTO);
 
     /* 장바구니 목록 */
     public List<CartDTO> listCart(CartDTO cartDTO);
 
     /* 장바구니 삭제 */
     public int deleteCart(String g_no);
+
+    /* 장바구니 확인 */
+    public CartDTO checkCart(CartDTO cartDTO);
 
     /* 마이페이지 구매 판매내역 */
     public List<BuyDTO> listBuy(String id);
