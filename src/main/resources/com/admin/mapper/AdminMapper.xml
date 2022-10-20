@@ -52,17 +52,28 @@
         FROM BUY
     </select>
 
+<!--    <select id="getRecentGalleryCount" resultType="_int">-->
+<!--        select count(*)-->
+<!--        from GALLERY-->
+<!--        where g_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')-->
+<!--    </select>-->
     <select id="getRecentGalleryCount" resultType="_int">
         select count(*)
         from GALLERY
-        where g_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+        where g_REG >= sysdate-1
     </select>
+
     <!--    where g_REG >= to_char(SYSDATE-1,'DD-MM-YY')-->
 
+<!--    <select id="getRecentBlogCount" resultType="_int">-->
+<!--        select count(*)-->
+<!--        from blog-->
+<!--        where b_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')-->
+<!--    </select>-->
     <select id="getRecentBlogCount" resultType="_int">
         select count(*)
         from blog
-        where b_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+        where b_REG >= SYSDATE - 1
     </select>
     <!--    where b_REG >= to_char(SYSDATE - 1, 'DD-MM-YY')-->
 
