@@ -253,7 +253,7 @@
                             <c:if test="${user_info.membership==4}">
                                 <p>다이아몬드</p>
                             </c:if>
-                            <p>${user_intro}</p>
+                            <p>${user_intro.u_INTRO}</p>
                             <img src="../resources/blog/images/liammason.png" alt="" class="img-fluid">
                         </div>
 

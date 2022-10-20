@@ -28,8 +28,6 @@
                             <div class="row">
                                 <form action="/blog/checkmainimg" method="get">
                                     <c:set var="i" value="${1}"/>
-
-
                                     <c:forEach var="img" items="${imgs}">
                                     <br>
                                     <br>
@@ -41,7 +39,7 @@
                                                      src="/blog/write/ckImgSubmit.do?uid=${img.BIT_UUID}&amp;fileName=${img.BIT_ORIGINNAME}"
                                                      class="img-fluid"
                                                      style="height:133px; width:100px"/>
-                                                <h4 class="mt-3">${img.BIT_ORIGINNAME}</h4>
+                                                <h4 class="mt-3">사진명 : ${img.BIT_ORIGINNAME}</h4>
                                             </div>
                                         </div>
 
@@ -59,6 +57,9 @@
                                             <%--            <input type="hidden" name="UUID" value="${img.BI_UUID}">--%>
 
                                             <c:set var="i" value="${i+1}"/>
+                                        <br>
+                                        <br>
+                                        <br>
                                         </c:forEach>
                                         <input type="submit" value="선택"/>
                                 </form>
@@ -71,11 +72,11 @@
                 </div>
             </div>
         </div>
+    </section>
 </div>
-</section>
 
 
-</div>
+
 
 <%--footer--%>
 <jsp:include page="/WEB-INF/views/includes/footer.jsp"/>
