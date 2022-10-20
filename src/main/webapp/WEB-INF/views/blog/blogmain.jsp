@@ -43,22 +43,7 @@
         <div class="row no-gutters">
             <div class="col-lg-12 col-sm-12 col-md-12 slider-wrap">
 
-                <div class="slider-item">
-                    <div class="slider-item-content">
-                        <div class="post-thumb mb-4">
-                            <a href="../resources/blog/blog-single.html">
-                                <img src="../resources/blog/images/slider/slider1.jpg" alt="" class="img-fluid">
-                            </a>
-                        </div>
 
-                        <div class="slider-post-content">
-                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">Lifestyle(메인 태그 <-- 카테고리 개념)</span>
-                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">Tips for Taking a
-                                Long-term Trip(블로그 제목)</a></h3>
-                            <span class=" text-muted  text-capitalize">January 2, 2019(블로그 수정 >> 작성 시간)</span>
-                        </div>
-                    </div>
-                </div>
                 <c:set var="i" value="1"/>
                 <c:forEach begin="${i}" var="board" end="5" items="${list}">
                     <c:if test="${board.b_STATUS == 0}">
@@ -82,55 +67,9 @@
                         <c:set var="i" value="${i+1}"/>
                     </c:if>
                 </c:forEach>
-                <div class="slider-item">
-                    <div class="slider-item-content">
-                        <div class="post-thumb mb-4">
-                            <a href="blog-single.html">
-                                <img src="../resources/blog/images/slider/slider3.jpg" alt="" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="slider-post-content">
-                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">weekends</span>
-                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">Our Favorite
-                                Weekend Getaways</a></h3>
-                            <span class=" text-muted  text-capitalize">June 12, 2019</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="slider-item">
-                    <div class="slider-item-content">
-                        <div class="post-thumb mb-4">
-                            <a href="../resources/blog/blog-single.html">
-                                <img src="../resources/blog/images/slider/slider2.jpg" alt="" class="img-fluid">
-                            </a>
-                        </div>
 
-                        <div class="slider-post-content">
-                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">Travel</span>
-                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">Trip to
-                                California</a></h3>
-                            <span class=" text-muted  text-capitalize">September 15, 2019</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="slider-item">
-                    <div class="slider-item-content">
-                        <div class="post-thumb mb-4">
-                            <a href="../resources/blog/blog-single.html">
-                                <img src="../resources/blog/images/slider/slider3.jpg" alt="" class="img-fluid">
-                            </a>
-                        </div>
-
-                        <div class="slider-post-content">
-                            <span class="cat-name text-color font-sm font-extra text-uppercase letter-spacing">Travel</span>
-                            <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">Trip to
-                                California</a></h3>
-                            <span class=" text-muted  text-capitalize">September 15, 2019</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -251,52 +190,6 @@
 </section>
 
 
-<!-- footer -->
-<%--<section class="footer-2 section-padding gray-bg pb-5">--%>
-<%--    <div class="container">--%>
-<%--        <div class="row justify-content-center">--%>
-<%--            <div class="col-lg-6">--%>
-<%--                <div class="subscribe-footer text-center">--%>
-<%--                    <div class="form-group mb-0">--%>
-<%--                        <h2 class="mb-3">Subscribe Newsletter</h2>--%>
-<%--                        <p class="mb-4">Subscribe my Newsletter for new blog posts , tips and info.<p>--%>
-<%--                        <div class="form-group form-row align-items-center mb-0">--%>
-<%--                            <div class="col-sm-9">--%>
-<%--                                <input type="email" class="form-control" placeholder="Email Address">--%>
-<%--                            </div>--%>
-<%--                            <div class="col-sm-3">--%>
-<%--                                <a href="#" class="btn btn-dark ">Subscribe</a>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-<%--        --%>
-<%--        <div class="footer-btm mt-5 pt-4 border-top">--%>
-<%--            <div class="row">--%>
-<%--                <div class="col-lg-12">--%>
-<%--                    <ul class="list-inline footer-socials-2 text-center">--%>
-<%--                        <li class="list-inline-item"><a href="#">Privacy policy</a></li>--%>
-<%--                        <li class="list-inline-item"><a href="#">Support</a></li>--%>
-<%--                        <li class="list-inline-item"><a href="#">About</a></li>--%>
-<%--                        <li class="list-inline-item"><a href="#">Contact</a></li>--%>
-<%--                        <li class="list-inline-item"><a href="#">Terms</a></li>--%>
-<%--                        <li class="list-inline-item"><a href="#">Category</a></li>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="row justify-content-center">--%>
-<%--                <div class="col-lg-6">--%>
-<%--                    <div class="copyright text-center ">--%>
-<%--                        @ copyright all reserved to <a href="https://themefisher.com/">themefisher.com</a>-2019--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</section>--%>
 
 
 <!-- THEME JAVASCRIPT FILES

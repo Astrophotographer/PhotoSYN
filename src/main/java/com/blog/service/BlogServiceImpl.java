@@ -202,5 +202,10 @@ public class BlogServiceImpl implements BlogService {
     public int getBlogLike(Blog_Like blog_like){
         return blogMapper.getBlogLike(blog_like);
     }
+
+    @Override
+    public List<DailyTag> getDailyTag() {
+        return blogMapper.getDailyTag();
+    }
 }
 

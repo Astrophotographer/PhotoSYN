@@ -179,6 +179,8 @@ public class BlogController {
 
         model.addAttribute("tagArr", tagsARR);
 
+        model.addAttribute("dailyTag", blogService.getDailyTag());
+
         //수정하기, 삭제하기 버튼 활성화 위해
 //        String checkUserId= Objects.requireNonNull(principal).getName();
         //java.lang.NullPointerException

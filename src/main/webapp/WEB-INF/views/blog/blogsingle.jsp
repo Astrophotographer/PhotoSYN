@@ -237,21 +237,33 @@
                             <div class="about-author">
                                 <img src="../resources/blog/images/author.jpg" alt="" class="img-fluid">
                             </div>
-                            <h4 class="mb-0 mt-4">Liam Mason</h4>
-                            <p>Travel Blogger</p>
-                            <p>I'm Liam, last year I decided to quit my job and travel the world. You can follow my
-                                journey on this blog!</p>
+                            <h4 class="mb-0 mt-4">${blog.u_ID}</h4>
+                            <c:if test="${user_info.membership==0}">
+                                <p>브론즈</p>
+                            </c:if>
+                            <c:if test="${user_info.membership==1}">
+                                <p>실버</p>
+                            </c:if>
+                            <c:if test="${user_info.membership==2}">
+                                <p>골드</p>
+                            </c:if>
+                            <c:if test="${user_info.membership==3}">
+                                <p>플레티넘</p>
+                            </c:if>
+                            <c:if test="${user_info.membership==4}">
+                                <p>다이아몬드</p>
+                            </c:if>
+                            <p>${user_intro}</p>
                             <img src="../resources/blog/images/liammason.png" alt="" class="img-fluid">
                         </div>
 
                         <div class="sidebar-widget follow mb-5 text-center">
                             <h4 class="text-center widget-title">Follow Me</h4>
                             <div class="follow-socials">
-                                <a href="#"><i class="ti-facebook"></i></a>
-                                <a href="#"><i class="ti-twitter"></i></a>
-                                <a href="#"><i class="ti-instagram"></i></a>
-                                <a href="#"><i class="ti-youtube"></i></a>
-                                <a href="#"><i class="ti-pinterest"></i></a>
+                                <a href="${user_sns.s_FACEBOOK}"><i class="ti-facebook"></i></a>
+                                <a href="${user_sns.s_TWITTER}"><i class="ti-twitter"></i></a>
+                                <a href="${user_sns.s_INSTAGRAM}"><i class="ti-instagram"></i></a>
+                                <a href="${user_sns.s_YOUTUBE}"><i class="ti-youtube"></i></a>
                             </div>
                         </div>
 
@@ -293,24 +305,14 @@
 
                         <!-- 카테고리 노출 (삭제 예정) -->
                         <div class="sidebar-widget category mb-5">
-                            <h4 class="text-center widget-title">Catgeories</h4>
+                            <h4 class="text-center widget-title">자주 쓰인 태그</h4>
                             <ul class="list-unstyled">
+                                <c:forEach var="tagName" items="${dailyTag}">
                                 <li class="align-items-center d-flex justify-content-between">
-                                    <a href="#">Innovation</a>
-                                    <span>14</span>
+                                    <a href="#">${tagName.tagName}</a>
+                                    <span>${tagName.tagCount}</span>
                                 </li>
-                                <li class="align-items-center d-flex justify-content-between">
-                                    <a href="#">Software</a>
-                                    <span>2</span>
-                                </li>
-                                <li class="align-items-center d-flex justify-content-between">
-                                    <a href="#">Social</a>
-                                    <span>10</span>
-                                </li>
-                                <li class="align-items-center d-flex justify-content-between">
-                                    <a href="#">Trends</a>
-                                    <span>5</span>
-                                </li>
+                                </c:forEach>
                             </ul>
                         </div>
 
