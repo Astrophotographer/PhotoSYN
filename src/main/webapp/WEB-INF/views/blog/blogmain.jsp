@@ -66,7 +66,7 @@
                             <div class="slider-item-content">
                                 <div class="post-thumb mb-4">
                                     <a href="/blog/single?b_no=${board.b_NO}">
-                                        <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid">
+                                        <img src="/blog/getmainimg?b_no=${board.b_NO}" alt="" class="img-fluid w-100" style="width: 300px; height: 370px; object-fit:cover">
                                     </a>
                                 </div>
                                 <div class="slider-post-content">
