@@ -51,7 +51,8 @@
                                             <%--                    style="height:133px; width:100px"/></p>--%>
                                         <br>
                                             <%--            <input type="radio" name="mainImg" value="${i}">${i}--%>
-                                        <input type="radio" name="UUID" value="${img.BIT_UUID}">${i}
+                                        <input type="radio" name="UUID" value="${img.BIT_UUID}"
+                                               style="width:30px;height:30px;border:1px;">${i}
                                             <%-- uuid값 여러개가 넘어감.  --%>
                                             <%--            <input type="hidden" name="UUID" value="${img.BI_UUID}">--%>
 
