@@ -140,7 +140,7 @@
                             alert("구매 실패");
                         }
                     },
-                    error: function (e) {
+                    error      : function (e) {
                         alert("실패");
                     }
                 });

@@ -42,15 +42,15 @@ public class MypageController {
     private BCryptPasswordEncoder encoder;
 
     @GetMapping("profile")
-    public String profile(Model model, Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO) {
+    public String profile(Model model, Authentication auth, BuyDTO buyDTO) {
         MemberUser user = (MemberUser) auth.getPrincipal();
-        log.info("########################################## :: " + buyDTO);
-
         buyDTO.setId(user.getMember().getId());
-        int result = memberService.sum(buyDTO);
-        model.addAttribute("tot", result);
+
+//        int result = memberService.sum(buyDTO);
+//        model.addAttribute("tot", result);
+
         log.info("########################################## :: " + buyDTO);
-        log.info("########################################## :: " + result);
+//        log.info("########################################## :: " + result);
 
         return "/member/mypage/profile";
     }
