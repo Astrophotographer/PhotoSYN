@@ -16,7 +16,9 @@
 
     <jsp:include page="/WEB-INF/views/includes/header.jsp"/>
 
-    <h1>이미지 체크</h1>
+
+
+
 
     <form action="/blog/checkmainimg" method="get">
         <c:set var="i" value="${1}"/>
@@ -26,12 +28,21 @@
             <br>
             <br>
 
-            이미지정보 : ${img} <br>
-            ${img.BIT_NAME} <br>
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="about-widget mb-4 mb-lg-0">
+                    <img alt="" src="/blog/write/ckImgSubmit.do?uid=${img.BIT_UUID}&amp;fileName=${img.BIT_ORIGINNAME}" class="img-fluid"
+                         style="height:133px; width:100px"/>
+                    <h4 class="mt-3">${img.BIT_ORIGINNAME}</h4>
+                </div>
+            </div>
+
+<%--            이미지정보 : ${img} <br>--%>
+<%--            ${img.BIT_NAME} <br>--%>
             <%--        <img src="${img}" alt="img" width="100" height="100">--%>
 
-            <p><img alt="" src="/blog/write/ckImgSubmit.do?uid=${img.BIT_UUID}&amp;fileName=${img.BIT_ORIGINNAME}"
-                    style="height:133px; width:100px"/></p>
+<%--            <p><img alt="" src="/blog/write/ckImgSubmit.do?uid=${img.BIT_UUID}&amp;fileName=${img.BIT_ORIGINNAME}"--%>
+<%--                    style="height:133px; width:100px"/></p>--%>
             <br>
 <%--            <input type="radio" name="mainImg" value="${i}">${i}--%>
             <input type="radio" name="UUID" value="${img.BIT_UUID}">${i}
