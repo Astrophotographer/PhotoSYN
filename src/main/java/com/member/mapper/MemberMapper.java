@@ -50,7 +50,7 @@ public interface MemberMapper {
     public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
-    public void insertCart(CartDTO cartDTO);
+    public int insertCart(CartDTO cartDTO);
 
     /* 장바구니 목록 */
     public List<CartDTO> listCart(CartDTO cartDTO);

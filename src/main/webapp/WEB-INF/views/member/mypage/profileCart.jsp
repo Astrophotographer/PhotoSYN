@@ -25,7 +25,7 @@
                     <td>${cartDTO.g_no}</td>
                     <td>
                         <input type="hidden" value="${cartDTO.c_hName}"/>
-                        <img src="/resources/gallery/images/${cartDTO.c_hName}" width="200">
+                        <img src="/resources/gallery/images/${cartDTO.c_hName}" width="220px" height="150">
                     </td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${cartDTO.c_reg}"/></td>
                     <td>${cartDTO.c_hPrice}</td>
@@ -149,6 +149,8 @@
             }
         }
     }
+
+
 </script>
 
 

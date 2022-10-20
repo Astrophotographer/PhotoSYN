@@ -127,8 +127,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 담기 */
     @Override
-    public void insertCart(CartDTO cartDTO) {
-        memberMapper.insertCart(cartDTO);
+    public int insertCart(CartDTO cartDTO) {
+        return memberMapper.insertCart(cartDTO);
     }
 
     /* 장바구니 목록 */
@@ -141,6 +141,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public int deleteCart(String g_no) {
         return memberMapper.deleteCart(g_no);
+    }
+
+    @Override
+    public CartDTO checkCart(CartDTO cartDTO) {
+        return memberMapper.checkCart(cartDTO);
     }
 
     /* 마이페이지 구매 판매내역 */

@@ -27,6 +27,7 @@
                 <th>작성자</th>
                 <th>작성일</th>
                 <th>가격</th>
+                <th>다운로드 수</th>
                 <th>상태</th>
             </tr>
             <c:forEach items="${list}" var="galleryDTO">
@@ -37,6 +38,7 @@
                     <td>${galleryDTO.u_ID}</td>
                     <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${galleryDTO.g_REG}"/></td>
                     <td>${galleryDTO.g_HPRICE}</td>
+                    <td>1</td>
                     <c:if test="${galleryDTO.g_STATUS == 0}">
                         <td>판매중</td>
                     </c:if>
