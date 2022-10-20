@@ -282,21 +282,25 @@ public class MypageController {
 
     // 갤러리 구매 (포인트 차감)
     @PostMapping("galleryBuyBtn")
-    public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr, HttpServletRequest request) {
+    public String galleryBuyBtn(Authentication auth,
+                                GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr, HttpServletRequest request, Model model) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
         int m = user.getMember().getPoint();
+        log.info("############################ " + m);
+        galleryDTO.setG_HPRICE(1000);
+        log.info("####################" + galleryDTO.getG_HPRICE());
 
         String[] ajaxMsg = request.getParameterValues("valueArr");
         int size = ajaxMsg.length;
 
         if (m < galleryDTO.getG_HPRICE()) {
             rttr.addFlashAttribute("notPoint", "포인트가 부족합니다.");
+            log.info("############################ " + m);
 
             return "redirect:/member/mypage/profilePointAdd";
         } else {
-            m = m - galleryDTO.getG_HPRICE();
-            user.getMember().setPoint(m);
+            m = m - 1000;
 
             buyDTO.setO_buyer(id);
             buyDTO.setG_no(galleryDTO.getG_NO());
@@ -304,19 +308,25 @@ public class MypageController {
             // 구매 내역 저장
             for (int i = 0; i < size; i++) {
                 buyDTO.setG_no(Long.parseLong(ajaxMsg[i]));
-                galleryService.buyGallery(galleryDTO.getG_NO());
-                memberService.buyGallery(buyDTO, id);
+//                galleryService.buyGallery(galleryDTO.getG_NO());
+                memberService.buyGallery(buyDTO);
             }
+            memberService.buyGallery(buyDTO);
 
             // 구매 후, 장바구니 내역 삭제
             for (int i = 0; i < size; i++) {
                 memberService.deleteCart(ajaxMsg[i]);
             }
 
+            // 다운로드 수 증가
+            int downCount = galleryService.updateGallerySales(buyDTO.getG_no());
+            model.addAttribute("downCount", downCount);
+
+            user.getMember().setPoint(m);
             // 시큐리티 정보 갱신
             renewalAuth();
 
-            return "redirect:/member/mypage/profile";
+            return "redirect:/member/mypage/profileBuy";
         }
     }
 

@@ -73,7 +73,7 @@
                 <a href="/gallery/gallerySingle?G_NO=${gallery.g_NO}">
                     <img src="/resources/gallery/images/${gallery.g_HNAME}" width="220px" height="150"/>
                 </a>
-                <div data-gno="${gallery.g_NO}">
+                <div class="product-cart-btn" data-gno="${gallery.g_NO}">
                     <button class="cartBtn" type="button">장바구니 담기</button>
                 </div>
             </div>

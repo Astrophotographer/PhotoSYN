@@ -163,15 +163,13 @@ public class MemberServiceImpl implements MemberService {
 
     /* 갤러리 구매 (포인트 차감) */
     @Override
-    public int buyGallery(BuyDTO buyDTO, String id) {
+    public int buyGallery(BuyDTO buyDTO) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
 
         // USER_LIST DB 데이터 업데이트
         memberMapper.updatePoint(memberDTO);
-        // 다운로드 수 증가
-        galleryMapper.updateGallerySales(buyDTO.getG_no());
 
         return memberMapper.buyGallery(buyDTO);
     }
