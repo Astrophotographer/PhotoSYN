@@ -140,23 +140,23 @@
                         <!-- 글 한개 -->
                     </c:forEach>
                     <!-- 샘플 글 여러개 배치 -->
-                    <c:forEach var="i" begin="1" end="8" step="1">
-                        <div class="col-lg-3 col-md-6">
-                            <article class="post-grid mb-5">
-                                <a class="post-thumb mb-4 d-block" href="../resources/blog/blog-single.html">
-                                    <img src="../resources/blog/images/news/f1.jpg" alt="" class="img-fluid w-100">
-                                </a>
-                                <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out
-                                        value="${i}"/> (메인태그 <-- 카테고리개념)</span>
-                                <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">The best place
-                                    to explore to enjoy(블로그 제목)</a></h3>
+<%--                    <c:forEach var="i" begin="1" end="8" step="1">--%>
+<%--                        <div class="col-lg-3 col-md-6">--%>
+<%--                            <article class="post-grid mb-5">--%>
+<%--                                <a class="post-thumb mb-4 d-block" href="../resources/blog/blog-single.html">--%>
+<%--                                    <img src="../resources/blog/images/news/f1.jpg" alt="" class="img-fluid w-100">--%>
+<%--                                </a>--%>
+<%--                                <span class="cat-name text-color font-extra text-sm text-uppercase letter-spacing-1"><c:out--%>
+<%--                                        value="${i}"/> (메인태그 <-- 카테고리개념)</span>--%>
+<%--                                <h3 class="post-title mt-1"><a href="../resources/blog/blog-single.html">The best place--%>
+<%--                                    to explore to enjoy(블로그 제목)</a></h3>--%>
 
-                                <span class="text-muted letter-spacing text-uppercase font-sm">June 15, 2019(블로그 수정 >> 작성 시간)</span>
+<%--                                <span class="text-muted letter-spacing text-uppercase font-sm">June 15, 2019(블로그 수정 >> 작성 시간)</span>--%>
 
-                            </article>
-                        </div>
-                        <!-- 글 한개 -->
-                    </c:forEach>
+<%--                            </article>--%>
+<%--                        </div>--%>
+<%--                        <!-- 글 한개 -->--%>
+<%--                    </c:forEach>--%>
 
                     <!-- 페이징처리 -->
                     <c:if test="${pager.prev}">
