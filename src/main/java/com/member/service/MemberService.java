@@ -69,7 +69,7 @@ public interface MemberService {
     public Integer sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
-    public int buyGallery(BuyDTO buyDTO, String id);
+    public int buyGallery(BuyDTO buyDTO);
 
     /************************************************ 페이징 처리 ******************************************************/
 
