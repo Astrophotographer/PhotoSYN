@@ -26,7 +26,7 @@
                 <th>사진</th>
                 <th>작성자</th>
                 <th>작성일</th>
-                <th>가격</th>
+                <th>판매금액</th>
                 <th>상태</th>
             </tr>
             <c:forEach items="${list}" var="galleryDTO">

@@ -3,6 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://mybatis.org/schema/mybatis-spring
@@ -10,7 +11,8 @@
     http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-4.3.xsd
     http://www.springframework.org/schema/aop
-  	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+  	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1/xsd">
 
     <!--DB connect -->
     <util:properties id="dataSourceConfig" location="classpath:db-connection.properties"/>
@@ -55,7 +57,7 @@
 
     <!-- multipart. 다운로드 -->
 
-<!--    <bean id="fileDown" class="com.gallery.util.DownloadView"/>-->
+    <!--    <bean id="fileDown" class="com.gallery.util.DownloadView"/>-->
     <bean id="fileDown" class="com.upload.util.DownloadView"/>
 
 
@@ -66,10 +68,10 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
     <!--프로필 이미지 파일 저장 경로 설정-->
-    <bean id="picPath" class="java.lang.String">
-        <constructor-arg value="D:\yesung\intellij\PhotoSYN3\src\main\webapp\resources\member\img\profile">
-        </constructor-arg>
-    </bean>
+<!--    <bean id="picPath" class="java.lang.String">-->
+<!--        <constructor-arg value="D:\yesung\intellij\PhotoSYN3\src\main\webapp\resources\member\img\profile">-->
+<!--        </constructor-arg>-->
+<!--    </bean>-->
 
     <!-- mapper, component(service등) 추가 -->
 
@@ -94,5 +96,7 @@
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
     <!-- commit test -->
 
+    <!-- scheduler 추가 -->
+    <context:component-scan base-package="com.admin.scheduler"/>
 
 </beans>

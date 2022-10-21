@@ -87,7 +87,7 @@
                         <li><a href="/member/mypage/profile">내정보</a></li>
                         <li><a href="/member/mypage/profileGallery">글 관리</a></li>
                         <li><a href="/member/mypage/profileCart">장바구니</a></li>
-                        <li><a href="/member/mypage/profileBuy">구매 · 판매내역</a></li>
+                        <li><a href="/member/mypage/profileBuy">구매내역</a></li>
 <%--                        <li><a href="#">환급신청</a></li>--%>
                     </ul>
                 </li>

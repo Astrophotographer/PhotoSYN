@@ -15,11 +15,12 @@
     height: 500px;
     margin: 100px 0px 0px 0px;
 }
+
 .swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
-    transition : 1.5s;
+    transition: 1.5s;
     transform: scale(1.0);
 
     /* Center slide text vertically */
@@ -37,23 +38,81 @@
     align-items: center;
 }
 
-.swiper-container-vertical>.swiper-pagination-bullets{
+.swiper-container-vertical > .swiper-pagination-bullets {
     top: unset !important;
     bottom: 10px;
     left: 0;
     width: 100%;
 }
 
-.swiper-container-vertical>.swiper-pagination-bullets .swiper-pagination-bullet{
-    display : inline-block !important;
+.swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+    display: inline-block !important;
     margin: 6px 2px !important;
 }
+
+/*********************************** 메인 이미지 hover ***********************************/
 
 .imgs {
     width: 1000px;
     height: 500px;
+    filter: brightness(1);
+    transition: 5s;
 }
+
 .imgs:hover {
-    transition : 3s;
+    transition: 3s;
     transform: scale(1.0);
+    filter: brightness(0.5);
 }
+
+
+.card {
+    position: relative;
+    background: linear-gradient(180deg, #441DB2 0%, #0d0425 100%);
+    width: 13rem;
+    overflow: hidden;
+    box-shadow: 15px 15px 25px black;
+}
+.card img {
+    /*width: 100%;*/
+    /*height: auto;*/
+
+    /* 포스터 크기 조정을 위해 scale 조정 */
+    transform: scale(1.1);
+    transition: all 0.25s linear;
+}
+.card:hover img {
+    opacity: 0.2;
+    transform: scale(1.25);
+}
+.card .inner-content {
+    width: 80%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transition: all 600ms ease;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card:hover .inner-content {
+    opacity: 1;
+    top: 50%;
+}
+.card .inner-content .title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.card .inner-content .overview {
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+.card .inner-content hr {
+    border-top: 1px solid #f1f1f1;
+    width: 100%;
+}
+
+

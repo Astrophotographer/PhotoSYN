@@ -52,17 +52,28 @@
         FROM BUY
     </select>
 
+<!--    <select id="getRecentGalleryCount" resultType="_int">-->
+<!--        select count(*)-->
+<!--        from GALLERY-->
+<!--        where g_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')-->
+<!--    </select>-->
     <select id="getRecentGalleryCount" resultType="_int">
         select count(*)
         from GALLERY
-        where g_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+        where g_REG >= sysdate-1
     </select>
+
     <!--    where g_REG >= to_char(SYSDATE-1,'DD-MM-YY')-->
 
+<!--    <select id="getRecentBlogCount" resultType="_int">-->
+<!--        select count(*)-->
+<!--        from blog-->
+<!--        where b_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')-->
+<!--    </select>-->
     <select id="getRecentBlogCount" resultType="_int">
         select count(*)
         from blog
-        where b_REG >= to_char(SYSDATE - 1, 'YYYYMMDD')
+        where b_REG >= SYSDATE - 1
     </select>
     <!--    where b_REG >= to_char(SYSDATE - 1, 'DD-MM-YY')-->
 
@@ -189,27 +200,118 @@
        ]]>
     </select>
 
-<!--    <update id="hideBlog">-->
-<!--        <foreach collection="b_noList" item="arr">-->
-<!--            update blog-->
-<!--            set B_STATUS = 3 where B_NO = #{arr}-->
-<!--        </foreach>-->
-<!--    </update>-->
+    <!--    <update id="hideBlog">-->
+    <!--        <foreach collection="b_noList" item="arr">-->
+    <!--            update blog-->
+    <!--            set B_STATUS = 3 where B_NO = #{arr}-->
+    <!--        </foreach>-->
+    <!--    </update>-->
 
     <update id="hideBlog">
-        update blog set B_STATUS = 3 where B_NO = #{b_no}
+        update blog
+        set B_STATUS = 3
+        where B_NO = #{b_no}
     </update>
 
     <update id="showBlog">
-        update blog set B_STATUS = 0 where B_NO = #{b_no}
+        update blog
+        set B_STATUS = 0
+        where B_NO = #{b_no}
     </update>
 
     <update id="hideGallery">
-        update gallery set G_STATUS = 3 where G_NO = #{g_no}
+        update gallery
+        set G_STATUS = 3
+        where G_NO = #{g_no}
     </update>
 
     <update id="showGallery">
-        update gallery set G_STATUS = 0 where G_NO = #{g_no}
+        update gallery
+        set G_STATUS = 0
+        where G_NO = #{g_no}
+    </update>
+
+    <insert id="insertTag">
+        insert into MAINTAG
+        values (#{newTag}, #{tagImgName})
+    </insert>
+
+    <update id="updateTag">
+        update MAINTAG
+        set MT_NAME = #{updateTag}
+        <if test="tagImgName != null">
+            , MT_IMG = #{tagImgName}
+        </if>
+        where MT_NAME = #{originTag}
+    </update>
+
+    <!-- 스케쥴러 실행 -->
+    <delete id="deleteBlogTempImg">
+        delete
+        from BLOG_IMG_TEMP
+    </delete>
+
+    <select id="getUserList" resultType="string">
+        select u_id
+        from USER_LIST
+    </select>
+
+    <!-- 원본 -->
+    <!--    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">-->
+    <!--        select A.u_id, sinceDate, galleryCount, sellerCount from (-->
+    <!--        <![CDATA[-->
+    <!--        select u_id, SYSDATE-U_REG sinceDate from USER_LIST where u_reg < SYSDATE ) A-->
+    <!--        ]]>-->
+    <!--        left outer join-->
+    <!--        (select u_id, count(u_id) galleryCount from gallery group by u_id) B-->
+    <!--        on (A.u_id = B.u_id)-->
+    <!--        left outer join-->
+    <!--        (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C-->
+    <!--        on (A.u_id = C.o_seller)-->
+    <!--    </select>-->
+    <!-- 수정본 -->
+    <select id="getUserMemberList" resultType="com.admin.domain.Admin_MemberShip">
+        select A.u_id, A.u_status, sinceDate, galleryCount, sellerCount
+        from
+         <![CDATA[
+             (select u_id, SYSDATE - U_REG sinceDate, U_STATUS from USER_LIST where u_reg < SYSDATE) A,
+        ]]>
+        (select u_id, count(u_id) galleryCount from gallery group by u_id) B,
+             (select o_seller, count(o_seller) sellerCount from buy group by o_seller) C
+        where a.u_id = b.u_id(+)
+          and a.u_id = c.o_seller(+)
+    </select>
+
+    <select id="getMemberShipInfo" resultType="com.admin.domain.Admin_MemberShipInfo">
+        select *
+        from MEMBERSHIP
+        order by MS_MEMBERSHIP desc
+    </select>
+
+    <!--    admin_memberShip : Admin_MemberShip(u_id=DUMMY134, u_status=0, sinceDate=5.380358796296297, galleryCount=0, sellerCount=0)-->
+
+    <!--    <update id="updateUserMemberShip" parameterType="java.util.List">-->
+    <!--        BEGIN-->
+    <!--            <foreach collection="list" item="item" separator="">-->
+    <!--                update USER_LIST set MS_MEMBERSHIP = #{item.u_status} where U_ID = #{item.u_id}-->
+    <!--            </foreach>-->
+    <!--        END;-->
+    <!--    </update>-->
+
+    <update id="updateUserMemberShip" parameterType="java.util.List">
+        <foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+            update USER_LIST set MS_MEMBERSHIP = #{item.u_status}
+            <where>u_id = #{item.u_id}</where>
+        </foreach>
+    </update>
+
+    <!--    <update id="updateUserMemberShip" parameterType="java.util.List">-->
+    <!--        <foreach collection="list" item="item" open="Insert All"-->
+    <!--    </update>-->
+
+    <update id="deleteDailyCountTag">
+        update TAGLIST
+        set T_DAYCOUNT = 0
     </update>
 
 </mapper>

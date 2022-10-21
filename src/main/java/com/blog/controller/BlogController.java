@@ -32,7 +32,7 @@ public class BlogController {
 
     //C:\\Users\\tjoeun\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
     //"C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";
-    static String imgServerPath = "";
+    static String imgServerPath = "C:\\Users\\tjoeun\\IdeaProjects\\PhotoSYN\\src\\main\\webapp\\resources\\saveImgckImage/";
 
     //TODO 1001 : 블로그 페이징처리
     //글 가져오기 조건. 페이징X, ajax로 요청
@@ -179,6 +179,25 @@ public class BlogController {
 
         model.addAttribute("tagArr", tagsARR);
 
+        model.addAttribute("dailyTag", blogService.getDailyTag());
+
+        //수정하기, 삭제하기 버튼 활성화 위해
+//        String checkUserId= Objects.requireNonNull(principal).getName();
+        //java.lang.NullPointerException
+        //	java.base/java.util.Objects.requireNonNull(Objects.java:222) 생성.
+
+
+        try {
+            String checkUserId = principal.getName();
+            model.addAttribute("loginUser", checkUserId);
+
+            log.info("=======================================================");
+            log.info(Objects.requireNonNull(principal).getName());
+        }catch (NullPointerException nullPointerException){
+            log.info(nullPointerException.getMessage());
+            log.info("비회원 상태입니다.");
+        }
+
 
         return "blog/blogsingle";
     }
@@ -217,8 +236,11 @@ public class BlogController {
             byte[] bytes = upload.getBytes();
 
             //이미지 경로 생성
-            String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 이미지 경로 설정(폴더 자동 생성)
+//            String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 이미지 경로 설정(폴더 자동 생성)
 //            C:\Users\pmwkd\Desktop\git\PhotoSYN\src\main\webapp\resources\saveImgckImage
+
+            String path = imgServerPath;
+
             String ckUploadPath = path + uid + "_" + fileName;
             File folder = new File(path);
             log.info("path:" + path);    // 이미지 저장경로 console에 확인
@@ -287,7 +309,10 @@ public class BlogController {
 
         //서버에 저장된 이미지 경로
 //        String path = "C:\\Users\\wowo1\\Pictures\\Saved Pictures" + "ckImage/";	// 저장된 이미지 경로
-        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 저장된 이미지 경로
+//        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 저장된 이미지 경로
+
+        String path = imgServerPath;
+
         System.out.println("/write/ckImgSubmit.do 에서 실행 path:" + path);
         log.info("/write/ckImgSubmit.do 에서 실행 path:" + path);
         String sDirPath = path + uid + "_" + fileName;
@@ -435,7 +460,10 @@ public class BlogController {
         //blog_img에 b_no 주고 메인이미지 가져오기
         blog_img = blogService.getMainImg(b_no);
 
-        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 저장된 이미지 경로
+//        String path = "C:\\Users\\pmwkd\\Desktop\\git\\PhotoSYN\\src\\main\\webapp\\resources\\saveImg" + "ckImage/";    // 저장된 이미지 경로
+
+        String path = imgServerPath;
+
         log.info("getmainimg 에서 실행 path:" + path);
         String sDirPath = path + blog_img.getBI_UUID() + "_" + blog_img.getBI_ORIGINNAME();
         log.info("getmainimg 에서 실행 sDirPath:" + sDirPath);

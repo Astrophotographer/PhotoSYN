@@ -1,5 +1,6 @@
 package com.member.controller;
 
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.MemberDTO;
 import com.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
@@ -21,6 +22,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -35,8 +37,13 @@ public class MemberController {
     private BCryptPasswordEncoder encoder;
 
     @GetMapping("main")
-    public void mainPage() {
+    public String mainPage(Model model) {
+        List<MaintagDTO> maintagDTO = memberService.getMainTagDTO();
+        log.info("mainPage");
 
+        model.addAttribute("maintagDTO", maintagDTO);
+
+        return "/member/main";
     }
 
     @GetMapping("signup")
@@ -86,9 +93,11 @@ public class MemberController {
 
     // 닉네임 중복확인
     @ResponseBody
-    @PostMapping("nameCheck")
+    @GetMapping("nameCheck")
     public int nameCheck(@RequestParam("name") String name) throws Exception {
-        return memberService.nameCheck(name);
+        int result = memberService.nameCheck(name);
+
+        return result;
     }
 
     // 접근 제한시 보여줄 페이지 경로 매핑
@@ -109,19 +118,18 @@ public class MemberController {
     public ModelAndView sendEmailAction(@RequestParam Map<String, Object> paramMap, ModelMap model, ModelAndView mv,
                                         HttpServletResponse response, MemberDTO memberDTO) throws Exception {
         String id = (String) paramMap.get("id");
-        memberDTO.setId(id); // memberDTO에 값 저장
         String name = (String) paramMap.get("name");
         String password = "";
-        log.info("################## id :: " + memberDTO.getId());
+
+        memberDTO.setId(id);
 
         if (memberDTO.getId().equals(id)) {
             for (int i = 0; i < 12; i++) {
                 password += (char) ((Math.random() * 26) + 97);
             }
-            memberDTO.setPw(encoder.encode(password)); // 임시 비밀번호 암호화
+            memberDTO.setPw(encoder.encode(password));
 
         }
-        log.info("################## pw :: " + memberDTO.getPw());
 
         try {
             MimeMessage msg = mailSender.createMimeMessage();
@@ -137,7 +145,7 @@ public class MemberController {
             System.out.println("MessagingException");
             e.printStackTrace();
         }
-        memberService.updatePw(memberDTO); // DB에 임시 비밀번호 저장
+        memberService.updatePw(memberDTO);
 
         mv.setViewName("/member/login");
         return mv;
