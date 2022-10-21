@@ -7,17 +7,17 @@
     <div class="swiper-wrapper">
         <c:forEach items="${maintagDTO}" var="tags">
             <div class="swiper-slide">
-<%--                <a href="#">--%>
-<%--                    <img class="imgs" src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}">--%>
-<%--                </a>--%>
+                    <%--                <a href="#">--%>
+                    <%--                    <img class="imgs" src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}">--%>
+                    <%--                </a>--%>
                 <div class="card">
-                    <a href="#">
-                    <img src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}">
+                    <a href="/gallery/main">
+                        <img src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}" style="width: 1000px; height: 200px;">
                     </a>
                     <div class="inner-content">
                         <span class="title">Photo SYN</span>
-                        <hr>
-                        <span class="overview">여행</span>
+                        <hr style="color: black;">
+                        <span class="overview">${tags.MT_NAME}</span>
                     </div>
                 </div>
             </div>
@@ -30,8 +30,6 @@
     <div class="swiper-button-next"></div>
 </div>
 
-
-
 <script>
     const swiper = new Swiper('.swiper-container', {
         //기본 셋팅
@@ -40,7 +38,7 @@
         //한번에 보여지는 페이지 숫자
         slidesPerView: 5,
         //페이지와 페이지 사이의 간격
-        spaceBetween: 20,
+        spaceBetween:20,
         //드레그 기능 true 사용가능 false 사용불가
         debugger: true,
         //마우스 휠기능 true 사용가능 false 사용불가

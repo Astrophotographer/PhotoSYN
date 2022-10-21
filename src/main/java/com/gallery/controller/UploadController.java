@@ -76,7 +76,7 @@ public class UploadController {
 
             // 파일 저장 경로 구하기
             // String uploadPath = request.getRealPath("/resources/gallery/images"); // 서버상 save 폴더 위치
-            String uploadPath = "/Users/chris/Desktop/Develop/photosyn2/src/main/webapp/resources/gallery/images"; // 서버상 save 폴더 위치
+            String uploadPath = "C:/Users/tjoeun/IdeaProjects/PhotoSYN/src/main/webapp/resources/gallery/images/"; // 서버상 save 폴더 위치
             log.info("************ save path : " + uploadPath);
             // 새 파일명 생성
             String uuid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -146,7 +146,7 @@ public class UploadController {
 
         log.info("&&&&&&&&&&&&&&&&&&&&&&&filename      " + fileName);
 //        File f = new File("/resources/gallery/images/" + fileName);
-        File f = new File("/Users/chris/Desktop/Develop/photosyn2/src/main/webapp/resources/gallery/images/"+fileName);
+        File f = new File("C:/Users/tjoeun/IdeaProjects/PhotoSYN/src/main/webapp/resources/gallery/images/"+fileName);
 
         log.info("&&&&&&&&&&&&&&&&&&&&&&&ffffff"+ f);
 //        if(fileNum == 1) {

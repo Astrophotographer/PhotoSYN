@@ -25,7 +25,7 @@ public class Admin_PageDTO {
         this.total = total;
 
         //한 페이지에 띄워줄 개수는 10개
-        this.endPage = (int)(Math.ceil(cri.getPageNum()/10.0)*10);
+        this.endPage = (int)(Math.ceil(cri.getPageNum()/10.0)*10);  //1페이지시 endpage=10
         this.startPage = this.endPage - 9;
 
         //만약 글의 갯수가 123개라면, 끝페이지는 13페이지가 되어야함

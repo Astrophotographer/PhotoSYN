@@ -93,7 +93,7 @@
     top: 80%;
     left: 50%;
     transition: all 600ms ease;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,14 +105,17 @@
 .card .inner-content .title {
     font-size: 1.2rem;
     font-weight: 700;
+    color: black;
 }
 .card .inner-content .overview {
     font-size: 0.9rem;
     font-weight: 300;
+    color: black;
 }
 .card .inner-content hr {
-    border-top: 1px solid #f1f1f1;
+    border-top: 1px solid #575353;
     width: 100%;
+    color: black;
 }
 
 

@@ -31,8 +31,7 @@ import java.util.UUID;
 @RequestMapping("/member/mypage/*")
 @Log4j
 public class MypageController {
-    //    private static final String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/";
-    private static final String uploadPath = "C:/Users/tjoeun/IdeaProjects/PhotoSYN/src/main/webapp/resources/member/img";
+    private static final String uploadPath = "C:/Users/tjoeun/IdeaProjects/PhotoSYN/src/main/webapp/resources/member/img/";
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -266,10 +265,9 @@ public class MypageController {
         model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
 
-    /*
     // 마이페이지 판매내역
     @GetMapping("profileSell")
-    public void sell(Authentication auth, Model model, MemberCriteria memberCriteria) {
+    public void sell(Authentication auth, GalleryDTO galleryDTO, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
         int total = memberService.getGalleryCount(memberCriteria);
@@ -278,7 +276,6 @@ public class MypageController {
         model.addAttribute("list", memberService.getListWithPaging(memberCriteria));
         model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
-    */ // 판매내역 필요 없는듯..?
 
     // 갤러리 구매 (포인트 차감)
     @PostMapping("galleryBuyBtn")
