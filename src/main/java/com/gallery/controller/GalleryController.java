@@ -3,6 +3,7 @@ package com.gallery.controller;
 import com.blog.domain.BlogDTO;
 import com.gallery.domain.Gallery_Criteria;
 import com.gallery.domain.Gallery_PageDTO;
+import com.gallery.domain.MetadataDTO;
 import com.member.security.MemberUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,7 +40,7 @@ public class GalleryController {
         return "gallery/imgTest";
     }
     @RequestMapping(value ="main")
-    public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, Principal principal) {
+    public String list(HttpServletResponse response, Model model, Gallery_Criteria cri, MetadataDTO metadataDTO, Principal principal) {
         log.info("gallery main2!!");
         log.info("cri : " + cri);
 

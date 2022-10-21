@@ -84,44 +84,76 @@
 
     <!-- 전체 갤러리 글 수  -->
     <select id="getTotal" resultType="int">
-        <![CDATA[
         select count(*) from
-            (select rownum r, A.* from (
-                select * from gallery g
-                where ]]>
+
+        (select rownum r, G.*, M.* from
+        (select * from gallery) g,
+        (select * from metadata) m
+        where g.G_NO = m.g_no(+)
         <if test="keyword != null">
-            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%')
-            and
+            and (g.G_TAG1 like '%'||#{keyword}||'%' or g.MT_NAME like '%'||#{keyword}||'%' or g.U_ID like '%'||#{keyword}||'%' or m.M_IMGLENS like '%'||#{keyword}||'%' or m.M_IMGCAMERA like '%'||#{keyword}||'%' or m.M_APERTURE like '%'||to_char(#{keyword})||'%' or m.M_FLENGTH like '%'||to_char(#{keyword})||'%')
+
         </if>
         <![CDATA[
-                    g_no > 0
-                order by G_REG desc) A
-            where rownum <= #{pageNum} * #{listQty} and g_status < 2
-            order by G_REG desc) B
-
-        where r > (#{pageNum} - 1) * #{listQty}
+                      and g.g_no > 0 and g.g_status < 2 AND rownum <= 1*12  order by g.G_REG desc
+              )
+        where r > (1 - 1) * 12
         ]]>
+
+<!--    <select id="getTotal" resultType="int">-->
+<!--        select count(*) from-->
+<!--            (select rownum r, G.* from (-->
+<!--                select * from gallery) g,(-->
+<!--                select * from metadata) m-->
+<!--                where g.G_NO = m.G_NO(+)-->
+<!--                    <if test="keyword != null">-->
+<!--                        and (g.G_TAG1 like '%'||#{keyword}||'%' or g.MT_NAME like '%'||#{keyword}||'%' or g.U_ID like '%'||#{keyword}||'%' or m.M_IMGLENS like '%'||#{keyword}||'%')-->
+<!--                    </if>-->
+<!--        <![CDATA[-->
+<!--                    and g.g_no > 0 and g.g_status < 2-->
+<!--                order by g.G_REG desc) A-->
+<!--            where rownum <= #{pageNum} * #{listQty}-->
+<!--            order by g.G_REG desc) B-->
+
+<!--        where r > (#{pageNum} - 1) * #{listQty}-->
+<!--        ]]>-->
 
     </select>
     <!-- 갤러리 메인에 보여줄거 다 가져오기 -->
     <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
-        <![CDATA[
-        select B.* from
-            (select rownum r, A.* from (
-                select * from gallery g
-                where ]]>
+            select MT_NAME, G_NO from
+            (select rownum r, G.* from
+            (select * from gallery) g,
+            (select * from metadata) m
+            where g.G_NO = m.G_NO(+)
         <if test="keyword != null">
-            (G_TAG1 like '%'||#{keyword}||'%' or MT_NAME like '%'||#{keyword}||'%' or U_ID like '%'||#{keyword}||'%')
-            and
+
+            and (g.G_TAG1 like '%'||#{keyword}||'%' or g.MT_NAME like '%'||#{keyword}||'%' or g.U_ID like '%'||#{keyword}||'%' or m.M_IMGLENS like '%'||#{keyword}||'%' or m.M_IMGCAMERA like '%'||#{keyword}||'%' or m.M_APERTURE like '%'||to_char(#{keyword})||'%' or m.M_FLENGTH like '%'||to_char(#{keyword})||'%')
+
         </if>
         <![CDATA[
-                    g_no > 0 and g_status < 2
-                order by G_REG desc) A
-            where rownum <= #{pageNum} * #{listQty}
-            order by G_REG desc) B
-
-        where r > (#{pageNum} - 1) * #{listQty}
+            and g.g_no > 0 and g.g_status < 2 AND rownum <= 1*12  order by g.G_REG desc
+            )
+            where r > (1 - 1) * 12
         ]]>
+
+
+<!--        select B.* from-->
+<!--       (select rownum r, A.* from (-->
+<!--                select * from gallery) g,(-->
+<!--                select * from metadata) m-->
+<!--                where g.G_NO = m.G_NO(+)-->
+<!--        <if test="keyword != null">-->
+<!--            and (g.G_TAG1 like '%'||#{keyword}||'%' or g.MT_NAME like '%'||#{keyword}||'%' or g.U_ID like '%'||#{keyword}||'%' or m.M_IMGLENS like '%'||#{keyword}||'%')-->
+<!--        </if>-->
+<!--        <![CDATA[-->
+<!--                    and g.g_no > 0 and g.g_status < 2-->
+<!--                order by g.G_REG desc) A-->
+<!--            where rownum <= #{pageNum} * #{listQty}-->
+<!--            order by g.G_REG desc) B-->
+
+<!--        where r > (#{pageNum} - 1) * #{listQty}-->
+<!--        ]]>-->
     </select>
 
 
