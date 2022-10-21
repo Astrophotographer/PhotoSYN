@@ -121,7 +121,7 @@
     </select>
     <!-- 갤러리 메인에 보여줄거 다 가져오기 -->
     <select id="getGalleryList" resultType="com.gallery.domain.GalleryDTO">
-            select MT_NAME, G_NO from
+            select G_NO, MT_NAME, U_ID, G_HNAME, G_LNAME, G_HPRICE, G_LPRICE, G_CONTENT, G_REG, G_EDIT, G_STATUS, G_SALES, G_LIKE, G_READCOUNT, G_TAG1, G_TYPE from
             (select rownum r, G.* from
             (select * from gallery) g,
             (select * from metadata) m
