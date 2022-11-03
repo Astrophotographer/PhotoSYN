@@ -36,6 +36,7 @@ public class GalleryController {
 
     @RequestMapping(value = "test")
     public String test (){
+
         // 걍 화면 테스트용
         return "gallery/imgTest";
     }
