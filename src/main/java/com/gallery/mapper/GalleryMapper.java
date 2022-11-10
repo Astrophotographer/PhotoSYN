@@ -7,7 +7,7 @@ import java.util.List;
 public interface GalleryMapper {
 
 
-    // C
+    // C test1
     public int uploadGallery(GalleryDTO galleryDTO); // 갤러리 업로드
     public int insertTempImg(Gallery_Img_Temp gallery_img_temp); // 메타데이터 확인용 이미지넣기
     public int insertMetadata(MetadataDTO metadataDTO); // 메타데이터 넣기
