@@ -45,5 +45,6 @@ public interface GalleryService {
     public boolean hideGallery(long G_NO); // 사진 숨기기 // G_STATUS  2로 변경
 
 
+    public int updateGallerySales(Long g_no); // 다운로드 수 증가
 }
 

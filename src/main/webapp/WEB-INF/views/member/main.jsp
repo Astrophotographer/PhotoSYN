@@ -5,27 +5,23 @@
 <div class="swiper-container">
     <!-- 보여지는 영역 -->
     <div class="swiper-wrapper">
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
-        <div class="swiper-slide">
-            <a href="#"><img class="imgs" src="/resources/member/img/5b45fe2e-e126-4daf-b61f-854d3b84b81f_2022071101596_0.jpg"></a>
-        </div>
+        <c:forEach items="${maintagDTO}" var="tags">
+            <div class="swiper-slide">
+<%--                <a href="#">--%>
+<%--                    <img class="imgs" src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}">--%>
+<%--                </a>--%>
+                <div class="card">
+                    <a href="#">
+                    <img src="/resources/mainTagImgSaveFolder/${tags.MT_IMG}">
+                    </a>
+                    <div class="inner-content">
+                        <span class="title">Photo SYN</span>
+                        <hr>
+                        <span class="overview">여행</span>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
     <!-- 페이징 버튼 처리 -->
     <%--    <div class="swiper-pagination"></div>--%>
@@ -34,10 +30,7 @@
     <div class="swiper-button-next"></div>
 </div>
 
-<sec:authorize access="hasRole('ROLE_ADMIN')">
-    어드민만 확인 가능 <br>
-    <a href="../admin/main">어드민 페이지</a>
-</sec:authorize>
+
 
 <script>
     const swiper = new Swiper('.swiper-container', {
@@ -45,9 +38,9 @@
         //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
         direction: 'horizontal',
         //한번에 보여지는 페이지 숫자
-        slidesPerView: 3,
+        slidesPerView: 5,
         //페이지와 페이지 사이의 간격
-        spaceBetween:20,
+        spaceBetween: 20,
         //드레그 기능 true 사용가능 false 사용불가
         debugger: true,
         //마우스 휠기능 true 사용가능 false 사용불가

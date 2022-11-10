@@ -1,9 +1,6 @@
 package com.admin.controller;
 
-import com.admin.domain.AdminMainDTO;
-import com.admin.domain.AdminMemberDTO;
-import com.admin.domain.Admin_Criteria;
-import com.admin.domain.Admin_PageDTO;
+import com.admin.domain.*;
 import com.admin.service.AdminService;
 import com.blog.domain.Blog_Criteria;
 import com.blog.domain.Blog_PageDTO;
@@ -17,8 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -122,6 +120,88 @@ public class AdminController {
     }
 
 
+    //현재 메인태그들 띄워주기
+    @RequestMapping(value = "maintag", method = RequestMethod.GET)
+    public String adminMainTag(Model model) {
+        log.info("adminMainTag");
+
+        log.info("adminService.getMainTagDTOList() : " + adminService.getMainTagDTOList().toString());
+        model.addAttribute("mainTagDTOList", adminService.getMainTagDTOList());
+
+        return "admin/adminmaintag";
+    }
+
+    //메인태그 추가, 수정 및 사진 추가, 수정
+//    @RequestMapping(value="maintagupdate", method = RequestMethod.POST)
+    @PostMapping(value = "maintagupdate")
+    public String adminMainTagUpsert(@RequestParam(value = "originTag", required = false) String orignTag, @RequestParam(value = "updateTag", required = false) String updateTag,
+                                     @RequestParam(value = "newTag", required = false) String newTag, MultipartHttpServletRequest request, Admin_UpsertTagDTO admin_upsertTagDTO) {
+        log.info("adminMainTagUpsert");
+        int result = 0;
+
+        log.info("orignTag : " + orignTag);
+        log.info("updateTag : " + updateTag);
+        log.info("newTag : " + newTag);
+
+        try {
+            admin_upsertTagDTO.setOriginTag(orignTag);
+            admin_upsertTagDTO.setUpdateTag(updateTag);
+            admin_upsertTagDTO.setNewTag(newTag);
+        } catch (NullPointerException nullPointerException) {
+            log.info("maintag NullPointerException...");
+            log.info("nullPointerException : " + nullPointerException.getMessage());
+        } catch (Exception e) {
+            log.info("maintag Exception...");
+            log.info("e : " + e.getMessage());
+        } finally {
+            result = adminService.tagUpsert(admin_upsertTagDTO, request);
+        }
+
+        log.info("admin_upsertTagDTO : " + admin_upsertTagDTO.toString());
+        log.info("result : " + result);
+
+
+        // 주석
+//        try{
+//            MultipartFile file = request.getFile("tagImg");
+//            if(file != null) {
+//                log.info(file);
+//                log.info("file.getname : " + file.getName());
+//                log.info("file.getOriginalFilename : " + file.getOriginalFilename());
+//                log.info("file.getSize : " + file.getSize());
+//                log.info("file.getContentType : " + file.getContentType());
+//                log.info("file.getBytes : " + file.getBytes());
+//
+//
+//
+//                //새로운 태그 추가+파일저장
+//                if(newTag != null && !(newTag.isEmpty())){
+//                    //new Tag
+//                    log.info("newTag (if) : "+newTag);
+//
+//
+//                }else if((orignTag != null && !(orignTag.isEmpty())) && (updateTag != null && !(updateTag.isEmpty()))){
+//                    //기존 태그 수정 + 파일 저장
+//                    log.info("orignTag (if) : "+orignTag);
+//                    log.info("updateTag (if) : "+updateTag);
+//                }
+//
+//            }else{
+//                //파일 업로드 없음. 태그명만 수정하기
+//                log.info("file is null");
+//            }
+//
+//        }catch (NullPointerException nullPointerException){
+//            log.info("nullPointerException : "+nullPointerException);
+//        }catch (Exception e){
+//            log.info("file : "+e.getMessage());
+//        }
+
+
+        return "redirect:/admin/maintag";
+    }
+
+
     @RequestMapping(value = "updateMemberShip", method = RequestMethod.POST)
     public ResponseEntity<String> updateMemberShip(@RequestBody MemberDTO memberDTO) {
         log.info("updateMemberShip memberDTO : " + memberDTO.toString());
@@ -158,7 +238,7 @@ public class AdminController {
         log.info("hideBlog");
         int result = 0;
 
-        for(int i=0; i<chk_list.size(); i++) {
+        for (int i = 0; i < chk_list.size(); i++) {
             log.info("chk_list : " + chk_list.get(i));
             //숨김처리 진행하기
 //            result = adminService.hideBlog(chk_list.get(i));
@@ -186,8 +266,8 @@ public class AdminController {
         return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @RequestMapping(value="gallery/hide", method=RequestMethod.POST)
-    public ResponseEntity<String> hideGallery(@RequestParam(value="chk_listArr[]", required=false) List<Integer> chk_list) {
+    @RequestMapping(value = "gallery/hide", method = RequestMethod.POST)
+    public ResponseEntity<String> hideGallery(@RequestParam(value = "chk_listArr[]", required = false) List<Integer> chk_list) {
         log.info("hideGallery");
         int result = 0;
 
@@ -198,8 +278,8 @@ public class AdminController {
         return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @RequestMapping(value="gallery/show", method=RequestMethod.POST)
-    public ResponseEntity<String> showGallery(@RequestParam(value="chk_listArr[]", required=false) List<Integer> chk_list) {
+    @RequestMapping(value = "gallery/show", method = RequestMethod.POST)
+    public ResponseEntity<String> showGallery(@RequestParam(value = "chk_listArr[]", required = false) List<Integer> chk_list) {
         log.info("hideGallery");
         int result = 0;
 
@@ -209,7 +289,6 @@ public class AdminController {
 
         return result >= 1 ? new ResponseEntity<String>("success", HttpStatus.OK) : new ResponseEntity<String>("fail", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-
 
 
 }

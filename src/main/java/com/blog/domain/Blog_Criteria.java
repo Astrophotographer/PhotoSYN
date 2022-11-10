@@ -14,6 +14,7 @@ public class Blog_Criteria {
 //    private String option_like; // 좋아요  popular/ unpopular
 //    private String option_view; // 조회수  highest_view/ lowest_view
     private String u_id;    //유저 아이디    usermain보기 위한 아이디 저장.
+    private Boolean isBlog;
 
     //수정 전
     // 옵션 + 정렬

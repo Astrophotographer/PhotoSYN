@@ -3,8 +3,9 @@
 
 <div class="gallery__page">
     <div class="gallery__warp">
-        <div style="font-size: 50px; font-weight: 800;">구매 · 판매내역</div>
+        <div style="font-size: 50px; font-weight: 800;">구매내역</div>
         <hr>
+        <!--
         <div style="display: flex; justify-content: space-between;">
             <h3>구매내역</h3>
             <select onchange="if(this.value) location.href=(this.value);">
@@ -13,6 +14,7 @@
             </select>
         </div>
         <br/>
+        -->
 
         <table class="member">
             <tr>
@@ -30,7 +32,7 @@
                 <tr>
                     <td><input type="checkbox" name="chk" style="width: 20px;"/></td>
                     <td>${buyDTO.o_no}</td>
-                    <td>${buyDTO.g_hName}</td>
+                    <td><img src="/resources/gallery/images/${cartDTO.c_hName}" width="220px" height="150"></td>
                     <td>${buyDTO.o_buyer}</td>
                     <td>${buyDTO.o_seller}</td>
                     <td>${buyDTO.o_price}</td>
@@ -77,8 +79,6 @@
             checkbox.checked = checkAll.checked;
         })
     }
-
-
 </script>
 
 

@@ -31,7 +31,8 @@ import java.util.UUID;
 @RequestMapping("/member/mypage/*")
 @Log4j
 public class MypageController {
-    private static final String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/";
+    //    private static final String uploadPath = "D:/yesung/intellij/PhotoSYN3/src/main/webapp/resources/member/img/";
+    private static final String uploadPath = "C:/Users/tjoeun/IdeaProjects/PhotoSYN/src/main/webapp/resources/member/img";
     @Autowired
     private MemberService memberService;
     @Autowired
@@ -42,17 +43,15 @@ public class MypageController {
     private BCryptPasswordEncoder encoder;
 
     @GetMapping("profile")
-    public String profile(Model model, Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO) {
-        galleryDTO.setG_SALES(1);
-        galleryDTO.setG_HPRICE(1000);
+    public String profile(Model model, Authentication auth, BuyDTO buyDTO) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        buyDTO.setId(user.getMember().getId());
 
-        buyDTO.setO_seller("찬욱");
-        buyDTO.setO_price(1000);
+//        int result = memberService.sum(buyDTO);
+//        model.addAttribute("tot", result);
 
-        long quantity = galleryDTO.getG_SALES();
-        int result = memberService.sum(buyDTO);
-
-        model.addAttribute("tot", result * quantity);  // 합계금액
+        log.info("########################################## :: " + buyDTO);
+//        log.info("########################################## :: " + result);
 
         return "/member/mypage/profile";
     }
@@ -215,17 +214,25 @@ public class MypageController {
     /************************************************ 장바구니 ************************************************/
 
     /* 장바구니 담기 */
-    @ResponseBody
     @PostMapping("insertCart")
-    public String insertCart(@RequestParam("G_NO") Long G_NO) {
-        memberService.insertCart(G_NO);
+    public String insertCart(@RequestParam("G_NO") Long G_NO, CartDTO cartDTO, GalleryDTO galleryDTO, Authentication auth) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        String id = user.getMember().getId();
+
+        cartDTO.setU_id(id);
+        cartDTO.setG_no(G_NO);
+
+        memberService.insertCart(cartDTO);
 
         return "success";
     }
 
     // 장바구니 목록 페이지
     @GetMapping("profileCart")
-    public String listCart(CartDTO cartDTO, Model model) {
+    public String listCart(Authentication auth, CartDTO cartDTO, Model model) {
+        MemberUser user = (MemberUser) auth.getPrincipal();
+        cartDTO.setU_id(user.getMember().getId());
+
         List<CartDTO> list = memberService.listCart(cartDTO);
         model.addAttribute("list", list);
 
@@ -252,46 +259,48 @@ public class MypageController {
     public void buy(Authentication auth, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
-
         int total = memberService.getGalleryCount(memberCriteria);
-        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
-        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
 
+        memberCriteria.setId(id);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
 
+    /*
     // 마이페이지 판매내역
     @GetMapping("profileSell")
-    public void sell(Authentication auth, GalleryDTO galleryDTO, Model model, MemberCriteria memberCriteria) {
+    public void sell(Authentication auth, Model model, MemberCriteria memberCriteria) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
-
-        long quantity = galleryDTO.getG_SALES();
-        long result = galleryDTO.getG_SALES() * galleryDTO.getG_HPRICE();
-
         int total = memberService.getGalleryCount(memberCriteria);
-        model.addAttribute("list", memberService.getListWithPaging(memberCriteria, id));
-        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
 
-        model.addAttribute("tot", result);
+        memberCriteria.setId(id);
+        model.addAttribute("list", memberService.getListWithPaging(memberCriteria));
+        model.addAttribute("pager", new MemberPageDTO(memberCriteria, total));
     }
+    */ // 판매내역 필요 없는듯..?
 
     // 갤러리 구매 (포인트 차감)
     @PostMapping("galleryBuyBtn")
-    public String galleryBuyBtn(Authentication auth, GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr, HttpServletRequest request) {
+    public String galleryBuyBtn(Authentication auth,
+                                GalleryDTO galleryDTO, BuyDTO buyDTO, RedirectAttributes rttr, HttpServletRequest request, Model model) {
         MemberUser user = (MemberUser) auth.getPrincipal();
         String id = user.getMember().getId();
         int m = user.getMember().getPoint();
+        log.info("############################ " + m);
+        galleryDTO.setG_HPRICE(1000);
+        log.info("####################" + galleryDTO.getG_HPRICE());
 
         String[] ajaxMsg = request.getParameterValues("valueArr");
         int size = ajaxMsg.length;
 
         if (m < galleryDTO.getG_HPRICE()) {
             rttr.addFlashAttribute("notPoint", "포인트가 부족합니다.");
+            log.info("############################ " + m);
 
             return "redirect:/member/mypage/profilePointAdd";
         } else {
-            m = m - galleryDTO.getG_HPRICE();
-            user.getMember().setPoint(m);
+            m = m - 1000;
 
             buyDTO.setO_buyer(id);
             buyDTO.setG_no(galleryDTO.getG_NO());
@@ -299,19 +308,25 @@ public class MypageController {
             // 구매 내역 저장
             for (int i = 0; i < size; i++) {
                 buyDTO.setG_no(Long.parseLong(ajaxMsg[i]));
-                galleryService.buyGallery(galleryDTO.getG_NO());
-                memberService.buyGallery(buyDTO, id);
+//                galleryService.buyGallery(galleryDTO.getG_NO());
+                memberService.buyGallery(buyDTO);
             }
+            memberService.buyGallery(buyDTO);
 
             // 구매 후, 장바구니 내역 삭제
             for (int i = 0; i < size; i++) {
                 memberService.deleteCart(ajaxMsg[i]);
             }
 
+            // 다운로드 수 증가
+            int downCount = galleryService.updateGallerySales(buyDTO.getG_no());
+            model.addAttribute("downCount", downCount);
+
+            user.getMember().setPoint(m);
             // 시큐리티 정보 갱신
             renewalAuth();
 
-            return "redirect:/member/mypage/profile";
+            return "redirect:/member/mypage/profileBuy";
         }
     }
 
@@ -360,7 +375,7 @@ public class MypageController {
     public boolean renewalAuth() {
         // 기존 정보 꺼내기
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MemberUser userAccount = (MemberUser) authentication.getPrincipal(); // principal만 꺼내서다음
+        MemberUser userAccount = (MemberUser) authentication.getPrincipal(); // principal만 꺼내서 담기
 
         // 현재 Authentication로 사용자 인증 후, 새 Authentication 정보를 SecurityContextHolder에 세팅
         SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, userAccount.getUsername()));
@@ -370,7 +385,7 @@ public class MypageController {
 
     /* 기존 권한과 사용자 id를 받아서,  new principal로 인증과 토큰 갱신해주는 메서드 */
     public Authentication createNewAuthentication(Authentication currentAuth, String username) {
-        UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB가서 새로운 정보로 가져와 pricipal 새로만들기
+        UserDetails newPrincipal = memberUserDetailsService.loadUserByUsername(username); // DB 가서 새로운 정보로 가져와 pricipal 새로 만들기
         // 새로운 principal로 시큐리티 인증 권한(토큰) 생성
         UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
         newAuth.setDetails(currentAuth.getDetails()); // 현재 정보 추가

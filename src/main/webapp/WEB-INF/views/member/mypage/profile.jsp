@@ -27,7 +27,7 @@
             입니다.
 
             <div style="text-align: right; padding: 15px;">
-                <fmt:formatNumber value="${princi.member.point}" pattern="#,###,###"/>&nbsp;P
+                <fmt:formatNumber value="${princi.member.point}" pattern="###,###"/>&nbsp;P
             </div>
             <div style="padding: 15px; display: flex; justify-content: space-between;">
                 <button class="profileBtn2" type="button" style="width: 100px"

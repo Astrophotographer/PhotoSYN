@@ -55,4 +55,6 @@ public interface BlogService {
     public MemberDTO getUserInfo(String u_id);
 
     public int getBlogLike(Blog_Like blog_like);
+
+    public List<DailyTag> getDailyTag();
 }

@@ -1,6 +1,7 @@
 package com.member.mapper;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.*;
 
 import java.util.List;
@@ -49,7 +50,7 @@ public interface MemberMapper {
     public int updateGalleryStatus2(String G_NO);
 
     /* 장바구니 담기 */
-    public void insertCart(Long g_no);
+    public int insertCart(CartDTO cartDTO);
 
     /* 장바구니 목록 */
     public List<CartDTO> listCart(CartDTO cartDTO);
@@ -64,7 +65,7 @@ public interface MemberMapper {
     public List<BuyDTO> listBuy(String id);
 
     /* 총 합계금액 */
-    public int sum(BuyDTO buyDTO);
+    public Integer sum(BuyDTO buyDTO);
 
     /* 갤러리 구매 (포인트 차감) */
     public int buyGallery(BuyDTO buyDTO);
@@ -73,5 +74,7 @@ public interface MemberMapper {
 
     public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria);
     public int getGalleryCount(MemberCriteria memberCriteria);
+
+    public List<MaintagDTO> getMainTagDTO();
 
 }

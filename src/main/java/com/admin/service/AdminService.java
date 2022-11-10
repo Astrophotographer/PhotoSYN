@@ -3,11 +3,14 @@ package com.admin.service;
 import com.admin.domain.AdminMainDTO;
 import com.admin.domain.AdminMemberDTO;
 import com.admin.domain.Admin_Criteria;
+import com.admin.domain.Admin_UpsertTagDTO;
 import com.blog.domain.BlogDTO;
 import com.blog.domain.Blog_Criteria;
 import com.gallery.domain.GalleryDTO;
 import com.gallery.domain.Gallery_Criteria;
+import com.gallery.domain.MaintagDTO;
 import com.member.domain.MemberDTO;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 
@@ -50,6 +53,10 @@ public interface AdminService {
     public int hideGallery(List<Integer> g_noList);
 
     public int showGallery(List<Integer> g_noList);
+
+    public List<MaintagDTO> getMainTagDTOList();
+
+    public int tagUpsert(Admin_UpsertTagDTO admin_upsertTagDTO, MultipartHttpServletRequest request);
 
 
 }

@@ -3,6 +3,7 @@ package com.member.service;
 import java.util.List;
 
 import com.gallery.domain.GalleryDTO;
+import com.gallery.domain.MaintagDTO;
 import com.gallery.mapper.GalleryMapper;
 import com.member.domain.*;
 import com.member.mapper.MemberMapper;
@@ -126,8 +127,8 @@ public class MemberServiceImpl implements MemberService {
 
     /* 장바구니 담기 */
     @Override
-    public void insertCart(Long G_NO) {
-        memberMapper.insertCart(G_NO);
+    public int insertCart(CartDTO cartDTO) {
+        return memberMapper.insertCart(cartDTO);
     }
 
     /* 장바구니 목록 */
@@ -142,6 +143,11 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.deleteCart(g_no);
     }
 
+    @Override
+    public CartDTO checkCart(CartDTO cartDTO) {
+        return memberMapper.checkCart(cartDTO);
+    }
+
     /* 마이페이지 구매 판매내역 */
     @Override
     public List<BuyDTO> listBuy(String id) {
@@ -150,30 +156,27 @@ public class MemberServiceImpl implements MemberService {
 
     /* 총 합계금액 */
     @Override
-    public int sum(BuyDTO buyDTO) {
+    public Integer sum(BuyDTO buyDTO) {
         return memberMapper.sum(buyDTO);
     }
 
 
     /* 갤러리 구매 (포인트 차감) */
     @Override
-    public int buyGallery(BuyDTO buyDTO, String id) {
+    public int buyGallery(BuyDTO buyDTO) {
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setPoint((-buyDTO.getO_price()));
         memberDTO.setId(buyDTO.getO_buyer());
 
         // USER_LIST DB 데이터 업데이트
         memberMapper.updatePoint(memberDTO);
-        // 다운로드 수 증가
-        galleryMapper.updateGallerySales(buyDTO.getG_no());
 
         return memberMapper.buyGallery(buyDTO);
     }
 
     /************************************************ 페이징 처리 ******************************************************/
     @Override
-    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria, String id) {
-        memberCriteria.setId(id);
+    public List<BuyDTO> getListWithPaging(MemberCriteria memberCriteria) {
         return memberMapper.getListWithPaging(memberCriteria);
     }
     @Override
@@ -181,6 +184,10 @@ public class MemberServiceImpl implements MemberService {
         return memberMapper.getGalleryCount(memberCriteria);
     }
 
+    @Override
+    public List<MaintagDTO> getMainTagDTO() {
+        return memberMapper.getMainTagDTO();
+    }
 
 
 }

@@ -82,6 +82,11 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public boolean hideGallery(long G_NO) {return galleryMapper.hideGallery(G_NO);}
 
+    @Override
+    public int updateGallerySales(Long g_no) {
+        return galleryMapper.updateGallerySales(g_no);
+    }
+
 
     @Override
     public int getTotal(Gallery_Criteria cri) { return galleryMapper.getTotal(cri); }

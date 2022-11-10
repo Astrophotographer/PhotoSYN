@@ -61,4 +61,5 @@ public interface BlogMapper {
 
     public int getBlogLike(Blog_Like blog_like);
 
+    public List<DailyTag> getDailyTag();
 }
